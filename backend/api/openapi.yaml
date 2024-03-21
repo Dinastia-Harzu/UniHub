@@ -1,0 +1,76 @@
+openapi: 3.0.2
+info:
+  title: UniHub Backend
+  description: API back-end para la página web UniHub
+  contact:
+    name: Dinastía Harzu
+    url: https://github.com/Dinastia-Harzu
+  license:
+    name: Apache 2.0
+    url: http://www.apache.org/licenses/LICENSE-2.0.html
+  version: 1.0.0
+servers:
+  - url: https://localhost:8192
+    description: Servidor ApiRest
+paths:
+  /usuarios:
+    get:
+      tags:
+        - Obtener usuarios
+      description: GET Usuarios
+      operationId: usuariosGET
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/inline_response_200"
+        "400":
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/inline_response_400"
+      x-swagger-router-controller: ObtenerUsuarios
+    post:
+      tags:
+        - Registrar usuario
+      operationId: usuariosPOST
+      responses:
+        "200":
+          description: OK
+      x-swagger-router-controller: RegistrarUsuario
+components:
+  schemas:
+    inline_response_200:
+      type: object
+      properties:
+        usuarios:
+          type: array
+          items:
+            type: object
+            properties:
+              id:
+                type: string
+              nombre:
+                type: string
+              email:
+                type: string
+            example:
+              id: id
+              nombre: nombre
+              email: email
+      example:
+        usuarios:
+          - id: id
+            nombre: nombre
+            email: email
+          - id: id
+            nombre: nombre
+            email: email
+    inline_response_400:
+      type: object
+      properties:
+        message:
+          type: string

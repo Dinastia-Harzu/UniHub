@@ -1,0 +1,40 @@
+{
+  "launch": {
+    "version": "0.2.0",
+    "configurations": [
+      {
+        "console": "integratedTerminal",
+        "internalConsoleOptions": "neverOpen",
+        "name": "nodemon",
+        "program": "${workspaceFolder}/backend/index.js",
+        "request": "launch",
+        "restart": true,
+        "runtimeExecutable": "nodemon",
+        "skipFiles": [
+          "<node_internals>/**"
+        ],
+        "type": "node"
+      }
+    ],
+    "compounds": []
+  },
+  "folders": [
+    {
+      "path": ".",
+      "name": "UniHub"
+    },
+    {
+      "path": "backend",
+      "name": "Back-end"
+    },
+    {
+      "path": "frontend",
+      "name": "Front-end"
+    }
+  ],
+  "settings": {
+    "editor.formatOnSave": true,
+    "editor.tabSize": 2,
+    "editor.insertSpaces": true,
+  }
+}
