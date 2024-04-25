@@ -16,7 +16,7 @@ paths:
   /usuarios:
     get:
       tags:
-        - Obtener usuarios
+        - Usuarios
       description: GET Usuarios
       operationId: usuariosGET
       responses:
@@ -25,25 +25,464 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/inline_response_200"
+                $ref: "#/components/schemas/Usuarios200"
         "400":
           description: Bad Request
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/inline_response_400"
+                $ref: "#/components/schemas/Usuarios400"
+        "500":
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/InternalServerError"
       x-swagger-router-controller: ObtenerUsuarios
     post:
       tags:
-        - Registrar usuario
+        - Usuarios
+      description: GET Universidades
       operationId: usuariosPOST
       responses:
         "200":
           description: OK
       x-swagger-router-controller: RegistrarUsuario
+  /usuarios/{id}:
+    get:
+      tags:
+        - Usuarios
+      description: GET usuario
+      parameters:
+      - name: id
+        in: path
+        description: el identificador del usuario
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: integer
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Usuario200"
+        "400":
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Usuario400"
+        "500":
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/InternalServerError"
+  /trabajos:
+    get:
+      tags:
+        - Trabajos
+      description: GET Trabajos
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Trabajos200"
+        "400":
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Trabajos400"
+        "500":
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/InternalServerError"
+  /trabajos/{id}:
+    get:
+      tags:
+        - Trabajos
+      description: GET Trabajo
+      parameters:
+        - name: id
+          in: path
+          description: el identificador del trabajo
+          required: true
+          style: simple
+          explode: false
+          schema:
+            type: integer
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Trabajo200"
+        "400":
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Trabajo400"
+        "500":
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/InternalServerError"
+  /universidades:
+    get:
+      tags:
+        - Universidades
+      description: GET Universidades
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Universidades200"
+        "400":
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Universidades400"
+        "500":
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/InternalServerError"
+  /universidades/{id}:
+    get:
+      tags:
+        - Universidades
+      description: GET Universidad
+      parameters:
+        - name: id
+          in: path
+          description: el identificador del trabajo
+          required: true
+          style: simple
+          explode: false
+          schema:
+            type: integer
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Universidad200"
+        "400":
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Universidad400"
+        "500":
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/InternalServerError"
+  /titulaciones:
+    get:
+      tags:
+        - Titulaciones
+      description: GET Titulaciones
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Titulaciones200"
+        "400":
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Titulaciones400"
+        "500":
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/InternalServerError"
+  /titulaciones/{id}:
+    get:
+      tags:
+        - Titulaciones
+      description: GET Titulación
+      parameters:
+        - name: id
+          in: path
+          description: el identificador del trabajo
+          required: true
+          style: simple
+          explode: false
+          schema:
+            type: integer
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Titulacion200"
+        "400":
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Titulacion400"
+        "500":
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/InternalServerError"
+  /tipos-trabajo:
+    get:
+      tags:
+        - Tipos de trabajo
+      description: GET Tipos de trabajo
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/TiposTrabajo200"
+        "400":
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/TiposTrabajo400"
+        "500":
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/InternalServerError"
+  /tipos-trabajo/{id}:
+    get:
+      tags:
+        - Tipos de trabajo
+      description: GET Tipo de trabajo
+      parameters:
+        - name: id
+          in: path
+          description: el identificador del trabajo
+          required: true
+          style: simple
+          explode: false
+          schema:
+            type: integer
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/TipoTrabajo200"
+        "400":
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/TipoTrabajo400"
+        "500":
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/InternalServerError"
+  /temas:
+    get:
+      tags:
+        - Temas
+      description: GET Temas
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Temas200"
+        "400":
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Temas400"
+        "500":
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/InternalServerError"
+  /temas/{id}:
+    get:
+      tags:
+        - Temas
+      description: GET Tema
+      parameters:
+        - name: id
+          in: path
+          description: el identificador del trabajo
+          required: true
+          style: simple
+          explode: false
+          schema:
+            type: integer
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Tema200"
+        "400":
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Tema400"
+        "500":
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/InternalServerError"
+  /multimedia:
+    get:
+      tags:
+        - Multimedia
+      description: GET Ficheros multimedia
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Multimedia200"
+        "400":
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Multimedia400"
+        "500":
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/InternalServerError"
+  /multimedia/{id}:
+    get:
+      tags:
+        - Multimedia
+      description: GET Fichero multimedia
+      parameters:
+        - name: id
+          in: path
+          description: el identificador del trabajo
+          required: true
+          style: simple
+          explode: false
+          schema:
+            type: integer
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/MultimediaIndividual200"
+        "400":
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/MultimediaIndividual400"
+        "500":
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/InternalServerError"
+  /comentarios:
+    get:
+      tags:
+        - Comentarios
+      description: GET Comentarios
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Comentarios200"
+        "400":
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Comentarios400"
+        "500":
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/InternalServerError"
+  /comentarios/{id}:
+    get:
+      tags:
+        - Comentarios
+      description: GET Comentario
+      parameters:
+        - name: id
+          in: path
+          description: el identificador del trabajo
+          required: true
+          style: simple
+          explode: false
+          schema:
+            type: integer
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Comentario200"
+        "400":
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Comentario400"
+        "500":
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/InternalServerError"
 components:
   schemas:
-    inline_response_200:
+    Usuarios200:
       type: object
       properties:
         usuarios:
@@ -52,25 +491,604 @@ components:
             type: object
             properties:
               id:
-                type: string
+                type: integer
               nombre:
                 type: string
-              email:
+              correo:
+                type: string
+                format: email
+              titulacion:
+                type: string
+              universidad:
+                type: string
+              direccion:
+                type: string
+              nacimiento:
+                type: string
+                format: date
+              tema:
+                type: string
+              foto-perfil:
                 type: string
             example:
-              id: id
-              nombre: nombre
-              email: email
+              id: 1
+              nombre: Arturo
+              correo: agrg11@alu.ua.es
+              titulacion: Grado en Ingeniería Multimedia
+              universidad: Universidad de Alicante
+              direccion: C/ del Presidente Adolfo Suárez, 22
+              nacimiento: 24/10/2002
+              tema: Oscuro
+              foto-perfil: recursos/pfp/predeterminado.png
       example:
         usuarios:
-          - id: id
-            nombre: nombre
-            email: email
-          - id: id
-            nombre: nombre
-            email: email
-    inline_response_400:
+          - id: 1
+            nombre: Arturo
+            correo: agrg11@alu.ua.es
+            titulacion: Grado en Ingeniería Multimedia
+            universidad: Universidad de Alicante
+            direccion: C/ del Presidente Adolfo Suárez, 22
+            nacimiento: 24/10/2002
+            tema: Oscuro
+            foto-perfil: recursos/pfp/predeterminado.png
+          - id: 2
+            nombre: Paula
+            correo: paula@alu.ua.es
+            titulacion: Grado en Ingeniería Multimedia
+            universidad: Universidad de Alicante
+            direccion: Afueras de Elche
+            nacimiento: 24/07/2002
+            tema: Oscuro
+            foto-perfil: recursos/pfp/predeterminado.png
+    Usuarios400:
       type: object
       properties:
         message:
           type: string
+      example:
+        400: Ha habido un error recogiendo los usuarios.
+    Usuario200:
+      type: object
+      properties:
+        usuarios:
+          type: object
+          properties:
+            id:
+              type: integer
+            nombre:
+              type: string
+            correo:
+              type: string
+              format: email
+            titulacion:
+              type: string
+            universidad:
+              type: string
+            direccion:
+              type: string
+            nacimiento:
+              type: string
+              format: date
+            tema:
+              type: string
+            foto-perfil:
+              type: string
+          example:
+            id: 1
+            nombre: Arturo
+            correo: agrg11@alu.ua.es
+            titulacion: Grado en Ingeniería Multimedia
+            universidad: Universidad de Alicante
+            direccion: C/ del Presidente Adolfo Suárez, 22
+            nacimiento: 24/10/2002
+            tema: Oscuro
+            foto-perfil: recursos/pfp/predeterminado.png
+      example:
+        id: 1
+        nombre: Arturo
+        correo: agrg11@alu.ua.es
+        titulacion: Grado en Ingeniería Multimedia
+        universidad: Universidad de Alicante
+        direccion: C/ del Presidente Adolfo Suárez, 22
+        nacimiento: 24/10/2002
+        tema: Oscuro
+        foto-perfil: recursos/pfp/predeterminado.png
+    Usuario400:
+      type: object
+      properties:
+        message:
+          type: string
+      example:
+        400: Ha habido un error recogiendo el usuario.
+    Trabajos200:
+      type: object
+      properties:
+        trabajos:
+          type: array
+          items:
+            type: object
+            properties:
+              id:
+                type: integer
+              nombre:
+                type: string
+              tipo:
+                type: string
+              autor:
+                type: string
+              titulacion:
+                type: string
+              publicacion:
+                type: string
+                format: date
+              resumen:
+                type: string
+              portada:
+                type: string
+              documento:
+                type: string
+            example:
+              id: 1
+              nombre: Realización de un cortometraje de animación en 3D
+              tipo: Trabajo Fin de Grado
+              autor: Sergio Huertas Fernández
+              titulacion: Grado en Ingeniería Multimedia
+              publicacion: 24/01/2024
+              resumen: Lorem ipsum
+              portada: recursos/portadas/realizacion-de-un-cortometraje-de-animacion-en-3d.png
+              documento: recursos/documentos/realizacion-de-un-cortometraje-de-animacion-en-3d.pdf
+      example:
+        trabajos:
+          - id: 1
+            nombre: Realización de un cortometraje de animación en 3D
+            tipo: Trabajo Fin de Grado
+            autor: Sergio Huertas Fernández
+            titulacion: Grado en Ingeniería Multimedia
+            publicacion: 24/01/2024
+            resumen: Lorem ipsum
+            portada: recursos/portadas/realizacion-de-un-cortometraje-de-animacion-en-3d.png
+            documento: recursos/documentos/realizacion-de-un-cortometraje-de-animacion-en-3d.pdf
+          - id: 2
+            nombre: La Tierra - Cortometraje de Animación 3D
+            tipo: paula@alu.ua.es
+            autor: Grado en Ingeniería Multimedia
+            titulacion: Universidad de Alicante
+            publicacion: Afueras de Elche
+            resumen: Lorem ipsum
+            portada: recursos/portadas/la-tierra-cortometraje-de-animacion-3d.png
+            documento: recursos/documentos/la-tierra-cortometraje-de-animacion-3d.pdf
+    Trabajos400:
+      type: object
+      properties:
+        message:
+          type: string
+      example:
+        400: Ha habido un error recogiendo los trabajos.
+    Trabajo200:
+      type: object
+      properties:
+        trabajos:
+          type: object
+          properties:
+            id:
+              type: integer
+            nombre:
+              type: string
+            tipo:
+              type: string
+            autor:
+              type: string
+            titulacion:
+              type: string
+            publicacion:
+              type: string
+              format: date
+            resumen:
+              type: string
+            portada:
+              type: string
+            documento:
+              type: string
+          example:
+            id: 1
+            nombre: Realización de un cortometraje de animación en 3D
+            tipo: Trabajo Fin de Grado
+            autor: Sergio Huertas Fernández
+            titulacion: Grado en Ingeniería Multimedia
+            publicacion: 24/01/2024
+            resumen: Lorem ipsum
+            portada: recursos/portadas/realizacion-de-un-cortometraje-de-animacion-en-3d.png
+            documento: recursos/documentos/realizacion-de-un-cortometraje-de-animacion-en-3d.pdf
+      example:
+        id: 1
+        nombre: Realización de un cortometraje de animación en 3D
+        tipo: Trabajo Fin de Grado
+        autor: Sergio Huertas Fernández
+        titulacion: Grado en Ingeniería Multimedia
+        publicacion: 24/01/2024
+        resumen: Lorem ipsum
+        portada: recursos/portadas/realizacion-de-un-cortometraje-de-animacion-en-3d.png
+        documento: recursos/documentos/realizacion-de-un-cortometraje-de-animacion-en-3d.pdf
+    Trabajo400:
+      type: object
+      properties:
+        message:
+          type: string
+      example:
+        400: Ha habido un error recogiendo el trabajo.
+    Universidades200:
+      type: object
+      properties:
+        universidades:
+          type: array
+          items:
+            type: object
+            properties:
+              id:
+                type: integer
+              nombre:
+                type: string
+              direccion:
+                type: string
+            example:
+              id: 1
+              nombre: Universidad de Alicante
+              direccion: San Vicente, Alicante
+      example:
+        universidades:
+          - id: 1
+            nombre: Universidad de Alicante
+            direccion: San Vicente, Alicante
+          - id: 2
+            nombre: Universidad Miguel Hernández
+            direccion: Elche, Alicante
+    Universidades400:
+      type: object
+      properties:
+        message:
+          type: string
+      example:
+        400: Ha habido un error recogiendo las universidades.
+    Universidad200:
+      type: object
+      properties:
+        universidades:
+          type: object
+          properties:
+            id:
+              type: integer
+            nombre:
+              type: string
+            direccion:
+              type: string
+          example:
+            id: 1
+            nombre: Universidad de Alicante
+            direccion: San Vicente, Alicante
+      example:
+        id: 1
+        nombre: Universidad de Alicante
+        direccion: San Vicente, Alicante
+    Universidad400:
+      type: object
+      properties:
+        message:
+          type: string
+      example:
+        400: Ha habido un error recogiendo la universidad.
+    Titulaciones200:
+      type: object
+      properties:
+        titulaciones:
+          type: array
+          items:
+            type: object
+            properties:
+              id:
+                type: integer
+              nombre:
+                type: string
+              universidad:
+                type: string
+            example:
+              id: 1
+              nombre: Grado en Ingeniería Multimedia
+              universidad: Universidad de Alicante
+      example:
+        titulaciones:
+          - id: 1
+            nombre: Grado en Ingeniería Multimedia
+            universidad: Universidad de Alicante
+          - id: 2
+            nombre: Grado en Ingeniería Informática
+            universidad: Universidad de Alicante
+    Titulaciones400:
+      type: object
+      properties:
+        message:
+          type: string
+      example:
+        400: Ha habido un error recogiendo las titulaciones.
+    Titulacion200:
+      type: object
+      properties:
+        titulaciones:
+          type: object
+          properties:
+            id:
+              type: integer
+            nombre:
+              type: string
+            universidad:
+              type: string
+          example:
+            id: 1
+            nombre: Grado en Ingeniería Multimedia
+            universidad: Universidad de Alicante
+      example:
+        id: 1
+        nombre: Grado en Ingeniería Multimedia
+        universidad: Universidad de Alicante
+    Titulacion400:
+      type: object
+      properties:
+        message:
+          type: string
+      example:
+        400: Ha habido un error recogiendo la titulación.
+    TiposTrabajo200:
+      type: object
+      properties:
+        tipos de trabajo:
+          type: array
+          items:
+            type: object
+            properties:
+              id:
+                type: integer
+              nombre:
+                type: string
+            example:
+              id: 1
+              nombre: Trabajo de Fin de Grado
+      example:
+        tipos de trabajo:
+          - id: 1
+            nombre: Trabajo de Fin de Grado
+          - id: 2
+            nombre: Trabajo de Fin de Máster
+    TiposTrabajo400:
+      type: object
+      properties:
+        message:
+          type: string
+      example:
+        400: Ha habido un error recogiendo los tipos de trabajo.
+    TipoTrabajo200:
+      type: object
+      properties:
+        tipos de trabajo:
+          type: object
+          properties:
+            id:
+              type: integer
+            nombre:
+              type: string
+          example:
+            id: 1
+            nombre: Trabajo de Fin de Grado
+      example:
+        id: 1
+        nombre: Trabajo de Fin de Grado
+    TipoTrabajo400:
+      type: object
+      properties:
+        message:
+          type: string
+      example:
+        400: Ha habido un error recogiendo el tipo de trabajo.
+    Temas200:
+      type: object
+      properties:
+        temas:
+          type: array
+          items:
+            type: object
+            properties:
+              id:
+                type: integer
+              nombre:
+                type: string
+              css:
+                type: string
+            example:
+              id: 1
+              nombre: Oscuro
+              css: recursos/temas/oscuro.css
+      example:
+        temas:
+          - id: 1
+            nombre: Oscuro
+            css: recursos/temas/oscuro.css
+          - id: 2
+            nombre: Claro
+            css: recursos/temas/oscuro.css
+    Temas400:
+      type: object
+      properties:
+        message:
+          type: string
+      example:
+        400: Ha habido un error recogiendo los temas.
+    Tema200:
+      type: object
+      properties:
+        temas:
+          type: object
+          properties:
+            id:
+              type: integer
+            nombre:
+              type: string
+            css:
+              type: string
+          example:
+            id: 1
+            nombre: Oscuro
+            css: recursos/temas/oscuro.css
+      example:
+        id: 1
+        nombre: Oscuro
+        css: recursos/temas/oscuro.css
+    Tema400:
+      type: object
+      properties:
+        message:
+          type: string
+      example:
+        400: Ha habido un error recogiendo el tema.
+    Multimedia200:
+      type: object
+      properties:
+        multimedia:
+          type: array
+          items:
+            type: object
+            properties:
+              id:
+                type: integer
+              nombre:
+                type: string
+              ruta:
+                type: string
+              trabajo:
+                type: string
+            example:
+              id: 1
+              nombre: Foto 1
+              ruta: recursos/trabajos/multimedia/foto1.png
+              trabajo: Realización de un cortometraje de animación en 3D
+      example:
+        multimedia:
+          - id: 1
+            nombre: Foto 1
+            ruta: recursos/trabajos/multimedia/foto1.png
+            trabajo: Realización de un cortometraje de animación en 3D
+          - id: 2
+            nombre: Foto 2
+            ruta: recursos/trabajos/multimedia/foto2.png
+            trabajo: Realización de un cortometraje de animación en 3D
+    Multimedia400:
+      type: object
+      properties:
+        message:
+          type: string
+      example:
+        400: Ha habido un error recogiendo los archivos multimedia.
+    MultimediaIndividual200:
+      type: object
+      properties:
+        multimedia:
+          type: object
+          properties:
+            id:
+              type: integer
+            nombre:
+              type: string
+            ruta:
+              type: string
+            trabajo:
+              type: string
+          example:
+            id: 1
+            nombre: Foto 1
+            ruta: recursos/trabajos/multimedia/foto1.png
+            trabajo: Realización de un cortometraje de animación en 3D
+      example:
+        id: 1
+        nombre: Foto 1
+        ruta: recursos/trabajos/multimedia/foto1.png
+        trabajo: Realización de un cortometraje de animación en 3D
+    MultimediaIndividual400:
+      type: object
+      properties:
+        message:
+          type: string
+      example:
+        400: Ha habido un error recogiendo el archivo multimedia.
+    Comentarios200:
+      type: object
+      properties:
+        comentarios:
+          type: array
+          items:
+            type: object
+            properties:
+              id:
+                type: integer
+              nombre:
+                type: string
+              comentario:
+                type: string
+              valoracion:
+                type: number
+            example:
+              id: 1
+              nombre: Ainhoa
+              comentario: Lorem ipsum
+              valoracion: 3.5
+      example:
+        comentarios:
+          - id: 1
+            nombre: Ainhoa
+            comentario: Lorem ipsum
+            valoracion: 3.5
+          - id: 2
+            nombre: Marta
+            comentario: Lorem ipsum
+            valoracion: 5
+    Comentarios400:
+      type: object
+      properties:
+        message:
+          type: string
+      example:
+        400: Ha habido un error recogiendo los comentarios.
+    Comentario200:
+      type: object
+      properties:
+        comentarios:
+          type: object
+          properties:
+            id:
+              type: integer
+            nombre:
+              type: string
+            comentario:
+              type: string
+            valoracion:
+              type: number
+          example:
+            id: 1
+            nombre: Ainhoa
+            comentario: Lorem ipsum
+            valoracion: 3.5
+      example:
+        id: 1
+        nombre: Ainhoa
+        comentario: Lorem ipsum
+        valoracion: 3.5
+    Comentario400:
+      type: object
+      properties:
+        message:
+          type: string
+      example:
+        400: Ha habido un error recogiendo el comentario.
+    InternalServerError:
+      type: object
+      properties:
+        message:
+          type: string
+      example:
+        500: Ha ocurrido un error interno del servidor.
