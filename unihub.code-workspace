@@ -5,8 +5,21 @@
       {
         "console": "integratedTerminal",
         "internalConsoleOptions": "neverOpen",
-        "name": "nodemon",
+        "name": "Backend",
         "program": "${workspaceFolder}/backend/index.js",
+        "request": "launch",
+        "restart": true,
+        "runtimeExecutable": "nodemon",
+        "skipFiles": [
+          "<node_internals>/**"
+        ],
+        "type": "node"
+      },
+      {
+        "console": "integratedTerminal",
+        "internalConsoleOptions": "neverOpen",
+        "name": "Frontend",
+        "program": "${workspaceFolder}/frontend/unihub/index.js",
         "request": "launch",
         "restart": true,
         "runtimeExecutable": "nodemon",
