@@ -1,0 +1,11 @@
+.logotipo {
+  width: 180px;
+  height: auto;
+}
+
+.navbar {
+  background-color: ;
+  display: flex;
+  flex-direction: column;
+  padding: 1.5em;
+}
