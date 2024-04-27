@@ -1,0 +1,14 @@
+:root {
+  --color-primary: #96CDB2;
+  --color-secondary: #FCA964;
+  --color-tertiary: #F79B68;
+  --color-text: #252525;
+
+  /*Fondos*/
+  --color-bg: #FEECAE;
+  --color-bg-2: #D95252;
+  --color-bg-form: #E47E25;
+  --color-bg-form-2: #F79B68;
+
+  --color-bg-comment: #D9D9D9;
+}

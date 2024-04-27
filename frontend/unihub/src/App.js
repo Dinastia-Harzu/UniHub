@@ -1,15 +1,17 @@
-import logo from "./logo.svg";
 import "./App.css";
-
+import "./styles/general.css"
+import Header from "./components/commons/Header.js"
+import Footer from "./components/commons/Footer.js"
+import Main from "./components/commons/Main.js"
+import Perfilusuario from "./components/Perfilusuario.js"
 export default function App() {
   return (
-    <div className="App-header">
-      <MiBoton img={logo} />
+    <div>
+      <Header />
+      <Main />
+      <Perfilusuario />
+      <Footer />
+
     </div>
   );
-}
-
-function MiBoton(obj) {
-  console.log(obj);
-  return <img src={obj.img} className="App-logo" alt="logo" />;
 }
