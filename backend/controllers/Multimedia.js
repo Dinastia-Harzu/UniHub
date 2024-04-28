@@ -13,8 +13,8 @@ module.exports.multimediaGET = function multimediaGET (req, res, next) {
     });
 };
 
-module.exports.multimediaIdDELETE = function multimediaIdDELETE (req, res, next) {
-  Multimedia.multimediaIdDELETE()
+module.exports.multimediaIdDELETE = function multimediaIdDELETE (req, res, next, id) {
+  Multimedia.multimediaIdDELETE(id)
     .then(function (response) {
       utils.writeJson(res, response);
     })
@@ -33,8 +33,8 @@ module.exports.multimediaIdGET = function multimediaIdGET (req, res, next, id) {
     });
 };
 
-module.exports.multimediaIdPUT = function multimediaIdPUT (req, res, next) {
-  Multimedia.multimediaIdPUT()
+module.exports.multimediaIdPUT = function multimediaIdPUT (req, res, next, body, id) {
+  Multimedia.multimediaIdPUT(body, id)
     .then(function (response) {
       utils.writeJson(res, response);
     })
@@ -43,8 +43,8 @@ module.exports.multimediaIdPUT = function multimediaIdPUT (req, res, next) {
     });
 };
 
-module.exports.multimediaPOST = function multimediaPOST (req, res, next) {
-  Multimedia.multimediaPOST()
+module.exports.multimediaPOST = function multimediaPOST (req, res, next, body) {
+  Multimedia.multimediaPOST(body)
     .then(function (response) {
       utils.writeJson(res, response);
     })

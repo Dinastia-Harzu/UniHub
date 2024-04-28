@@ -13,8 +13,8 @@ module.exports.usuariosGET = function usuariosGET (req, res, next) {
     });
 };
 
-module.exports.usuariosIdDELETE = function usuariosIdDELETE (req, res, next) {
-  Usuarios.usuariosIdDELETE()
+module.exports.usuariosIdDELETE = function usuariosIdDELETE (req, res, next, id) {
+  Usuarios.usuariosIdDELETE(id)
     .then(function (response) {
       utils.writeJson(res, response);
     })
@@ -33,8 +33,8 @@ module.exports.usuariosIdGET = function usuariosIdGET (req, res, next, id) {
     });
 };
 
-module.exports.usuariosIdPUT = function usuariosIdPUT (req, res, next) {
-  Usuarios.usuariosIdPUT()
+module.exports.usuariosIdPUT = function usuariosIdPUT (req, res, next, body, id) {
+  Usuarios.usuariosIdPUT(body, id)
     .then(function (response) {
       utils.writeJson(res, response);
     })
@@ -43,8 +43,8 @@ module.exports.usuariosIdPUT = function usuariosIdPUT (req, res, next) {
     });
 };
 
-module.exports.usuariosPOST = function usuariosPOST (req, res, next) {
-  Usuarios.usuariosPOST()
+module.exports.usuariosPOST = function usuariosPOST (req, res, next, body) {
+  Usuarios.usuariosPOST(body)
     .then(function (response) {
       utils.writeJson(res, response);
     })

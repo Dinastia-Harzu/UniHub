@@ -13,8 +13,8 @@ module.exports.titulacionesGET = function titulacionesGET (req, res, next) {
     });
 };
 
-module.exports.titulacionesIdDELETE = function titulacionesIdDELETE (req, res, next) {
-  Titulaciones.titulacionesIdDELETE()
+module.exports.titulacionesIdDELETE = function titulacionesIdDELETE (req, res, next, id) {
+  Titulaciones.titulacionesIdDELETE(id)
     .then(function (response) {
       utils.writeJson(res, response);
     })
@@ -33,8 +33,8 @@ module.exports.titulacionesIdGET = function titulacionesIdGET (req, res, next, i
     });
 };
 
-module.exports.titulacionesIdPUT = function titulacionesIdPUT (req, res, next) {
-  Titulaciones.titulacionesIdPUT()
+module.exports.titulacionesIdPUT = function titulacionesIdPUT (req, res, next, body, id) {
+  Titulaciones.titulacionesIdPUT(body, id)
     .then(function (response) {
       utils.writeJson(res, response);
     })
@@ -43,8 +43,8 @@ module.exports.titulacionesIdPUT = function titulacionesIdPUT (req, res, next) {
     });
 };
 
-module.exports.titulacionesPOST = function titulacionesPOST (req, res, next) {
-  Titulaciones.titulacionesPOST()
+module.exports.titulacionesPOST = function titulacionesPOST (req, res, next, body) {
+  Titulaciones.titulacionesPOST(body)
     .then(function (response) {
       utils.writeJson(res, response);
     })

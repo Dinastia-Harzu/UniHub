@@ -8,6 +8,7 @@ const cors = require("cors");
 const moment = require("moment");
 const jwt = require("jwt-simple");
 const responder = require("./writer").respondWithCode;
+
 app.use(cors());
 app.options("*", cors());
 
@@ -46,10 +47,21 @@ const connection = mysql.createConnection({
 function getHttpCodeFromErrNo(errno) {
   if (errno) {
     switch (errno) {
-      case -4078:
-        return 500;
-      default:
+      case "ER_PARSE_ERROR":
+      case "ER_WRONG_VALUE_COUNT_ON_ROW":
+      case "ER_DUP_ENTRY":
+      case "ER_BAD_FIELD_ERROR":
+      case "ER_BAD_NULL_ERROR":
         return 400;
+      case "ER":
+        return 401;
+      case "ER":
+        return 403;
+      case "ER_NO_SUCH_TABLE":
+        return 404;
+
+      default:
+        return 500;
     }
   }
   return 500;
@@ -63,10 +75,13 @@ const respuestas = {
     201: "Se ha creado el recurso correctamente.",
   },
   204: {
-    204: "Se ha borrado el recurso correctamente.",
+    200: "Se ha borrado el recurso correctamente.",
   },
   400: {
-    400: "No se ha podido crear el recurso porque está mal formado.",
+    POST: { 400: "No se ha podido crear el recurso porque está mal formado." },
+    PUT: {
+      400: "No se ha podido modificar el recurso porque está mal formado.",
+    },
   },
   401: {
     401: "Identifícate para acceder a este recurso.",
@@ -81,6 +96,35 @@ const respuestas = {
     500: "Ha ocurrido un error interno en el servidor.",
   },
 };
+
+function determinarCamposPut(tabla, cuerpo, id) {
+  const len = Object.keys(cuerpo).length;
+  let sql = `UPDATE ${tabla} SET `;
+  if (len == 0) {
+    sql += `id = ${id}`;
+  } else {
+    for (let i = 0; i < len; i++) {
+      if (i > 0) {
+        sql += ", ";
+      }
+      sql += `${Object.keys(cuerpo).at(i)} = ${json2sql(
+        Object.values(cuerpo).at(i)
+      )}`;
+    }
+  }
+  sql += ` WHERE id = ${id}`;
+  return sql;
+}
+
+function json2sql(valor) {
+  if (typeof valor === "undefined" || typeof valor === "null") {
+    return "NULL";
+  }
+  if (typeof valor === "string") {
+    return `'${valor}'`;
+  }
+  return valor;
+}
 
 const SECRETO = "loremipsum";
 const TIEMPO_EXPIRACION_TOKEN = 7 * 24 * 60;
@@ -119,6 +163,8 @@ module.exports = {
   connection,
   getHttpCodeFromErrNo,
   respuestas,
+  determinarCamposPut,
+  json2sql,
   SECRETO,
   TIEMPO_EXPIRACION_TOKEN,
   creaToken,

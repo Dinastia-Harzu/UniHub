@@ -13,8 +13,8 @@ module.exports.comentariosGET = function comentariosGET (req, res, next) {
     });
 };
 
-module.exports.comentariosIdDELETE = function comentariosIdDELETE (req, res, next) {
-  Comentarios.comentariosIdDELETE()
+module.exports.comentariosIdDELETE = function comentariosIdDELETE (req, res, next, id) {
+  Comentarios.comentariosIdDELETE(id)
     .then(function (response) {
       utils.writeJson(res, response);
     })
@@ -33,8 +33,8 @@ module.exports.comentariosIdGET = function comentariosIdGET (req, res, next, id)
     });
 };
 
-module.exports.comentariosIdPUT = function comentariosIdPUT (req, res, next) {
-  Comentarios.comentariosIdPUT()
+module.exports.comentariosIdPUT = function comentariosIdPUT (req, res, next, body, id) {
+  Comentarios.comentariosIdPUT(body, id)
     .then(function (response) {
       utils.writeJson(res, response);
     })
@@ -43,8 +43,8 @@ module.exports.comentariosIdPUT = function comentariosIdPUT (req, res, next) {
     });
 };
 
-module.exports.comentariosPOST = function comentariosPOST (req, res, next) {
-  Comentarios.comentariosPOST()
+module.exports.comentariosPOST = function comentariosPOST (req, res, next, body) {
+  Comentarios.comentariosPOST(body)
     .then(function (response) {
       utils.writeJson(res, response);
     })
