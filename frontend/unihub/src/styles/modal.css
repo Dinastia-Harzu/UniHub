@@ -1,0 +1,41 @@
+@import url("detalles.css");
+
+.modal {
+    position: fixed;
+    z-index: 2;
+    top: 20%;
+    left: 25%;
+    width: 45%;
+    display: none;
+}
+
+.modal.esta-abierto {
+    display: block;
+}
+
+.boton-cerrar-modal {
+    position: absolute;
+    top: 1em;
+}
+
+.contenedor-modal {
+    background-color: rgb(238, 238, 238);
+    border-radius: 0.45em;
+    padding: 2em;
+    position: relative;
+}
+
+.contenedor-usuario-y-publicar {
+    display: grid;
+    grid-template-columns: 60% 40%;
+    margin: 2em 0 2em 0;
+}
+
+.parrafo-valoracion {
+    margin-bottom: 0;
+}
+
+.contenedor-modal textarea {
+    width: 97%;
+    padding: 0.5em;
+}
