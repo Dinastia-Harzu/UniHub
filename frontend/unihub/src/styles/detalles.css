@@ -1,3 +1,7 @@
+p, h2, h3 {
+    margin: 1em 0 1em 0;
+}
+
 body {
     min-width: 500px;
 }
@@ -8,7 +12,7 @@ body {
 
 .contenedor-detalles {
     display: grid;
-    grid-template-columns: [portada] 30% [datos]45%;
+    grid-template-columns: 25% 50%;
     justify-items: center;
     justify-content: center;
     gap: 5%;
@@ -21,7 +25,7 @@ body {
    margin-top: 1em;
 }
 
-.contenedor-portada div {
+.contenedor-ver-y-descargar {
     margin-bottom: 1em;
     top: 30px;
     position: sticky;
@@ -32,7 +36,7 @@ body {
 }
 
 .contenedor-portada img {
-    width: 450px;
+    width: 410px;
     top: 75px;
     position: sticky;
 }

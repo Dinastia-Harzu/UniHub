@@ -5,7 +5,7 @@ function Modal({children, estaAbierto, cerrarModal}) {
   return (
     <article className={`modal ${estaAbierto && "esta-abierto"}`}>
       <div className="contenedor-modal">
-        <button className="boton-cerrar-modal" onClick={cerrarModal}>X</button>
+        <b className="boton-cerrar-modal" onClick={cerrarModal}>X</b>
         {children}
       </div>
     </article>

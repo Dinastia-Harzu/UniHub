@@ -1,4 +1,5 @@
 @import url("detalles.css");
+@import url("paleta-normal.css");
 
 .modal {
     position: fixed;
@@ -16,12 +17,32 @@
 .boton-cerrar-modal {
     position: absolute;
     top: 1em;
+    cursor: pointer;
+    padding: 0.5em 0.75em 0.5em 0.75em;
+    background-color: black;
+    color: white;
+    border-radius: 0.5em;
+}
+
+.boton-cerrar-modal:hover {
+    background-color: rgb(51, 51, 51);
+}
+
+.boton-publicar-comentario {
+    background-color: var(--color-bg-2);
+    border: 0;
+    font-size: 15px;
+    cursor: pointer;
+}
+
+.boton-publicar-comentario:hover {
+    background-color: #e35555; /*TODO: CAMBIAR CUANDO LOS COLORES ESTEN ESTABLECIDOS*/
 }
 
 .contenedor-modal {
     background-color: rgb(238, 238, 238);
     border-radius: 0.45em;
-    padding: 2em;
+    padding: 2.8em 2em 2em;
     position: relative;
 }
 

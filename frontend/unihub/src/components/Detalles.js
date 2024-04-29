@@ -1,15 +1,15 @@
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faDownload, faEye } from '@fortawesome/free-solid-svg-icons'
-import StarRating from './components/commons/StarRating';
-import {ModalDetalle} from './components/commons/Modales';
-import "./styles/detalles.css"
+import { faDownload, faEye, faStar } from '@fortawesome/free-solid-svg-icons'
+import StarRating from './commons/StarRating';
+import {ModalDetalle} from './commons/Modales';
+import "../styles/detalles.css";
 
-export function Detalles() {
+export default function Detalles() {
    return(
     <>
     <main className="contenedor-detalles">
            <section className="contenedor-portada">
-               <div>
+               <div className="contenedor-ver-y-descargar">
                    <a href="https://www.omfgdogs.com/" target='blank'><FontAwesomeIcon icon={faDownload} size='2xl' className='boton-descargar' /></a>
                    <FontAwesomeIcon icon={faEye} size='2xl' className='boton-ver' />
                </div>
@@ -24,6 +24,7 @@ export function Detalles() {
                    </div>
                    <p><b>Autor/es: </b>Huertas Ferrández, Sergio</p>
                    <p><b>Fecha de Publicación:</b> 24 de enero de 2024</p>
+                   <p><b>Valoración:</b> 5 <FontAwesomeIcon icon={faStar} size="lg"/></p>
                    <p><b>Palabras clave:</b> Animación 3D | Modelado 3D | Cortometraje | Texturizado | Blender | Substance Painter</p>
                </article>
 
