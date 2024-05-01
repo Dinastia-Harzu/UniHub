@@ -1,0 +1,71 @@
+@import url("paleta-normal.css");
+
+.cabecera-inicio {
+  width: 100%;
+  height: 20%;
+  overflow: hidden;
+}
+
+.img-cabecera {
+  width: 100%;
+  /* Ancho de la ventana */
+  height: 20em;
+  object-fit: cover;
+}
+
+.titulo-inicio {
+  display: flex;
+  justify-content: center;
+}
+
+.contenedor-inicio-2 {
+  display: flex;
+  padding: 2em;
+  flex-direction: column;
+  /* Alinea los elementos en columna */
+  align-items: center;
+  /* Centra horizontalmente los elementos en el eje transversal */
+  justify-content: center;
+  /* Centra verticalmente los elementos en el eje principal */
+  /* Toma el 100% del alto de la ventana */
+}
+
+.contenedor-articulos-inicio {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  border-top: 2px solid var(--color-bg-2);
+  width: 60%;
+  padding: 2em;
+}
+
+.articulo-inicio {
+  display: flex;
+  justify-self: center;
+  margin-bottom: 20px;
+}
+
+.imagen-articulo-inicio {
+  width: 200px;
+  /* Ancho de la imagen */
+  height: auto;
+  margin-right: 20px;
+  /* Espacio entre la imagen y el contenido */
+}
+
+.contenido-articulo-inicio {
+  flex: 1;
+  /* El contenido ocupará el espacio restante */
+}
+
+.titulo-articulo-inicio {
+  margin-top: 0;
+  /* Elimina el margen superior del título */
+  margin-bottom: 10px;
+  /* Espacio entre el título y el texto */
+}
+
+.texto-articulo-inicio {
+  margin-top: 0;
+  /* Elimina el margen superior del texto */
+}
