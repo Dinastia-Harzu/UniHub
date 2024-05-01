@@ -31,8 +31,10 @@
 .boton-publicar-comentario {
     background-color: var(--color-bg-2);
     border: 0;
-    font-size: 15px;
+    font-size: 1em;
     cursor: pointer;
+    outline: none;
+    border-style: none;
 }
 
 .boton-publicar-comentario:hover {

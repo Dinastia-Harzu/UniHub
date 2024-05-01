@@ -14,7 +14,7 @@ export function ModalDetalle()  {
                    <img className='foto-usuario' src="assets/Foto_Usuario.jpg" alt="foto-usuario"></img>
                    <span><b>Carmina Lucía</b></span>
                </div>
-               <button className="boton-publicar-comentario" onClick={publicarModal1}>Publicar comentario</button>
+               <button className="boton-publicar-comentario" onClick={publicarModal1}><b>Publicar comentario</b></button>
            </div>
            <form>
             <p className='parrafo-valoracion'><label htmlFor='valoracion'>Introduce tu valoración:</label></p>
