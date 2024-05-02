@@ -1506,7 +1506,7 @@ components:
         tipo:
           type: integer
         autor:
-          type: string
+          type: integer
         titulacion:
           type: integer
         publicacion:
