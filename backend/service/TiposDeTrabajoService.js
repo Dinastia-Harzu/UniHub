@@ -123,11 +123,9 @@ exports.tipos_trabajoIdPUT = function (body, id) {
  **/
 exports.tipos_trabajoPOST = function (body) {
   conexion.query(
-    `INSERT INTO tipo-trabajo VALUES (
+    `INSERT INTO \`tipo-trabajo\` VALUES (
       ${$()},
-      ${$(body.autor)},
-      ${$(body.tipo - trabajo)},
-      ${$(body.valoracion)}
+      ${$(body.nombre)}
   )`,
     (err) => {
       if (err) {

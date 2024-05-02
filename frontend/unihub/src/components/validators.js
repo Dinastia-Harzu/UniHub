@@ -12,3 +12,9 @@ const titulacionValidator = (value) => {
 };
 
 export { titulacionValidator }
+
+const estiloValidator = (value) => {
+  return value !== "none";
+};
+
+export { estiloValidator }

@@ -8,7 +8,7 @@ export default function App() {
   return (
     <div>
       <Header />
-      {/* <Perfilusuario /> */}
+      <Perfilusuario />
       <Inicio />
       <Footer />
     </div>
