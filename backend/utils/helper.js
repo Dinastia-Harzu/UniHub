@@ -9,6 +9,8 @@ const moment = require("moment");
 const jwt = require("jwt-simple");
 const responder = require("./writer").respondWithCode;
 
+const config = require("../config");
+
 app.use(cors());
 app.options("*", cors());
 
@@ -31,10 +33,10 @@ app.use(allowCrossTokenMethods);
 app.use(allowCrossTokenHeaders);
 
 const connection = mysql.createConnection({
-  host: "localhost",
-  user: "root",
-  password: "",
-  database: "unihub",
+  host: config.huesped,
+  user: config.usuario,
+  password: config.clave,
+  database: config.db,
   typeCast: function castField(field, useDefaultTypeCasting) {
     if (field.type === "BIT" && field.length === 1) {
       const bytes = field.buffer();
