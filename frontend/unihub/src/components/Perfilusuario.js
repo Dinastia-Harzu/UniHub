@@ -1,5 +1,5 @@
 import { useForm } from "react-hook-form";
-import { edadValidator, titulacionValidator } from "./validators";
+import { edadValidator, titulacionValidator, estiloValidator } from "./validators";
 import React, { useState } from 'react';
 
 const Perfilusuario = () => {
@@ -21,7 +21,7 @@ const Perfilusuario = () => {
     <h2>Mi Perfil</h2>
     <form onSubmit={handleSubmit(onSubmit)}>
       <label for="nombre">Nombre:</label>
-      <input type="text" id="nombre" name="nombre" value="Miriam"{...register('nombre', {
+      <input type="text" id="nombre" name="nombre" defaultValue="Miriam"{...register('nombre', {
         required: true,
         maxLength: 20
       })} />
@@ -31,7 +31,7 @@ const Perfilusuario = () => {
       <br /><br />
 
       <label for="apellidos">Apellidos:</label>
-      <input type="text" id="apellidos" name="apellidos" value="García"{...register('apellidos', {
+      <input type="text" id="apellidos" name="apellidos" defaultValue="García"{...register('apellidos', {
         required: true,
         maxLength: 50
       })} />
@@ -41,7 +41,7 @@ const Perfilusuario = () => {
       <br /><br />
 
       <label for="correo">Correo electrónico:</label>
-      <input type="email" id="correo" name="correo" value="miriam34@gmail.com"{...register('correo', {
+      <input type="email" id="correo" name="correo" defaultValue="miriam34@gmail.com"{...register('correo', {
         required: true,
         pattern: /^[^\s@]+@[^\s@]+\.[^\s@]+$/i
       })} />
@@ -57,7 +57,7 @@ const Perfilusuario = () => {
           type={mostrarContrasena ? "text" : "password"}
           id="contrasena"
           name="contrasena"
-          value="1234Pepito"
+          defaultValue="1234Pepito"
           {...register('contrasena', {
             required: true,
             pattern: /(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}/
@@ -72,7 +72,7 @@ const Perfilusuario = () => {
       <br /><br />
 
       <label for="titulacion">Grado o máster:</label>
-      <select value="arquitectura" {...register('titulacion', {
+      <select defaultValue="arquitectura" {...register('titulacion', {
         required: true,
         validate: titulacionValidator
       })} >
@@ -114,8 +114,26 @@ const Perfilusuario = () => {
       {errors.titulacion?.type === 'validate' && <p>Debes elegir una titulacion</p>}
       <br /><br />
 
+      <label for="estilo">Estilo:</label>
+      <select defaultValue="1" {...register('estilo', {
+        required: true,
+        validate: estiloValidator
+      })}>
+        <option value="none">Selecciona tu estilo</option>
+        <option value="1">Por defecto</option>
+        <option value="2">Letra Grande</option>
+        <option value="3">Alto contraste</option>
+      </select>
+
+
+      {errors.titulacion?.type === 'required' && <p>El campo es requerido</p>}
+      {errors.titulacion?.type === 'validate' && <p>Debes elegir una titulacion</p>}
+      <br /><br />
+
+
+
       <label for="direccion">Dirección:</label>
-      <input type="text" id="direccion" name="direccion" value="Calle Altozano, Alicante" {...register('direccion', {
+      <input type="text" id="direccion" name="direccion" defaultValue="Calle Altozano, Alicante" {...register('direccion', {
         required: true,
       })} />
 
@@ -123,7 +141,7 @@ const Perfilusuario = () => {
       <br /><br />
 
       <label for="fecha_nacimiento">Fecha de Nacimiento:</label>
-      <input type="date" id="fecha_nacimiento" name="fecha_nacimiento" value="2023-05-24" {...register('fecha_nacimiento', {
+      <input type="date" id="fecha_nacimiento" name="fecha_nacimiento" defaultValue="2023-05-24" {...register('fecha_nacimiento', {
         required: true,
         validate: edadValidator
       })} />
@@ -132,7 +150,7 @@ const Perfilusuario = () => {
 
       <br /><br />
 
-      <input type="submit" value="Aceptar Cambios" />
+      <input type="submit" value="Editar perfil" />
     </form>
   </div >
 
