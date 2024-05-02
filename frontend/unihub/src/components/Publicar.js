@@ -20,7 +20,7 @@ export default function Publicar() {
         console.log(pagina);
     }
 
-    const PaginasFormularios = [<FormPublicar1/>, <FormPublicar2/>, <FormPublicar3/>];
+    const PaginasFormularios = [<FormPublicar1 setPagina={setPagina} />, <FormPublicar2 setPagina={setPagina} />, <FormPublicar3 setPagina={setPagina} />];
 
     return (
         <div>
@@ -34,10 +34,10 @@ export default function Publicar() {
                     </div>
                     <div className={(pagina === 2) ? 'boton-oculto' : 'boton-siguiente'}>
                         <button className="btn" onClick={() => adelantarPagina()}>Siguiente</button>
-                        <FontAwesomeIcon icon={faChevronRight} size="2x"/>
+                        <FontAwesomeIcon icon={faChevronRight} size="2x" />
                     </div>
                     <div className="boton-publicar">
-                        <button className="btn" hidden = {!(pagina === 2)}>Publicar</button>
+                        <button className="btn" hidden={!(pagina === 2)}>Publicar</button>
                     </div>
                 </div>
             </section>

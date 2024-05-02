@@ -1,6 +1,6 @@
 import "../styles/publicar.css";
 
-export default function FormPublicar1() {
+export default function FormPublicar1({ setPagina }) {
     return (
         <main className="contenedor-publicar">
             <section className="titulo-publicar">
@@ -8,9 +8,9 @@ export default function FormPublicar1() {
             </section>
             <section className="contenedor-formulario-publicar">
                 <div className="contenedor-apartados-publicar">
-                    <p className="apartado actual">Detalles</p>
-                    <p className="apartado no-actual">Multimedia</p>
-                    <p className="apartado no-actual">Portada</p>
+                    <p className="apartado actual" onClick={() => setPagina(0)}>Detalles</p>
+                    <p className="apartado no-actual" onClick={() => setPagina(1)}>Multimedia</p>
+                    <p className="apartado no-actual" onClick={() => setPagina(2)}>Portada</p>
                 </div>
                 <div className="formulario-publicar">
                     <form>
