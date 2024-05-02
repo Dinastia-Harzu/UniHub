@@ -2,7 +2,7 @@ import { useState } from "react";
 import "../styles/publicar.css";
 import ContenedorRecurso from "./ContenedorRecurso";
 
-export default function FormPublicar2() {
+export default function FormPublicar2({ setPagina }) {
 
     // Estado para almacenar los recursos
     const [recursos, setRecursos] = useState([]);
@@ -12,8 +12,8 @@ export default function FormPublicar2() {
     const agregarRecurso = (evt) => {
         evt.preventDefault();
 
-        if(recursos.length <= 5) {
-            setRecursos([...recursos, { id: contadorId}]);
+        if (recursos.length <= 5) {
+            setRecursos([...recursos, { id: contadorId }]);
             setContadorId(contadorId + 1); // Incrementar el contador de id
         }
     };
@@ -29,9 +29,9 @@ export default function FormPublicar2() {
             </section>
             <section className="contenedor-formulario-publicar">
                 <div className="contenedor-apartados-publicar">
-                    <p className="apartado no-actual">Detalles</p>
-                    <p className="apartado actual">Multimedia</p>
-                    <p className="apartado no-actual">Portada</p>
+                    <p className="apartado no-actual" onClick={() => setPagina(0)}>Detalles</p>
+                    <p className="apartado actual" onClick={() => setPagina(1)}>Multimedia</p>
+                    <p className="apartado no-actual" onClick={() => setPagina(2)}>Portada</p>
                 </div>
                 <div className="formulario-publicar">
                     <form>
@@ -52,6 +52,6 @@ export default function FormPublicar2() {
                 </div>
             </section>
         </main>
-        
+
     );
 }
