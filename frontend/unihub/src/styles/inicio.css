@@ -69,3 +69,7 @@
   margin-top: 0;
   /* Elimina el margen superior del texto */
 }
+
+.texto-articulo-inicio {
+  text-align: justify;
+}
