@@ -16,17 +16,16 @@
         "type": "node"
       },
       {
-        "console": "integratedTerminal",
-        "internalConsoleOptions": "neverOpen",
         "name": "Frontend",
-        "program": "${workspaceFolder}/frontend/unihub/index.js",
+        "type": "node",
+        "console": "integratedTerminal",
         "request": "launch",
-        "restart": true,
-        "runtimeExecutable": "nodemon",
-        "skipFiles": [
-          "<node_internals>/**"
-        ],
-        "type": "node"
+        "cwd": "${workspaceFolder}/frontend/unihub/",
+        "runtimeExecutable": "npm",
+        "runtimeArgs": [
+          "run-script",
+          "start"
+        ]
       }
     ],
     "compounds": []

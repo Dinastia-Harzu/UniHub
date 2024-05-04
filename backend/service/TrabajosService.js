@@ -123,6 +123,7 @@ exports.trabajosPOST = function (body) {
     conexion.query(
       `INSERT INTO trabajo VALUES (
         ${$()},
+        ${$(body.nombre)},
         ${$(body.tipo)},
         ${$(body.autor)},
         ${$(body.titulacion)},
