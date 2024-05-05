@@ -16,7 +16,7 @@ const _ = require("./TiposDeTrabajoService");
  **/
 exports.tipos_trabajoGET = function () {
   return new Promise(function (resolve, reject) {
-    conexion.query(`SELECT * FROM tipo-trabajo`, (err, filas) => {
+    conexion.query(`SELECT * FROM \`tipo-trabajo\``, (err, filas) => {
       if (err) {
         console.error(err);
         reject(responder(500, respuestas[500]));
@@ -66,7 +66,7 @@ exports.tipos_trabajoIdDELETE = function (id) {
 exports.tipos_trabajoIdGET = function (id) {
   return new Promise(function (resolve, reject) {
     conexion.query(
-      `SELECT * FROM tipo-trabajo WHERE id = ${id}`,
+      `SELECT * FROM \`tipo-trabajo\` WHERE id = ${id}`,
       (err, res) => {
         if (err) {
           console.error(err);
@@ -122,35 +122,37 @@ exports.tipos_trabajoIdPUT = function (body, id) {
  * returns Created
  **/
 exports.tipos_trabajoPOST = function (body) {
-  conexion.query(
-    `INSERT INTO \`tipo-trabajo\` VALUES (
+  return new Promise(function (resolve, reject) {
+    conexion.query(
+      `INSERT INTO \`tipo-trabajo\` VALUES (
       ${$()},
       ${$(body.nombre)}
   )`,
-    (err) => {
-      if (err) {
-        console.error(err);
-        const codigo = helper.getHttpCodeFromErrNo(err.code);
-        reject(
-          responder(
-            codigo,
-            codigo == 400 ? respuestas[400].POST : respuestas[codigo]
-          )
-        );
-      } else {
-        _.tipos_trabajoGET().then(
-          (res) =>
-            resolve(
-              responder(
-                201,
-                Object.assign({}, respuestas[201], {
-                  "tipo-trabajo": res.payload.at(-1),
-                })
-              )
-            ),
-          (err) => reject(err)
-        );
+      (err) => {
+        if (err) {
+          console.error(err);
+          const codigo = helper.getHttpCodeFromErrNo(err.code);
+          reject(
+            responder(
+              codigo,
+              codigo == 400 ? respuestas[400].POST : respuestas[codigo]
+            )
+          );
+        } else {
+          _.tipos_trabajoGET().then(
+            (res) =>
+              resolve(
+                responder(
+                  201,
+                  Object.assign({}, respuestas[201], {
+                    "tipo-trabajo": res.payload.at(-1),
+                  })
+                )
+              ),
+            (err) => reject(err)
+          );
+        }
       }
-    }
-  );
+    );
+  });
 };

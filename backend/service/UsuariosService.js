@@ -128,7 +128,6 @@ exports.usuariosPOST = function (body) {
         ${$(body.correo)},
         ${$(body.clave)},
         ${$(body.titulacion)},
-        1,
         ${$(body.direccion)},
         ${$(body.nacimiento)},
         ${$(body.tema)},
