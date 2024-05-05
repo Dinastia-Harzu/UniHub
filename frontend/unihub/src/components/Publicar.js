@@ -30,21 +30,23 @@ export default function Publicar() {
         console.log(pagina);
     }
 
-    const MostrarPaginas = () => {
-        if (pagina === 0) {
-            return <FormPublicar1 setPagina={setPagina} formData={formData} setFormData={setFormData} />;
-        }
-        else if (pagina === 1) {
-            return <FormPublicar2 setPagina={setPagina} formData={formData} setFormData={setFormData} />;
-        }
-        else {
-            return <FormPublicar3 setPagina={setPagina} formData={formData} setFormData={setFormData} />;
-        }
+    function verData() {
+        console.log(formData);
     }
 
     return (
         <div className="pagina-publicar">
-            <div>{MostrarPaginas()}</div>
+            <div>
+                <div className={pagina === 0 ? 'form-mostrado' : 'form-oculto'}>
+                    <FormPublicar1 setPagina={setPagina} formData={formData} setFormData={setFormData} />;
+                </div>
+                <div className={pagina === 1 ? 'form-mostrado' : 'form-oculto'}>
+                    <FormPublicar2 setPagina={setPagina} formData={formData} setFormData={setFormData} />;
+                </div>
+                <div className={pagina === 2 ? 'form-mostrado' : 'form-oculto'}>
+                    <FormPublicar3 setPagina={setPagina} formData={formData} setFormData={setFormData} />;
+                </div>
+            </div>
 
             <section className="seccion-botones-publicar">
                 <div className="contenedor-botones-publicar">
@@ -57,7 +59,7 @@ export default function Publicar() {
                         <FontAwesomeIcon icon={faChevronRight} size="2x" />
                     </div>
                     <div className="boton-publicar">
-                        <button className="btn" hidden={!(pagina === 2)}>Publicar</button>
+                        <button className="btn" hidden={!(pagina === 2)} onClick={() => verData()}>Publicar</button>
                     </div>
                 </div>
             </section>

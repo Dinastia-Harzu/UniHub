@@ -16,19 +16,19 @@ export default function FormPublicar1({ setPagina, formData, setFormData }) {
                     <form>
                         <div className="contenedor-apartados-formulario">
                             <label htmlFor="autor">Autor</label>
-                            <input type="text" name="autor" placeholder="Introduce tu nombre y apellidos..." value={formData.autor}
+                            <input type="text" name="autor" required placeholder="Introduce tu nombre y apellidos..." value={formData.autor}
                                 onChange={(event) => setFormData({ ...formData, autor: event.target.value })}></input>
                         </div>
 
                         <div className="contenedor-apartados-formulario">
                             <label htmlFor="titulo">Título</label>
-                            <input type="text" name="titulo" placeholder="Introduce el título del trabajo..." value={formData.titulo}
+                            <input type="text" name="titulo" required placeholder="Introduce el título del trabajo..." value={formData.titulo}
                                 onChange={(event) => setFormData({ ...formData, titulo: event.target.value })}></input>
                         </div>
 
                         <div className="contenedor-apartados-formulario">
                             <label htmlFor="nivel">Grado/Máster</label>
-                            <input type="text" name="nivel" placeholder="Introduce el grado/máster al que pertenece el trabajo..." value={formData.grado}
+                            <input type="text" name="nivel" required placeholder="Introduce el grado/máster al que pertenece el trabajo..." value={formData.grado}
                                 onChange={(event) => setFormData({ ...formData, grado: event.target.value })}></input>
                         </div>
 

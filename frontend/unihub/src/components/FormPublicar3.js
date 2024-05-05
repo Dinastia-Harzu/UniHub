@@ -14,6 +14,7 @@ export default function FormPublicar3({ setPagina, formData, setFormData }) {
         const fichero = inp.target.files[0];
         const img = refImagen.current;
         img.src = URL.createObjectURL(fichero);
+        setFormData({ ...formData, portada: inp.target.files[0].name })
     }
 
     return (

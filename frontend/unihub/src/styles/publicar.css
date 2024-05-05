@@ -1,5 +1,13 @@
 @import url(paleta-normal.css);
 
+.form-mostrado {
+    display: block;
+}
+
+.form-oculto {
+    display: none;
+}
+
 .seccion-botones-publicar {
     display: flex;
     justify-content: center;
@@ -140,11 +148,6 @@
 
 .boton-oculto {
     display: none !important;
-}
-
-/* PARTE 3 */
-.info-archivo-actual {
-    font-size: 14px;
 }
 
 /* MEDIA QUERIES */

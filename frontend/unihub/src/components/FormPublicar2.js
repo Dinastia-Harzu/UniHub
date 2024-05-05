@@ -5,7 +5,7 @@ import ContenedorRecurso from "./ContenedorRecurso";
 export default function FormPublicar2({ setPagina, formData, setFormData }) {
 
     // Estado para almacenar los recursos
-    const [recursos, setRecursos] = useState(formData.recursos);
+    const [recursos, setRecursos] = useState([]);
     const [contadorId, setContadorId] = useState(0); // Nuevo estado para el contador de los recursos y asi no usar length
 
     // Función para agregar un nuevo ContenedorRecurso
@@ -44,7 +44,7 @@ export default function FormPublicar2({ setPagina, formData, setFormData }) {
                         <label className="titulo-recursos" htmlFor="recursos[]">Recursos Multimedia:</label>
                         <section className="contenedor-todos-los-recursos">
                             {recursos.map(recurso => (
-                                <ContenedorRecurso key={recurso.id} id={recurso.id} eliminarRecurso={eliminarRecurso} />
+                                <ContenedorRecurso key={recurso.id} id={recurso.id} eliminarRecurso={eliminarRecurso} formData={formData} setFormData={setFormData} />
                             ))}
                         </section>
 
