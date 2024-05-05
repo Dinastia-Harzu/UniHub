@@ -1,7 +1,7 @@
 import "../styles/publicar.css";
 import { useRef } from 'react';
 
-export default function FormPublicar3({ setPagina }) {
+export default function FormPublicar3({ setPagina, formData, setFormData }) {
     const refPortada = useRef();
     const refImagen = useRef();
 
@@ -31,12 +31,14 @@ export default function FormPublicar3({ setPagina }) {
                     <form>
                         <div className="contenedor-apartados-formulario">
                             <label htmlFor="autor">Archivo de trabajo: </label>
-                            <input type="file" name="archivo" accept="application/pdf"></input>
+                            <p className="info-archivo-actual"><b>Archivo actual:</b> {formData.archivo}</p>
+                            <input type="file" name="archivo" accept="application/pdf"
+                                onChange={(event) => setFormData({ ...formData, archivo: event.target.files[0].name })}></input>
                         </div>
 
                         <div className="contenedor-apartados-formulario">
                             <label htmlFor="portada">Portada: </label>
-                            <img ref={refImagen} src="./assets/Foto_defecto_portada.png" alt="Portada" onClick={() => setPortada()} width={250} height={320} />
+                            <img ref={refImagen} src="./assets/Foto_defecto_portada.png" alt="Portada" onClick={() => setPortada()} width={190} height={255} />
                             <input ref={refPortada} type="file" name="portada" accept="image/*" onChange={(event) => cambiarFoto(event)}></input>
                         </div>
                     </form>

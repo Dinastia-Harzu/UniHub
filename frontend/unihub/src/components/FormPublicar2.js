@@ -2,10 +2,10 @@ import { useState } from "react";
 import "../styles/publicar.css";
 import ContenedorRecurso from "./ContenedorRecurso";
 
-export default function FormPublicar2({ setPagina }) {
+export default function FormPublicar2({ setPagina, formData, setFormData }) {
 
     // Estado para almacenar los recursos
-    const [recursos, setRecursos] = useState([]);
+    const [recursos, setRecursos] = useState(formData.recursos);
     const [contadorId, setContadorId] = useState(0); // Nuevo estado para el contador de los recursos y asi no usar length
 
     // Función para agregar un nuevo ContenedorRecurso
@@ -14,7 +14,7 @@ export default function FormPublicar2({ setPagina }) {
 
         if (recursos.length <= 5) {
             setRecursos([...recursos, { id: contadorId }]);
-            setContadorId(contadorId + 1); // Incrementar el contador de id
+            setContadorId(contadorId + 1);                  // Incrementar el contador de id
         }
     };
 
@@ -37,7 +37,8 @@ export default function FormPublicar2({ setPagina }) {
                     <form>
                         <div className="contenedor-apartados-formulario">
                             <label htmlFor="resumen">Resumen:</label>
-                            <textarea name="resumen" placeholder="Escribe un resumen sobre el trabajo..." rows={8} cols={50}></textarea>
+                            <textarea name="resumen" placeholder="Escribe un resumen sobre el trabajo..." rows={8} cols={50} value={formData.resumen}
+                                onChange={(event) => setFormData({ ...formData, resumen: event.target.value })}></textarea>
                         </div>
 
                         <label className="titulo-recursos" htmlFor="recursos[]">Recursos Multimedia:</label>
