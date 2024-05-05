@@ -1,0 +1,75 @@
+.cabecera-inicio {
+  height: 200px;
+}
+
+.contenedor-resultados-busqueda>h3 {
+  margin-top: 1em;
+  border-bottom: 2px solid var(--color-bg-2);
+  width: 100%;
+}
+
+.resultados {
+  padding: 1em;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.contenedor-busqueda {
+  padding: 2em;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+/*ESTILO PARA EL FORMULARIO*/
+.formulario-busqueda {
+  width: 50%;
+  padding: 1em;
+  border: 3px solid #ffffff;
+  background-color: var(--color-bg-form);
+  border-radius: 5px;
+}
+
+.formulario-busqueda>h2 {
+  text-align: center;
+  padding: .5em;
+}
+
+.formulario-busqueda button {
+  font-weight: bold;
+  color: var(--color-texto);
+  background-color: var(--color-primary);
+  border: 2px solid white;
+}
+
+.formulario-busqueda button:hover {
+  font-weight: bold;
+  color: var(--color-bg) !important;
+  background-color: transparent;
+  border: none;
+}
+
+.contenedor-apartados-formulario {
+  margin-bottom: 15px;
+  /* Espacio entre los campos */
+}
+
+input[type="text"],
+input[type="date"],
+select {
+  width: 100%;
+  /* El campo de entrada ocupará todo el ancho disponible */
+  padding: 10px;
+  /* Espacio interno */
+  border: 1px solid #ccc;
+  /* Borde del campo */
+  border-radius: 5px;
+  /* Bordes redondeados */
+}
+
+select {
+  appearance: none;
+  /* Elimina la apariencia nativa del selector */
+}
