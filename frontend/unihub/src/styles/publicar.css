@@ -3,6 +3,7 @@
 .seccion-botones-publicar {
     display: flex;
     justify-content: center;
+    margin-bottom: 5em;
 }
 
 .contenedor-botones-publicar {
@@ -50,7 +51,7 @@
 
 .no-actual {
     background-color: var(--color-bg-form-2);
-    height: 77%;
+    /* height: 77%; */
 }
 
 .formulario-publicar {
@@ -141,12 +142,17 @@
     display: none !important;
 }
 
+/* PARTE 3 */
+.info-archivo-actual {
+    font-size: 14px;
+}
+
 /* MEDIA QUERIES */
 @media only screen and (max-width: 820px) {
     .contenedor-publicar {
         display: grid;
-        grid-template-rows: 5% 95%;
-        grid-template-columns: repeat(1, 1fr);
+        grid-template-rows: 10% 95%;
+        grid-template-columns: 100%;
         justify-items: center;
     }
 
@@ -154,4 +160,20 @@
         margin-left: 30%;
         width: 90%;
     }
+
+    .contenedor-apartados-publicar {
+        font-size: 13px;
+    }
+
+    .contenedor-botones-publicar {
+        width: 68%;
+        display: grid;
+        grid-template-columns: 50% 50%;
+    }
+
+    .seccion-botones-publicar {
+        margin-top: 2em;
+    }
 }
+
+@media only screen and (max-width: 530px) {}

@@ -9,6 +9,16 @@ import { useState } from 'react';
 export default function Publicar() {
 
     const [pagina, setPagina] = useState(0);
+    const [formData, setFormData] = useState({
+        autor: "",
+        titulo: "",
+        grado: "",
+        palabras_clave: "",
+        resumen: "",
+        recursos: [],
+        archivo: "",
+        portada: ""
+    });
 
     function adelantarPagina() {
         setPagina(pagina + 1);
@@ -20,11 +30,21 @@ export default function Publicar() {
         console.log(pagina);
     }
 
-    const PaginasFormularios = [<FormPublicar1 setPagina={setPagina} />, <FormPublicar2 setPagina={setPagina} />, <FormPublicar3 setPagina={setPagina} />];
+    const MostrarPaginas = () => {
+        if (pagina === 0) {
+            return <FormPublicar1 setPagina={setPagina} formData={formData} setFormData={setFormData} />;
+        }
+        else if (pagina === 1) {
+            return <FormPublicar2 setPagina={setPagina} formData={formData} setFormData={setFormData} />;
+        }
+        else {
+            return <FormPublicar3 setPagina={setPagina} formData={formData} setFormData={setFormData} />;
+        }
+    }
 
     return (
-        <div>
-            <div>{PaginasFormularios[pagina]}</div>
+        <div className="pagina-publicar">
+            <div>{MostrarPaginas()}</div>
 
             <section className="seccion-botones-publicar">
                 <div className="contenedor-botones-publicar">

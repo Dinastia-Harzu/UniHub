@@ -1,6 +1,6 @@
 import "../styles/publicar.css";
 
-export default function FormPublicar1({ setPagina }) {
+export default function FormPublicar1({ setPagina, formData, setFormData }) {
     return (
         <main className="contenedor-publicar">
             <section className="titulo-publicar">
@@ -16,17 +16,20 @@ export default function FormPublicar1({ setPagina }) {
                     <form>
                         <div className="contenedor-apartados-formulario">
                             <label htmlFor="autor">Autor</label>
-                            <input type="text" name="autor" placeholder="Introduce tu nombre y apellidos..."></input>
+                            <input type="text" name="autor" placeholder="Introduce tu nombre y apellidos..." value={formData.autor}
+                                onChange={(event) => setFormData({ ...formData, autor: event.target.value })}></input>
                         </div>
 
                         <div className="contenedor-apartados-formulario">
                             <label htmlFor="titulo">Título</label>
-                            <input type="text" name="titulo" placeholder="Introduce el título del trabajo..."></input>
+                            <input type="text" name="titulo" placeholder="Introduce el título del trabajo..." value={formData.titulo}
+                                onChange={(event) => setFormData({ ...formData, titulo: event.target.value })}></input>
                         </div>
 
                         <div className="contenedor-apartados-formulario">
                             <label htmlFor="nivel">Grado/Máster</label>
-                            <input type="text" name="nivel" placeholder="Introduce el grado/máster al que pertenece el trabajo..."></input>
+                            <input type="text" name="nivel" placeholder="Introduce el grado/máster al que pertenece el trabajo..." value={formData.grado}
+                                onChange={(event) => setFormData({ ...formData, grado: event.target.value })}></input>
                         </div>
 
                         <div className="contenedor-apartados-formulario">
@@ -34,7 +37,8 @@ export default function FormPublicar1({ setPagina }) {
                                 <label htmlFor="palabras-clave">Palabras clave</label>
                                 <label className="texto-info-comas" htmlFor="palabras-clave"> (Separados por comas)</label>
                             </p>
-                            <input type="text" name="palabras-clave" placeholder="Introduce las palabras clave..."></input>
+                            <input type="text" name="palabras-clave" placeholder="Introduce las palabras clave..." value={formData.palabras_clave}
+                                onChange={(event) => setFormData({ ...formData, palabras_clave: event.target.value })}></input>
                         </div>
                     </form>
                 </div>
