@@ -1,0 +1,26 @@
+.carta-busqueda {
+  display: flex;
+  flex-direction: row;
+  padding: 1em;
+  width: 90%;
+}
+
+.img-busqueda {
+  width: 150px;
+  height: auto;
+  flex: 0 0 auto;
+  margin-right: 20px;
+  border: 3px solid black;
+  border-radius: .5em;
+}
+
+.carta-contenido {
+  flex: 1;
+  gap: 1em;
+}
+
+.carta-contenido p {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  text-align: justify;
+}
