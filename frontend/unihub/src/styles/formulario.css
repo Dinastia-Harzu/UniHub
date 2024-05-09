@@ -4,6 +4,7 @@
   grid-gap: 2em;
   grid-auto-rows: minmax(5em, auto);
   margin-bottom: 10em;
+  padding: 1em;
 }
 
 #nombre {
@@ -13,17 +14,19 @@
 
 #contrasenia {
   display: grid;
-  grid-template-columns: 2fr 1fr;
+  grid-template-columns: 2fr .2fr;
   grid-template-rows: 1fr;
 }
 .input-contrasenia{
   grid-column: 1;
 }
 .boton-contrasenia{
+  padding: .5em;
   display: flex;
   justify-content: center;
   grid-column: 2;
 }
+
 #nombre-titulo {
   grid-column: 2;
   grid-row: 1;
@@ -59,11 +62,13 @@
   border-radius: 0.5em;
 }
 
+.img-cabecera{
+  border-radius: 50%;
+}
 .wrapper {
   display: grid;
   grid-template-columns: 2fr 2fr 2fr;
   grid-gap: .2em;
-  grid-template-rows: 1fr 3fr 2fr;
   grid-auto-rows: minmax(.5em, auto);
 }
 
@@ -106,18 +111,30 @@ button {
 
 }
 
-.file-input-label {
-  display: inline-block;
-  position: relative;
-  overflow: hidden;
-  cursor: pointer;
-  background-color: #007bff;
-  color: white;
+.contenedor-apartados-formulario_usuario {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  grid-column: 1 / 2;
+  grid-row: 2 / span 2;
+  width: 100%;
+ 
+}
+
+.contenedor-apartados-formulario_usuario p {
+  margin-bottom: 0;
+  margin-top: 0;
+  
+}
+
+.contenedor-apartados-formulario_usuario input {
+  display: none;
+}
+
+.contenedor-apartados-formulario_usuario img {
+  width: 10em;
+  height: 10em;
   border-radius: 50%;
-  width: 100px;
-  height: 100px;
-  text-align: center;
-  line-height: 100px;
 }
 
 .blue-btn:hover {
@@ -129,5 +146,67 @@ button {
   display: flex;
   justify-content: center;
   margin: .2em;
-  width: 50%;
+  width: 100%;
+}
+
+.contenedor-inicial{
+    padding: 2em;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    
+}
+
+
+.icono-grande {
+  margin-top: 1em;
+  font-size: 1.5em;
+}
+
+
+@media (max-width: 850px) {
+
+  .wrapper {
+    display: grid;
+    grid-template-columns: 2fr 2fr 2fr 2fr 2fr;
+    grid-gap: .2em;
+    grid-auto-rows: minmax(.5em, auto);
+  }
+
+  .contenedor-apartados-formulario_usuario {
+    display: flex;
+  justify-content: center;
+  align-items: center;
+  grid-column: 1 / span2;
+  grid-row: 2 / span 2;
+  width: 100%;
+  margin-bottom: 5em;
+  }
+
+  .contenedor-apartados-formulario_usuario img {
+    width: 100%;
+    height: 100;
+    border-bottom: .5em;
+  }
+
+  #nombre {
+    grid-column: 1 / span 3;
+    grid-row: 3;
+  }
+
+  #apellidos {
+    grid-column: 1 / span 3;
+    grid-row: 4;
+  }
+  #parte-inferior {
+    grid-column: 1 / span 3;
+    grid-row: 5;
+  }
+  .boton-editar {
+    display: flex;
+    justify-content: right;
+    grid-column: 3;
+    grid-row: 6;
+  }
 }

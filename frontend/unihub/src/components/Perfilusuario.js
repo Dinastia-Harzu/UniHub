@@ -2,15 +2,33 @@ import { useForm } from "react-hook-form";
 import { edadValidator, titulacionValidator, estiloValidator } from "./validators";
 import React, { useState } from 'react';
 import "../styles/formulario.css";
+import { FaEye, FaEyeSlash } from 'react-icons/fa';
+import { useRef } from 'react';
 
 const Perfilusuario = () => {
   const { register, formState: { errors }, handleSubmit } = useForm();
+  const [mostrarContrasena, setMostrarContrasena] = useState(false);
+  const [imagenSeleccionada, setImagenSeleccionada] = useState(null);
+  const refPortada = useRef();
+  const refImagen = useRef();
 
+  function setPortada() {
+    const recurso_actual = refPortada.current;
+    recurso_actual.click();
+}
+
+function cambiarFoto(inp) {
+  if (inp.target.files.length > 0) {
+    const fichero = inp.target.files[0];
+    const img = refImagen.current;
+    img.src = URL.createObjectURL(fichero);
+  } else {
+    setImagenSeleccionada(null);
+  }
+}
   const onSubmit = (data) => {
     console.log(data);
   }
-
-  const [mostrarContrasena, setMostrarContrasena] = useState(false);
 
   const toggleMostrarContrasena = () => {
     setMostrarContrasena(!mostrarContrasena);
@@ -18,18 +36,19 @@ const Perfilusuario = () => {
 
   return (
     <main>
-      <section className="contenedor-inicial">
+      <div className="contenedor-inicial">
         <div className="titulo"><h2>Mi Perfil</h2></div>
         <div className="form-container">
           <form onSubmit={handleSubmit(onSubmit)} className="pos-wrapper">
+
             <div className="wrapper">
               <div className="form-group" id="nombre-titulo"><h1>Miriam</h1></div>
-              <div className="form-group" id="imagen">
-                <label htmlFor="imagen" className="file-input-label">
-                  <span>Seleccionar imagen</span>
-                  <input type="file" id="imagen" {...register('imagen')} />
-                </label>
-              </div>
+
+              <div className="contenedor-apartados-formulario_usuario">
+                            <label htmlFor="portada"></label>
+                            <img ref={refImagen} src="./assets/no_photo.png" alt="Portada" onClick={() => setPortada()} width={240} height={320} />
+                            <input ref={refPortada} type="file" name="portada" accept="image/*" onChange={(event) => cambiarFoto(event)}></input>
+                        </div>
 
               <div className="form-group" id="nombre">
                 <label htmlFor="nombre">Nombre:</label>
@@ -40,7 +59,6 @@ const Perfilusuario = () => {
                 {errors.nombre?.type === 'required' && <p>El campo es requerido</p>}
                 {errors.nombre?.type === 'maxLength' && <p>El nombre introducido es demasiado largo</p>}
               </div>
-
               <div className="form-group" id="apellidos">
                 <label htmlFor="apellidos">Apellidos:</label>
                 <input type="text" id="apellidos" name="apellidos" defaultValue="García" {...register('apellidos', {
@@ -81,14 +99,15 @@ const Perfilusuario = () => {
                     })}
                   />
                   </div>
+                  
                   <div className="boton-contrasenia">
-                  <button type="button" onClick={toggleMostrarContrasena}>
-                    {mostrarContrasena ? "Ocultar" : "Mostrar"}
-                  </button>
-                  </div>
+                  <span type="button" onClick={toggleMostrarContrasena}>
+                  {mostrarContrasena ? <FaEyeSlash className="icono-grande" /> : <FaEye className="icono-grande" />}
+                  </span>
+                </div>
                   {errors.contrasena?.type === 'required' && <p>El campo es requerido</p>}
                   {errors.contrasena?.type === 'pattern' && <p>El formato no es adecuado</p>}
-                  <br /><br />
+                  <br />
                 </div>
 
                 <div className="form-group" id="titulacion">
@@ -175,14 +194,14 @@ const Perfilusuario = () => {
                   <br /><br />
 
                 </div>
-
+                
 
               </div>
-              <div class="boton-editar"> <button type="submit" class="btn" value="Editar perfil">Editar perfil</button></div>
+              <div class="boton-editar"> <button type="submit" class="btn" value="Editar perfil">Editar</button></div>
             </div>
           </form>
         </div>
-      </section >
+      </div >
     </main >
   );
 }
