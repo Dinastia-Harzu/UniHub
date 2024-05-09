@@ -62,9 +62,10 @@
   border-radius: 0.5em;
 }
 
-.img-cabecera{
+/* .img-cabecera{
   border-radius: 50%;
-}
+} */
+
 .wrapper {
   display: grid;
   grid-template-columns: 2fr 2fr 2fr;
