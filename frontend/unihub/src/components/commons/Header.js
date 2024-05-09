@@ -1,6 +1,7 @@
 import React from 'react';
 import { useRef } from "react";
 import { FaBars, FaTimes } from "react-icons/fa"
+import { ReactDOM } from "react-dom/client";
 // import { slide as Menu } from 'react-burger-menu';
 
 import "../../styles/header.css";
@@ -8,7 +9,6 @@ import "../../styles/header.css";
 
 export default function Header() {
   const navRef = useRef();
-
   const showNavbar = () => {
     navRef.current.classList.toggle("responsive_nav");
   }
