@@ -1,5 +1,4 @@
-@import url("paleta-normal.css");
-
+@import url("paleta-alto-contraste.css");
 
 * {
   box-sizing: border-box;
@@ -99,8 +98,6 @@ html {
   bottom: 0;
   width: 100%;
 }
-
-
 
 @media screen and (max-width: 870px) {
   .navbar {

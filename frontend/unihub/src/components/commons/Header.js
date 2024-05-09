@@ -4,7 +4,6 @@ import { FaBars, FaTimes } from "react-icons/fa"
 import { ReactDOM } from "react-dom/client";
 // import { slide as Menu } from 'react-burger-menu';
 
-import "../../styles/general.css";
 import "../../styles/header.css";
 
 
@@ -18,7 +17,8 @@ export default function Header() {
     <header>
       <div className="container1">
         <a href="/">
-          <img className='logotipo' src="assets/Tiny_Logo.PNG" alt="logo" />
+          <div className='logotipo'></div>
+          {/* <img className='logotipo' src="assets/Tiny_Logo.PNG" alt="logo" /> */}
         </a>
       </div>
       <nav ref={navRef}>

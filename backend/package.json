@@ -4,8 +4,8 @@
   "description": "API back-end para la página web UniHub",
   "main": "index.js",
   "scripts": {
-    "prestart": "npm install",
-    "start": "node index.js"
+    "prestart": "npm i --force",
+    "start": "nodemon index.js"
   },
   "keywords": [
     "swagger"

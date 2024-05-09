@@ -4,7 +4,7 @@
 
 .contenedor-resultados-busqueda>h3 {
   margin-top: 1em;
-  border-bottom: 2px solid var(--color-bg-2);
+  border-bottom: 2px solid var(--color-tertiary);
   width: 100%;
 }
 
@@ -46,7 +46,7 @@
 
 .formulario-busqueda button:hover {
   font-weight: bold;
-  color: var(--color-bg) !important;
+  color: var(--color-bg);
   background-color: transparent;
   border: none;
 }
