@@ -10,9 +10,9 @@ export default function Publicar() {
 
     const [pagina, setPagina] = useState(0);
     const [formData, setFormData] = useState({
-        autor: "",
         titulo: "",
         grado: "",
+        tipo: "",
         palabras_clave: "",
         resumen: "",
         recursos: [],

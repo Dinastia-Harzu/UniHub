@@ -22,7 +22,7 @@ export default function App() {
     <div>
       <Header />
       <Busqueda />
-      {/* <Perfilusuario /> */}
+       <Perfilusuario /> 
       {/* <Inicio /> */}
       <Footer />
     </div>
