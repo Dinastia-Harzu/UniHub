@@ -33,7 +33,7 @@ export default function FormPublicar3({ setPagina, formData, setFormData }) {
                         <div className="contenedor-apartados-formulario">
                             <label htmlFor="autor">Archivo de trabajo: </label>
                             <input type="file" name="archivo" accept="application/pdf"
-                                onChange={(event) => setFormData({ ...formData, archivo: event.target.files[0].name })}></input>
+                                onChange={(event) => setFormData({ ...formData, documento: event.target.files[0].name })}></input>
                         </div>
 
                         <div className="contenedor-apartados-formulario">

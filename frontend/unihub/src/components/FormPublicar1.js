@@ -17,13 +17,13 @@ export default function FormPublicar1({ setPagina, formData, setFormData }) {
                     <form>
                         <div className="contenedor-apartados-formulario">
                             <label htmlFor="titulo">Título</label>
-                            <input type="text" name="titulo" required placeholder="Introduce el título del trabajo..." value={formData.titulo}
-                                onChange={(event) => setFormData({ ...formData, titulo: event.target.value })}></input>
+                            <input type="text" name="titulo" required placeholder="Introduce el título del trabajo..." value={formData.nombre}
+                                onChange={(event) => setFormData({ ...formData, nombre: event.target.value })}></input>
                         </div>
 
-                        <SelectorTipoTrabajo />
 
-                        <SelectorTitulaciones />
+                        <SelectorTitulaciones formData={formData} setFormData={setFormData} />
+                        <SelectorTipoTrabajo formData={formData} setFormData={setFormData} />
 
                         <div className="contenedor-apartados-formulario">
                             <p>

@@ -4,12 +4,13 @@ import Inicio from "./components/Inicio.js";
 import Footer from "./components/commons/Footer.js";
 import Perfilusuario from "./components/Perfilusuario.js";
 import Busqueda from "./components/Busqueda.js";
+import Publicar from "./components/Publicar.js"
 
 export default function App() {
   return (
     <div>
       <Header />
-      <Busqueda />
+      {/* <Busqueda /> */}
       {/* <Perfilusuario /> */}
       {/* <Inicio /> */}
       <Footer />
