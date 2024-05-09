@@ -6,23 +6,23 @@ import Footer from "./components/commons/Footer.js";
 import Perfilusuario from "./components/Perfilusuario.js";
 import Busqueda from "./components/Busqueda.js";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect } from "react";
 
 export default function App() {
-  const [userTheme, setUserTheme] = useState('');
+  const [userTheme, setUserTheme] = useState("");
 
   useEffect(() => {
     // Simula la obtención de la preferencia de tema del usuario desde el backend
-    const userThemeFromBackend = 'osc'; // Ejemplo: 'normal', 'dark', 'alternative', etc.
+    const userThemeFromBackend = "osc"; // Ejemplo: 'normal', 'dark', 'alternative', etc.
     setUserTheme(userThemeFromBackend);
 
     // Carga dinámicamente el archivo CSS correspondiente al tema seleccionado
-    const link = document.createElement('link');
-    link.rel = 'stylesheet';
+    const link = document.createElement("link");
+    link.rel = "stylesheet";
     link.href = `assets/themes/general-${userThemeFromBackend}.css`;
     document.head.appendChild(link);
 
-    if (userThemeFromBackend == 'ac' || userThemeFromBackend == 'osc') {
+    if (userThemeFromBackend == "ac" || userThemeFromBackend == "osc") {
       document.getElementsByClassName("logotipo").src = "assets/W_Logotipo.PNG";
       console.log(document.getElementsByClassName("logotipo"));
     }
@@ -34,22 +34,17 @@ export default function App() {
   }, []);
 
   return (
-    // <BrowserRouter>
-    //   <Routes>
-    //     <Route path="/" element={<Header />}>
-    //       <Route index element={<Inicio />} />
-    //       {/* <Route path="descubrir" element={<Descubrir />} /> */}
-    //       <Route path="busqueda" element={<Busqueda />} />
-    //       <Route path="perfil" element={<Perfilusuario />} />
-    //     </Route>
-    //   </Routes>
-    // </BrowserRouter>
-    <div>
-      <Header />
-      <Busqueda />
-      <Perfilusuario />
-      {/* <Inicio /> */}
-      <Footer />
-    </div>
+    <BrowserRouter>
+      <Routes>
+        <Route path="/" element={<Header />}>
+          <Route index element={<Inicio />} />
+          {/* <Route path="descubrir" element={<Descubrir />} /> */}
+          <Route path="buscar" element={<Busqueda />} />
+          <Route path="perfil" element={<Perfilusuario />} />
+          {/* <Route path="login" element={<Login />} />
+          <Route path="signup" element={<Registro />} /> */}
+        </Route>
+      </Routes>
+    </BrowserRouter>
   );
 }
