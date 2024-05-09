@@ -7,6 +7,7 @@ import Perfilusuario from "./components/Perfilusuario.js";
 import Busqueda from "./components/Busqueda.js";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import React, { useState, useEffect } from "react";
+import Publicar from "./components/Publicar.js"
 
 export default function App() {
   const [userTheme, setUserTheme] = useState("");

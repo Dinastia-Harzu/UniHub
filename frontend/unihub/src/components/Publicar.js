@@ -10,14 +10,16 @@ export default function Publicar() {
 
     const [pagina, setPagina] = useState(0);
     const [formData, setFormData] = useState({
-        titulo: "",
-        grado: "",
-        tipo: "",
-        palabras_clave: "",
+        nombre: "",
+        tipo: 2,
+        autor: "Arturo",
+        titulacion: 2,
+        publicacion: new Date((new Date).getTime() - (new Date).getTimezoneOffset() * 60 * 1000).toISOString().split('T')[0],
         resumen: "",
+        documento: "",
+        portada: "",
         recursos: [],
-        archivo: "",
-        portada: ""
+        palabras_clave: ""
     });
 
     function adelantarPagina() {
@@ -30,8 +32,9 @@ export default function Publicar() {
         console.log(pagina);
     }
 
-    function verData() {
-        console.log(formData);
+    function enviarData() {
+        const { recursos, palabras_clave, ...formDataEnviar } = formData;
+        console.log(formDataEnviar);
     }
 
     return (
@@ -59,7 +62,7 @@ export default function Publicar() {
                         <FontAwesomeIcon icon={faChevronRight} size="2x" />
                     </div>
                     <div className="boton-publicar">
-                        <button className="btn" hidden={!(pagina === 2)} onClick={() => verData()}>Publicar</button>
+                        <button className="btn" hidden={!(pagina === 2)} onClick={() => enviarData()}>Publicar</button>
                     </div>
                 </div>
             </section>

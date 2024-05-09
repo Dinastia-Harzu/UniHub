@@ -1,54 +1,60 @@
-import { useState } from "react"
+import { useState, useEffect } from "react"
 import axios from 'axios';
-import { URL_BASE } from "../../utils/constantes.js"
+import { URL_BASE } from "../../utils/constantes.js";
 
-export function SelectorTipoTrabajo() {
+export function SelectorTipoTrabajo({ formData, setFormData }) {
 
-  const [tiposTrabajos, setTiposTrabajos] = useState([]);
+  const [tiposTrabajo, settiposTrabajo] = useState([]);
 
   function recogerTiposTrabajo() {
     axios.get(URL_BASE + "tipos-trabajo").then((result) => {
-      setTiposTrabajos(result.data);
-      console.log(tiposTrabajos);
+      settiposTrabajo(result.data);
     }).catch((err) => {
       console.log(err);
     });
   }
-  recogerTiposTrabajo();
+  useEffect(() => {
+    recogerTiposTrabajo();
+  }, [])
 
   return (
     <div className="contenedor-apartados-formulario">
       <label htmlFor="nivel">Tipo del trabajo</label>
-      <select title="tipos-trabajo" name="tipo">
-        {tiposTrabajos.map((tipo, idx) => {
-          return (<option value={tipo.id}>{tipo.nombre}</option>)
+      <select title="tipos-trabajo" name="tipo" onChange={(event) => setFormData({ ...formData, tipo: parseInt(event.target.value) })}
+        defaultValue={formData.tipo}>
+        {tiposTrabajo.map((tipo, idx) => {
+          return (<option value={tipo.id} key={idx}>{tipo.nombre}</option>)
         })};
       </select>
     </div>
   )
 }
 
-export function SelectorTitulaciones() {
+export function SelectorTitulaciones({ formData, setFormData }) {
 
   const [titulaciones, setTitulaciones] = useState([]);
 
   function recogerTitulaciones() {
     axios.get(URL_BASE + "titulaciones").then((result) => {
       setTitulaciones(result.data);
-      console.log(titulaciones);
     }).catch((err) => {
       console.log(err);
     });
   }
-  recogerTitulaciones();
+
+  useEffect(() => {
+    recogerTitulaciones();
+  }, [])
+
 
   return (
     <div className="contenedor-apartados-formulario">
       <label htmlFor="nivel">Titulación</label>
-      <select title="tipos-trabajo" name="tipo">
+      <select title="titulaciones" name="titulacion" onChange={(event) => setFormData({ ...formData, titulacion: parseInt(event.target.value) })}
+        defaultValue={formData.titulacion}>
         {titulaciones.map((titulacion, idx) => {
-          return (<option value={titulacion.id}>{titulacion.nombre}</option>)
-        })};
+          return (<option value={titulacion.id} key={idx}>{titulacion.nombre}</option>)
+        })}
       </select>
     </div>
   )
