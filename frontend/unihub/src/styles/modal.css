@@ -1,5 +1,4 @@
 @import url("detalles.css");
-@import url("paleta-normal.css");
 
 .modal {
     position: fixed;
@@ -38,7 +37,8 @@
 }
 
 .boton-publicar-comentario:hover {
-    background-color: #e35555; /*TODO: CAMBIAR CUANDO LOS COLORES ESTEN ESTABLECIDOS*/
+    background-color: #e35555;
+    /*TODO: CAMBIAR CUANDO LOS COLORES ESTEN ESTABLECIDOS*/
 }
 
 .contenedor-modal {

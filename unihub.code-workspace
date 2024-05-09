@@ -3,17 +3,16 @@
     "version": "0.2.0",
     "configurations": [
       {
-        "console": "integratedTerminal",
-        "internalConsoleOptions": "neverOpen",
         "name": "Backend",
-        "program": "${workspaceFolder}/backend/index.js",
+        "type": "node",
+        "console": "integratedTerminal",
         "request": "launch",
-        "restart": true,
-        "runtimeExecutable": "nodemon",
-        "skipFiles": [
-          "<node_internals>/**"
-        ],
-        "type": "node"
+        "cwd": "${workspaceFolder}/backend/",
+        "runtimeExecutable": "npm",
+        "runtimeArgs": [
+          "run-script",
+          "start"
+        ]
       },
       {
         "name": "Frontend",
@@ -26,7 +25,7 @@
           "run-script",
           "start"
         ]
-      }
+      },
     ],
     "compounds": []
   },
