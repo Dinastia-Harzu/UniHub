@@ -6,7 +6,7 @@ import "../styles/busqueda.css"
 
 export default function Busqueda({ proyecto }) {
   return (
-    <main >
+    <main>
       <section className="cabecera-inicio">
         <img className='img-cabecera' src="assets/Cabecera.jpg" alt="Imagen de cabecera" />
       </section>
