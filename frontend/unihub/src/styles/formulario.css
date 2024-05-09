@@ -1,6 +1,6 @@
 .form-container {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: 1fr 2fr 1fr;
   grid-gap: 2em;
   grid-auto-rows: minmax(5em, auto);
   margin-bottom: 10em;
@@ -11,6 +11,19 @@
   grid-row: 2;
 }
 
+#contrasenia {
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  grid-template-rows: 1fr;
+}
+.input-contrasenia{
+  grid-column: 1;
+}
+.boton-contrasenia{
+  display: flex;
+  justify-content: center;
+  grid-column: 2;
+}
 #nombre-titulo {
   grid-column: 2;
   grid-row: 1;

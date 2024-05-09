@@ -68,6 +68,7 @@ const Perfilusuario = () => {
 
 
                 <div className="form-group" id="contrasenia">
+                  <div className="input-contrasenia">
                   <label for="contrasena">Contraseña:</label>
                   <input
                     type={mostrarContrasena ? "text" : "password"}
@@ -79,10 +80,12 @@ const Perfilusuario = () => {
                       pattern: /(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}/
                     })}
                   />
+                  </div>
+                  <div className="boton-contrasenia">
                   <button type="button" onClick={toggleMostrarContrasena}>
                     {mostrarContrasena ? "Ocultar" : "Mostrar"}
                   </button>
-
+                  </div>
                   {errors.contrasena?.type === 'required' && <p>El campo es requerido</p>}
                   {errors.contrasena?.type === 'pattern' && <p>El formato no es adecuado</p>}
                   <br /><br />
