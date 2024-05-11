@@ -4,7 +4,10 @@ import Inicio from "./components/Inicio.js";
 // import Descubrir from './components/Descubrir';
 import Footer from "./components/commons/Footer.js";
 import Perfilusuario from "./components/Perfilusuario.js";
+import InicioSesion from "./components/InicioSesion.js";
 import Busqueda from "./components/Busqueda.js";
+import Registro from "./components/Registro.js";
+import EditarPerfil from "./components/EditarPerfil.js";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import React, { useState, useEffect } from "react";
 import Publicar from "./components/Publicar.js"
@@ -42,6 +45,9 @@ export default function App() {
           {/* <Route path="descubrir" element={<Descubrir />} /> */}
           <Route path="buscar" element={<Busqueda />} />
           <Route path="perfil" element={<Perfilusuario />} />
+          <Route path="login" element={<InicioSesion />} />
+          <Route path="registro" element={<Registro />} />7
+          <Route path="editar" element={<EditarPerfil />} />
           {/* <Route path="login" element={<Login />} />
           <Route path="signup" element={<Registro />} /> */}
         </Route>
