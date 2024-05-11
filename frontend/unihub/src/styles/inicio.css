@@ -40,12 +40,13 @@
 .articulo-inicio {
   display: flex;
   justify-self: center;
-  margin-bottom: 20px;
+  padding: 1em;
 }
 
 
 .contenido-articulo-inicio {
   flex: 1;
+  padding: 1em;
   /* El contenido ocupará el espacio restante */
 }
 
@@ -53,7 +54,6 @@
   width: 200px;
   /* Ancho de la imagen */
   height: auto;
-  margin-right: 20px;
   /* Espacio entre la imagen y el contenido */
 }
 
