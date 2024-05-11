@@ -16,6 +16,13 @@ export default function Inicio() {
               <p className="texto-articulo-inicio">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean eget lacus sed nibh lacinia hendrerit et at dolor. Duis a nibh neque. Nam feugiat dignissim nunc, vel porttitor diam. Duis vulputate finibus lorem eu faucibus. Phasellus semper gravida velit id volutpat.</p>
             </div>
           </article>
+          <article className="articulo-inicio">
+            <div className="contenido-articulo-inicio">
+              <h2 className="titulo-articulo-inicio">Consigue que el mundo vea tu progreso</h2>
+              <p className="texto-articulo-inicio">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean eget lacus sed nibh lacinia hendrerit et at dolor. Duis a nibh neque. Nam feugiat dignissim nunc, vel porttitor diam. Duis vulputate finibus lorem eu faucibus. Phasellus semper gravida velit id volutpat.</p>
+            </div>
+            <img src="assets/Cabecera.jpg" alt="Imagen" className="imagen-articulo-inicio" />
+          </article>
         </section>
       </section>
     </main>
