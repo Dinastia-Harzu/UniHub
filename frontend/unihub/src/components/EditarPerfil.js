@@ -15,17 +15,17 @@ const EditarPerfil = () => {
   function setPortada() {
     const recurso_actual = refPortada.current;
     recurso_actual.click();
-}
-
-function cambiarFoto(inp) {
-  if (inp.target.files.length > 0) {
-    const fichero = inp.target.files[0];
-    const img = refImagen.current;
-    img.src = URL.createObjectURL(fichero);
-  } else {
-    setImagenSeleccionada(null);
   }
-}
+
+  function cambiarFoto(inp) {
+    if (inp.target.files.length > 0) {
+      const fichero = inp.target.files[0];
+      const img = refImagen.current;
+      img.src = URL.createObjectURL(fichero);
+    } else {
+      setImagenSeleccionada(null);
+    }
+  }
   const onSubmit = (data) => {
     console.log(data);
   }
@@ -40,16 +40,13 @@ function cambiarFoto(inp) {
         <div className="titulo"><h2>Mi Perfil</h2></div>
         <div className="form-container">
           <form onSubmit={handleSubmit(onSubmit)} className="pos-wrapper">
-
             <div className="wrapper">
               <div className="form-group" id="nombre-titulo"><h1>Miriam</h1></div>
-
               <div className="contenedor-apartados-formulario_usuario">
-                            <label htmlFor="portada"></label>
-                            <img ref={refImagen} src="./assets/no_photo.png" alt="Portada" onClick={() => setPortada()} width={240} height={320} />
-                            <input ref={refPortada} type="file" name="portada" accept="image/*" onChange={(event) => cambiarFoto(event)}></input>
-                        </div>
-
+                <label htmlFor="portada"></label>
+                <img ref={refImagen} src="./assets/no_photo.png" alt="Portada" onClick={() => setPortada()} width={240} height={320} />
+                <input ref={refPortada} type="file" name="portada" accept="image/*" onChange={(event) => cambiarFoto(event)}></input>
+              </div>
               <div className="form-group" id="nombre">
                 <label htmlFor="nombre">Nombre:</label>
                 <input type="text" id="nombre" name="nombre" defaultValue="Miriam" {...register('nombre', {
@@ -68,10 +65,7 @@ function cambiarFoto(inp) {
                 {errors.apellidos?.type === 'required' && <p>El campo es requerido</p>}
                 {errors.apellidos?.type === 'maxLength' && <p>El nombre introducido es demasiado largo</p>}
               </div>
-
-
               <div id="parte-inferior" >
-
                 <div className="form-group" id="correo">
                   <label for="correo">Correo electrónico:</label>
                   <input type="email" id="correo" name="correo" defaultValue="miriam34@gmail.com"{...register('correo', {
@@ -80,36 +74,31 @@ function cambiarFoto(inp) {
                   })} />
                   {errors.correo?.type === 'required' && <p>El campo es requerido</p>}
                   {errors.correo?.type === 'maxLength' && <p>El formato del correo no es adecuado</p>}
-
-                  <br /><br /></div>
-
-
-
+                  <br /><br />
+                </div>
                 <div className="form-group" id="contrasenia">
                   <div className="input-contrasenia">
-                  <label for="contrasena">Contraseña:</label>
-                  <input
-                    type={mostrarContrasena ? "text" : "password"}
-                    id="contrasena"
-                    name="contrasena"
-                    defaultValue="1234Pepito"
-                    {...register('contrasena', {
-                      required: true,
-                      pattern: /(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}/
-                    })}
-                  />
+                    <label for="contrasena">Contraseña:</label>
+                    <input
+                      type={mostrarContrasena ? "text" : "password"}
+                      id="contrasena"
+                      name="contrasena"
+                      defaultValue="1234Pepito"
+                      {...register('contrasena', {
+                        required: true,
+                        pattern: /(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}/
+                      })}
+                    />
                   </div>
-                  
                   <div className="boton-contrasenia">
-                  <span type="button" onClick={toggleMostrarContrasena}>
-                  {mostrarContrasena ? <FaEyeSlash className="icono-grande" /> : <FaEye className="icono-grande" />}
-                  </span>
-                </div>
+                    <span type="button" onClick={toggleMostrarContrasena}>
+                      {mostrarContrasena ? <FaEyeSlash className="icono-grande" /> : <FaEye className="icono-grande" />}
+                    </span>
+                  </div>
                   {errors.contrasena?.type === 'required' && <p>El campo es requerido</p>}
                   {errors.contrasena?.type === 'pattern' && <p>El formato no es adecuado</p>}
                   <br />
                 </div>
-
                 <div className="form-group" id="titulacion">
                   <label for="titulacion">Grado o máster:</label>
                   <select defaultValue="arquitectura" {...register('titulacion', {
@@ -130,7 +119,6 @@ function cambiarFoto(inp) {
                     <option value="ingenieria_informatica_ade">Ingeniería Informática + ADE</option>
                     <option value="ingenieria_quimica">Ingeniería Química</option>
                     <option value="ingenieria_robotica">Ingeniería Robótica</option>
-
                     <option value="master_arquitectura">Máster en arquitectura</option>
                     <option value="master_automatica_robotica">Máster en Automática y Robótica</option>
                     <option value="master_ciberseguridad">Máster en Ciberseguridad</option>
@@ -149,12 +137,10 @@ function cambiarFoto(inp) {
                     <option value="master_nuevas_tecnologias">Máster en Nuevas Tecnologías y Eficiencia Energética en Edificación </option>
                     <option value="master_prevencion_riesgos_laborales">Máster en Prevención de Riesgos Laborales</option>
                   </select>
-
                   {errors.titulacion?.type === 'required' && <p>El campo es requerido</p>}
                   {errors.titulacion?.type === 'validate' && <p>Debes elegir una titulacion</p>}
                   <br /><br />
                 </div>
-
                 <div className="form-group" id="titulacion">
                   <label for="estilo">Estilo:</label>
                   <select defaultValue="1" {...register('estilo', {
@@ -168,20 +154,16 @@ function cambiarFoto(inp) {
                   </select>
                   {errors.titulacion?.type === 'required' && <p>El campo es requerido</p>}
                   {errors.titulacion?.type === 'validate' && <p>Debes elegir una titulacion</p>}
-                  <br /><br /></div>
-
-
+                  <br /><br />
+                </div>
                 <div className="form-group" id="direccion">
                   <label for="direccion">Dirección:</label>
                   <input type="text" id="direccion" name="direccion" defaultValue="Calle Altozano, Alicante" {...register('direccion', {
                     required: true,
                   })} />
-
                   {errors.direccion?.type === 'required' && <p>El campo es requerido</p>}
                   <br /><br />
-
                 </div>
-
                 <div className="form-group" id="nacimiento">
                   <label for="fecha_nacimiento">Fecha de Nacimiento:</label>
                   <input type="date" id="fecha_nacimiento" name="fecha_nacimiento" defaultValue="2023-05-24" {...register('fecha_nacimiento', {
@@ -190,14 +172,12 @@ function cambiarFoto(inp) {
                   })} />
                   {errors.fecha_nacimiento?.type === 'required' && <p>El campo es requerido</p>}
                   {errors.fecha_nacimiento?.type === 'validate' && <p>Debes ser mayor de 17 años</p>}
-
                   <br /><br />
-
                 </div>
-                
-
               </div>
-              <div class="boton-editar"> <button type="submit" class="btn" value="Editar perfil">Editar</button></div>
+              <div className="boton-editar">
+                <button type="submit" className="btn" value="Editar perfil">Editar</button>
+              </div>
             </div>
           </form>
         </div>

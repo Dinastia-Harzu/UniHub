@@ -5,7 +5,7 @@ import { ReactDOM } from "react-dom/client";
 // import { slide as Menu } from 'react-burger-menu';
 
 import "../../styles/header.css";
-import { Outlet } from "react-router-dom";
+import { Link, Outlet } from "react-router-dom";
 
 export default function Header() {
   const navRef = useRef();
@@ -17,29 +17,29 @@ export default function Header() {
     <>
       <header>
         <div className="container1">
-          <a href="/">
+          <Link to="/">
             <div className="logotipo"></div>
-          </a>
+          </Link>
         </div>
         <nav ref={navRef}>
           <div className="container2">
-            <a href="/" className="navbar-item">
+            <Link to="/" className="navbar-item">
               Inicio
-            </a>
-            <a href="/descubrir" className="navbar-item">
+            </Link>
+            {/* <Link to="/descubrir" className="navbar-item">
               Descubrir
-            </a>
-            <a href="/buscar" className="navbar-item">
+            </Link> */}
+            <Link to="/buscar" className="navbar-item">
               Buscar
-            </a>
+            </Link>
           </div>
           <div className="navbar-buttons">
-            <a className="btn btn-secondary" href="/login">
+            <Link to="/login" className="btn btn-secondary">
               Identificarse
-            </a>
-            <a className="btn btn-primary" href="/signup">
+            </Link>
+            <Link to="/registro" className="btn btn-primary" >
               Registrarse
-            </a>
+            </Link>
           </div>
           <button className="nav-btn nav-close-btn" onClick={showNavbar}>
             <FaTimes />
@@ -53,43 +53,3 @@ export default function Header() {
     </>
   );
 }
-// <header>
-//   {screenWidth <= 475 ? (
-//     <Menu pageWrapId={"page-wrap"} left>
-//       <div className="container2">
-//         <ul className="navbar-menu">
-// <li className="navbar-item"><a href="/">Inicio</a></li>
-// <li className="navbar-item"><a href="/descubrir">Descubrir</a></li>
-// <li className="navbar-item"><a href="/buscar">Buscar</a></li>
-//         </ul>
-//       </div>
-//       <div className="container3">
-//         <div className="navbar-buttons">
-//           <a className="btn btn-secondary" href="/login">Identificarse</a>
-//           <a className="btn btn-primary" href="/signup">Registrarse</a>
-//         </div>
-//       </div>
-//     </Menu>
-//   ) : (
-//     <div className="navbar">
-//       <div className="container1">
-//         <a href="/">
-//           <img className='logotipo' src="assets/Tiny_Logo.PNG" alt="logo" />
-//         </a>
-//       </div>
-//       <div class="container2">
-//         <ul className="navbar-menu">
-//           <li className="navbar-item"><a href="/">Inicio</a></li>
-//           <li className="navbar-item"><a href="/descubrir">Descubrir</a></li>
-//           <li className="navbar-item"><a href="/buscar">Buscar</a></li>
-//         </ul>
-//       </div>
-//       <div className="container3">
-//         <div className="navbar-buttons">
-//           <a className="btn btn-secondary" href="/login">Identificarse</a>
-//           <a className="btn btn-primary" href="/signup">Registrarse</a>
-//         </div>
-//       </div>
-//     </div>
-//   )}
-// </header>
