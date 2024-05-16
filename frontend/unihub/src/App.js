@@ -47,24 +47,10 @@ export default function App() {
           <Route path="login" element={<InicioSesion />} />
           <Route path="registro" element={<Registro />} />7
           <Route path="editar" element={<EditarPerfil />} />
+          <Route path="contacto" element={<Contacto />} />
         </Routes>
         <Footer />
       </>
     </BrowserRouter>
-    // <BrowserRouter>
-    //   <Routes>
-    //     <Route path="/" element={<Header />}>
-    //       <Route index element={<Inicio />} />
-    //       {/* <Route path="descubrir" element={<Descubrir />} /> */}
-    //       <Route path="buscar" element={<Busqueda />} />
-    //       <Route path="perfil" element={<Perfilusuario />} />
-    //       <Route path="login" element={<InicioSesion />} />
-    //       <Route path="registro" element={<Registro />} />7
-    //       <Route path="editar" element={<EditarPerfil />} />
-    //       {/* <Route path="login" element={<Login />} />
-    //       <Route path="signup" element={<Registro />} /> */}
-    //     </Route>
-    //   </Routes>
-    // </BrowserRouter>
   );
 }
