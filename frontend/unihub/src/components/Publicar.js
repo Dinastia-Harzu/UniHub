@@ -5,6 +5,8 @@ import FormPublicar2 from './FormPublicar2.js'
 import FormPublicar3 from './FormPublicar3.js'
 import "../styles/publicar.css";
 import { useState } from 'react';
+import axios from 'axios';
+import { URL_BASE } from '../utils/constantes.js';
 
 export default function Publicar() {
 
@@ -12,7 +14,7 @@ export default function Publicar() {
     const [formData, setFormData] = useState({
         nombre: "",
         tipo: 2,
-        autor: "Arturo",
+        autor: 14,
         titulacion: 2,
         publicacion: new Date((new Date).getTime() - (new Date).getTimezoneOffset() * 60 * 1000).toISOString().split('T')[0],
         resumen: "",
@@ -35,6 +37,11 @@ export default function Publicar() {
     function enviarData() {
         const { recursos, palabras_clave, ...formDataEnviar } = formData;
         console.log(formDataEnviar);
+        axios.post(URL_BASE + "trabajos", formDataEnviar).then((result) => {
+            console.log(result);
+        }).catch((err) => {
+            console.log(err);
+        });
     }
 
     return (
