@@ -42,10 +42,11 @@ export default function App() {
         <Header />
         <Routes>
           <Route path="/" element={<Inicio />} />
+          {/* <Route path="descubrir" element={<Descubrir />} /> */}
           <Route path="buscar" element={<Busqueda />} />
           <Route path="perfil" element={<Perfilusuario />} />
           <Route path="login" element={<InicioSesion />} />
-          <Route path="registro" element={<Registro />} />7
+          <Route path="registro" element={<Registro />} />
           <Route path="editar" element={<EditarPerfil />} />
           <Route path="contacto" element={<Contacto />} />
         </Routes>
