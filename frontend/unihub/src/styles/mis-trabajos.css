@@ -1,0 +1,86 @@
+/* General styles for the main container */
+main {
+  padding: 20px;
+}
+
+/* Style for the title */
+.titulo {
+  text-align: center;
+  margin-bottom: 20px;
+  font-size: 2em;
+  color: var(--color-text);
+}
+
+/* Container for the cards */
+.cards-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 20px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+/* Individual card styling */
+.card {
+  position: relative; /* Needed for positioning title and description over the image */
+  background-color: #fff;
+  border: 2px solid var(--color-text); /* Black border */
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+  transition: transform 0.3s;
+}
+
+.card img {
+  object-fit: cover;
+  width: 100%;
+  height: 20em;
+  display: block;
+}
+
+.card-content {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  color: #fff;
+  background-color: rgba(0, 0, 0, 0.6); /* Semi-transparent black background */
+  transition: transform 0.3s;
+  padding: 10px;
+  box-sizing: border-box;
+  transform: translateY(30%); /* Hide content by default */
+}
+
+.card h3 {
+  margin: 0;
+  font-size: 1.2em;
+  text-align: center;
+  padding: 10px;
+  box-sizing: border-box;
+}
+
+.descripcion {
+  margin: 0;
+  font-size: 1em;
+  display: block;
+  border: .5em;
+  flex-direction: column;
+  align-items: center;
+  max-height: 3em; /* Limit the height to show part of the description */
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+
+/* Hover effect for the card and content */
+.card:hover .card-content {
+  transform: translateY(0); /* Show content on hover */
+}
+
+/* Mobile friendly adjustments */
+@media (max-width: 600px) {
+  .cards-container {
+    grid-template-columns: 1fr;
+    padding: 0 10px;
+  }
+}

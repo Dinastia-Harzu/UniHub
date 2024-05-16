@@ -1,0 +1,31 @@
+import React from 'react';
+import '../styles/mis-trabajos.css';
+
+const MisTrabajos = () => {
+  // Datos de ejemplo de las cartas
+  const cardsData = [
+    { id: 1, title: 'Trabajo 1', description: 'Descripción breve del trabajo 1 Descripción breve del trabajo 1 Descripción breve del trabajo 1', image: '/assets/Cabecera.jpg' },
+    { id: 2, title: 'Trabajo 2', description: 'Descripción breve del trabajo 2', image: '/assets/Clase.png' },
+    { id: 3, title: 'Trabajo 3', description: 'Descripción breve del trabajo 3', image: '/assets/Habitacion.png' },
+    // Añadir más datos de cartas según sea necesario
+  ];
+
+  return (
+    <main>
+      <h2 className='titulo'>Mis Trabajos</h2>
+      <div className="cards-container">
+        {cardsData.map(card => (
+          <div key={card.id} className="card">
+            <img src={card.image} alt={card.title} />
+            <div className="card-content">
+              <h3>{card.title}</h3>
+              <div className='descripcion'><p>{card.description}</p></div>
+            </div>
+          </div>
+        ))}
+      </div>
+    </main>
+  );
+};
+
+export default MisTrabajos;
