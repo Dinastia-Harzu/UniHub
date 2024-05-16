@@ -16,11 +16,9 @@ export default function App() {
   const [userTheme, setUserTheme] = useState("");
 
   useEffect(() => {
-    // Simula la obtención de la preferencia de tema del usuario desde el backend
     const userThemeFromBackend = "osc"; // Ejemplo: 'normal', 'dark', 'alternative', etc.
     setUserTheme(userThemeFromBackend);
 
-    // Carga dinámicamente el archivo CSS correspondiente al tema seleccionado
     const link = document.createElement("link");
     link.rel = "stylesheet";
     link.href = `assets/themes/general-${userThemeFromBackend}.css`;
