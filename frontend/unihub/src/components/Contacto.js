@@ -10,18 +10,13 @@ export default function Contacto() {
         <h1 className="titulo-inicio">Información de contacto</h1>
         <section className="contenedor-articulos-inicio">
           <article className="articulo-inicio">
-            <img src="assets/Cabecera.jpg" alt="Imagen" className="imagen-articulo-inicio" />
             <div className="contenido-articulo-inicio">
-              <h2 className="titulo-articulo-inicio">La plataforma perfecta para subir tu trabajo</h2>
-              <p className="texto-articulo-inicio">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean eget lacus sed nibh lacinia hendrerit et at dolor. Duis a nibh neque. Nam feugiat dignissim nunc, vel porttitor diam. Duis vulputate finibus lorem eu faucibus. Phasellus semper gravida velit id volutpat.</p>
+                <h2 className="titulo-articulo-inicio">En caso de cualquier problema, puedes contactarnos a través de:</h2>
+                <p className="texto-articulo-inicio"><strong>Nombre:</strong> Juan Pérez</p>
+                <p className="texto-articulo-inicio"><strong>Email:</strong> juan@example.com</p>
+                <p className="texto-articulo-inicio"><strong>Teléfono:</strong> +1234567890</p>
+                <p className="texto-articulo-inicio"><strong>Dirección:</strong> Calle Falsa 123, Ciudad Ficticia</p>
             </div>
-          </article>
-          <article className="articulo-inicio">
-            <div className="contenido-articulo-inicio">
-              <h2 className="titulo-articulo-inicio">Consigue que el mundo vea tu progreso</h2>
-              <p className="texto-articulo-inicio">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean eget lacus sed nibh lacinia hendrerit et at dolor. Duis a nibh neque. Nam feugiat dignissim nunc, vel porttitor diam. Duis vulputate finibus lorem eu faucibus. Phasellus semper gravida velit id volutpat.</p>
-            </div>
-            <img src="assets/Cabecera.jpg" alt="Imagen" className="imagen-articulo-inicio" />
           </article>
         </section>
       </section>
