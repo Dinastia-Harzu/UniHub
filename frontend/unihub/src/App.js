@@ -8,6 +8,7 @@ import InicioSesion from "./components/InicioSesion.js";
 import Busqueda from "./components/Busqueda.js";
 import Registro from "./components/Registro.js";
 import EditarPerfil from "./components/EditarPerfil.js";
+import Contacto from "./components/Contacto.js";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import React, { useState, useEffect } from "react";
 import Publicar from "./components/Publicar.js"
@@ -16,11 +17,9 @@ export default function App() {
   const [userTheme, setUserTheme] = useState("");
 
   useEffect(() => {
-    // Simula la obtención de la preferencia de tema del usuario desde el backend
     const userThemeFromBackend = "osc"; // Ejemplo: 'normal', 'dark', 'alternative', etc.
     setUserTheme(userThemeFromBackend);
 
-    // Carga dinámicamente el archivo CSS correspondiente al tema seleccionado
     const link = document.createElement("link");
     link.rel = "stylesheet";
     link.href = `assets/themes/general-${userThemeFromBackend}.css`;
@@ -39,18 +38,34 @@ export default function App() {
 
   return (
     <BrowserRouter>
-      <Routes>
-        <Route path="/">
-          <Route index element={<Inicio />} />
-          {/* <Route path="descubrir" element={<Descubrir />} /> */}
+      <>
+        <Header />
+        <Routes>
+          <Route path="/" element={<Inicio />} />
           <Route path="buscar" element={<Busqueda />} />
           <Route path="perfil" element={<Perfilusuario />} />
           <Route path="login" element={<InicioSesion />} />
           <Route path="registro" element={<Registro />} />
           <Route path="editar" element={<EditarPerfil />} />
           <Route path="contacto" element={<Contacto />} />
-        </Route>
-      </Routes>
+        </Routes>
+        <Footer />
+      </>
     </BrowserRouter>
+    // <BrowserRouter>
+    //   <Routes>
+    //     <Route path="/" element={<Header />}>
+    //       <Route index element={<Inicio />} />
+    //       {/* <Route path="descubrir" element={<Descubrir />} /> */}
+    //       <Route path="buscar" element={<Busqueda />} />
+    //       <Route path="perfil" element={<Perfilusuario />} />
+    //       <Route path="login" element={<InicioSesion />} />
+    //       <Route path="registro" element={<Registro />} />7
+    //       <Route path="editar" element={<EditarPerfil />} />
+    //       {/* <Route path="login" element={<Login />} />
+    //       <Route path="signup" element={<Registro />} /> */}
+    //     </Route>
+    //   </Routes>
+    // </BrowserRouter>
   );
 }
