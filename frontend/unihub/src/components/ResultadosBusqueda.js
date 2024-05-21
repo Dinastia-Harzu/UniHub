@@ -1,7 +1,7 @@
 import React from "react";
 import CartaBusqueda from "./CartaBusqueda";
 import FormBusqueda from "./FormBusqueda";
-import "../styles/busqueda.css"
+import "../styles/busqueda.css";
 
 export default function ResultadosBusqueda() {
   return (

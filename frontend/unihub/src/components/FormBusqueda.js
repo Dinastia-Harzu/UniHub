@@ -6,7 +6,11 @@ export default function FormBusqueda() {
       <h2>¿Qué estás buscando?</h2>
       <form>
         <div className="contenedor-apartados-formulario">
-          <input type="text" name="nombre" placeholder="Título del trabajo"></input>
+          <input
+            type="text"
+            name="nombre"
+            placeholder="Título del trabajo"
+          ></input>
         </div>
         <div className="contenedor-apartados-formulario">
           <input type="text" name="autor" placeholder="Autor"></input>
@@ -20,7 +24,9 @@ export default function FormBusqueda() {
             <option value="2">Grado en ingeniería informática</option>
           </select>
         </div>
-        <button className="btn" type="submit">Buscar</button>
+        <button className="btn" type="submit">
+          Buscar
+        </button>
       </form>
     </div>
   );

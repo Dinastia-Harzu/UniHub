@@ -15,32 +15,34 @@ export default function CartaBusqueda() {
     //   </div>
     // </div>
     <>
-    <div className="carta-busqueda">
-      <img
-        className="img-busqueda"
-        alt="Cortometraje de animación 3D"
-        src="assets/TFG_Similar1.png"
-      />
-      <div className="carta-contenido">
-        <h2>
-          <a href="#"><strong>Cortometraje de animación 3D</strong></a>
-        </h2>
-        <br />
-        <p>
-          <strong>Autor</strong>: Jane Doe
-        </p>
-        <p>
-          <strong>Titulación</strong>: Máster en Arte y Animación
-        </p>
-        <p>
-          <strong>Fecha</strong>: 19/05/2022
-        </p>
-        <p>
-          Pequeño cortometraje realizado para la práctica número 2 de la
-          asignatura "Animación por computador"
-        </p>
+      <div className="carta-busqueda">
+        <img
+          className="img-busqueda"
+          alt="Cortometraje de animación 3D"
+          src="assets/TFG_Similar1.png"
+        />
+        <div className="carta-contenido">
+          <h2>
+            <a href="#">
+              <strong>Cortometraje de animación 3D</strong>
+            </a>
+          </h2>
+          <br />
+          <p>
+            <strong>Autor</strong>: Jane Doe
+          </p>
+          <p>
+            <strong>Titulación</strong>: Máster en Arte y Animación
+          </p>
+          <p>
+            <strong>Fecha</strong>: 19/05/2022
+          </p>
+          <p>
+            Pequeño cortometraje realizado para la práctica número 2 de la
+            asignatura "Animación por computador"
+          </p>
+        </div>
       </div>
-    </div>
     </>
   );
 }
