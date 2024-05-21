@@ -3,8 +3,55 @@ import { faDownload, faEye, faStar } from "@fortawesome/free-solid-svg-icons";
 import StarRating from "./commons/StarRating";
 import { ModalDetalle } from "./commons/Modales";
 import "../styles/detalles.css";
+import { useParams } from "react-router-dom";
+import { useEffect, useState } from "react";
+import axios from "axios";
+import { URL_BASE } from "../utils/constantes";
 
 export default function Detalles() {
+
+  const params = useParams();
+  const id_trabajo = params.id;
+  const [trabajo, setTrabajo] = useState({});
+
+  useEffect(() => {
+    obtenerDatosTrabajo();
+  }, []);
+
+  function obtenerDatosTrabajo() {
+    axios
+      .get(URL_BASE + "trabajos/" + id_trabajo)
+      .then((result) => {
+        // Formateamos fecha de publicacion
+        let data = result.data;
+        data.publicacion = data.publicacion.split('T').at(0);
+        setTrabajo({
+          nombre: data.nombre,
+          autor: data.autor,
+          publicacion: data.publicacion,
+          resumen: data.resumen,
+          portada: data.portada,
+          recursos: [],
+          documento: data.documento
+        });
+        // Hacemos peticion para conocer el autor
+        axios.get(URL_BASE + "usuarios/" + result.data.autor).then((usuario) => {
+          setTrabajo(prevTrabajo => ({
+            ...prevTrabajo,
+            autor: usuario.data.nombre
+          }));
+        })
+
+        // Hacer peticion para obtener los recursos
+        // TODO: Hacer eso cuando Arturo haya hecho la query
+
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+
+  }
+
   return (
     <>
       <main className="contenedor-detalles">
@@ -14,16 +61,17 @@ export default function Detalles() {
               <FontAwesomeIcon
                 icon={faDownload}
                 size="2xl"
+                style={{ color: "#FFFFFF" }}
                 className="boton-descargar"
               />
             </a>
             <FontAwesomeIcon icon={faEye} size="2xl" className="boton-ver" />
           </div>
-          <img src="assets/TFG.png" alt="foto"></img>
+          <img src={"/assets/" + trabajo.portada} alt="portada"></img>
         </section>
         <section className="contenedor-datos">
           <article className="datos">
-            <h2>Realización de un cortometraje de animación en 3D</h2>
+            <h2>{trabajo.nombre}</h2>
             <div className="ver-y-descargar-oculto">
               <a href="https://www.omfgdogs.com/" target="blank">
                 <FontAwesomeIcon
@@ -35,7 +83,7 @@ export default function Detalles() {
               <FontAwesomeIcon icon={faEye} size="xl" className="boton-ver" />
             </div>
             <p>
-              <b>Autor/es: </b>Huertas Ferrández, Sergio
+              <b>Autor: </b>{trabajo.autor}
             </p>
             <p>
               <b>Fecha de Publicación:</b> 24 de enero de 2024
@@ -49,23 +97,25 @@ export default function Detalles() {
             </p>
           </article>
 
+          <hr></hr>
+
           <article className="resumen">
             <p>
               <b>Resumen:</b>
             </p>
             <p>
-              Este trabajo consiste en la realización de un cortometraje que
-              narra el día de un niño a través de la caracterización de un avión
-              de papel. Este comienza su día en el colegio y, al terminar las
-              clases, se va al parque a disfrutar de su entorno...
+              {trabajo.resumen}
             </p>
           </article>
+
+          <hr></hr>
 
           <article className="recursos-asociados">
             <h3>Recursos multimedia asociados:</h3>
             <div>
-              <img src="assets/Clase.png" alt="clase"></img>
-              <img src="assets/Habitacion.png" alt="habitacion"></img>
+              <img src="
+              /assets/Clase.png" alt="clase"></img>
+              <img src="/assets/Habitacion.png" alt="habitacion"></img>
             </div>
           </article>
 
@@ -73,15 +123,15 @@ export default function Detalles() {
             <h3>Trabajos asociados: </h3>
             <div>
               <p>
-                <img src="assets/TFG_Similar1.png" alt="TFG-similar1"></img>
+                <img src="/assets/TFG_Similar1.png" alt="TFG-similar1"></img>
                 <p>La Tierra - Cortometraje de Animación 3D</p>
               </p>
               <p>
-                <img src="assets/TFG_Similar2.png" alt="TFG-similar2"></img>
+                <img src="/assets/TFG_Similar2.png" alt="TFG-similar2"></img>
                 <p>Sons of Odin - Corto de animación 3D</p>
               </p>
               <p>
-                <img src="assets/TFG_Similar3.png" alt="TFG-similar3"></img>
+                <img src="/assets/TFG_Similar3.png" alt="TFG-similar3"></img>
                 <p>Loop animado 3D estilo cartoon</p>
               </p>
             </div>
@@ -92,13 +142,13 @@ export default function Detalles() {
             <div>
               <div className="contenedor-comentar">
                 <p>Escribe tu opinión sobre este trabajo:</p>
-                <ModalDetalle />
+                <ModalDetalle id_trabajo={id_trabajo} />
               </div>
               <hr></hr>
               <div className="contenedor-comentario">
                 <p className="contenedor-usuario">
                   <img
-                    src="assets/Foto_Usuario.jpg"
+                    src="/assets/Foto_Usuario.jpg"
                     alt="foto-usuario"
                     className="foto-usuario"
                   ></img>
@@ -107,7 +157,9 @@ export default function Detalles() {
                   </span>
                 </p>
                 <p className="fecha-comentario">Publicado en Marzo de 2024 </p>
-                <StarRating />
+                <p>
+                  <b>Valoración:</b> 5 <FontAwesomeIcon icon={faStar} size="lg" />
+                </p>
                 <p className="texto-comentario">
                   Creo que la autora ha creado una escena original y atractiva.
                   El resultado es una obra de calidad, con un buen nivel de
