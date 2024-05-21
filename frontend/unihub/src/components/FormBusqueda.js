@@ -24,10 +24,12 @@ export default function FormBusqueda() {
             <option value="2">Grado en ingeniería informática</option>
           </select>
         </div>
-        <button className="btn" type="submit">
-          Buscar
-        </button>
+        <div className="contenedor-botones-busqueda">
+          <button className="btn" type="submit">
+            Buscar
+          </button>
+        </div>
       </form>
-    </div>
+    </div >
   );
 }
