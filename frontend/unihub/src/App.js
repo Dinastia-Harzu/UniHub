@@ -49,14 +49,14 @@ export default function App() {
           <Route path="perfil" element={<Perfilusuario />} />
           <Route path="login" element={<InicioSesion />} />
           <Route path="registro" element={<Registro />} />
-          <Route path="registro" element={<Registro />} />
           <Route path="editar" element={<EditarPerfil />} />
           <Route path="detalles" element={<Detalles />} />
           <Route path="publicar" element={<Publicar />} />
           {/* <Route path="login" element={<Login />} />
           <Route path="signup" element={<Registro />} /> */}
-        </Route>
-      </Routes>
+        </Routes>
+        <Footer />
+      </>
     </BrowserRouter>
   );
 }
