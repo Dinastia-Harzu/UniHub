@@ -54,7 +54,7 @@ export function ModalDetalle({ id_trabajo }) {
           >
             <b>Publicar comentario</b>
           </button>
-        </div>
+        </form>
       </Modal>
     </div>
   );
