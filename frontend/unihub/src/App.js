@@ -14,6 +14,7 @@ import { BrowserRouter, Route, Routes } from "react-router-dom";
 import React, { useState, useEffect } from "react";
 import Publicar from "./components/Publicar.js";
 import Detalles from "./components/Detalles.js";
+import CartaBusqueda from "./components/CartaBusqueda.js";
 
 export default function App() {
   const [userTheme, setUserTheme] = useState("");
@@ -24,11 +25,12 @@ export default function App() {
 
     const link = document.createElement("link");
     link.rel = "stylesheet";
-    link.href = `assets/themes/general-${userThemeFromBackend}.css`;
+    link.href = `/assets/themes/general-${userThemeFromBackend}.css`;
     document.head.appendChild(link);
 
     if (userThemeFromBackend == "ac" || userThemeFromBackend == "osc") {
-      document.getElementsByClassName("logotipo").src = "assets/W_Logotipo.PNG";
+      document.getElementsByClassName("logotipo").src =
+        "/assets/W_Logotipo.PNG";
       console.log(document.getElementsByClassName("logotipo"));
     }
 
@@ -41,18 +43,24 @@ export default function App() {
   return (
     <BrowserRouter>
       <>
-        <Header />
+        {/* <Header /> */}
         <Routes>
-          <Route index element={<Inicio />} />
-          <Route path="trabajos" element={<MisTrabajos />} />
-          <Route path="buscar" element={<Busqueda />} />
-          <Route path="perfil" element={<Perfilusuario />} />
-          <Route path="login" element={<InicioSesion />} />
-          <Route path="registro" element={<Registro />} />
-          <Route path="editar" element={<EditarPerfil />} />
-          <Route path="detalles" element={<Detalles />} />
-          <Route path="publicar" element={<Publicar />} />
-          <Route path="contacto" element={<Contacto />} />
+          <Route path="/" element={<Header />}>
+            <Route index element={<Inicio />} />
+            <Route path="trabajos" element={<MisTrabajos />} />
+            <Route path="buscar" element={<Busqueda />} />
+            <Route path="perfil" element={<Perfilusuario />} />
+            <Route path="login" element={<InicioSesion />} />
+            <Route path="registro" element={<Registro />} />
+            <Route path="editar" element={<EditarPerfil />} />
+            <Route path="detalles" element={<Detalles />} />
+            <Route path="publicar" element={<Publicar />} />
+            <Route path="contacto" element={<Contacto />} />
+            <Route path="trabajos" element={<MisTrabajos />} />
+            <Route path="algo" element={<Inicio />}>
+              <Route path="lol" element={<MisTrabajos />} />
+            </Route>
+          </Route>
         </Routes>
         <Footer />
       </>

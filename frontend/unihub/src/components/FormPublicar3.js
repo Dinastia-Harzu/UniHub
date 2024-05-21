@@ -55,7 +55,7 @@ export default function FormPublicar3({ setPagina, formData, setFormData }) {
               <label htmlFor="portada">Portada: </label>
               <img
                 ref={refImagen}
-                src="./assets/Foto_defecto_portada.png"
+                src="/assets/Foto_defecto_portada.png"
                 alt="Portada"
                 onClick={() => setPortada()}
                 width={240}

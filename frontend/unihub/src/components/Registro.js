@@ -68,7 +68,7 @@ const Registro = () => {
                 <img
                   ref={refImagen}
                   tabIndex="0"
-                  src="./assets/no_photo.png"
+                  src="/assets/no_photo.png"
                   alt="Portada"
                   onClick={setPortada}
                   onKeyDown={handleKeyDownSetPortada}

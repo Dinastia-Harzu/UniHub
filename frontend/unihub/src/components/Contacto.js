@@ -16,7 +16,6 @@ export default function Contacto() {
           <strong>+123 456 7890</strong>
         </div>
       </div>
-
-    </main >
+    </main>
   );
 }

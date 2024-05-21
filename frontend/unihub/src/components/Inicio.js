@@ -6,7 +6,7 @@ export default function Inicio() {
       <section className="cabecera-inicio">
         <img
           className="img-cabecera"
-          src="assets/Cabecera.jpg"
+          src="/assets/Cabecera.jpg"
           alt="Imagen de cabecera"
         />
       </section>
@@ -15,7 +15,7 @@ export default function Inicio() {
         <section className="contenedor-articulos-inicio">
           <article className="articulo-inicio">
             <img
-              src="assets/Cabecera.jpg"
+              src="/assets/Cabecera.jpg"
               alt="Imagen"
               className="imagen-articulo-inicio"
             />
@@ -46,7 +46,7 @@ export default function Inicio() {
               </p>
             </div>
             <img
-              src="assets/Cabecera.jpg"
+              src="/assets/Cabecera.jpg"
               alt="Imagen"
               className="imagen-articulo-inicio"
             />

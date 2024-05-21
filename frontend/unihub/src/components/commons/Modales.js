@@ -16,7 +16,7 @@ export function ModalDetalle() {
           <div className="contenedor-usuario">
             <img
               className="foto-usuario"
-              src="assets/Foto_Usuario.jpg"
+              src="/assets/Foto_Usuario.jpg"
               alt="foto-usuario"
             ></img>
             <span>
