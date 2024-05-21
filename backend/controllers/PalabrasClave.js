@@ -1,10 +1,10 @@
 "use strict";
 
 var utils = require("../utils/writer.js");
-var TiposDeTrabajo = require("../service/TiposDeTrabajoService");
+var PalabrasClave = require("../service/PalabrasClaveService");
 
-module.exports.tipos_trabajoGET = function tipos_trabajoGET(req, res, next) {
-  TiposDeTrabajo.tipos_trabajoGET()
+module.exports.palabras_claveGET = function palabras_claveGET(req, res, next) {
+  PalabrasClave.palabras_claveGET()
     .then(function (response) {
       utils.writeJson(res, response);
     })
@@ -13,13 +13,13 @@ module.exports.tipos_trabajoGET = function tipos_trabajoGET(req, res, next) {
     });
 };
 
-module.exports.tipos_trabajoIdDELETE = function tipos_trabajoIdDELETE(
+module.exports.palabras_claveIdDELETE = function palabras_claveIdDELETE(
   req,
   res,
   next,
   id
 ) {
-  TiposDeTrabajo.tipos_trabajoIdDELETE(id)
+  PalabrasClave.palabras_claveIdDELETE(id)
     .then(function (response) {
       utils.writeJson(res, response);
     })
@@ -28,13 +28,13 @@ module.exports.tipos_trabajoIdDELETE = function tipos_trabajoIdDELETE(
     });
 };
 
-module.exports.tipos_trabajoIdGET = function tipos_trabajoIdGET(
+module.exports.palabras_claveIdGET = function palabras_claveIdGET(
   req,
   res,
   next,
   id
 ) {
-  TiposDeTrabajo.tipos_trabajoIdGET(id)
+  PalabrasClave.palabras_claveIdGET(id)
     .then(function (response) {
       utils.writeJson(res, response);
     })
@@ -43,14 +43,14 @@ module.exports.tipos_trabajoIdGET = function tipos_trabajoIdGET(
     });
 };
 
-module.exports.tipos_trabajoIdPUT = function tipos_trabajoIdPUT(
+module.exports.palabras_claveIdPUT = function palabras_claveIdPUT(
   req,
   res,
   next,
   body,
   id
 ) {
-  TiposDeTrabajo.tipos_trabajoIdPUT(body, id)
+  PalabrasClave.palabras_claveIdPUT(body, id)
     .then(function (response) {
       utils.writeJson(res, response);
     })
@@ -59,13 +59,13 @@ module.exports.tipos_trabajoIdPUT = function tipos_trabajoIdPUT(
     });
 };
 
-module.exports.tipos_trabajoPOST = function tipos_trabajoPOST(
+module.exports.palabras_clavePOST = function palabras_clavePOST(
   req,
   res,
   next,
   body
 ) {
-  TiposDeTrabajo.tipos_trabajoPOST(body)
+  PalabrasClave.palabras_clavePOST(body)
     .then(function (response) {
       utils.writeJson(res, response);
     })

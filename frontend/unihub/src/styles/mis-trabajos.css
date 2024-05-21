@@ -1,6 +1,6 @@
 /* General styles for the main container */
-main {
-  padding: 20px;
+.main-mis-trabajos {
+  padding: 1em;
 }
 
 /* Style for the title */
@@ -57,13 +57,17 @@ main {
   color: var(--color-text);
   margin-right: 10px;
   cursor: pointer;
-  -webkit-appearance: none;  /* Remove default styling in Safari */
-  -moz-appearance: none;     /* Remove default styling in Firefox */
-  appearance: none;          /* Remove default styling in modern browsers */
+  -webkit-appearance: none;
+  /* Remove default styling in Safari */
+  -moz-appearance: none;
+  /* Remove default styling in Firefox */
+  appearance: none;
+  /* Remove default styling in modern browsers */
 }
 
 .filter-select option {
-  background-color: var(--background-color); /* Ensure options have a background color to be readable */
+  background-color: var(--background-color);
+  /* Ensure options have a background color to be readable */
   color: black;
 }
 
@@ -103,8 +107,10 @@ main {
   overflow: hidden;
   transition: transform 0.3s;
   cursor: pointer;
-  text-decoration: none; /* Remove underline from links */
-  color: inherit; /* Inherit color from parent */
+  text-decoration: none;
+  /* Remove underline from links */
+  color: inherit;
+  /* Inherit color from parent */
 }
 
 .card img {
