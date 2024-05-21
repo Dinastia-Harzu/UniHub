@@ -46,30 +46,38 @@ export default function Publicar() {
 
         let trabajoEnviadoId = 0;
 
-        // // Enviamos trabajo
-        // axios.post(URL_BASE + "trabajos", formDataEnviar).then((result) => {
-        //     console.log(result);
-        //     let trabajoEnviadoId = result.data.trabajo.id;
-        //     console.log(trabajoEnviadoId);
-        // }).catch((err) => {
-        //     console.log(err);
-        // });
+        // Enviamos trabajo
+        axios.post(URL_BASE + "trabajos", formDataEnviar).then((result) => {
+            console.log(result);
+            let trabajoEnviadoId = result.data.trabajo.id;
+            console.log(trabajoEnviadoId);
 
-        // Enviamos palabras clave
-        const palabrasClaveEnviar = formData.palabras_clave.split(',');
-        console.log(palabrasClaveEnviar);
+            // Enviamos palabras clave
+            const palabrasClaveEnviar = formData.palabras_clave.split(',');
+            console.log(palabrasClaveEnviar);
 
-        // TODO: Enviar peticion a palabras clave cuando Arturo tenga la peticion
+            // TODO: Enviar peticion a palabras clave cuando Arturo tenga la peticion
 
-        // Enviamos multimedia
-        const multimedia = {
-            nombre: formData.recursos.at(0).split('.').at(0),
-            ruta: formData.recursos.at(0),
-            trabajo: trabajoEnviadoId
-        }
-        console.log('Multimedia:');
-        console.log(multimedia);
+            // Enviamos recursos
+            formData.recursos.forEach(recurso => {
+                const formRecurso = {
+                    nombre: recurso.split('.').at(0),
+                    ruta: recurso,
+                    trabajo: trabajoEnviadoId
+                }
 
+                console.log(formRecurso);
+
+                axios.post(URL_BASE + "multimedia", formRecurso).then((result) => {
+                    console.log(result);
+                }).catch((err) => {
+                    console.log(err);
+                });
+            });
+
+        }).catch((err) => {
+            console.log(err);
+        });
     }
 
     return (
@@ -104,7 +112,6 @@ export default function Publicar() {
             <section className="seccion-botones-publicar">
                 <div className="contenedor-botones-publicar">
                     <div className={pagina === 0 ? "boton-oculto" : "boton-anterior"}>
-                        <FontAwesomeIcon icon={faChevronLeft} size="2x" />
                         <button className="btn" onClick={() => atrasarPagina()}>
                             Anterior
                         </button>
@@ -113,7 +120,6 @@ export default function Publicar() {
                         <button className="btn" onClick={() => adelantarPagina()}>
                             Siguiente
                         </button>
-                        <FontAwesomeIcon icon={faChevronRight} size="2x" />
                     </div>
                     <div className="boton-publicar">
                         <button
