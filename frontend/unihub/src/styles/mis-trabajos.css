@@ -1,0 +1,159 @@
+/* General styles for the main container */
+main {
+  padding: 20px;
+}
+
+/* Style for the title */
+.titulo {
+  text-align: center;
+  margin-bottom: 20px;
+  font-size: 2em;
+  color: var(--color-text);
+}
+
+/* Container for actions (filter and button) */
+.actions-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+  padding: 0 20px;
+}
+
+.filter {
+  display: flex;
+  align-items: center;
+}
+
+.filter-button {
+  padding: 10px;
+  font-size: 2em;
+  color: var(--color-text);
+  background-color: transparent;
+  border: 2px solid var(--color-text);
+  border-radius: 50%;
+  cursor: pointer;
+  width: 50px;
+  height: 50px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-right: 10px;
+}
+
+.filter-button:hover {
+  background-color: rgba(0, 0, 0, 0.1);
+}
+
+.filter-button .icon-filter {
+  font-size: 1.5em;
+}
+
+.filter-select {
+  padding: 5px;
+  font-size: 1em;
+  border: none;
+  background-color: transparent;
+  color: var(--color-text);
+  margin-right: 10px;
+  cursor: pointer;
+  -webkit-appearance: none;  /* Remove default styling in Safari */
+  -moz-appearance: none;     /* Remove default styling in Firefox */
+  appearance: none;          /* Remove default styling in modern browsers */
+}
+
+.filter-select option {
+  background-color: var(--background-color); /* Ensure options have a background color to be readable */
+  color: black;
+}
+
+.filter-select option:checked {
+  background-color: var(--color-text);
+  color: black;
+}
+
+.publish-button {
+  padding: 10px;
+  font-size: 1em;
+  color: #fff;
+  background-color: var(--color-text);
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.publish-button:hover {
+  background-color: var(--color-text-dark);
+}
+
+/* Container for the cards */
+.cards-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 20px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+.card {
+  position: relative;
+  background-color: var(--color-bg-form);
+  border: 2px solid var(--color-text);
+  border-radius: 10px;
+  overflow: hidden;
+  transition: transform 0.3s;
+  cursor: pointer;
+  text-decoration: none; /* Remove underline from links */
+  color: inherit; /* Inherit color from parent */
+}
+
+.card img {
+  object-fit: cover;
+  width: 100%;
+  height: 20em;
+  display: block;
+}
+
+.card-content {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  color: #fff;
+  background-color: rgba(0, 0, 0, 0.6);
+  transition: transform 0.3s;
+  padding: 10px;
+  box-sizing: border-box;
+  transform: translateY(30%);
+}
+
+.card h3 {
+  margin: 0;
+  font-size: 1.2em;
+  text-align: center;
+  padding: 10px;
+  box-sizing: border-box;
+}
+
+.descripcion {
+  margin: 0;
+  font-size: 1em;
+  display: block;
+  border: .5em;
+  flex-direction: column;
+  align-items: center;
+  max-height: 3em;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.card:hover .card-content {
+  transform: translateY(0);
+}
+
+@media (max-width: 600px) {
+  .cards-container {
+    grid-template-columns: 1fr;
+    padding: 0 10px;
+  }
+}

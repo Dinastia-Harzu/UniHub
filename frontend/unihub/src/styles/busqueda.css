@@ -73,3 +73,13 @@ select {
   appearance: none;
   /* Elimina la apariencia nativa del selector */
 }
+
+@media screen and (max-width: 870px) {
+  .formulario-busqueda {
+    width: 100%;
+  }
+}
+
+@media screen and (max-width: 574px) {
+
+}

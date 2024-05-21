@@ -8,6 +8,8 @@ import InicioSesion from "./components/InicioSesion.js";
 import Busqueda from "./components/Busqueda.js";
 import Registro from "./components/Registro.js";
 import EditarPerfil from "./components/EditarPerfil.js";
+import Contacto from "./components/Contacto.js";
+import MisTrabajos from "./components/MisTrabajos.js";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import React, { useState, useEffect } from "react";
 import Publicar from "./components/Publicar.js"
@@ -38,13 +40,15 @@ export default function App() {
 
   return (
     <BrowserRouter>
-      <Routes>
-        <Route path="/" element={<Header />}>
-          <Route index element={<Inicio />} />
+      <>
+        <Header />
+        <Routes>
+          <Route path="/" element={<Inicio />} />
           {/* <Route path="descubrir" element={<Descubrir />} /> */}
           <Route path="buscar" element={<Busqueda />} />
           <Route path="perfil" element={<Perfilusuario />} />
           <Route path="login" element={<InicioSesion />} />
+          <Route path="registro" element={<Registro />} />
           <Route path="registro" element={<Registro />} />
           <Route path="editar" element={<EditarPerfil />} />
           <Route path="detalles" element={<Detalles />} />

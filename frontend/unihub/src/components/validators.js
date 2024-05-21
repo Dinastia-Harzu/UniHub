@@ -5,16 +5,16 @@ const edadValidator = (value) => {
   return edad >= 17;
 };
 
-export { edadValidator }
+export { edadValidator };
 
 const titulacionValidator = (value) => {
   return value !== "none";
 };
 
-export { titulacionValidator }
+export { titulacionValidator };
 
 const estiloValidator = (value) => {
   return value !== "none";
 };
 
-export { estiloValidator }
+export { estiloValidator };
