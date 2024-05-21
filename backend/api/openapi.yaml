@@ -1413,6 +1413,31 @@ paths:
               schema:
                 $ref: "#/components/schemas/InternalServerError"
       x-swagger-router-controller: Multimedia
+  /multimedia/trabajo/{id}:
+    get:
+      tags:
+        - Multimedia
+      description: GET Multimedia de un trabajo
+      operationId: multimedia_trabajoGET
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/OK-GET"
+        "404":
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/NotFound"
+        "500":
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/InternalServerError"
   /comentarios:
     get:
       tags:
@@ -1686,6 +1711,8 @@ components:
     ReqComentario:
       properties:
         autor:
+          type: integer
+        trabajo:
           type: integer
         comentario:
           type: string
