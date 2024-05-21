@@ -11,6 +11,7 @@ import EditarPerfil from "./components/EditarPerfil.js";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import React, { useState, useEffect } from "react";
 import Publicar from "./components/Publicar.js"
+import Detalles from "./components/Detalles.js"
 
 export default function App() {
   const [userTheme, setUserTheme] = useState("");
@@ -44,8 +45,10 @@ export default function App() {
           <Route path="buscar" element={<Busqueda />} />
           <Route path="perfil" element={<Perfilusuario />} />
           <Route path="login" element={<InicioSesion />} />
-          <Route path="registro" element={<Registro />} />7
+          <Route path="registro" element={<Registro />} />
           <Route path="editar" element={<EditarPerfil />} />
+          <Route path="detalles" element={<Detalles />} />
+          <Route path="publicar" element={<Publicar />} />
           {/* <Route path="login" element={<Login />} />
           <Route path="signup" element={<Registro />} /> */}
         </Route>

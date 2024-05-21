@@ -37,11 +37,33 @@ export default function Publicar() {
     function enviarData() {
         const { recursos, palabras_clave, ...formDataEnviar } = formData;
         console.log(formDataEnviar);
-        axios.post(URL_BASE + "trabajos", formDataEnviar).then((result) => {
-            console.log(result);
-        }).catch((err) => {
-            console.log(err);
-        });
+
+        let trabajoEnviadoId = 0;
+
+        // // Enviamos trabajo
+        // axios.post(URL_BASE + "trabajos", formDataEnviar).then((result) => {
+        //     console.log(result);
+        //     let trabajoEnviadoId = result.data.trabajo.id;
+        //     console.log(trabajoEnviadoId);
+        // }).catch((err) => {
+        //     console.log(err);
+        // });
+
+        // Enviamos palabras clave
+        const palabrasClaveEnviar = formData.palabras_clave.split(',');
+        console.log(palabrasClaveEnviar);
+
+        // TODO: Enviar peticion a palabras clave cuando Arturo tenga la peticion
+
+        // Enviamos multimedia
+        const multimedia = {
+            nombre: formData.recursos.at(0).split('.').at(0),
+            ruta: formData.recursos.at(0),
+            trabajo: trabajoEnviadoId
+        }
+        console.log('Multimedia:');
+        console.log(multimedia);
+
     }
 
     return (
