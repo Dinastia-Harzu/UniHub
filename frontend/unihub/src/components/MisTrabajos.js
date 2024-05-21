@@ -47,44 +47,46 @@ const MisTrabajos = () => {
 
   return (
     <main>
-      <h2 className="titulo">Mis Trabajos</h2>
-      <div className="actions-container">
-        <div className="filter">
-          <button className="filter-button" onClick={handleFilterClick}>
-            <MdTune className="icon-filter" />
-          </button>
-          {filterOpen && (
-            <form action="submit">
-              <select
-                className="filter-select"
-                value={selectedFilter}
-                onChange={handleFilterChange}
-              >
-                <option value="">Seleccione un filtro</option>
-                <option value="Trabajo 1">Trabajo 1</option>
-                <option value="Trabajo 2">Trabajo 2</option>
-                <option value="Trabajo 3">Trabajo 3</option>
-              </select>
-            </form>
-          )}
-        </div>
-        <Link to="/publicar" className="btn publish-button">
-          Publicar
-        </Link>
-      </div>
-      <div className="cards-container">
-        {cardsData.map((card) => (
-          <Link key={card.id} to="/trabajo" className="card">
-            <img src={card.image} alt={card.title} />
-            <div className="card-content">
-              <h3>{card.title}</h3>
-              <div className="descripcion">
-                <p>{card.description}</p>
-              </div>
-            </div>
+      <section className="main-mis-trabajos">
+        <h2 className="titulo">Mis Trabajos</h2>
+        <div className="actions-container">
+          <div className="filter">
+            <button className="filter-button" onClick={handleFilterClick}>
+              <MdTune className="icon-filter" />
+            </button>
+            {filterOpen && (
+              <form action="submit">
+                <select
+                  className="filter-select"
+                  value={selectedFilter}
+                  onChange={handleFilterChange}
+                >
+                  <option value="">Seleccione un filtro</option>
+                  <option value="Trabajo 1">Trabajo 1</option>
+                  <option value="Trabajo 2">Trabajo 2</option>
+                  <option value="Trabajo 3">Trabajo 3</option>
+                </select>
+              </form>
+            )}
+          </div>
+          <Link to="/publicar" className="btn publish-button">
+            Publicar
           </Link>
-        ))}
-      </div>
+        </div>
+        <div className="cards-container">
+          {cardsData.map((card) => (
+            <Link key={card.id} to="/trabajo" className="card">
+              <img src={card.image} alt={card.title} />
+              <div className="card-content">
+                <h3>{card.title}</h3>
+                <div className="descripcion">
+                  <p>{card.description}</p>
+                </div>
+              </div>
+            </Link>
+          ))}
+        </div>
+      </section>
     </main>
   );
 };
