@@ -1,7 +1,6 @@
 import "./App.css";
 import Header from "./components/commons/Header.js";
 import Inicio from "./components/Inicio.js";
-// import Descubrir from './components/Descubrir';
 import Footer from "./components/commons/Footer.js";
 import Perfilusuario from "./components/Perfilusuario.js";
 import InicioSesion from "./components/InicioSesion.js";
@@ -10,6 +9,8 @@ import Registro from "./components/Registro.js";
 import EditarPerfil from "./components/EditarPerfil.js";
 import Contacto from "./components/Contacto.js";
 import MisTrabajos from "./components/MisTrabajos.js";
+import NotFound from "./components/NotFound.js";
+
 import {
   BrowserRouter,
   createBrowserRouter,
@@ -67,6 +68,7 @@ export default function App() {
             <Route path="algo" element={<Inicio />}>
               <Route path="lol" element={<MisTrabajos />} />
             </Route>
+            <Route path="*" element={<NotFound />} />
           </Route>
         </Routes>
         <Footer />
