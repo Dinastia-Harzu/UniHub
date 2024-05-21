@@ -52,8 +52,6 @@ export default function App() {
           <Route path="editar" element={<EditarPerfil />} />
           <Route path="detalles" element={<Detalles />} />
           <Route path="publicar" element={<Publicar />} />
-          {/* <Route path="login" element={<Login />} />
-          <Route path="signup" element={<Registro />} /> */}
         </Routes>
         <Footer />
       </>
