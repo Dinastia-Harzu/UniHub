@@ -19,7 +19,7 @@ export default function CartaBusqueda() {
         <img
           className="img-busqueda"
           alt="Cortometraje de animación 3D"
-          src="assets/TFG_Similar1.png"
+          src="/assets/TFG_Similar1.png"
         />
         <div className="carta-contenido">
           <h2>

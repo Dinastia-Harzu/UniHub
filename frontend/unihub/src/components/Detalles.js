@@ -19,7 +19,7 @@ export default function Detalles() {
             </a>
             <FontAwesomeIcon icon={faEye} size="2xl" className="boton-ver" />
           </div>
-          <img src="assets/TFG.png" alt="foto"></img>
+          <img src="/assets/TFG.png" alt="foto"></img>
         </section>
         <section className="contenedor-datos">
           <article className="datos">
@@ -64,8 +64,8 @@ export default function Detalles() {
           <article className="recursos-asociados">
             <h3>Recursos multimedia asociados:</h3>
             <div>
-              <img src="assets/Clase.png" alt="clase"></img>
-              <img src="assets/Habitacion.png" alt="habitacion"></img>
+              <img src="/assets/Clase.png" alt="clase"></img>
+              <img src="/assets/Habitacion.png" alt="habitacion"></img>
             </div>
           </article>
 
@@ -73,15 +73,15 @@ export default function Detalles() {
             <h3>Trabajos asociados: </h3>
             <div>
               <p>
-                <img src="assets/TFG_Similar1.png" alt="TFG-similar1"></img>
+                <img src="/assets/TFG_Similar1.png" alt="TFG-similar1"></img>
                 <p>La Tierra - Cortometraje de Animación 3D</p>
               </p>
               <p>
-                <img src="assets/TFG_Similar2.png" alt="TFG-similar2"></img>
+                <img src="/assets/TFG_Similar2.png" alt="TFG-similar2"></img>
                 <p>Sons of Odin - Corto de animación 3D</p>
               </p>
               <p>
-                <img src="assets/TFG_Similar3.png" alt="TFG-similar3"></img>
+                <img src="/assets/TFG_Similar3.png" alt="TFG-similar3"></img>
                 <p>Loop animado 3D estilo cartoon</p>
               </p>
             </div>
@@ -98,7 +98,7 @@ export default function Detalles() {
               <div className="contenedor-comentario">
                 <p className="contenedor-usuario">
                   <img
-                    src="assets/Foto_Usuario.jpg"
+                    src="/assets/Foto_Usuario.jpg"
                     alt="foto-usuario"
                     className="foto-usuario"
                   ></img>

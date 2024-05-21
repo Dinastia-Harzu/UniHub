@@ -58,7 +58,7 @@ const EditarPerfil = () => {
                 <label htmlFor="portada"></label>
                 <img
                   ref={refImagen}
-                  src="./assets/no_photo.png"
+                  src="/assets/no_photo.png"
                   alt="Portada"
                   onClick={() => setPortada()}
                   width={240}

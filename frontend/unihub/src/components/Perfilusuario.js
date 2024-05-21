@@ -70,7 +70,7 @@ const Perfilusuario = () => {
                 <label htmlFor="portada"></label>
                 <img
                   ref={refImagen}
-                  src="./assets/no_photo.png"
+                  src="/assets/no_photo.png"
                   alt="Portada"
                   width={240}
                   height={320}

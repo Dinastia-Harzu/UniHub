@@ -6,7 +6,7 @@ export default function Contacto() {
       <section className="cabecera-inicio">
         <img
           className="img-cabecera"
-          src="assets/Cabecera.jpg"
+          src="/assets/Cabecera.jpg"
           alt="Imagen de cabecera"
         />
       </section>

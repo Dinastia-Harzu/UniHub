@@ -48,7 +48,7 @@ export default function ContenedorRecurso({
       <label>
         <img
           ref={refImagen}
-          src="./assets/Foto_defecto_recurso.png"
+          src="/assets/Foto_defecto_recurso.png"
           alt="Recurso"
           onClick={() => setRecurso()}
         />
