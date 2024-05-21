@@ -10,11 +10,19 @@ import Registro from "./components/Registro.js";
 import EditarPerfil from "./components/EditarPerfil.js";
 import Contacto from "./components/Contacto.js";
 import MisTrabajos from "./components/MisTrabajos.js";
-import { BrowserRouter, Route, Routes } from "react-router-dom";
+import {
+  BrowserRouter,
+  createBrowserRouter,
+  createRoutesFromElements,
+  Route,
+  RouterProvider,
+  Routes,
+} from "react-router-dom";
 import React, { useState, useEffect } from "react";
 import Publicar from "./components/Publicar.js";
 import Detalles from "./components/Detalles.js";
 import CartaBusqueda from "./components/CartaBusqueda.js";
+import Root from "./components/Root.js";
 
 export default function App() {
   const [userTheme, setUserTheme] = useState("");
@@ -43,9 +51,9 @@ export default function App() {
   return (
     <BrowserRouter>
       <>
-        {/* <Header /> */}
+        <Header />
         <Routes>
-          <Route path="/" element={<Header />}>
+          <Route path="/">
             <Route index element={<Inicio />} />
             <Route path="trabajos" element={<MisTrabajos />} />
             <Route path="buscar" element={<Busqueda />} />
@@ -65,5 +73,10 @@ export default function App() {
         <Footer />
       </>
     </BrowserRouter>
+    // <RouterProvider
+    //   router={createBrowserRouter(
+    //     createRoutesFromElements(<Route path="/" element={<Root />}></Route>)
+    //   )}
+    // />
   );
 }
