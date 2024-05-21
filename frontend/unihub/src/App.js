@@ -12,7 +12,8 @@ import Contacto from "./components/Contacto.js";
 import MisTrabajos from "./components/MisTrabajos.js";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import React, { useState, useEffect } from "react";
-import Publicar from "./components/Publicar.js";
+import Publicar from "./components/Publicar.js"
+import Detalles from "./components/Detalles.js"
 
 export default function App() {
   const [userTheme, setUserTheme] = useState("");
@@ -48,12 +49,14 @@ export default function App() {
           <Route path="perfil" element={<Perfilusuario />} />
           <Route path="login" element={<InicioSesion />} />
           <Route path="registro" element={<Registro />} />
+          <Route path="registro" element={<Registro />} />
           <Route path="editar" element={<EditarPerfil />} />
-          <Route path="trabajos" element={<MisTrabajos />} />
-          <Route path="contacto" element={<Contacto />} />
-        </Routes>
-        <Footer />
-      </>
+          <Route path="detalles" element={<Detalles />} />
+          <Route path="publicar" element={<Publicar />} />
+          {/* <Route path="login" element={<Login />} />
+          <Route path="signup" element={<Registro />} /> */}
+        </Route>
+      </Routes>
     </BrowserRouter>
   );
 }
