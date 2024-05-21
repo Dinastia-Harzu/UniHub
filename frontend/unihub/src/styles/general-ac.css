@@ -64,8 +64,6 @@ html {
   padding: .5em;
   background-color: var(--color-secondary);
   border-radius: 5px;
-  outline: none;
-  border-style: none;
   font-size: 1em;
   height: 2.3em;
   cursor: pointer;

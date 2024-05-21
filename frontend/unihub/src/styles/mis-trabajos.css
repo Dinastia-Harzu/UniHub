@@ -55,7 +55,6 @@ main {
   border: none;
   background-color: transparent;
   color: var(--color-text);
-  outline: none;
   margin-right: 10px;
   cursor: pointer;
   -webkit-appearance: none;  /* Remove default styling in Safari */

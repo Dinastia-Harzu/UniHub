@@ -14,6 +14,7 @@ export default function CartaBusqueda() {
     //     <p>{proyecto.resumen}</p>
     //   </div>
     // </div>
+    <>
     <div className="carta-busqueda">
       <img
         className="img-busqueda"
@@ -22,7 +23,7 @@ export default function CartaBusqueda() {
       />
       <div className="carta-contenido">
         <h2>
-          <strong>Cortometraje de animación 3D</strong>
+          <a href="#"><strong>Cortometraje de animación 3D</strong></a>
         </h2>
         <br />
         <p>
@@ -40,5 +41,6 @@ export default function CartaBusqueda() {
         </p>
       </div>
     </div>
+    </>
   );
 }

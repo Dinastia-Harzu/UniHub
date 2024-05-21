@@ -12,10 +12,26 @@ const Perfilusuario = () => {
   const refPortada = useRef();
   const refImagen = useRef();
 
-  function setPortada() {
+  const toggleMostrarContrasena = () => {
+    setMostrarContrasena(!mostrarContrasena);
+  };
+
+  const handleKeyDownTogglePassword = (event) => {
+    if (event.key === 'Enter') {
+      toggleMostrarContrasena();
+    }
+  };
+
+  const setPortada = () => {
     const recurso_actual = refPortada.current;
     recurso_actual.click();
-  }
+  };
+
+  const handleKeyDownSetPortada = (event) => {
+    if (event.key === 'Enter') {
+      setPortada();
+    }
+  };
 
   function cambiarFoto(inp) {
     if (inp.target.files.length > 0) {
@@ -30,10 +46,6 @@ const Perfilusuario = () => {
     console.log(data);
   }
 
-  const toggleMostrarContrasena = () => {
-    setMostrarContrasena(!mostrarContrasena);
-  };
-
   return (
     <main>
       <div className="contenedor-inicial">
@@ -44,8 +56,8 @@ const Perfilusuario = () => {
               <div className="form-group" id="nombre-titulo"><h1>Miriam</h1></div>
               <div className="contenedor-apartados-formulario_usuario">
                 <label htmlFor="portada"></label>
-                <img ref={refImagen} src="./assets/no_photo.png" alt="Portada" onClick={() => setPortada()} width={240} height={320} />
-                <input className="solo-mostrar" ref={refPortada} type="file" name="portada" accept="image/*" onChange={(event) => cambiarFoto(event)}></input>
+                <img ref={refImagen}  src="./assets/no_photo.png" alt="Portada"  width={240} height={320} />
+              
               </div>
               <div className="form-group" id="nombre">
                 <label htmlFor="nombre">Nombre:</label>
@@ -73,17 +85,19 @@ const Perfilusuario = () => {
                 </div>
                 <div className="form-group" id="contrasenia">
                   <div className="input-contrasenia">
-                    <label for="contrasena">Contraseña:</label>
-                    <input
-                      className="solo-mostrar"
+                    <label htmlFor="contrasena">Contraseña:</label>
+                    <input class="solo-mostrar" defaultValue="miriam34@gmail.com" readOnly
                       type={mostrarContrasena ? "text" : "password"}
                       id="contrasena"
                       name="contrasena"
-                      defaultValue="1234Pepito"
-                      readOnly />
+                      {...register('contrasena', {
+                        required: true,
+                        pattern: /(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}/
+                      })}
+                    />
                   </div>
-                  <div className="boton-contrasenia">
-                    <span type="button" onClick={toggleMostrarContrasena}>
+                  <div className="boton-contrasenia" tabIndex="0" onKeyDown={handleKeyDownTogglePassword} onClick={toggleMostrarContrasena}>
+                    <span role="button" >
                       {mostrarContrasena ? <FaEyeSlash className="icono-grande" /> : <FaEye className="icono-grande" />}
                     </span>
                   </div>

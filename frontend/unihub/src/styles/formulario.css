@@ -21,6 +21,7 @@
   grid-column: 1;
 }
 .boton-contrasenia{
+  
   padding: .5em;
   display: flex;
   justify-content: center;
