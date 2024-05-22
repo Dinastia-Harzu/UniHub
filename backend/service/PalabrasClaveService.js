@@ -142,7 +142,7 @@ exports.palabras_clavePOST = function (body) {
             )
           );
         } else {
-          _.palabras_claveGET().then(
+          return _.palabras_claveGET().then(
             (res) =>
               resolve(
                 responder(
