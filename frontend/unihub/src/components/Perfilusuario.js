@@ -1,4 +1,5 @@
 import { useForm } from "react-hook-form";
+import { useTranslation } from 'react-i18next';
 import {
   edadValidator,
   titulacionValidator,
@@ -11,6 +12,7 @@ import { useRef } from 'react';
 import { Link } from 'react-router-dom';
 
 const Perfilusuario = () => {
+  const { t } = useTranslation();
   const {
     register,
     formState: { errors },
@@ -59,7 +61,7 @@ const Perfilusuario = () => {
     <main>
       <div className="contenedor-inicial">
         <div className="titulo">
-          <h2 className="titulo-letra">Mi Perfil</h2>
+          <h2 className="titulo-letra">{t('mi-perfil')}</h2>
         </div>
         <div className="form-container">
           <form onSubmit={handleSubmit(onSubmit)} className="pos-wrapper">
@@ -78,7 +80,7 @@ const Perfilusuario = () => {
                 />
               </div>
               <div className="form-group" id="nombre">
-                <label htmlFor="nombre" className="contenido-letra">Nombre:</label>
+                <label htmlFor="nombre" className="contenido-letra">{t('nombre')}:</label>
                 <input
                   className="solo-mostrar contenido-letra"
                   type="text"
@@ -91,15 +93,9 @@ const Perfilusuario = () => {
                   })}
                   readOnly
                 />
-                {errors.nombre?.type === "required" && (
-                  <p className="contenido-letra">El campo es requerido</p>
-                )}
-                {errors.nombre?.type === "maxLength" && (
-                  <p className="contenido-letra">El nombre introducido es demasiado largo</p>
-                )}
               </div>
               <div className="form-group" id="apellidos">
-                <label htmlFor="apellidos" className="contenido-letra">Apellidos:</label>
+                <label htmlFor="apellidos" className="contenido-letra">{t('apellidos')}:</label>
                 <input
                   className="solo-mostrar contenido-letra"
                   type="text"
@@ -112,16 +108,10 @@ const Perfilusuario = () => {
                   })}
                   readOnly
                 />
-                {errors.apellidos?.type === "required" && (
-                  <p className="contenido-letra">El campo es requerido</p>
-                )}
-                {errors.apellidos?.type === "maxLength" && (
-                  <p className="contenido-letra">El nombre introducido es demasiado largo</p>
-                )}
               </div>
               <div id="parte-inferior">
                 <div className="form-group" id="correo">
-                  <label for="correo" className="contenido-letra">Correo electrónico:</label>
+                  <label for="correo" className="contenido-letra">{t('correo')}:</label>
                   <input
                     className="solo-mostrar contenido-letra"
                     type="email"
@@ -135,7 +125,7 @@ const Perfilusuario = () => {
                 </div>
                 <div className="form-group" id="contrasenia">
                   <div className="input-contrasenia" >
-                    <label htmlFor="contrasena" className="contenido-letra">Contraseña:</label>
+                    <label htmlFor="contrasena" className="contenido-letra">{t('contrasenia')}:</label>
                   <input className="solo-mostrar contenido-letra" defaultValue="miriam34@gmail.com" readOnly
                       type={mostrarContrasena ? "text" : "password"}
                       id="contrasena"
@@ -159,33 +149,33 @@ const Perfilusuario = () => {
                   <br />
                 </div>
                 <div className="form-group" id="titulacion">
-                  <label for="titulacion" className="contenido-letra">Grado o máster:</label>
+                  <label for="titulacion" className="contenido-letra">{t('sel-tit')}:</label>
                   <input
                     className="solo-mostrar contenido-letra"
                     type="text"
                     id="titulacion"
                     name="titulacion"
-                    defaultValue="Arquitectura"
+                    defaultValue={t('arquitectura')}
                     readOnly
                   />
                   <br />
                   <br />
                 </div>
                 <div className="form-group" id="titulacion">
-                  <label for="estilo" className="contenido-letra">Estilo:</label>
+                  <label for="estilo" className="contenido-letra">{t('sel-estilo')}:</label>
                   <input
                     className="solo-mostrar contenido-letra"
                     type="text"
                     id="estilo"
                     name="estilo"
-                    defaultValue="Letras grandes"
+                    defaultValue={t('normal-lg')}
                     readOnly
                   />
                   <br />
                   <br />
                 </div>
                 <div className="form-group" id="direccion">
-                  <label for="direccion" className="contenido-letra">Dirección:</label>
+                  <label for="direccion" className="contenido-letra">{t('direccion')}:</label>
                   <input
                     className="solo-mostrar contenido-letra"
                     type="text"
@@ -198,7 +188,7 @@ const Perfilusuario = () => {
                   <br />
                 </div>
                 <div className="form-group" id="nacimiento">
-                  <label for="fecha_nacimiento" className="contenido-letra">Fecha de Nacimiento:</label>
+                  <label for="fecha_nacimiento" className="contenido-letra">{t('fecnac')}:</label>
                   <input
                     className="solo-mostrar contenido-letra"
                     type="date"
@@ -212,7 +202,7 @@ const Perfilusuario = () => {
                 </div>
               </div>
               <div className="boton-editar btn-letra">
-                <Link to="../editar" className="btn btn-primary btn-letra" value="Editar">Editar</Link>
+                <Link to="../editar" className="btn btn-primary btn-letra" value="Editar">{t('editar')}</Link>
               </div>
             </div>
           </form>

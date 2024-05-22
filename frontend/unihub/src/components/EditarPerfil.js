@@ -1,4 +1,5 @@
 import { useForm } from "react-hook-form";
+import { useTranslation } from 'react-i18next';
 import {
   edadValidator,
   titulacionValidator,
@@ -10,6 +11,7 @@ import { FaEye, FaEyeSlash } from "react-icons/fa";
 import { useRef } from "react";
 
 const EditarPerfil = () => {
+  const { t } = useTranslation();
   const {
     register,
     formState: { errors },
@@ -57,7 +59,7 @@ const EditarPerfil = () => {
     <main>
       <div className="contenedor-inicial">
         <div className="titulo">
-          <h2 className="titulo-letra">Mi Perfil</h2>
+          <h2 className="titulo-letra">{t('mi-perfil')}</h2>
         </div>
         <div className="form-container">
           <form onSubmit={handleSubmit(onSubmit)} className="pos-wrapper">
@@ -84,7 +86,7 @@ const EditarPerfil = () => {
                 ></input>
               </div>
               <div className="form-group" id="nombre">
-                <label htmlFor="nombre" className="contenido-letra">Nombre:</label>
+                <label htmlFor="nombre" className="contenido-letra">{t('nombre')}:</label>
                 <input
                 className="contenido-letra"
                   type="text"
@@ -97,14 +99,14 @@ const EditarPerfil = () => {
                   })}
                 />
                 {errors.nombre?.type === "required" && (
-                  <p className="contenido-letra">El campo es requerido</p>
+                  <p className="contenido-letra">{t('campo-requerido')}</p>
                 )}
                 {errors.nombre?.type === "maxLength" && (
-                  <p className="contenido-letra">El nombre introducido es demasiado largo</p>
+                  <p className="contenido-letra">{t('nombre-largo')}</p>
                 )}
               </div>
               <div className="form-group" id="apellidos">
-                <label htmlFor="apellidos" className="contenido-letra">Apellidos:</label>
+                <label htmlFor="apellidos" className="contenido-letra">{t('apellidos')}:</label>
                 <input
                 className="contenido-letra"
                   type="text"
@@ -117,15 +119,15 @@ const EditarPerfil = () => {
                   })}
                 />
                 {errors.apellidos?.type === "required" && (
-                  <p className="contenido-letra">El campo es requerido</p>
+                  <p className="contenido-letra">{t('campo-requerido')}</p>
                 )}
                 {errors.apellidos?.type === "maxLength" && (
-                  <p className="contenido-letra">El nombre introducido es demasiado largo</p>
+                  <p className="contenido-letra">{t('nombre-largo')}</p>
                 )}
               </div>
               <div id="parte-inferior">
                 <div className="form-group" id="correo">
-                  <label for="correo" className="contenido-letra">Correo electrónico:</label>
+                  <label for="correo" className="contenido-letra">{t('correo')}:</label>
                   <input
                   className="contenido-letra"
                     type="email"
@@ -138,17 +140,17 @@ const EditarPerfil = () => {
                     })}
                   />
                   {errors.correo?.type === "required" && (
-                    <p className="contenido-letra">El campo es requerido</p>
+                    <p className="contenido-letra">{t('campo-requerido')}</p>
                   )}
                   {errors.correo?.type === "maxLength" && (
-                    <p className="contenido-letra">El formato del correo no es adecuado</p>
+                    <p className="contenido-letra">{t('correo-erróneo')}</p>
                   )}
                   <br />
                   <br />
                 </div>
                 <div className="form-group" id="contrasenia">
                   <div className="input-contrasenia">
-                    <label htmlFor="contrasena" className="contenido-letra">Contraseña:</label>
+                    <label htmlFor="contrasena" className="contenido-letra">{t('contrasenia')}:</label>
                     <input
                     className="contenido-letra"
                       type={mostrarContrasena ? "text" : "password"}
@@ -172,15 +174,15 @@ const EditarPerfil = () => {
                     </span>
                   </div>
                   {errors.contrasena?.type === "required" && (
-                    <p className="contenido-letra">El campo es requerido</p>
+                    <p className="contenido-letra">{t('campo-requerido')}</p>
                   )}
                   {errors.contrasena?.type === "pattern" && (
-                    <p className="contenido-letra">El formato no es adecuado</p>
+                    <p className="contenido-letra">{t('contra-erróneo')}</p>
                   )}
                   <br />
                 </div>
                 <div className="form-group" id="titulacion">
-                  <label for="titulacion" className="contenido-letra">Grado o máster:</label>
+                  <label for="titulacion" className="contenido-letra">{t('sel-tit')}:</label>
                   <select
                   className="contenido-letra"
                     defaultValue="arquitectura"
@@ -189,106 +191,105 @@ const EditarPerfil = () => {
                       validate: titulacionValidator,
                     })}
                   >
-                    <option value="none" className="contenido-letra">Selecciona tu titulación</option>
-                    <option value="ingenieria_multimedia"className="contenido-letra">
-                      Ingeniería Multimedia
+                    <option value="none" className="contenido-letra">{t('sel-tutit')}</option>
+                    <option value="ingenieria_multimedia"  className="contenido-letra">
+                    {t('ingenieria_multimedia')}
                     </option>
-                    <option value="arquitectura"className="contenido-letra">Arquitectura</option>
-                    <option value="arquitectura_tecnica"className="contenido-letra">
-                      Arquitectura técnica
+                    <option value="arquitectura"  className="contenido-letra">{t('arquitectura')}</option>
+                    <option value="arquitectura_tecnica">
+                    {t('arquitectura_tecnica')}
                     </option>
-                    <option value="fundamentos_arquitectura"className="contenido-letra">
-                      Fundamentos de la arquitectura
+                    <option value="fundamentos_arquitectura"  className="contenido-letra">
+                    {t('fundamentos_arquitectura')}
                     </option>
-                    <option value="ingenieria_aeroespacial"className="contenido-letra">
-                      Ingeniería Aeroespacial
+                    <option value="ingenieria_aeroespacial"  className="contenido-letra">
+                    {t('ingenieria_aeroespacial')}
                     </option>
-                    <option value="ingenieria_biomedica"className="contenido-letra">
-                      Ingeniería Biomédica
+                    <option value="ingenieria_biomedica"  className="contenido-letra">
+                    {t('ingenieria_biomedica')}
                     </option>
-                    <option value="ingenieria_sonido_imagen"className="contenido-letra">
-                      Ingeniería en Sonido e Imagen en Telecomunicación
+                    <option value="ingenieria_sonido_imagen"  className="contenido-letra">
+                    {t('ingenieria_sonido_imagen')}
                     </option>
-                    <option value="ingenieria_civil"className="contenido-letra">Ingeniería Civil</option>
-                    <option value="ingenieria_ia"className="contenido-letra">
-                      Ingeniería en Inteligencia Artificial
+                    <option value="ingenieria_civil"  className="contenido-letra">{t('ingenieria_civil')}</option>
+                    <option value="ingenieria_ia">
+                    {t('ingenieria_ia')}
                     </option>
-                    <option value="ingenieria_informatica"className="contenido-letra">
-                      Ingeniería Informática
+                    <option value="ingenieria_informatica"  className="contenido-letra">
+                    {t('ingenieria_informatica')}
                     </option>
-                    <option value="ingenieria_informatica_ade"className="contenido-letra">
-                      Ingeniería Informática + ADE
+                    <option value="ingenieria_informatica_ade"  className="contenido-letra">
+                    {t('ingenieria_informatica_ade')}
                     </option>
-                    <option value="ingenieria_quimica"className="contenido-letra">
-                      Ingeniería Química
+                    <option value="ingenieria_quimica"  className="contenido-letra">
+                    {t('ingenieria_quimica')}
                     </option>
-                    <option value="ingenieria_robotica"className="contenido-letra">
-                      Ingeniería Robótica
+                    <option value="ingenieria_robotica"  className="contenido-letra">
+                    {t('ingenieria_robotica')}
                     </option>
-                    <option value="master_arquitectura"className="contenido-letra">
-                      Máster en arquitectura
+                    <option value="master_arquitectura"  className="contenido-letra">
+                    {t('master_arquitectura')}
                     </option>
-                    <option value="master_automatica_robotica"className="contenido-letra">
-                      Máster en Automática y Robótica
+                    <option value="master_automatica_robotica"  className="contenido-letra">
+                    {t('master_automatica_robotica')}
                     </option>
-                    <option value="master_ciberseguridad"className="contenido-letra">
-                      Máster en Ciberseguridad
+                    <option value="master_ciberseguridad"  className="contenido-letra">
+                    {t('master_ciberseguridad')}
                     </option>
-                    <option value="master_ciencia_datos"className="contenido-letra">
-                      Máster en Ciencia de datos
+                    <option value="master_ciencia_datos"  className="contenido-letra">
+                    {t('master_ciencia_datos')}
                     </option>
-                    <option value="master_desarrollo_aplicaciones_servicios_web"className="contenido-letra">
-                      Máster en Desarrollo de Aplicaciones y Servicios Web
+                    <option value="master_desarrollo_aplicaciones_servicios_web"  className="contenido-letra">
+                    {t('master_desarrollo_aplicaciones_servicios_web')}
                     </option>
-                    <option value="master_desarrollo_software_dispositivos_moviles"className="contenido-letra">
-                      Máster en Desarrollo de software para dispositivos móviles
+                    <option value="master_desarrollo_software_dispositivos_moviles"  className="contenido-letra">
+                    {t('master_desarrollo_software_dispositivos_moviles')}
                     </option>
-                    <option value="master_gestion_edificacion"className="contenido-letra">
-                      Máster en Gestión de Edificación
+                    <option value="master_gestion_edificacion"  className="contenido-letra">
+                    {t('master_gestion_edificacion')}
                     </option>
-                    <option value="master_ingenieria_biomedica"className="contenido-letra">
-                      Máster en Ingeniería Biomédica
+                    <option value="master_ingenieria_biomedica"  className="contenido-letra">
+                    {t('master_ingenieria_biomedica')}
                     </option>
-                    <option value="master_ingenieria_caminos_canales_puertos"className="contenido-letra">
-                      Máster en Ingenieria de Caminos, canales y Puertos
+                    <option value="master_ingenieria_caminos_canales_puertos"  className="contenido-letra">
+                    {t('master_ingenieria_caminos_canales_puertos')}
                     </option>
-                    <option value="master_ingenieria_materiales_agua_terreno"className="contenido-letra">
-                      Máster en Ingeniería de los Materiales, Agua y Terreno
+                    <option value="master_ingenieria_materiales_agua_terreno"  className="contenido-letra">
+                    {t('master_ingenieria_materiales_agua_terreno')}
                     </option>
-                    <option value="master_ingenieria_telecomunicacion"className="contenido-letra">
-                      Máster en Ingeniería de Telecomunicación
+                    <option value="master_ingenieria_telecomunicacion"  className="contenido-letra">
+                    {t('master_ingenieria_telecomunicacion')}
                     </option>
-                    <option value="master_ingenieria_geologica"className="contenido-letra">
-                      Máster en Ingeniería Geológica
+                    <option value="master_ingenieria_geologica"  className="contenido-letra">
+                    {t('master_ingenieria_geologica')}
                     </option>
-                    <option value="master_ingenieria_informatica"className="contenido-letra">
-                      Máster en Ingeniería Informática
+                    <option value="master_ingenieria_informatica"  className="contenido-letra">
+                    {t('master_ingenieria_informatica')}
                     </option>
-                    <option value="master_ingenieria_quimica"className="contenido-letra">
-                      Máster en Ingeniería Química
+                    <option value="master_ingenieria_quimica"  className="contenido-letra">
+                    {t('master_ingenieria_quimica')}
                     </option>
-                    <option value="master_ingenieria_artificial"className="contenido-letra">
-                      Máster en Ingeniería Artificial
+                    <option value="master_ingenieria_artificial"  className="contenido-letra">
+                    {t('master_ingenieria_artificial')}
                     </option>
-                    <option value="master_nuevas_tecnologias"className="contenido-letra">
-                      Máster en Nuevas Tecnologías y Eficiencia Energética en
-                      Edificación{" "}
+                    <option value="master_nuevas_tecnologias"  className="contenido-letra">
+                    {t('master_nuevas_tecnologias')}
                     </option>
-                    <option value="master_prevencion_riesgos_laborales"className="contenido-letra">
-                      Máster en Prevención de Riesgos Laborales
+                    <option value="master_prevencion_riesgos_laborales"  className="contenido-letra">
+                    {t('master_prevencion_riesgos_laborales')}
                     </option>
                   </select>
                   {errors.titulacion?.type === "required" && (
-                    <p className="contenido-letra">El campo es requerido</p>
+                    <p  className="contenido-letra">{t('campo-requerido')}</p>
                   )}
                   {errors.titulacion?.type === "validate" && (
-                    <p className="contenido-letra">Debes elegir una titulacion</p>
+                    <p  className="contenido-letra">{t('titulacion-obligatoria')}</p>
                   )}
                   <br />
                   <br />
                 </div>
                 <div className="form-group" id="titulacion" >
-                  <label for="estilo" className="contenido-letra">Estilo:</label>
+                  <label for="estilo" className="contenido-letra">{t('estilo')}:</label>
                   <select
                   className="contenido-letra"
                     defaultValue="1"
@@ -297,25 +298,25 @@ const EditarPerfil = () => {
                       validate: estiloValidator,
                     })}
                   >
-                    <option value="none"  className="contenido-letra">Selecciona tu estilo</option>
-                    <option value="1"  className="contenido-letra">Por defecto</option>
-                    <option value="2"  className="contenido-letra">Oscuro</option>
-                    <option value="3"  className="contenido-letra">Alto contraste</option>
-                    <option value="4"  className="contenido-letra">Por defecto con letra grande</option>
-                    <option value="5"  className="contenido-letra">Oscuro con letra grande</option>
-                    <option value="6"  className="contenido-letra">Alto contraste con letra grande</option>
+                  <option value="none"  className="contenido-letra">{t('sel-estilo')}</option>
+                    <option value="1"  className="contenido-letra">{t('normal')}</option>
+                    <option value="2"  className="contenido-letra">{t('oscuro')}</option>
+                    <option value="3"  className="contenido-letra">{t('ac')}</option>
+                    <option value="4"  className="contenido-letra">{t('normal-lg')}</option>
+                    <option value="5"  className="contenido-letra">{t('oscuro-lg')}</option>
+                    <option value="6"  className="contenido-letra">{t('ac-lg')}</option>
                   </select>
-                  {errors.titulacion?.type === "required" && (
-                    <p className="contenido-letra">El campo es requerido</p>
+                  {errors.estilo?.type === "required" && (
+                    <p className="contenido-letra">{t('campo-requerido')}</p>
                   )}
-                  {errors.titulacion?.type === "validate" && (
-                    <p className="contenido-letra">Debes elegir una titulacion</p>
+                  {errors.estilo?.type === "validate" && (
+                    <p className="contenido-letra">{t('estilo-obligatorio')}</p>
                   )}
                   <br />
                   <br />
                 </div>
                 <div className="form-group" id="direccion">
-                  <label for="direccion" className="contenido-letra">Dirección:</label>
+                  <label for="direccion" className="contenido-letra">{t('direccion')}:</label>
                   <input
                   className="contenido-letra"
                     type="text"
@@ -327,13 +328,13 @@ const EditarPerfil = () => {
                     })}
                   />
                   {errors.direccion?.type === "required" && (
-                    <p className="contenido-letra">El campo es requerido</p>
+                    <p className="contenido-letra">{t('campo-requerido')}</p>
                   )}
                   <br />
                   <br />
                 </div>
                 <div className="form-group" id="nacimiento">
-                  <label for="fecha_nacimiento" className="contenido-letra">Fecha de Nacimiento:</label>
+                  <label for="fecha_nacimiento" className="contenido-letra">{t('fecnac')}:</label>
                   <input
                   className="contenido-letra"
                     type="date"
@@ -346,10 +347,10 @@ const EditarPerfil = () => {
                     })}
                   />
                   {errors.fecha_nacimiento?.type === "required" && (
-                    <p className="contenido-letra">El campo es requerido</p>
+                    <p className="contenido-letra">{t('campo-requerido')}</p>
                   )}
                   {errors.fecha_nacimiento?.type === "validate" && (
-                    <p className="contenido-letra">Debes ser mayor de 17 años</p>
+                    <p className="contenido-letra">{t('mayor-edad')}</p>
                   )}
                   <br />
                   <br />
@@ -357,7 +358,7 @@ const EditarPerfil = () => {
               </div>
               <div className="boton-editar btn-letra">
                 <button type="submit" className="btn btn-letra" value="Editar perfil">
-                  Editar
+                {t('editar')}
                 </button>
               </div>
             </div>
