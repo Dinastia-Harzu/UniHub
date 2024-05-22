@@ -10,8 +10,10 @@ import "../styles/publicar.css";
 import { useState } from "react";
 import axios from "axios";
 import { URL_BASE } from "../utils/constantes.js";
+import { useTranslation } from 'react-i18next';
 
 export default function Publicar() {
+    const { t } = useTranslation();
     const [pagina, setPagina] = useState(0);
     const [formData, setFormData] = useState({
         nombre: "",
@@ -111,23 +113,23 @@ export default function Publicar() {
 
             <section className="seccion-botones-publicar">
                 <div className="contenedor-botones-publicar">
-                    <div className={pagina === 0 ? "boton-oculto" : "boton-anterior"}>
-                        <button className="btn btn-fondo btn-letra" onClick={(event) => atrasarPagina(event)}>
-                            Anterior
+                    <div className={pagina === 0 ? "boton-oculto" : "boton-anterior btn-letra"}>
+                        <button className="btn btn-fondo btn-letra" onClick={() => atrasarPagina()}>
+                            {t('anterior')}
                         </button>
                     </div>
-                    <div className={pagina === 2 ? "boton-oculto" : "boton-siguiente"}>
-                        <button className="btn btn-fondo" onClick={(event) => adelantarPagina(event)}>
-                            Siguiente
+                    <div className={pagina === 2 ? "boton-oculto" : "boton-siguiente btn-letra"}>
+                        <button className="btn btn-fondo btn-letra" onClick={() => adelantarPagina()}>
+                            {t('siguiente')}
                         </button>
                     </div>
                     <div className="boton-publicar btn-letra">
                         <button
-                            className="btn btn-fondo"
+                            className="btn btn-fondo btn-letra"
                             hidden={!(pagina === 2)}
                             onClick={() => enviarData()}
                         >
-                            Publicar
+                            {t('publicar')}
                         </button>
                     </div>
                 </div>

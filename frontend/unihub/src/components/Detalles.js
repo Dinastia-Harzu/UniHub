@@ -8,10 +8,11 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 import { URL_BASE } from "../utils/constantes";
 import ContenedorComentario from "./ContenedorComentario";
-
+import { useTranslation } from 'react-i18next';
+import { Link } from 'react-router-dom';
 
 export default function Detalles() {
-
+  const { t } = useTranslation();
   const params = useParams();
   const id_trabajo = params.id;
   const [trabajo, setTrabajo] = useState({
@@ -87,29 +88,29 @@ export default function Detalles() {
             </a>
             <ModalPDF archivo={trabajo.documento} nombre={trabajo.nombre} />
           </div>
-          <img src={`/assets/${trabajo.portada}`} alt="portada"></img>
+          <img src={`/assets/${trabajo.portada}`} alt={t("portada")}></img>
         </section>
         <section className="contenedor-datos">
           <article className="datos">
             <h2>{trabajo.nombre}</h2>
             <p>
-              <b>Autor: </b>{trabajo.autor}
+              <b>{t('autor')}: </b>{trabajo.autor}
             </p>
             <p className="contenido-letra">
-              <b>Fecha de Publicación:</b> {trabajo.publicacion}
+              <b>{t('fecha-publicacion')}:</b> {trabajo.publicacion}
             </p>
             <p>
               <StarRating formComentario={null} setFormComentario={null} ratinginicial={3} desabilitado={true} />
             </p>
             <p className="contenido-letra">
-              <b>Palabras clave:</b> Animación 3D | Modelado 3D | Cortometraje |
+              <b>{t('palabras-clave')}:</b> Animación 3D | Modelado 3D | Cortometraje |
               Texturizado | Blender | Substance Painter
             </p>
           </article>
 
           <article className="resumen">
             <p className="contenido-letra">
-              <b>Resumen:</b>
+              <b>{t('resumen')}:</b>
             </p>
             <p>
               {trabajo.resumen}
@@ -117,41 +118,41 @@ export default function Detalles() {
           </article>
 
           <article className="recursos-asociados ">
-            <h3 className="contenido-letra">Recursos multimedia asociados:</h3>
+            <h3 className="contenido-letra">{t('recursos-multimedia')}:</h3>
             <div>
               {trabajo.recursos.length > 0 ? (
                 trabajo.recursos.map((recurso) => (
                   <img src={`/assets/${recurso.ruta}`} alt={recurso.nombre}></img>
                 ))
               ) : (
-                <p>No hay recursos</p>
+                <p>{t('no-resultados')}</p>
               )}
             </div>
           </article>
 
           <article className="trabajos-similares">
-            <h3 className="titulo-letra">Trabajos asociados: </h3>
+            <h3 className="titulo-letra">{t('trabajos-asociados')}: </h3>
             <div>
               <p>
                 <img src="/assets/TFG_Similar1.png" alt="TFG-similar1"></img>
-                <Link className="link-fondo">La Tierra - Cortometraje de Animación 3D</Link>
+                <Link to="index" className="link-fondo">La Tierra - Cortometraje de Animación 3D</Link>
               </p>
               <p>
                 <img src="/assets/TFG_Similar2.png" alt="TFG-similar2"></img>
-                <Link className="link-fondo">Sons of Odin - Corto de animación 3D</Link>
+                <Link to="index" className="link-fondo">Sons of Odin - Corto de animación 3D</Link>
               </p>
               <p>
                 <img src="/assets/TFG_Similar3.png" alt="TFG-similar3"></img>
-                <Link className="link-fondo">Loop animado 3D estilo cartoon</Link>
+                <Link to="index" className="link-fondo">Loop animado 3D estilo cartoon</Link>
               </p>
             </div>
           </article>
 
           <article className="seccion-comentarios">
-            <h3 className="titulo-letra">Comentarios:</h3>
+            <h3 className="titulo-letra">{t('comentarios')}:</h3>
             <div>
               <div className="contenedor-comentar">
-                <p>Escribe tu opinión sobre este trabajo:</p>
+                <p>{t('opinion-sobre-trabajo')}:</p>
                 <ModalDetalle id_trabajo={id_trabajo} />
               </div>
               <div>
@@ -162,7 +163,7 @@ export default function Detalles() {
                     />
                   ))
                 ) : (
-                  <p>No hay comentarios</p>
+                  <p>{t('no-comentarios')}</p>
                 )}
               </div>
             </div>

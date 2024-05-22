@@ -16,6 +16,16 @@ export default function ContenedorRecurso({
     recurso_actual.click();
   }
 
+  const handleKeyDown = (event) => {
+    if (event.key === "Enter") {
+       setRecurso();
+    }}
+    const handleKeyDownDelete = (event) => {
+      if (event.key === "Enter") {
+        eliminar();
+      }}
+    
+
   function cambiarFoto(inp) {
     const fichero = inp.target.files[0];
     const img = refImagen.current;
@@ -51,9 +61,11 @@ export default function ContenedorRecurso({
           src="/assets/Foto_defecto_recurso.png"
           alt="Recurso"
           onClick={() => setRecurso()}
+          onKeyDown={handleKeyDown}
+          tabIndex="0"
         />
       </label>
-      <p className="boton-eliminar-recurso" onClick={() => eliminar()}>
+      <p className="boton-eliminar-recurso" tabIndex="0" onKeyDown={handleKeyDownDelete} onClick={() => eliminar()}>
         <FontAwesomeIcon icon={faXmark} />
       </p>
       <input
@@ -62,6 +74,7 @@ export default function ContenedorRecurso({
         name="recursos[]"
         accept="image/*"
         hidden
+        tabIndex="0"
         onChange={(event) => cambiarFoto(event)}
       ></input>
     </div>
