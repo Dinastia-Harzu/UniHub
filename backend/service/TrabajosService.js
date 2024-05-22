@@ -188,9 +188,6 @@ exports.trabajosPOST = function (body) {
     //       });
     //     });
 
-
-
-
     conexion.query(
       //   `
       //   START TRANSACTION;
@@ -235,68 +232,88 @@ exports.trabajosPOST = function (body) {
           );
         } else {
           const id_trabajo = res.insertId;
-          const inserciones_multimedia = body.multimedia.map((nombre, ruta) => {
+          const inserciones_multimedia = body.multimedia.map((multimedia) => {
             return new Promise((resolve, reject) => {
-              conexion.query(`
+              conexion.query(
+                `
                 INSERT INTO multimedia VALUES(
                   ${$()},
-                  ${$(nombre)},
-                  ${$(ruta)},
+                  ${$(multimedia.nombre)},
+                  ${$(multimedia.ruta)},
                   ${$(id_trabajo)}
                 )
-              `, (err, result) => {
-                if (err) {
-                  reject(err);
-                } else {
-                  resolve(result);
+              `,
+                (err, result) => {
+                  if (err) {
+                    reject(err);
+                  } else {
+                    resolve(result);
+                  }
                 }
+              );
+            });
+          });
+          const inserciones_palabras_clave = body["palabras-clave"].map(
+            (nombre) => {
+              return new Promise((resolve, reject) => {
+                conexion.query(
+                  `
+                INSERT INTO \`palabra-clave\` VALUES(${$()}, ${$(nombre)})
+              `,
+                  (err, result) => {
+                    if (err) {
+                      reject(err);
+                    } else {
+                      resolve(result);
+                    }
+                  }
+                );
               });
-            });
-          });
-          const inserciones_palabras_clave = body["palabras-clave"].map(nombre => {
-            return new Promise((resolve, reject) => {
-              conexion.query(`
-                INSERT INTO \`palabra-clave\` VALUES(${$(nombre)})
-              `, (err, result) => {
-                if (err) {
-                  reject(err);
-                } else {
-                  resolve(result);
-                }
-              })
-            });
-          });
+            }
+          );
           Promise.all(inserciones_multimedia)
             .then(() => {
               return Promise.all(inserciones_palabras_clave);
             })
-            .then(ids => {
-              const inserciones_palabras_clave_trabajos = ids.map(id => {
-                return new Promise((resolve, reject) => {
-                  conexion.query(`
+            .then((resultados) => {
+              const inserciones_palabras_clave_trabajos = resultados.map(
+                (resultado) => {
+                  return new Promise((resolve, reject) => {
+                    conexion.query(
+                      `
                     INSERT INTO \`palabra-clave-trabajo\` VALUES(
-                      ${$(id)},
                       ${$(id_trabajo)},
+                      ${$(resultado.insertId)}
                     );
-                  `, [id, id_trabajo], (err, result) => {
-                    if (err) return reject(err);
-                    resolve(result);
+                  `,
+                      (err, result) => {
+                        if (err) {
+                          return reject(err);
+                        }
+                        resolve(result);
+                      }
+                    );
                   });
-                });
-              });
+                }
+              );
               return Promise.all(inserciones_palabras_clave_trabajos);
             })
             .then(() => {
-              conexion.commit(err => {
+              conexion.commit((err) => {
                 if (err) {
                   return conexion.rollback(() => {
                     reject(err);
                   });
                 }
-                resolve(responder(201, Object.assign({}, respuestas[201], { trabajo: id_trabajo })));
+                resolve(
+                  responder(
+                    201,
+                    Object.assign({}, respuestas[201], { trabajo: id_trabajo })
+                  )
+                );
               });
             })
-            .catch(err => {
+            .catch((err) => {
               conexion.rollback(() => {
                 reject(err);
               });
@@ -336,32 +353,55 @@ exports.trabajosPOST = function (body) {
           //   )
           // }, err => { console.error(err); reject(err) });
 
-          _.trabajosGET().then(res => {
-            const trabajo = res.payload.at(-1);
-            for (const palabra of body["palabras-clave"]) {
-              const promesas = [];
-              promesas.push(new Promise((resolve, reject) => {
-                conexion.query(`
-                  
-                `, err => {
-                  if (err) {
-                    console.error(err); reject(err);
-                  } else {
-                    resolve(responder(201, Object.assign({}, respuestas[201])));
-                  }
-                })
-              }));
-              Promise.all(promesas).then(() => {
-                resolve(
-                  responder(
-                    201,
-                    Object.assign({}, respuestas[201], {
-                      trabajo: Object.assign(trabajo, { "palabras-clave": body["palabras-clave"] }),
-                    })
-                  ));
-              }, e => { console.error(e); reject(e); })
-            }
-          }, error => { console.error(error); reject(error) });
+          // _.trabajosGET().then(
+          //   (res) => {
+          //     const trabajo = res.payload.at(-1);
+          //     for (const palabra of body["palabras-clave"]) {
+          //       const promesas = [];
+          //       promesas.push(
+          //         new Promise((resolve, reject) => {
+          //           conexion.query(
+          //             `
+
+          //       `,
+          //             (err) => {
+          //               if (err) {
+          //                 console.error(err);
+          //                 reject(err);
+          //               } else {
+          //                 resolve(
+          //                   responder(201, Object.assign({}, respuestas[201]))
+          //                 );
+          //               }
+          //             }
+          //           );
+          //         })
+          //       );
+          //       Promise.all(promesas).then(
+          //         () => {
+          //           resolve(
+          //             responder(
+          //               201,
+          //               Object.assign({}, respuestas[201], {
+          //                 trabajo: Object.assign(trabajo, {
+          //                   "palabras-clave": body["palabras-clave"],
+          //                 }),
+          //               })
+          //             )
+          //           );
+          //         },
+          //         (e) => {
+          //           console.error(e);
+          //           reject(e);
+          //         }
+          //       );
+          //     }
+          //   },
+          //   (error) => {
+          //     console.error(error);
+          //     reject(error);
+          //   }
+          // );
         }
       }
     );

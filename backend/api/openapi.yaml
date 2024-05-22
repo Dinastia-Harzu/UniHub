@@ -222,7 +222,7 @@ paths:
       parameters:
         - name: palabras-clave
           in: query
-          description: IDs de las palabras clave separadas por coma para filtrar trabajos
+          description: IDs de las palabras clave separadas por coma
           schema:
             type: string
       responses:
@@ -1768,6 +1768,15 @@ components:
           type: string
         documento:
           type: string
+        multimedia:
+          type: array
+          items:
+            type: object
+            properties:
+              nombre:
+                type: string
+              ruta:
+                type: string
         palabras-clave:
           type: array
           items:
