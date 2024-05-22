@@ -124,9 +124,9 @@
     border-style: none;
 }
 
-.boton-eliminar-recurso:hover {
-    background-color: #e35555;
-    /*TODO: CAMBIAR CUANDO LOS COLORES ESTEN ESTABLECIDOS*/
+.boton-eliminar-recurso:hover,.boton-eliminar-recurso:focus {
+    background-color: var(--color-secondary);
+    
 }
 
 .boton-anterior {

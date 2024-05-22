@@ -19,9 +19,9 @@ const MisTrabajos = () => {
     setFilterOpen(!filterOpen);
   };
 
-  const handleFilterChange = (e) => {
-    setSelectedFilter(e.target.value);
-    handleSearch(e.target.value);
+  const handleFilterChange = (event) => {
+    setSelectedFilter(event.target.value);
+    event.target.form.submit();
   };
 
   const handleSearch = (filter) => {
@@ -34,13 +34,13 @@ const MisTrabajos = () => {
       <h2 className='titulo'>Mis Trabajos</h2>
       <div className='actions-container'>
         <div className='filter'>
-          <button className='filter-button' onClick={handleFilterClick}>
+          <button className='filter-button' onClick={handleFilterClick} tabIndex="0">
             <MdTune className='icon-filter' />
           </button>
           {filterOpen && (
-            <form action='submit'>
-              <select className='filter-select' value={selectedFilter} onChange={handleFilterChange}>
-                <option value=''>Seleccione un filtro</option>
+            <form action='submit' method='post'>
+              <select tabIndex="0" className='filter-select'  onChange={handleFilterChange} value={selectedFilter} onChange={handleFilterChange}>
+                <option value=''>Elige filtro</option>
                 <option value='Trabajo 1'>Trabajo 1</option>
                 <option value='Trabajo 2'>Trabajo 2</option>
                 <option value='Trabajo 3'>Trabajo 3</option>
@@ -48,7 +48,7 @@ const MisTrabajos = () => {
             </form>
           )}
         </div>
-        <Link to='/publicar' className='btn publish-button'>Publicar</Link>
+        <Link to='/publicar' className='btn publish-button btn-primary'>Publicar</Link>
       </div>
       <div className="cards-container">
         {cardsData.map(card => (

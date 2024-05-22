@@ -1,7 +1,10 @@
+import React, { useState, useEffect } from 'react';
+import { BrowserRouter, Route, Routes } from 'react-router-dom';
+import { useTranslation } from 'react-i18next';
+import './i18n'; // Asegúrate de importar el archivo de configuración de i18n
 import "./App.css";
 import Header from "./components/commons/Header.js";
 import Inicio from "./components/Inicio.js";
-// import Descubrir from './components/Descubrir';
 import Footer from "./components/commons/Footer.js";
 import Perfilusuario from "./components/Perfilusuario.js";
 import InicioSesion from "./components/InicioSesion.js";
@@ -10,15 +13,14 @@ import Registro from "./components/Registro.js";
 import EditarPerfil from "./components/EditarPerfil.js";
 import Contacto from "./components/Contacto.js";
 import MisTrabajos from "./components/MisTrabajos.js";
-import { BrowserRouter, Route, Routes } from "react-router-dom";
-import React, { useState, useEffect } from "react";
-import Publicar from "./components/Publicar.js"
+import Publicar from "./components/Publicar.js";
+import Detalles from "./components/Detalles.js";
 
 export default function App() {
   const [userTheme, setUserTheme] = useState("");
 
   useEffect(() => {
-    const userThemeFromBackend = "osc"; // Ejemplo: 'normal', 'dark', 'alternative', etc.
+    const userThemeFromBackend = "normal-lg"; // Ejemplo: 'normal', 'dark', 'alternative', etc.
     setUserTheme(userThemeFromBackend);
 
     const link = document.createElement("link");
@@ -26,7 +28,7 @@ export default function App() {
     link.href = `assets/themes/general-${userThemeFromBackend}.css`;
     document.head.appendChild(link);
 
-    if (userThemeFromBackend == "ac" || userThemeFromBackend == "osc") {
+    if (userThemeFromBackend === "ac" || userThemeFromBackend === "osc" ) {
       document.getElementsByClassName("logotipo").src = "assets/W_Logotipo.PNG";
       console.log(document.getElementsByClassName("logotipo"));
     }
@@ -43,7 +45,6 @@ export default function App() {
         <Header />
         <Routes>
           <Route path="/" element={<Inicio />} />
-          {/* <Route path="descubrir" element={<Descubrir />} /> */}
           <Route path="buscar" element={<Busqueda />} />
           <Route path="perfil" element={<Perfilusuario />} />
           <Route path="login" element={<InicioSesion />} />
@@ -51,6 +52,8 @@ export default function App() {
           <Route path="editar" element={<EditarPerfil />} />
           <Route path="trabajos" element={<MisTrabajos />} />
           <Route path="contacto" element={<Contacto />} />
+          <Route path="detalles" element={<Detalles />} />
+          <Route path="publicar" element={<Publicar />} />
         </Routes>
         <Footer />
       </>

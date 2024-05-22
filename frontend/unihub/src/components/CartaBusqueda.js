@@ -23,19 +23,19 @@ export default function CartaBusqueda() {
       />
       <div className="carta-contenido">
         <h2>
-          <a href="#"><strong>Cortometraje de animación 3D</strong></a>
+          <a href="#" className="titulo-letra"><strong>Cortometraje de animación 3D</strong></a>
         </h2>
         <br />
-        <p>
-          <strong>Autor</strong>: Jane Doe
+        <p className="contenido-letra">
+          <strong >Autor</strong>: Jane Doe
         </p>
-        <p>
+        <p className="contenido-letra">
           <strong>Titulación</strong>: Máster en Arte y Animación
         </p>
-        <p>
+        <p className="contenido-letra">
           <strong>Fecha</strong>: 19/05/2022
         </p>
-        <p>
+        <p className="contenido-letra">
           Pequeño cortometraje realizado para la práctica número 2 de la
           asignatura "Animación por computador"
         </p>

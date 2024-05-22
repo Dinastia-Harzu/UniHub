@@ -75,7 +75,7 @@ const InicioSesion = () => {
                 <a href="registro">Regístrate</a>
               </div>
               <div className="boton-entrar">
-                <button type="submit" className="btn btn-primary" value="Editar perfil">Entrar</button>
+                <button type="submit" className="btn  btn-primary" value="Editar perfil">Entrar</button>
               </div>
             </div>
           </form>

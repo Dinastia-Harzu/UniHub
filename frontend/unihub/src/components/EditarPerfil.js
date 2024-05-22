@@ -1,9 +1,9 @@
 import { useForm } from "react-hook-form";
 import { edadValidator, titulacionValidator, estiloValidator } from "./validators";
-import React, { useState } from 'react';
+import React, { useState, useRef } from 'react';
 import "../styles/formulario.css";
 import { FaEye, FaEyeSlash } from 'react-icons/fa';
-import { useRef } from 'react';
+import { Link } from 'react-router-dom';
 
 const EditarPerfil = () => {
   const { register, formState: { errors }, handleSubmit } = useForm();
@@ -11,7 +11,6 @@ const EditarPerfil = () => {
   const [imagenSeleccionada, setImagenSeleccionada] = useState(null);
   const refPortada = useRef();
   const refImagen = useRef();
-
   function setPortada() {
     const recurso_actual = refPortada.current;
     recurso_actual.click();
@@ -26,6 +25,7 @@ const EditarPerfil = () => {
       setImagenSeleccionada(null);
     }
   }
+
   const onSubmit = (data) => {
     console.log(data);
   }
@@ -34,21 +34,41 @@ const EditarPerfil = () => {
     setMostrarContrasena(!mostrarContrasena);
   };
 
+  const handleKeyDownTogglePassword = (event) => {
+    if (event.key === 'Enter') {
+      toggleMostrarContrasena();
+    }
+  };
+
+  const handleKeyDownSetPortada = (event) => {
+    if (event.key === 'Enter') {
+      setPortada();
+    }
+  };
   return (
     <main>
       <div className="contenedor-inicial">
-        <div className="titulo"><h2>Mi Perfil</h2></div>
+        <div className="titulo titulo-letra"><h2>Mi Perfil</h2></div>
         <div className="form-container">
           <form onSubmit={handleSubmit(onSubmit)} className="pos-wrapper">
-            <div className="wrapper">
+          <div className="wrapper">
               <div className="form-group" id="nombre-titulo"><h1>Miriam</h1></div>
               <div className="contenedor-apartados-formulario_usuario">
                 <label htmlFor="portada"></label>
-                <img ref={refImagen} src="./assets/no_photo.png" alt="Portada" onClick={() => setPortada()} width={240} height={320} />
-                <input ref={refPortada} type="file" name="portada" accept="image/*" onChange={(event) => cambiarFoto(event)}></input>
+                <img
+                  ref={refImagen}
+                  src="./assets/no_photo.png"
+                  alt="Portada"
+                  onClick={setPortada}
+                  onKeyDown={handleKeyDownSetPortada}
+                  tabIndex="0"
+                  width={240}
+                  height={320}
+                />
+                <input ref={refPortada} type="file" name="portada" accept="image/*" onChange={cambiarFoto} style={{ display: 'none' }} />
               </div>
               <div className="form-group" id="nombre">
-                <label htmlFor="nombre">Nombre:</label>
+                <label htmlFor="nombre" className="contenido-letra">Nombre:</label>
                 <input type="text" id="nombre" name="nombre" defaultValue="Miriam" {...register('nombre', {
                   required: true,
                   maxLength: 20
@@ -57,7 +77,7 @@ const EditarPerfil = () => {
                 {errors.nombre?.type === 'maxLength' && <p>El nombre introducido es demasiado largo</p>}
               </div>
               <div className="form-group" id="apellidos">
-                <label htmlFor="apellidos">Apellidos:</label>
+                <label htmlFor="apellidos" className="contenido-letra">Apellidos:</label>
                 <input type="text" id="apellidos" name="apellidos" defaultValue="García" {...register('apellidos', {
                   required: true,
                   maxLength: 50
@@ -65,20 +85,20 @@ const EditarPerfil = () => {
                 {errors.apellidos?.type === 'required' && <p>El campo es requerido</p>}
                 {errors.apellidos?.type === 'maxLength' && <p>El nombre introducido es demasiado largo</p>}
               </div>
-              <div id="parte-inferior" >
+              <div id="parte-inferior">
                 <div className="form-group" id="correo">
-                  <label for="correo">Correo electrónico:</label>
+                  <label htmlFor="correo"className="contenido-letra">Correo electrónico:</label>
                   <input type="email" id="correo" name="correo" defaultValue="miriam34@gmail.com"{...register('correo', {
                     required: true,
                     pattern: /^[^\s@]+@[^\s@]+\.[^\s@]+$/i
                   })} />
                   {errors.correo?.type === 'required' && <p>El campo es requerido</p>}
-                  {errors.correo?.type === 'maxLength' && <p>El formato del correo no es adecuado</p>}
+                  {errors.correo?.type === 'pattern' && <p>El formato del correo no es adecuado</p>}
                   <br /><br />
                 </div>
                 <div className="form-group" id="contrasenia">
                   <div className="input-contrasenia">
-                    <label for="contrasena">Contraseña:</label>
+                    <label htmlFor="contrasena" className="contenido-letra">Contraseña:</label>
                     <input
                       type={mostrarContrasena ? "text" : "password"}
                       id="contrasena"
@@ -88,10 +108,11 @@ const EditarPerfil = () => {
                         required: true,
                         pattern: /(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}/
                       })}
+                    
                     />
                   </div>
                   <div className="boton-contrasenia">
-                    <span type="button" onClick={toggleMostrarContrasena}>
+                    <span type="button"  tabIndex="0" onKeyDown={handleKeyDownTogglePassword} onClick={toggleMostrarContrasena}>
                       {mostrarContrasena ? <FaEyeSlash className="icono-grande" /> : <FaEye className="icono-grande" />}
                     </span>
                   </div>
@@ -100,7 +121,7 @@ const EditarPerfil = () => {
                   <br />
                 </div>
                 <div className="form-group" id="titulacion">
-                  <label for="titulacion">Grado o máster:</label>
+                  <label htmlFor="titulacion" className="contenido-letra">Grado o máster:</label>
                   <select defaultValue="arquitectura" {...register('titulacion', {
                     required: true,
                     validate: titulacionValidator
@@ -141,8 +162,8 @@ const EditarPerfil = () => {
                   {errors.titulacion?.type === 'validate' && <p>Debes elegir una titulacion</p>}
                   <br /><br />
                 </div>
-                <div className="form-group" id="titulacion">
-                  <label for="estilo">Estilo:</label>
+                <div className="form-group" id="estilo">
+                  <label htmlFor="estilo" className="contenido-letra">Estilo:</label>
                   <select defaultValue="1" {...register('estilo', {
                     required: true,
                     validate: estiloValidator
@@ -152,12 +173,12 @@ const EditarPerfil = () => {
                     <option value="2">Letra Grande</option>
                     <option value="3">Alto contraste</option>
                   </select>
-                  {errors.titulacion?.type === 'required' && <p>El campo es requerido</p>}
-                  {errors.titulacion?.type === 'validate' && <p>Debes elegir una titulacion</p>}
+                  {errors.estilo?.type === 'required' && <p>El campo es requerido</p>}
+                  {errors.estilo?.type === 'validate' && <p>Debes elegir un estilo</p>}
                   <br /><br />
                 </div>
                 <div className="form-group" id="direccion">
-                  <label for="direccion">Dirección:</label>
+                  <label htmlFor="direccion" className="contenido-letra">Dirección:</label>
                   <input type="text" id="direccion" name="direccion" defaultValue="Calle Altozano, Alicante" {...register('direccion', {
                     required: true,
                   })} />
@@ -165,7 +186,7 @@ const EditarPerfil = () => {
                   <br /><br />
                 </div>
                 <div className="form-group" id="nacimiento">
-                  <label for="fecha_nacimiento">Fecha de Nacimiento:</label>
+                  <label htmlFor="fecha_nacimiento" className="contenido-letra">Fecha de Nacimiento:</label>
                   <input type="date" id="fecha_nacimiento" name="fecha_nacimiento" defaultValue="2023-05-24" {...register('fecha_nacimiento', {
                     required: true,
                     validate: edadValidator
@@ -176,7 +197,7 @@ const EditarPerfil = () => {
                 </div>
               </div>
               <div className="boton-editar">
-                <button type="submit" className="btn" value="Editar perfil">Editar</button>
+              <Link to="../perfil" className="btn  btn-primary btn-letra" value="Aceptar">Aceptar</Link>
               </div>
             </div>
           </form>

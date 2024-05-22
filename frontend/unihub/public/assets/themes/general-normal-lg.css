@@ -1,17 +1,18 @@
-@import url("paleta-normal.css");
+@import url("paleta-normal-letra-grande.css");
 
 
 .titulo-letra{
-  font-size: xx-large !important;
+  font-size: var(--title);
 }
 
 .btn-letra{
-  font-size: var(--button);
+  font-size: var(--butons);
 }
 
 .contenido-letra{
-  font-size: var(--contenido);
+  font-size: var(--content);
 }
+
 
 * {
   box-sizing: border-box;
@@ -42,6 +43,7 @@ html {
 }
 
 .logotipo {
+  content: url('../Logotipo.PNG');
   width: 180px;
   height: auto;
 }
@@ -77,11 +79,17 @@ html {
   padding: .5em;
   background-color: var(--color-secondary);
   border-radius: 5px;
+  box-shadow: inset 0 0 0 .15em white;
+  outline: none;
+  border-style: none;
   font-size: 1em;
   height: 2.3em;
   cursor: pointer;
   min-width: fit-content;
   margin: .3em;
+}
+select > option{
+  color: var(--color-text);
 }
 
 .btn:hover,.btn:focus {
@@ -140,9 +148,20 @@ html {
   .footer>.container2 {
     padding-top: 0;
   }
+
+  
+.titulo-letra{
+  font-size: var(--title-tlf);
 }
 
+.btn-letra{
+  font-size: var(--butons-tlf);
+}
 
+.contenido-letra{
+  font-size: var(--content-tlf);
+}
+}
 
 @media screen and (max-width: 375px) {
   .logotipo {
@@ -165,6 +184,17 @@ html {
   .navbar-buttons {
     width: 75%;
     height: auto;
+  }
+  .titulo-letra{
+    font-size: var(--title-tlf);
+  }
+  
+  .btn-letra{
+    font-size: var(--butons-tlf);
+  }
+  
+  .contenido-letra{
+    font-size: var(--content-tlf);
   }
 
 }

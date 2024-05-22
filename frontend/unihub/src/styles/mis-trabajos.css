@@ -25,12 +25,13 @@ main {
   align-items: center;
 }
 
+
 .filter-button {
   padding: 10px;
   font-size: 2em;
   color: var(--color-text);
   background-color: transparent;
-  border: 2px solid var(--color-text);
+  border: 2px solid var( --color-bg-form );
   border-radius: 50%;
   cursor: pointer;
   width: 50px;
@@ -41,9 +42,12 @@ main {
   margin-right: 10px;
 }
 
-.filter-button:hover {
+.filter-button:hover,.filter-button:focus {
   background-color: rgba(0, 0, 0, 0.1);
+  color: var(--color-text);   
 }
+
+
 
 .filter-button .icon-filter {
   font-size: 1.5em;
@@ -63,12 +67,12 @@ main {
 }
 
 .filter-select option {
-  background-color: var(--background-color); /* Ensure options have a background color to be readable */
+ background-color: var(--background-color); 
   color: black;
 }
 
 .filter-select option:checked {
-  background-color: var(--color-text);
+  /* background-color: var(--color-text); */
   color: black;
 }
 
@@ -76,13 +80,13 @@ main {
   padding: 10px;
   font-size: 1em;
   color: #fff;
-  background-color: var(--color-text);
+  background-color: var(--color-text); 
   border: none;
   border-radius: 5px;
   cursor: pointer;
 }
 
-.publish-button:hover {
+.publish-button:hover,.publish-button:focus {
   background-color: var(--color-text-dark);
 }
 
@@ -98,7 +102,7 @@ main {
 .card {
   position: relative;
   background-color: var(--color-bg-form);
-  border: 2px solid var(--color-text);
+  /* border: 2px solid var(--color-text); */
   border-radius: 10px;
   overflow: hidden;
   transition: transform 0.3s;
@@ -147,9 +151,10 @@ main {
   white-space: nowrap;
 }
 
-.card:hover .card-content {
+.card:hover,.card:focus .card-content {
   transform: translateY(0);
 }
+
 
 @media (max-width: 600px) {
   .cards-container {

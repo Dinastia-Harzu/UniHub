@@ -4,6 +4,7 @@ import React, { useState } from 'react';
 import "../styles/formulario.css";
 import { FaEye, FaEyeSlash } from 'react-icons/fa';
 import { useRef } from 'react';
+import { Link } from 'react-router-dom';
 
 const Perfilusuario = () => {
   const { register, formState: { errors }, handleSubmit } = useForm();
@@ -86,14 +87,10 @@ const Perfilusuario = () => {
                 <div className="form-group" id="contrasenia">
                   <div className="input-contrasenia">
                     <label htmlFor="contrasena">Contraseña:</label>
-                    <input class="solo-mostrar" defaultValue="miriam34@gmail.com" readOnly
+                  <input class="solo-mostrar" defaultValue="miriam34@gmail.com" readOnly
                       type={mostrarContrasena ? "text" : "password"}
                       id="contrasena"
                       name="contrasena"
-                      {...register('contrasena', {
-                        required: true,
-                        pattern: /(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}/
-                      })}
                     />
                   </div>
                   <div className="boton-contrasenia" tabIndex="0" onKeyDown={handleKeyDownTogglePassword} onClick={toggleMostrarContrasena}>
@@ -126,7 +123,7 @@ const Perfilusuario = () => {
                 </div>
               </div>
               <div className="boton-editar">
-                <button type="submit" className="btn" value="Editar perfil">Editar</button>
+                <Link to="../editar" className="btn btn-primary" value="Editar">Editar</Link>
               </div>
             </div>
           </form>

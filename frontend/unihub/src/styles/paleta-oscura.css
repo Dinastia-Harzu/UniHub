@@ -11,4 +11,8 @@
   --color-bg-form-2: #524a4a;
 
   --color-bg-comment: #403535;
+
+  --title: large;
+  --content: medium;
+  --butons: small;
 }

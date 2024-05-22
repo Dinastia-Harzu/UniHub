@@ -19,7 +19,7 @@ export function SelectorTipoTrabajo({ formData, setFormData }) {
 
   return (
     <div className="contenedor-apartados-formulario">
-      <label htmlFor="nivel">Tipo del trabajo</label>
+      <label htmlFor="nivel" className="contenido-letra">Tipo del trabajo</label>
       <select title="tipos-trabajo" name="tipo" onChange={(event) => setFormData({ ...formData, tipo: parseInt(event.target.value) })}
         defaultValue={formData.tipo}>
         {tiposTrabajo.map((tipo, idx) => {
@@ -49,7 +49,7 @@ export function SelectorTitulaciones({ formData, setFormData }) {
 
   return (
     <div className="contenedor-apartados-formulario">
-      <label htmlFor="nivel">Titulación</label>
+      <label htmlFor="nivel" className="contenido-letra">Titulación</label>
       <select title="titulaciones" name="titulacion" onChange={(event) => setFormData({ ...formData, titulacion: parseInt(event.target.value) })}
         defaultValue={formData.titulacion}>
         {titulaciones.map((titulacion, idx) => {

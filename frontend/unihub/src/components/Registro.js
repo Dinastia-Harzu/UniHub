@@ -242,7 +242,7 @@ const Registro = () => {
                 <a href="login">Inicia sesión</a>
               </div>
               <div className="boton-entrar">
-                <button type="submit" className="btn btn-primary" value="Editar perfil">Registrarse</button>
+                <button type="submit" className="btn  btn-primary" value="Editar perfil">Registrarse</button>
               </div>
             </div>
           </form>

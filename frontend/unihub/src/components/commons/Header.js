@@ -23,21 +23,21 @@ export default function Header() {
         </div>
         <nav ref={navRef}>
           <div className="container2">
-            <Link to="/" className="navbar-item">
+            <Link to="/" className="navbar-item btn-letra">
               Inicio
             </Link>
             {/* <Link to="/descubrir" className="navbar-item">
               Descubrir
             </Link> */}
-            <Link to="/buscar" className="navbar-item">
+            <Link to="/buscar" className="navbar-item btn-letra">
               Buscar
             </Link>
           </div>
           <div className="navbar-buttons">
-            <Link to="/login" className="btn btn-secondary">
+            <Link to="/login" className="btn btn-secondary btn-letra">
               Identificarse
             </Link>
-            <Link to="/registro" className="btn btn-primary" >
+            <Link to="/registro" className="btn btn-primary btn-letra" >
               Registrarse
             </Link>
           </div>

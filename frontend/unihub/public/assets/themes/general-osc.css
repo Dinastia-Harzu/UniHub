@@ -1,5 +1,18 @@
 @import url("paleta-oscura.css");
 
+
+.titulo-letra{
+  font-size: var(--title);
+}
+
+.btn-letra{
+  font-size: var(--button);
+}
+
+.contenido-letra{
+  font-size: var(--contenido);
+}
+
 * {
   box-sizing: border-box;
   margin: 0;
@@ -11,7 +24,7 @@ a {
   font-weight: bold;
 }
 
-a:hover {
+a:hover,a:focus {
   color: var(--color-tertiary);
 }
 
@@ -82,7 +95,7 @@ header .nav-btn {
   margin: .3em;
 }
 
-.btn:hover {
+.btn:hover,.btn:focus {
   background-color: transparent;
   color: var(--color-tertiary) !important;
   box-shadow: inset 0 0 0 .2em var(--color-tertiary);
