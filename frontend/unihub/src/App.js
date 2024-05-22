@@ -1,3 +1,7 @@
+import React, { useState, useEffect } from 'react';
+import { BrowserRouter, Route, Routes } from 'react-router-dom';
+import { useTranslation } from 'react-i18next';
+import './i18n.js'; // Asegúrate de importar el archivo de configuración de i18n
 import "./App.css";
 import Header from "./components/commons/Header.js";
 import Inicio from "./components/Inicio.js";
@@ -12,24 +16,20 @@ import MisTrabajos from "./components/MisTrabajos.js";
 import NotFound from "./components/NotFound.js";
 
 import {
-  BrowserRouter,
   createBrowserRouter,
   createRoutesFromElements,
-  Route,
   RouterProvider,
-  Routes,
 } from "react-router-dom";
-import React, { useState, useEffect } from "react";
-import Publicar from "./components/Publicar.js";
-import Detalles from "./components/Detalles.js";
 import CartaBusqueda from "./components/CartaBusqueda.js";
 import Root from "./components/Root.js";
+import Publicar from "./components/Publicar.js";
+import Detalles from "./components/Detalles.js";
 
 export default function App() {
   const [userTheme, setUserTheme] = useState("");
 
   useEffect(() => {
-    const userThemeFromBackend = "osc"; // 'normal', 'ac', 'osc'
+    const userThemeFromBackend = "normal"; // 'normal', 'ac', 'osc'
     setUserTheme(userThemeFromBackend);
 
     const link = document.createElement("link");

@@ -1,0 +1,22 @@
+:root {
+    --color-primary: #96CDB2;
+    --color-secondary: #FCA964;
+    --color-tertiary: #F79B68;
+    --color-text: #f7f1ec;
+  
+    /*Fondos*/
+    --color-bg: #272323;
+    --color-bg-2: #221C1C;
+    --color-bg-form: #403535;
+    --color-bg-form-2: #524a4a;
+  
+    --color-bg-comment: #403535;
+  
+    --title: x-large;
+  --content: large;
+  --butons: medium;
+
+  --title-tlf: x-large;
+  --content-tlf: x-large;
+  --butons-tlf: large;
+  }

@@ -25,12 +25,13 @@
   align-items: center;
 }
 
+
 .filter-button {
   padding: 10px;
   font-size: 2em;
   color: var(--color-text);
   background-color: transparent;
-  border: 2px solid var(--color-text);
+  border: 2px solid var(--color-bg-form);
   border-radius: 50%;
   cursor: pointer;
   width: 50px;
@@ -41,9 +42,13 @@
   margin-right: 10px;
 }
 
-.filter-button:hover {
+.filter-button:hover,
+.filter-button:focus {
   background-color: rgba(0, 0, 0, 0.1);
+  color: var(--color-text);
 }
+
+
 
 .filter-button .icon-filter {
   font-size: 1.5em;
@@ -67,27 +72,29 @@
 
 .filter-select option {
   background-color: var(--background-color);
-  /* Ensure options have a background color to be readable */
   color: black;
 }
 
 .filter-select option:checked {
-  background-color: var(--color-text);
+  /* background-color: var(--color-text); */
   color: black;
 }
 
 .publish-button {
   padding: 10px;
   font-size: 1em;
-  color: #fff;
+  color: var(--color-text);
   background-color: var(--color-text);
   border: none;
   border-radius: 5px;
   cursor: pointer;
 }
 
-.publish-button:hover {
-  background-color: var(--color-text-dark);
+.publish-button:hover,
+.publish-button:focus {
+  background-color: transparent;
+  color: var(--color-bg-form) !important;
+  box-shadow: inset 0 0 0 .2em var(--color-bg-form) !important;
 }
 
 /* Container for the cards */
@@ -102,7 +109,7 @@
 .card {
   position: relative;
   background-color: var(--color-bg-form);
-  border: 2px solid var(--color-text);
+  /* border: 2px solid var(--color-text); */
   border-radius: 10px;
   overflow: hidden;
   transition: transform 0.3s;
@@ -153,9 +160,11 @@
   white-space: nowrap;
 }
 
-.card:hover .card-content {
+.card:hover,
+.card:focus .card-content {
   transform: translateY(0);
 }
+
 
 @media (max-width: 600px) {
   .cards-container {

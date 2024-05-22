@@ -79,32 +79,37 @@ export default function Detalles() {
           <article className="datos">
             <h2>{trabajo.nombre}</h2>
             <div className="ver-y-descargar-oculto">
-              <a href="https://www.omfgdogs.com/" target="blank">
+              <a href="https://www.omfgdogs.com/" target="blank" tabIndex="0">
                 <FontAwesomeIcon
                   icon={faDownload}
                   size="xl"
                   className="boton-descargar"
                 />
               </a>
-              <FontAwesomeIcon icon={faEye} size="xl" className="boton-ver" />
+              <FontAwesomeIcon
+                icon={faEye}
+                size="xl"
+                className="boton-ver"
+                tabIndex="0"
+              />
             </div>
             <p>
               <b>Autor: </b>{trabajo.autor}
             </p>
-            <p>
+            <p className="contenido-letra">
               <b>Fecha de Publicación:</b> 24 de enero de 2024
             </p>
             <p>
               <StarRating formComentario={null} setFormComentario={null} ratinginicial={3} desabilitado={true} />
             </p>
-            <p>
+            <p className="contenido-letra">
               <b>Palabras clave:</b> Animación 3D | Modelado 3D | Cortometraje |
               Texturizado | Blender | Substance Painter
             </p>
           </article>
 
           <article className="resumen">
-            <p>
+            <p className="contenido-letra">
               <b>Resumen:</b>
             </p>
             <p>
@@ -112,8 +117,8 @@ export default function Detalles() {
             </p>
           </article>
 
-          <article className="recursos-asociados">
-            <h3>Recursos multimedia asociados:</h3>
+          <article className="recursos-asociados ">
+            <h3 className="contenido-letra">Recursos multimedia asociados:</h3>
             <div>
               <img src="
               /assets/Clase.png" alt="clase"></img>
@@ -122,7 +127,7 @@ export default function Detalles() {
           </article>
 
           <article className="trabajos-similares">
-            <h3>Trabajos asociados: </h3>
+            <h3 className="titulo-letra">Trabajos asociados: </h3>
             <div>
               <p>
                 <img src="/assets/TFG_Similar1.png" alt="TFG-similar1"></img>
@@ -140,7 +145,7 @@ export default function Detalles() {
           </article>
 
           <article className="seccion-comentarios">
-            <h3>Comentarios:</h3>
+            <h3 className="titulo-letra">Comentarios:</h3>
             <div>
               <div className="contenedor-comentar">
                 <p>Escribe tu opinión sobre este trabajo:</p>
@@ -152,8 +157,8 @@ export default function Detalles() {
                     src="/assets/Foto_Usuario.jpg"
                     alt="foto-usuario"
                     className="foto-usuario"
-                  ></img>
-                  <span>
+                  />
+                  <span className="contenido-letra">
                     <b>Carmina Lucía</b>
                   </span>
                 </p>

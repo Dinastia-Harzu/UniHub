@@ -112,18 +112,18 @@ export default function Publicar() {
             <section className="seccion-botones-publicar">
                 <div className="contenedor-botones-publicar">
                     <div className={pagina === 0 ? "boton-oculto" : "boton-anterior"}>
-                        <button className="btn" onClick={() => atrasarPagina()}>
+                        <button className="btn btn-fondo" onClick={() => atrasarPagina()}>
                             Anterior
                         </button>
                     </div>
                     <div className={pagina === 2 ? "boton-oculto" : "boton-siguiente"}>
-                        <button className="btn" onClick={() => adelantarPagina()}>
+                        <button className="btn btn-fondo" onClick={() => adelantarPagina()}>
                             Siguiente
                         </button>
                     </div>
                     <div className="boton-publicar">
                         <button
-                            className="btn"
+                            className="btn btn-fondo"
                             hidden={!(pagina === 2)}
                             onClick={() => enviarData()}
                         >

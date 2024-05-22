@@ -19,7 +19,6 @@ const EditarPerfil = () => {
   const [imagenSeleccionada, setImagenSeleccionada] = useState(null);
   const refPortada = useRef();
   const refImagen = useRef();
-
   function setPortada() {
     const recurso_actual = refPortada.current;
     recurso_actual.click();
@@ -34,6 +33,7 @@ const EditarPerfil = () => {
       setImagenSeleccionada(null);
     }
   }
+
   const onSubmit = (data) => {
     console.log(data);
   };
@@ -42,6 +42,17 @@ const EditarPerfil = () => {
     setMostrarContrasena(!mostrarContrasena);
   };
 
+  const handleKeyDownTogglePassword = (event) => {
+    if (event.key === 'Enter') {
+      toggleMostrarContrasena();
+    }
+  };
+
+  const handleKeyDownSetPortada = (event) => {
+    if (event.key === 'Enter') {
+      setPortada();
+    }
+  };
   return (
     <main>
       <div className="contenedor-inicial">
@@ -134,7 +145,7 @@ const EditarPerfil = () => {
                 </div>
                 <div className="form-group" id="contrasenia">
                   <div className="input-contrasenia">
-                    <label for="contrasena">Contraseña:</label>
+                    <label htmlFor="contrasena" className="contenido-letra">Contraseña:</label>
                     <input
                       type={mostrarContrasena ? "text" : "password"}
                       id="contrasena"
@@ -144,6 +155,7 @@ const EditarPerfil = () => {
                         required: true,
                         pattern: /(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}/,
                       })}
+                    
                     />
                   </div>
                   <div className="boton-contrasenia">

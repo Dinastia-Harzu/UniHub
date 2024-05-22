@@ -1,4 +1,4 @@
-@import url("paleta-oscura.css");
+@import url("paleta-normal-letra-grande.css");
 
 
 .titulo-letra {
@@ -13,6 +13,7 @@
   font-size: var(--content);
 }
 
+
 * {
   box-sizing: border-box;
   margin: 0;
@@ -26,7 +27,7 @@ a {
 
 a:hover,
 a:focus {
-  color: var(--color-tertiary);
+  color: var(--color-bg);
 }
 
 ul {
@@ -42,13 +43,8 @@ html {
   width: 100%;
 }
 
-main {
-  color: white;
-  margin-bottom: 7em;
-}
-
 .logotipo {
-  content: url('../W_Logotipo.PNG');
+  content: url('../Logotipo.PNG');
   width: 180px;
   height: auto;
 }
@@ -74,10 +70,6 @@ main {
   margin-left: 2.5em;
 }
 
-header .nav-btn {
-  color: white;
-}
-
 .container2 {
   display: flex;
   justify-content: center;
@@ -85,24 +77,28 @@ header .nav-btn {
 }
 
 .btn {
-  color: black !important;
   padding: .5em;
   background-color: var(--color-secondary);
   border-radius: 5px;
+  box-shadow: inset 0 0 0 .15em white;
+  outline: none;
   border-style: none;
   font-size: 1em;
   height: 2.3em;
   cursor: pointer;
   min-width: fit-content;
   margin: .3em;
-  transition: background-color 0.3s;
+}
+
+select>option {
+  color: var(--color-text);
 }
 
 .btn:hover,
 .btn:focus {
   background-color: transparent;
-  color: var(--color-tertiary) !important;
-  box-shadow: inset 0 0 0 .2em var(--color-tertiary);
+  color: var(--color-bg);
+  box-shadow: inset 0 0 0 .2em var(--color-bg);
 }
 
 .btn-fondo:hover,
@@ -132,12 +128,7 @@ header .nav-btn {
   width: 100%;
 }
 
-.footer {
-  color: white;
-  position: fixed;
-  bottom: 0;
-  width: 100%;
-}
+
 
 @media screen and (max-width: 870px) {
   .navbar {
@@ -167,6 +158,19 @@ header .nav-btn {
   .footer>.container2 {
     padding-top: 0;
   }
+
+
+  .titulo-letra {
+    font-size: var(--title-tlf);
+  }
+
+  .btn-letra {
+    font-size: var(--butons-tlf);
+  }
+
+  .contenido-letra {
+    font-size: var(--content-tlf);
+  }
 }
 
 @media screen and (max-width: 375px) {
@@ -190,6 +194,18 @@ header .nav-btn {
   .navbar-buttons {
     width: 75%;
     height: auto;
+  }
+
+  .titulo-letra {
+    font-size: var(--title-tlf);
+  }
+
+  .btn-letra {
+    font-size: var(--butons-tlf);
+  }
+
+  .contenido-letra {
+    font-size: var(--content-tlf);
   }
 
 }
