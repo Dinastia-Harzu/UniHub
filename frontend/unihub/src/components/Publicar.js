@@ -15,9 +15,9 @@ export default function Publicar() {
     const [pagina, setPagina] = useState(0);
     const [formData, setFormData] = useState({
         nombre: "",
-        tipo: 2,
+        tipo: 1,
         autor: 14,
-        titulacion: 2,
+        titulacion: 1,
         publicacion: new Date(
             new Date().getTime() - new Date().getTimezoneOffset() * 60 * 1000
         )
@@ -78,10 +78,12 @@ export default function Publicar() {
         }).catch((err) => {
             console.log(err);
         });
+        alert("Trabajo publicado!");
+        window.location.replace("");
     }
 
     return (
-        <div className="pagina-publicar">
+        <main className="pagina-publicar">
             <div>
                 <div className={pagina === 0 ? "form-mostrado" : "form-oculto"}>
                     <FormPublicar1
@@ -89,7 +91,6 @@ export default function Publicar() {
                         formData={formData}
                         setFormData={setFormData}
                     />
-                    ;
                 </div>
                 <div className={pagina === 1 ? "form-mostrado" : "form-oculto"}>
                     <FormPublicar2
@@ -97,7 +98,6 @@ export default function Publicar() {
                         formData={formData}
                         setFormData={setFormData}
                     />
-                    ;
                 </div>
                 <div className={pagina === 2 ? "form-mostrado" : "form-oculto"}>
                     <FormPublicar3
@@ -105,7 +105,6 @@ export default function Publicar() {
                         formData={formData}
                         setFormData={setFormData}
                     />
-                    ;
                 </div>
             </div>
 
@@ -132,6 +131,6 @@ export default function Publicar() {
                     </div>
                 </div>
             </section>
-        </div>
+        </main>
     );
 }

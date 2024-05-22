@@ -7,56 +7,71 @@ import { useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
 import axios from "axios";
 import { URL_BASE } from "../utils/constantes";
+import ContenedorComentario from "./ContenedorComentario";
 
 
 export default function Detalles() {
 
   const params = useParams();
   const id_trabajo = params.id;
-  const [trabajo, setTrabajo] = useState({});
+  const [trabajo, setTrabajo] = useState({
+    id: '',
+    nombre: '',
+    autor: '',
+    publicacion: '',
+    resumen: '',
+    portada: '',
+    recursos: [],
+    comentarios: [],
+    documento: ''
+  });
 
   useEffect(() => {
     obtenerDatosTrabajo();
   }, []);
 
-  function obtenerDatosTrabajo() {
-    axios
-      .get(URL_BASE + "trabajos/" + id_trabajo)
-      .then((result) => {
-        // Formateamos fecha de publicacion
-        let data = result.data;
-        data.publicacion = data.publicacion.split('T').at(0);
+  const obtenerDatosTrabajo = async () => {
+    try {
+      const result = await axios.get(`${URL_BASE}trabajos/${id_trabajo}`);
+      let data = result.data;
+      data.publicacion = data.publicacion.split('T').at(0);
 
-        // Creamos objeto trabajo
-        setTrabajo({
-          nombre: data.nombre,
-          autor: data.autor,
-          publicacion: data.publicacion,
-          resumen: data.resumen,
-          portada: data.portada,
-          recursos: [],
-          documento: data.documento
-        });
+      setTrabajo((prevTrabajo) => ({
+        ...prevTrabajo,
+        id: data.id,
+        nombre: data.nombre,
+        autor: data.autor,
+        publicacion: data.publicacion,
+        resumen: data.resumen,
+        portada: data.portada,
+        documento: data.documento,
+      }));
 
-        // Hacemos peticion para conocer el autor y ponerlo
-        axios.get(URL_BASE + "usuarios/" + result.data.autor).then((usuario) => {
-          setTrabajo(prevTrabajo => ({
-            ...prevTrabajo,
-            autor: usuario.data.nombre
-          }));
-        }).catch((err) => {
-          console.log(err);
-        });
+      // Obtenemos nombre de usuario
+      const usuario = await axios.get(`${URL_BASE}usuarios/${data.autor}`);
+      setTrabajo((prevTrabajo) => ({
+        ...prevTrabajo,
+        autor: usuario.data.nombre
+      }));
 
-        // Hacer peticion para obtener los recursos
-        // TODO: Hacer eso cuando Arturo haya hecho la query
+      // Obtenemos recursos
+      const recursos = await axios.get(`${URL_BASE}multimedia/trabajo/${data.id}`);
+      setTrabajo((prevTrabajo) => ({
+        ...prevTrabajo,
+        recursos: recursos.data
+      }));
 
-      })
-      .catch((err) => {
-        console.log(err);
-      });
+      // Obtenemos comentarios
+      const comentarios = await axios.get(`${URL_BASE}comentarios/trabajo/${data.id}`);
+      setTrabajo((prevTrabajo) => ({
+        ...prevTrabajo,
+        comentarios: comentarios.data
+      }));
 
-  }
+    } catch (err) {
+      console.log(err);
+    }
+  };
 
   return (
     <>
@@ -70,33 +85,18 @@ export default function Detalles() {
                 className="boton-descargar"
               />
             </a>
-            <ModalPDF archivo={trabajo.documento} />
+            <ModalPDF archivo={trabajo.documento} nombre={trabajo.nombre} />
           </div>
           <img src={`/assets/${trabajo.portada}`} alt="portada"></img>
         </section>
         <section className="contenedor-datos">
           <article className="datos">
             <h2>{trabajo.nombre}</h2>
-            <div className="ver-y-descargar-oculto">
-              <a href="https://www.omfgdogs.com/" target="blank" tabIndex="0">
-                <FontAwesomeIcon
-                  icon={faDownload}
-                  size="xl"
-                  className="boton-descargar"
-                />
-              </a>
-              <FontAwesomeIcon
-                icon={faEye}
-                size="xl"
-                className="boton-ver"
-                tabIndex="0"
-              />
-            </div>
             <p>
               <b>Autor: </b>{trabajo.autor}
             </p>
             <p className="contenido-letra">
-              <b>Fecha de Publicación:</b> 24 de enero de 2024
+              <b>Fecha de Publicación:</b> {trabajo.publicacion}
             </p>
             <p>
               <StarRating formComentario={null} setFormComentario={null} ratinginicial={3} desabilitado={true} />
@@ -119,9 +119,13 @@ export default function Detalles() {
           <article className="recursos-asociados ">
             <h3 className="contenido-letra">Recursos multimedia asociados:</h3>
             <div>
-              <img src="
-              /assets/Clase.png" alt="clase"></img>
-              <img src="/assets/Habitacion.png" alt="habitacion"></img>
+              {trabajo.recursos.length > 0 ? (
+                trabajo.recursos.map((recurso) => (
+                  <img src={`/assets/${recurso.ruta}`} alt={recurso.nombre}></img>
+                ))
+              ) : (
+                <p>No hay recursos</p>
+              )}
             </div>
           </article>
 
@@ -150,30 +154,16 @@ export default function Detalles() {
                 <p>Escribe tu opinión sobre este trabajo:</p>
                 <ModalDetalle id_trabajo={id_trabajo} />
               </div>
-              <div className="contenedor-comentario">
-                <p className="contenedor-usuario">
-                  <img
-                    src="/assets/Foto_Usuario.jpg"
-                    alt="foto-usuario"
-                    className="foto-usuario"
-                  />
-                  <span className="contenido-letra">
-                    <b>Carmina Lucía</b>
-                  </span>
-                </p>
-                <p className="fecha-comentario">Publicado en Marzo de 2024 </p>
-                <p>
-                  <StarRating formComentario={null} setFormComentario={null} ratinginicial={3} desabilitado={true} />
-                </p>
-                <p className="texto-comentario">
-                  Creo que la autora ha creado una escena original y atractiva.
-                  El resultado es una obra de calidad, con un buen nivel de
-                  detalle, realismo y expresividad. El trabajo también incluye
-                  una documentación completa y rigurosa, donde se explica el
-                  proceso de creación, las referencias utilizadas, los problemas
-                  encontrados y las soluciones adoptadas. Por todo ello,
-                  considero que el trabajo merece una calificación excelente.
-                </p>
+              <div>
+                {trabajo.comentarios.length > 0 ? (
+                  trabajo.comentarios.map((comentario) => (
+                    <ContenedorComentario
+                      comentario={comentario}
+                    />
+                  ))
+                ) : (
+                  <p>No hay comentarios</p>
+                )}
               </div>
             </div>
           </article>

@@ -6,7 +6,7 @@ import {
 
 export default function FormPublicar1({ setPagina, formData, setFormData }) {
   return (
-    <main className="contenedor-publicar">
+    <section className="contenedor-publicar">
       <section className="titulo-publicar">
         <h1>Publica tu trabajo</h1>
       </section>
@@ -73,6 +73,6 @@ export default function FormPublicar1({ setPagina, formData, setFormData }) {
           </form>
         </div>
       </section>
-    </main>
+    </section>
   );
 }

@@ -44,7 +44,7 @@ export function ModalDetalle({ id_trabajo }) {
   );
 }
 
-export function ModalPDF({ archivo }) {
+export function ModalPDF({ archivo, nombre }) {
   const [modalEstaAbierto2, abrirModal2, cerrarModal2, publicarModal2] =
     useModal(false);
 
@@ -52,7 +52,11 @@ export function ModalPDF({ archivo }) {
     <div className="contenedor-modal-pdf">
       <FontAwesomeIcon icon={faEye} size="xl" className="boton-ver" onClick={abrirModal2} />
       <Modal estaAbierto={modalEstaAbierto2} cerrarModal={cerrarModal2}>
-        <p>{archivo}</p>
+        <div className="contenedor-pdf">
+          <b className="titulo-pdf">{nombre}</b>
+          <object data={`/documentos/${archivo}`} type="application/pdf" width="100%" height="98%">
+          </object>
+        </div>
       </Modal>
     </div>
   )

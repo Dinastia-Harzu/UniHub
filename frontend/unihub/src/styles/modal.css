@@ -1,7 +1,7 @@
 .modal {
     position: fixed;
     z-index: 2;
-    top: 20%;
+    top: 5%;
     left: 25%;
     width: 45%;
     display: none;
@@ -10,6 +10,7 @@
 
 .modal.esta-abierto {
     display: block;
+    text-align: left;
 }
 
 .boton-cerrar-modal {
@@ -22,7 +23,8 @@
     border-radius: 0.5em;
 }
 
-.boton-cerrar-modal:hover,.boton-cerrar-modal:focus {
+.boton-cerrar-modal:hover,
+.boton-cerrar-modal:focus {
     background-color: rgb(51, 51, 51);
 }
 
@@ -34,7 +36,8 @@
     border-style: none;
 }
 
-.boton-publicar-comentario:hover,.boton-publicar-comentario:focus {
+.boton-publicar-comentario:hover,
+.boton-publicar-comentario:focus {
     background-color: #e35555;
     /*TODO: CAMBIAR CUANDO LOS COLORES ESTEN ESTABLECIDOS*/
 }
