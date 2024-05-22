@@ -67,7 +67,6 @@ export default function Detalles() {
               <FontAwesomeIcon
                 icon={faDownload}
                 size="2xl"
-                style={{ color: "#FFFFFF" }}
                 className="boton-descargar"
               />
             </a>
