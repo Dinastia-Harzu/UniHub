@@ -8,25 +8,27 @@ export default function FormBusqueda({ setPagina, formData, setFormData }) {
   return (
     <div className="formulario-busqueda titulo-letra">
       <h2>¿Qué estás buscando?</h2>
-      <form>
-        <div className="contenedor-apartados-formulario">
-          <label htmlFor="nombre-tmp">Título
-          </label>
-          <input id="nombre-tmp" type="text" name="nombre" placeholder="Introduce el título del trabajo"></input>
+      <form method="post">
+        <div className="contenedor-apartados-formulario contenido-letra">
+          <label htmlFor="nombre-tmp">Título</label>
+          <input className="contenido-letra" id="nombre-tmp" type="text" name="nombre" placeholder="Introduce el título del trabajo"></input>
         </div>
-        <div className="contenedor-apartados-formulario">
-          <label htmlFor="autor">Autor
-          </label>
+        <div className="contenedor-apartados-formulario contenido-letra">
+          <label htmlFor="autor">Autor</label>
           <input className="contenido-letra" type="text" id="autor" name="autor" placeholder="Introduce el nombre del autor"></input>
         </div>
         <div className="contenedor-apartados-formulario contenido-letra">
-          <input className="contenido-letra" type="text" name="autor" placeholder="Autor"></input>
+          <label htmlFor="fecha">Fecha</label>
+          <input className="contenido-letra" id="fecha" type="date" name="publicacion" placeholder="Fecha"></input>
         </div>
         <div className="contenedor-apartados-formulario contenido-letra">
-          <input className="contenido-letra" type="date" name="Fecha" placeholder="Fecha"></input>
-        </div>
-        <div className="contenedor-apartados-formulario c">
           <SelectorTipoTrabajo
+            formData={formData}
+            setFormData={setFormData}
+          />
+        </div>
+        <div className="contenedor-apartados-formulario contenido-letra">
+          <SelectorTitulaciones
             formData={formData}
             setFormData={setFormData}
           />

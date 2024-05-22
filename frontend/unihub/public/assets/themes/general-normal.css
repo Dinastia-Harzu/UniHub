@@ -2,21 +2,22 @@
 
 
 
-.titulo-letra{
+.titulo-letra {
   font-size: var(--title);
 }
 
-.btn-letra{
+.btn-letra {
   font-size: var(--butons);
 }
 
-.contenido-letra{
+.contenido-letra {
   font-size: var(--content);
 }
 
-select > option{
+select>option {
   color: var(--color-text);
 }
+
 * {
   box-sizing: border-box;
   margin: 0;
@@ -28,7 +29,8 @@ a {
   font-weight: bold;
 }
 
-a:hover,a:focus {
+a:hover,
+a:focus {
   color: var(--color-bg);
 }
 
@@ -97,10 +99,18 @@ main {
   transition: background-color 0.3s;
 }
 
-.btn:hover,.btn:focus {
+.btn:hover,
+.btn:focus {
   background-color: transparent;
   color: var(--color-bg);
   box-shadow: inset 0 0 0 .2em var(--color-bg);
+}
+
+.btn-fondo:hover,
+.btn-fondo:hover {
+  background-color: transparent;
+  color: var(--color-bg-form) !important;
+  box-shadow: inset 0 0 0 .2em var(--color-bg-form) !important;
 }
 
 .btn-primary {
