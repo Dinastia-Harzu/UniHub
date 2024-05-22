@@ -3,7 +3,7 @@ import { faDownload, faEye } from "@fortawesome/free-solid-svg-icons";
 import StarRating from "./commons/StarRating";
 import { ModalDetalle, ModalPDF } from "./commons/Modales";
 import "../styles/detalles.css";
-import { useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
 import axios from "axios";
 import { URL_BASE } from "../utils/constantes";
@@ -134,15 +134,15 @@ export default function Detalles() {
             <div>
               <p>
                 <img src="/assets/TFG_Similar1.png" alt="TFG-similar1"></img>
-                <p>La Tierra - Cortometraje de Animación 3D</p>
+                <Link className="link-fondo">La Tierra - Cortometraje de Animación 3D</Link>
               </p>
               <p>
                 <img src="/assets/TFG_Similar2.png" alt="TFG-similar2"></img>
-                <p>Sons of Odin - Corto de animación 3D</p>
+                <Link className="link-fondo">Sons of Odin - Corto de animación 3D</Link>
               </p>
               <p>
                 <img src="/assets/TFG_Similar3.png" alt="TFG-similar3"></img>
-                <p>Loop animado 3D estilo cartoon</p>
+                <Link className="link-fondo">Loop animado 3D estilo cartoon</Link>
               </p>
             </div>
           </article>
