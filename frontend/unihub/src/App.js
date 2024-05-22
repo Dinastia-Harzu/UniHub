@@ -16,16 +16,10 @@ import MisTrabajos from "./components/MisTrabajos.js";
 import NotFound from "./components/NotFound.js";
 
 import {
-  BrowserRouter,
   createBrowserRouter,
   createRoutesFromElements,
-  Route,
   RouterProvider,
-  Routes,
 } from "react-router-dom";
-import React, { useState, useEffect } from "react";
-import Publicar from "./components/Publicar.js";
-import Detalles from "./components/Detalles.js";
 import CartaBusqueda from "./components/CartaBusqueda.js";
 import Root from "./components/Root.js";
 import Publicar from "./components/Publicar.js";
@@ -35,7 +29,6 @@ export default function App() {
   const [userTheme, setUserTheme] = useState("");
 
   useEffect(() => {
-    const userThemeFromBackend = "osc"; // 'normal', 'ac', 'osc'
     const userThemeFromBackend = "normal-lg"; // Ejemplo: 'normal', 'dark', 'alternative', etc.
     setUserTheme(userThemeFromBackend);
 

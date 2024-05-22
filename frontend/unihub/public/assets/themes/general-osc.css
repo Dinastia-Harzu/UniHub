@@ -6,11 +6,11 @@
 }
 
 .btn-letra{
-  font-size: var(--button);
+  font-size: var(--butons);
 }
 
 .contenido-letra{
-  font-size: var(--contenido);
+  font-size: var(--content);
 }
 
 * {
