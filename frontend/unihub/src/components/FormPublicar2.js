@@ -26,7 +26,6 @@ export default function FormPublicar2({ setPagina, formData, setFormData }) {
   return (
     <div className="contenedor-publicar">
       <section className="titulo-publicar">
-        <h1>Publica tu trabajo</h1>
       </section>
       <section className="contenedor-formulario-publicar">
         <div className="contenedor-apartados-publicar">

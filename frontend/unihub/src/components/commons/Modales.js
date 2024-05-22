@@ -11,7 +11,7 @@ export function ModalDetalle({ id_trabajo }) {
   const [modalEstaAbierto1, abrirModal1, cerrarModal1, publicarModal1] =
     useModal(false);
   const [formComentario, setFormComentario] = useState({
-    autor: 14, // TODO: Pillar tu usuario cuando este
+    autor: 14,
     trabajo: parseInt(id_trabajo),
     comentario: "",
     valoracion: 0
@@ -19,8 +19,14 @@ export function ModalDetalle({ id_trabajo }) {
 
   return (
     <div>
-      <button onClick={abrirModal1} className="btn btn-letra btn-fondo">
-      {t('comentar')}
+      <button
+        onClick={(event) => {
+          abrirModal1(); // Ejecuta la función abrirModal1
+          event.target.blur(); // Elimina el foco del botón
+        }}
+        className="btn btn-letra btn-fondo"
+      >
+        {t('comentar')}
       </button>
       <Modal estaAbierto={modalEstaAbierto1} cerrarModal={cerrarModal1}>
         <form>

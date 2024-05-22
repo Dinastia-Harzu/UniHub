@@ -32,14 +32,14 @@ export default function Publicar() {
         palabras_clave: "",
     });
 
-    function adelantarPagina() {
+    function adelantarPagina(event) {
         setPagina(pagina + 1);
-        console.log(pagina);
+        event.target.blur();
     }
 
-    function atrasarPagina() {
+    function atrasarPagina(event) {
         setPagina(pagina - 1);
-        console.log(pagina);
+        event.target.blur();
     }
 
     function enviarData() {
@@ -86,6 +86,7 @@ export default function Publicar() {
 
     return (
         <main className="pagina-publicar">
+            <h1>{t('publicar-trabajo')}</h1>
             <div>
                 <div className={pagina === 0 ? "form-mostrado contenido-letra" : "form-oculto"}>
                     <FormPublicar1
@@ -113,13 +114,13 @@ export default function Publicar() {
             <section className="seccion-botones-publicar">
                 <div className="contenedor-botones-publicar">
                     <div className={pagina === 0 ? "boton-oculto" : "boton-anterior btn-letra"}>
-                        <button className="btn btn-fondo btn-letra" onClick={() => atrasarPagina()}>
-                        {t('anterior')}
+                        <button className="btn btn-fondo btn-letra" onClick={(event) => atrasarPagina(event)}>
+                            {t('anterior')}
                         </button>
                     </div>
                     <div className={pagina === 2 ? "boton-oculto" : "boton-siguiente btn-letra"}>
-                        <button className="btn btn-fondo btn-letra" onClick={() => adelantarPagina()}>
-                        {t('siguiente')}
+                        <button className="btn btn-fondo btn-letra" onClick={(event) => adelantarPagina(event)}>
+                            {t('siguiente')}
                         </button>
                     </div>
                     <div className="boton-publicar btn-letra">

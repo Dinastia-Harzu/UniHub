@@ -22,18 +22,17 @@ export default function FormPublicar3({ setPagina, formData, setFormData }) {
   return (
     <div className="contenedor-publicar">
       <section className="titulo-publicar">
-        <h1>{t('publica-tu-trabajo')}</h1>
       </section>
       <section className="contenedor-formulario-publicar">
         <div className="contenedor-apartados-publicar">
           <p className="apartado no-actual contenido-letra" onClick={() => setPagina(0)}>
-          {t('detalles')}
+            {t('detalles')}
           </p>
           <p className="apartado no-actual contenido-letra" onClick={() => setPagina(1)}>
-          {t('multimedia')}
+            {t('multimedia')}
           </p>
           <p className="apartado actual contenido-letra" onClick={() => setPagina(2)}>
-          {t('portada')}
+            {t('portada')}
           </p>
         </div>
         <div className="formulario-publicar">

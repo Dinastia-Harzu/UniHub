@@ -3,13 +3,12 @@ import { faDownload, faEye } from "@fortawesome/free-solid-svg-icons";
 import StarRating from "./commons/StarRating";
 import { ModalDetalle, ModalPDF } from "./commons/Modales";
 import "../styles/detalles.css";
-import { useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
 import axios from "axios";
 import { URL_BASE } from "../utils/constantes";
 import ContenedorComentario from "./ContenedorComentario";
 import { useTranslation } from 'react-i18next';
-import { Link } from 'react-router-dom';
 
 export default function Detalles() {
   const { t } = useTranslation();
