@@ -9,7 +9,6 @@ import axios from "axios";
 import { URL_BASE } from "../utils/constantes";
 import ContenedorComentario from "./ContenedorComentario";
 import { useTranslation } from 'react-i18next';
-import { Link } from 'react-router-dom';
 
 export default function Detalles() {
   const { t } = useTranslation();
