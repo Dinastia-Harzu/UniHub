@@ -28,6 +28,10 @@ html {
   width: 100%;
 }
 
+main {
+  margin-bottom: 7em;
+}
+
 .logotipo {
   content: url('../Logotipo.PNG');
   width: 180px;
@@ -73,6 +77,7 @@ html {
   cursor: pointer;
   min-width: fit-content;
   margin: .3em;
+  transition: background-color 0.3s;
 }
 
 .btn:hover {

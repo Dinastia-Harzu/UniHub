@@ -1,8 +1,16 @@
-import React, { useState } from "react";
+import React, { act, useState } from "react";
 
-export default function StarRating() {
+export default function StarRating({ formComentario, setFormComentario }) {
   const [rating, setRating] = useState(null);
   const [hover, setHover] = useState(null);
+
+  function actualizarValoracion(currentRating) {
+    setFormComentario(prevComentario => ({
+      ...prevComentario,
+      valoracion: currentRating
+    }));
+    setRating(currentRating);
+  }
 
   return (
     <div>
@@ -15,7 +23,7 @@ export default function StarRating() {
               type="radio"
               name="rating"
               value={currentRating}
-              onChange={() => setRating(currentRating)}
+              onChange={() => actualizarValoracion(currentRating)}
             />
             <span
               className="star"
