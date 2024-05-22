@@ -97,8 +97,6 @@ export default function Detalles() {
             </p>
           </article>
 
-          <hr></hr>
-
           <article className="resumen">
             <p>
               <b>Resumen:</b>
@@ -107,8 +105,6 @@ export default function Detalles() {
               {trabajo.resumen}
             </p>
           </article>
-
-          <hr></hr>
 
           <article className="recursos-asociados">
             <h3>Recursos multimedia asociados:</h3>
@@ -144,7 +140,6 @@ export default function Detalles() {
                 <p>Escribe tu opinión sobre este trabajo:</p>
                 <ModalDetalle id_trabajo={id_trabajo} />
               </div>
-              <hr></hr>
               <div className="contenedor-comentario">
                 <p className="contenedor-usuario">
                   <img

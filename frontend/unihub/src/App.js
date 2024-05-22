@@ -61,7 +61,7 @@ export default function App() {
             <Route path="login" element={<InicioSesion />} />
             <Route path="registro" element={<Registro />} />
             <Route path="editar" element={<EditarPerfil />} />
-            <Route path="detalles" element={<Detalles />} />
+            <Route path="detalles/:id" element={<Detalles />} />
             <Route path="publicar" element={<Publicar />} />
             <Route path="contacto" element={<Contacto />} />
             <Route path="trabajos" element={<MisTrabajos />} />

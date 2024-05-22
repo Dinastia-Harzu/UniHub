@@ -5,7 +5,8 @@ export const useModal = (initialValue = false) => {
 
   const abrirModal = () => setEstaAbierto(true);
   const cerrarModal = () => setEstaAbierto(false);
-  const publicar = (formComentario) => {
+  const publicar = (event, formComentario) => {
+    event.preventDefault();
     console.log(formComentario);
   };
 
