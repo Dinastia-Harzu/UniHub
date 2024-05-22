@@ -1,4 +1,5 @@
 import { useForm } from "react-hook-form";
+import { useTranslation } from 'react-i18next';
 import {
   edadValidator,
   titulacionValidator,
@@ -9,6 +10,7 @@ import { FaEye, FaEyeSlash } from "react-icons/fa";
 import "../styles/formulario.css";
 
 const Registro = () => {
+  const { t } = useTranslation();
   const {
     register,
     formState: { errors },
@@ -58,7 +60,7 @@ const Registro = () => {
     <main>
       <div className="contenedor-inicial">
         <div className="titulo">
-          <h2 className="titulo-letra">Registro</h2>
+          <h2 className="titulo-letra">{t('registro')}</h2>
         </div>
         <div className="form-container">
           <form onSubmit={handleSubmit(onSubmit)} className="pos-wrapper">
@@ -85,71 +87,71 @@ const Registro = () => {
                 />
               </div>
               <div className="form-group" id="nombre">
-                <label htmlFor="nombre" className="contenido-letra">Nombre:</label>
+                <label htmlFor="nombre" className="contenido-letra">{t('registro')}:</label>
                 <input
                  className="contenido-letra"
                   type="text"
                   id="nombre"
                   name="nombre"
-                  placeholder="Tu nombre"
+                  placeholder={t('placeholder-nombre')}
                   {...register("nombre", {
                     required: true,
                     maxLength: 20,
                   })}
                 />
                 {errors.nombre?.type === "required" && (
-                  <p  className="contenido-letra">El campo es requerido</p>
+                  <p  className="contenido-letra">{t('campo-requerido')}</p>
                 )}
                 {errors.nombre?.type === "maxLength" && (
-                  <p  className="contenido-letra">El nombre introducido es demasiado largo</p>
+                  <p  className="contenido-letra">{t('nombre-largo')}</p>
                 )}
               </div>
               <div className="form-group" id="apellidos">
-                <label htmlFor="apellidos"  className="contenido-letra">Apellidos:</label>
+                <label htmlFor="apellidos"  className="contenido-letra">{t('apellidos')}:</label>
                 <input
                  className="contenido-letra"
                   type="text"
                   id="apellidos"
                   name="apellidos"
-                  placeholder="Tus apellidos"
+                  placeholder={t('placeholder-apellidos')}
                   {...register("apellidos", {
                     required: true,
                     maxLength: 50,
                   })}
                 />
                 {errors.apellidos?.type === "required" && (
-                  <p  className="contenido-letra">El campo es requerido</p>
+                  <p  className="contenido-letra">{t('campo-requerido')}</p>
                 )}
                 {errors.apellidos?.type === "maxLength" && (
-                  <p  className="contenido-letra">El nombre introducido es demasiado largo</p>
+                  <p  className="contenido-letra">{t('nombre-largo')}</p>
                 )}
               </div>
               <div id="parte-inferior">
                 <div className="form-group" id="correo">
-                  <label htmlFor="correo"  className="contenido-letra">Correo electrónico:</label>
+                  <label htmlFor="correo"  className="contenido-letra">{t('correo')}:</label>
                   <input
                    className="contenido-letra"
                     type="email"
                     id="correo"
                     name="correo"
-                    placeholder="tu@correo.com"
+                    placeholder={t('placeholder-correo')}
                     {...register("correo", {
                       required: true,
                       pattern: /^[^\s@]+@[^\s@]+\.[^\s@]+$/i,
                     })}
                   />
                   {errors.correo?.type === "required" && (
-                    <p  className="contenido-letra">El campo es requerido</p>
+                    <p  className="contenido-letra">{t('campo-requerido')}</p>
                   )}
                   {errors.correo?.type === "pattern" && (
-                    <p  className="contenido-letra">El formato del correo no es adecuado</p>
+                    <p  className="contenido-letra">{t('correo-erróneo')}</p>
                   )}
                   <br />
                   <br />
                 </div>
                 <div className="form-group" id="contrasenia">
                   <div className="input-contrasenia">
-                    <label htmlFor="contrasena"  className="contenido-letra">Contraseña:</label>
+                    <label htmlFor="contrasena"  className="contenido-letra">{t('contrasenia')}:</label>
                     <input
                      className="contenido-letra"
                       type={mostrarContrasena ? "text" : "password"}
@@ -177,15 +179,15 @@ const Registro = () => {
                     </span>
                   </div>
                   {errors.contrasena?.type === "required" && (
-                    <p  className="contenido-letra">El campo es requerido</p>
+                    <p  className="contenido-letra">{t('campo-requerido')}</p>
                   )}
                   {errors.contrasena?.type === "pattern" && (
-                    <p  className="contenido-letra">El formato no es adecuado</p>
+                    <p  className="contenido-letra">{t('contra-erróneo')}</p>
                   )}
                   <br />
                 </div>
                 <div className="form-group" id="titulacion">
-                  <label htmlFor="titulacion"  className="contenido-letra">Grado o máster:</label>
+                  <label htmlFor="titulacion"  className="contenido-letra">{t('sel-tit')}:</label>
                   <select
                   className="contenido-letra"
                     defaultValue="none"
@@ -194,106 +196,105 @@ const Registro = () => {
                       validate: titulacionValidator,
                     })}
                   >
-                    <option value="none"  className="contenido-letra">Selecciona tu titulación</option>
+                    <option value="none"  className="contenido-letra">{t('sel-tutit')}</option>
                     <option value="ingenieria_multimedia"  className="contenido-letra">
-                      Ingeniería Multimedia
+                    {t('ingenieria_multimedia')}
                     </option>
-                    <option value="arquitectura"  className="contenido-letra">Arquitectura</option>
+                    <option value="arquitectura"  className="contenido-letra">{t('arquitectura')}</option>
                     <option value="arquitectura_tecnica">
-                      Arquitectura técnica
+                    {t('arquitectura_tecnica')}
                     </option>
                     <option value="fundamentos_arquitectura"  className="contenido-letra">
-                      Fundamentos de la arquitectura
+                    {t('fundamentos_arquitectura')}
                     </option>
                     <option value="ingenieria_aeroespacial"  className="contenido-letra">
-                      Ingeniería Aeroespacial
+                    {t('ingenieria_aeroespacial')}
                     </option>
                     <option value="ingenieria_biomedica"  className="contenido-letra">
-                      Ingeniería Biomédica
+                    {t('ingenieria_biomedica')}
                     </option>
                     <option value="ingenieria_sonido_imagen"  className="contenido-letra">
-                      Ingeniería en Sonido e Imagen en Telecomunicación
+                    {t('ingenieria_sonido_imagen')}
                     </option>
-                    <option value="ingenieria_civil"  className="contenido-letra">Ingeniería Civil</option>
+                    <option value="ingenieria_civil"  className="contenido-letra">{t('ingenieria_civil')}</option>
                     <option value="ingenieria_ia">
-                      Ingeniería en Inteligencia Artificial
+                    {t('ingenieria_ia')}
                     </option>
                     <option value="ingenieria_informatica"  className="contenido-letra">
-                      Ingeniería Informática
+                    {t('ingenieria_informatica')}
                     </option>
                     <option value="ingenieria_informatica_ade"  className="contenido-letra">
-                      Ingeniería Informática + ADE
+                    {t('ingenieria_informatica_ade')}
                     </option>
                     <option value="ingenieria_quimica"  className="contenido-letra">
-                      Ingeniería Química
+                    {t('ingenieria_quimica')}
                     </option>
                     <option value="ingenieria_robotica"  className="contenido-letra">
-                      Ingeniería Robótica
+                    {t('ingenieria_robotica')}
                     </option>
                     <option value="master_arquitectura"  className="contenido-letra">
-                      Máster en arquitectura
+                    {t('master_arquitectura')}
                     </option>
                     <option value="master_automatica_robotica"  className="contenido-letra">
-                      Máster en Automática y Robótica
+                    {t('master_automatica_robotica')}
                     </option>
                     <option value="master_ciberseguridad"  className="contenido-letra">
-                      Máster en Ciberseguridad
+                    {t('master_ciberseguridad')}
                     </option>
                     <option value="master_ciencia_datos"  className="contenido-letra">
-                      Máster en Ciencia de datos
+                    {t('master_ciencia_datos')}
                     </option>
                     <option value="master_desarrollo_aplicaciones_servicios_web"  className="contenido-letra">
-                      Máster en Desarrollo de Aplicaciones y Servicios Web
+                    {t('master_desarrollo_aplicaciones_servicios_web')}
                     </option>
                     <option value="master_desarrollo_software_dispositivos_moviles"  className="contenido-letra">
-                      Máster en Desarrollo de software para dispositivos móviles
+                    {t('master_desarrollo_software_dispositivos_moviles')}
                     </option>
                     <option value="master_gestion_edificacion"  className="contenido-letra">
-                      Máster en Gestión de Edificación
+                    {t('master_gestion_edificacion')}
                     </option>
                     <option value="master_ingenieria_biomedica"  className="contenido-letra">
-                      Máster en Ingeniería Biomédica
+                    {t('master_ingenieria_biomedica')}
                     </option>
                     <option value="master_ingenieria_caminos_canales_puertos"  className="contenido-letra">
-                      Máster en Ingenieria de Caminos, canales y Puertos
+                    {t('master_ingenieria_caminos_canales_puertos')}
                     </option>
                     <option value="master_ingenieria_materiales_agua_terreno"  className="contenido-letra">
-                      Máster en Ingeniería de los Materiales, Agua y Terreno
+                    {t('master_ingenieria_materiales_agua_terreno')}
                     </option>
                     <option value="master_ingenieria_telecomunicacion"  className="contenido-letra">
-                      Máster en Ingeniería de Telecomunicación
+                    {t('master_ingenieria_telecomunicacion')}
                     </option>
                     <option value="master_ingenieria_geologica"  className="contenido-letra">
-                      Máster en Ingeniería Geológica
+                    {t('master_ingenieria_geologica')}
                     </option>
                     <option value="master_ingenieria_informatica"  className="contenido-letra">
-                      Máster en Ingeniería Informática
+                    {t('master_ingenieria_informatica')}
                     </option>
                     <option value="master_ingenieria_quimica"  className="contenido-letra">
-                      Máster en Ingeniería Química
+                    {t('master_ingenieria_quimica')}
                     </option>
                     <option value="master_ingenieria_artificial"  className="contenido-letra">
-                      Máster en Ingeniería Artificial
+                    {t('master_ingenieria_artificial')}
                     </option>
                     <option value="master_nuevas_tecnologias"  className="contenido-letra">
-                      Máster en Nuevas Tecnologías y Eficiencia Energética en
-                      Edificación
+                    {t('master_nuevas_tecnologias')}
                     </option>
                     <option value="master_prevencion_riesgos_laborales"  className="contenido-letra">
-                      Máster en Prevención de Riesgos Laborales
+                    {t('master_prevencion_riesgos_laborales')}
                     </option>
                   </select>
                   {errors.titulacion?.type === "required" && (
-                    <p  className="contenido-letra">El campo es requerido</p>
+                    <p  className="contenido-letra">{t('campo-requerido')}</p>
                   )}
                   {errors.titulacion?.type === "validate" && (
-                    <p  className="contenido-letra">Debes elegir una titulación</p>
+                    <p  className="contenido-letra">{t('titulacion-obligatoria')}</p>
                   )}
                   <br />
                   <br />
                 </div>
                 <div className="form-group" id="titulacion">
-                  <label htmlFor="estilo"  className="contenido-letra">Estilo:</label>
+                  <label htmlFor="estilo"  className="contenido-letra">{t('estilo')}:</label>
                   <select
                    className="contenido-letra"
                     defaultValue="none"
@@ -302,70 +303,70 @@ const Registro = () => {
                       validate: estiloValidator,
                     })}
                   >
-                    <option value="none"  className="contenido-letra">Selecciona tu estilo</option>
-                    <option value="1"  className="contenido-letra">Por defecto</option>
-                    <option value="2"  className="contenido-letra">Oscuro</option>
-                    <option value="3"  className="contenido-letra">Alto contraste</option>
-                    <option value="4"  className="contenido-letra">Por defecto con letra grande</option>
-                    <option value="5"  className="contenido-letra">Oscuro con letra grande</option>
-                    <option value="6"  className="contenido-letra">Alto contraste con letra grande</option>
+                    <option value="none"  className="contenido-letra">{t('sel-estilo')}</option>
+                    <option value="1"  className="contenido-letra">{t('normal')}</option>
+                    <option value="2"  className="contenido-letra">{t('oscuro')}</option>
+                    <option value="3"  className="contenido-letra">{t('ac')}</option>
+                    <option value="4"  className="contenido-letra">{t('normal-lg')}</option>
+                    <option value="5"  className="contenido-letra">{t('oscuro-lg')}</option>
+                    <option value="6"  className="contenido-letra">{t('ac-lg')}</option>
                   </select>
                   {errors.estilo?.type === "required" && (
-                    <p className="contenido-letra">El campo es requerido</p>
+                    <p className="contenido-letra">{t('campo-requerido')}</p>
                   )}
                   {errors.estilo?.type === "validate" && (
-                    <p className="contenido-letra">Debes elegir un estilo</p>
+                    <p className="contenido-letra">{t('estilo-obligatorio')}</p>
                   )}
                   <br />
                   <br />
                 </div>
                 <div className="form-group" id="direccion">
-                  <label htmlFor="direccion" className="contenido-letra">Dirección:</label>
+                  <label htmlFor="direccion" className="contenido-letra">{t('direccion')}:</label>
                   <input
                   className="contenido-letra"
                     type="text"
                     id="direccion"
                     name="direccion"
-                    placeholder="Incluye tu dirección"
+                    placeholder={t('placeholder-direccion')}
                     {...register("direccion", {
                       required: true,
                     })}
                   />
                   {errors.direccion?.type === "required" && (
-                    <p className="contenido-letra">El campo es requerido</p>
+                    <p className="contenido-letra">{t('campo-requerido')}</p>
                   )}
                   <br />
                   <br />
                 </div>
                 <div className="form-group contenido-letra" id="nacimiento">
-                  <label htmlFor="fecha_nacimiento" className="contenido-letra">Fecha de Nacimiento:</label>
+                  <label htmlFor="fecha_nacimiento" className="contenido-letra">{t('fecnac')}:</label>
                   <input
                   className="contenido-letra"
                     type="date"
                     id="fecha_nacimiento"
                     name="fecha_nacimiento"
-                    placeholder="DD-MM-AAAA"
+                    placeholder={t('placeholder-fecha')}
                     {...register("fecha_nacimiento", {
                       required: true,
                       validate: edadValidator,
                     })}
                   />
                   {errors.fecha_nacimiento?.type === "required" && (
-                    <p className="contenido-letra">El campo es requerido</p>
+                    <p className="contenido-letra">{t('campo-requerido')}</p>
                   )}
                   {errors.fecha_nacimiento?.type === "validate" && (
-                    <p className="contenido-letra">Debes ser mayor de 17 años</p>
+                    <p className="contenido-letra">{t('mayor-edad')}</p>
                   )}
                   <br />
                   <br />
                 </div>
               </div>
               <div className="recomendacion">
-                <span className="contenido-letra">¿Ya tienes cuenta?</span>
-                <a href="login" className="contenido-letra">Inicia sesión</a>
+                <span className="contenido-letra">{t('pregunta-registro')}</span>
+                <a href="login" className="contenido-letra">{t('in')}</a>
               </div>
               <div className="boton-entrar btn-letra">
-                <button type="submit" className="btn  btn-primary btn-letra" value="Editar perfil">Registrarse</button>
+                <button type="submit" className="btn  btn-primary btn-letra" value="Editar perfil">{t('registro')}</button>
               </div>
             </div>
           </form>

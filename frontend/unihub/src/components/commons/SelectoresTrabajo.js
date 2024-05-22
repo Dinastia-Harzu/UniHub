@@ -1,11 +1,14 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
 import { URL_BASE } from "../../utils/constantes.js";
+import { useTranslation } from 'react-i18next';
 
 export function SelectorTipoTrabajo({ formData, setFormData }) {
+  const { t } = useTranslation();
   const [tiposTrabajo, settiposTrabajo] = useState([]);
 
   function recogerTiposTrabajo() {
+
     axios
       .get(URL_BASE + "tipos-trabajo")
       .then((result) => {
@@ -20,8 +23,8 @@ export function SelectorTipoTrabajo({ formData, setFormData }) {
   }, []);
 
   return (
-    <div className="contenedor-apartados-formulario">
-      <label htmlFor="tipoTrabajo">Tipo del trabajo</label>
+    <div className="contenedor-apartados-formulario contenido-letra">
+      <label htmlFor="tipoTrabajo">{t("tipo-trabajo")}</label>
       <select
         id="tipoTrabajo"
         title="tipos-trabajo"
@@ -45,6 +48,7 @@ export function SelectorTipoTrabajo({ formData, setFormData }) {
 }
 
 export function SelectorTitulaciones({ formData, setFormData }) {
+  const { t } = useTranslation();
   const [titulaciones, setTitulaciones] = useState([]);
 
   function recogerTitulaciones() {

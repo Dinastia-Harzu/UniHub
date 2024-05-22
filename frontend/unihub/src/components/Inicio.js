@@ -24,7 +24,7 @@ export default function Inicio() {
             />
             <div className="contenido-articulo-inicio">
               <h2 className="titulo-articulo-inicio titulo-letra">
-                La plataforma perfecta para subir tu trabajo
+              {t('titulo-articulo-inicio')}
               </h2>
               <p className="texto-articulo-inicio contenido-letra">
                 Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean
@@ -38,7 +38,7 @@ export default function Inicio() {
           <article className="articulo-inicio">
             <div className="contenido-articulo-inicio">
               <h2 className="titulo-articulo-inicio titulo-letra">
-                Consigue que el mundo vea tu progreso
+              {t('titulo-articulo-inicio-dos')}
               </h2>
               <p className="texto-articulo-inicio contenido-letra">
                 Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean

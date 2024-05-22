@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 
 export default function Footer() {
+  const { t } = useTranslation();
   const { i18n } = useTranslation();
 
   const changeLanguage = (event) => {
@@ -16,10 +17,10 @@ export default function Footer() {
         <p className='btn-letra'>&copy;2024 UniHub</p>
       </div>
       <div className="container2">
-        <Link to="/contacto" className='btn-letra'>Contacto</Link>
+        <Link to="/contacto" className='btn-letra'>{t('contacto')}</Link>
       </div>
       <div className="language-selector btn-letra">
-        <select className="btn btn-letra" onChange={changeLanguage} defaultValue={i18n.language}>
+        <select className="language-selector btn btn-letra" onChange={changeLanguage} defaultValue={i18n.language}>
           <option value="en" className='btn-letra'>English</option>
           <option value="es" className='btn-letra'>Español</option>
         </select>

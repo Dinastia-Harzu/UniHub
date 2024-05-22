@@ -6,6 +6,11 @@
     display: none;
 }
 
+.titulo-publicar{
+    display: flex;
+    justify-content: center;
+}
+
 .seccion-botones-publicar {
     display: flex;
     justify-content: center;
@@ -122,9 +127,10 @@
     border-style: none;
 }
 
-.boton-eliminar-recurso:hover,.boton-eliminar-recurso:focus {
+.boton-eliminar-recurso:hover,
+.boton-eliminar-recurso:focus {
     background-color: var(--color-secondary);
-    
+
 }
 
 .boton-anterior {
