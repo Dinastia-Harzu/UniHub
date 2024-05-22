@@ -49,7 +49,6 @@ export default function Header() {
           <FaBars />
         </button>
       </header>
-      <Outlet />
     </>
   );
 }

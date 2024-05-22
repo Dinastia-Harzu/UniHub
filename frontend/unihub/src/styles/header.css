@@ -56,7 +56,7 @@ nav .container2 {
     gap: .5em;
     background-color: var(--color-bg-2);
     transition: 1s;
-    transform: translateY(-100vh);
+    transform: translateY(-150vh);
   }
 
   header .responsive-nav {

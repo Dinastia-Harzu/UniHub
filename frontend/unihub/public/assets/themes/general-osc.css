@@ -43,6 +43,7 @@ html {
 
 main {
   color: white;
+  margin-bottom: 7em;
 }
 
 .logotipo {
@@ -93,6 +94,7 @@ header .nav-btn {
   cursor: pointer;
   min-width: fit-content;
   margin: .3em;
+  transition: background-color 0.3s;
 }
 
 .btn:hover,.btn:focus {

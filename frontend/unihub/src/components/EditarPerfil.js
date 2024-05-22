@@ -1,12 +1,20 @@
 import { useForm } from "react-hook-form";
-import { edadValidator, titulacionValidator, estiloValidator } from "./validators";
-import React, { useState, useRef } from 'react';
+import {
+  edadValidator,
+  titulacionValidator,
+  estiloValidator,
+} from "./validators";
+import React, { useState } from "react";
 import "../styles/formulario.css";
-import { FaEye, FaEyeSlash } from 'react-icons/fa';
-import { Link } from 'react-router-dom';
+import { FaEye, FaEyeSlash } from "react-icons/fa";
+import { useRef } from "react";
 
 const EditarPerfil = () => {
-  const { register, formState: { errors }, handleSubmit } = useForm();
+  const {
+    register,
+    formState: { errors },
+    handleSubmit,
+  } = useForm();
   const [mostrarContrasena, setMostrarContrasena] = useState(false);
   const [imagenSeleccionada, setImagenSeleccionada] = useState(null);
   const refPortada = useRef();
@@ -28,7 +36,7 @@ const EditarPerfil = () => {
 
   const onSubmit = (data) => {
     console.log(data);
-  }
+  };
 
   const toggleMostrarContrasena = () => {
     setMostrarContrasena(!mostrarContrasena);
@@ -48,53 +56,92 @@ const EditarPerfil = () => {
   return (
     <main>
       <div className="contenedor-inicial">
-        <div className="titulo titulo-letra"><h2>Mi Perfil</h2></div>
+        <div className="titulo">
+          <h2>Mi Perfil</h2>
+        </div>
         <div className="form-container">
           <form onSubmit={handleSubmit(onSubmit)} className="pos-wrapper">
-          <div className="wrapper">
-              <div className="form-group" id="nombre-titulo"><h1>Miriam</h1></div>
+            <div className="wrapper">
+              <div className="form-group" id="nombre-titulo">
+                <h1>Miriam</h1>
+              </div>
               <div className="contenedor-apartados-formulario_usuario">
                 <label htmlFor="portada"></label>
                 <img
                   ref={refImagen}
-                  src="./assets/no_photo.png"
+                  src="/assets/no_photo.png"
                   alt="Portada"
-                  onClick={setPortada}
-                  onKeyDown={handleKeyDownSetPortada}
-                  tabIndex="0"
+                  onClick={() => setPortada()}
                   width={240}
                   height={320}
                 />
-                <input ref={refPortada} type="file" name="portada" accept="image/*" onChange={cambiarFoto} style={{ display: 'none' }} />
+                <input
+                  ref={refPortada}
+                  type="file"
+                  name="portada"
+                  accept="image/*"
+                  onChange={(event) => cambiarFoto(event)}
+                ></input>
               </div>
               <div className="form-group" id="nombre">
-                <label htmlFor="nombre" className="contenido-letra">Nombre:</label>
-                <input type="text" id="nombre" name="nombre" defaultValue="Miriam" {...register('nombre', {
-                  required: true,
-                  maxLength: 20
-                })} />
-                {errors.nombre?.type === 'required' && <p>El campo es requerido</p>}
-                {errors.nombre?.type === 'maxLength' && <p>El nombre introducido es demasiado largo</p>}
+                <label htmlFor="nombre">Nombre:</label>
+                <input
+                  type="text"
+                  id="nombre"
+                  name="nombre"
+                  defaultValue="Miriam"
+                  {...register("nombre", {
+                    required: true,
+                    maxLength: 20,
+                  })}
+                />
+                {errors.nombre?.type === "required" && (
+                  <p>El campo es requerido</p>
+                )}
+                {errors.nombre?.type === "maxLength" && (
+                  <p>El nombre introducido es demasiado largo</p>
+                )}
               </div>
               <div className="form-group" id="apellidos">
-                <label htmlFor="apellidos" className="contenido-letra">Apellidos:</label>
-                <input type="text" id="apellidos" name="apellidos" defaultValue="García" {...register('apellidos', {
-                  required: true,
-                  maxLength: 50
-                })} />
-                {errors.apellidos?.type === 'required' && <p>El campo es requerido</p>}
-                {errors.apellidos?.type === 'maxLength' && <p>El nombre introducido es demasiado largo</p>}
+                <label htmlFor="apellidos">Apellidos:</label>
+                <input
+                  type="text"
+                  id="apellidos"
+                  name="apellidos"
+                  defaultValue="García"
+                  {...register("apellidos", {
+                    required: true,
+                    maxLength: 50,
+                  })}
+                />
+                {errors.apellidos?.type === "required" && (
+                  <p>El campo es requerido</p>
+                )}
+                {errors.apellidos?.type === "maxLength" && (
+                  <p>El nombre introducido es demasiado largo</p>
+                )}
               </div>
               <div id="parte-inferior">
                 <div className="form-group" id="correo">
-                  <label htmlFor="correo"className="contenido-letra">Correo electrónico:</label>
-                  <input type="email" id="correo" name="correo" defaultValue="miriam34@gmail.com"{...register('correo', {
-                    required: true,
-                    pattern: /^[^\s@]+@[^\s@]+\.[^\s@]+$/i
-                  })} />
-                  {errors.correo?.type === 'required' && <p>El campo es requerido</p>}
-                  {errors.correo?.type === 'pattern' && <p>El formato del correo no es adecuado</p>}
-                  <br /><br />
+                  <label for="correo">Correo electrónico:</label>
+                  <input
+                    type="email"
+                    id="correo"
+                    name="correo"
+                    defaultValue="miriam34@gmail.com"
+                    {...register("correo", {
+                      required: true,
+                      pattern: /^[^\s@]+@[^\s@]+\.[^\s@]+$/i,
+                    })}
+                  />
+                  {errors.correo?.type === "required" && (
+                    <p>El campo es requerido</p>
+                  )}
+                  {errors.correo?.type === "maxLength" && (
+                    <p>El formato del correo no es adecuado</p>
+                  )}
+                  <br />
+                  <br />
                 </div>
                 <div className="form-group" id="contrasenia">
                   <div className="input-contrasenia">
@@ -104,107 +151,210 @@ const EditarPerfil = () => {
                       id="contrasena"
                       name="contrasena"
                       defaultValue="1234Pepito"
-                      {...register('contrasena', {
+                      {...register("contrasena", {
                         required: true,
-                        pattern: /(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}/
+                        pattern: /(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}/,
                       })}
                     
                     />
                   </div>
                   <div className="boton-contrasenia">
-                    <span type="button"  tabIndex="0" onKeyDown={handleKeyDownTogglePassword} onClick={toggleMostrarContrasena}>
-                      {mostrarContrasena ? <FaEyeSlash className="icono-grande" /> : <FaEye className="icono-grande" />}
+                    <span type="button" onClick={toggleMostrarContrasena}>
+                      {mostrarContrasena ? (
+                        <FaEyeSlash className="icono-grande" />
+                      ) : (
+                        <FaEye className="icono-grande" />
+                      )}
                     </span>
                   </div>
-                  {errors.contrasena?.type === 'required' && <p>El campo es requerido</p>}
-                  {errors.contrasena?.type === 'pattern' && <p>El formato no es adecuado</p>}
+                  {errors.contrasena?.type === "required" && (
+                    <p>El campo es requerido</p>
+                  )}
+                  {errors.contrasena?.type === "pattern" && (
+                    <p>El formato no es adecuado</p>
+                  )}
                   <br />
                 </div>
                 <div className="form-group" id="titulacion">
-                  <label htmlFor="titulacion" className="contenido-letra">Grado o máster:</label>
-                  <select defaultValue="arquitectura" {...register('titulacion', {
-                    required: true,
-                    validate: titulacionValidator
-                  })} >
+                  <label for="titulacion">Grado o máster:</label>
+                  <select
+                    defaultValue="arquitectura"
+                    {...register("titulacion", {
+                      required: true,
+                      validate: titulacionValidator,
+                    })}
+                  >
                     <option value="none">Selecciona tu titulación</option>
-                    <option value="ingenieria_multimedia">Ingeniería Multimedia</option>
+                    <option value="ingenieria_multimedia">
+                      Ingeniería Multimedia
+                    </option>
                     <option value="arquitectura">Arquitectura</option>
-                    <option value="arquitectura_tecnica">Arquitectura técnica</option>
-                    <option value="fundamentos_arquitectura">Fundamentos de la arquitectura</option>
-                    <option value="ingenieria_aeroespacial">Ingeniería Aeroespacial</option>
-                    <option value="ingenieria_biomedica">Ingeniería Biomédica</option>
-                    <option value="ingenieria_sonido_imagen">Ingeniería en Sonido e Imagen en Telecomunicación</option>
+                    <option value="arquitectura_tecnica">
+                      Arquitectura técnica
+                    </option>
+                    <option value="fundamentos_arquitectura">
+                      Fundamentos de la arquitectura
+                    </option>
+                    <option value="ingenieria_aeroespacial">
+                      Ingeniería Aeroespacial
+                    </option>
+                    <option value="ingenieria_biomedica">
+                      Ingeniería Biomédica
+                    </option>
+                    <option value="ingenieria_sonido_imagen">
+                      Ingeniería en Sonido e Imagen en Telecomunicación
+                    </option>
                     <option value="ingenieria_civil">Ingeniería Civil</option>
-                    <option value="ingenieria_ia">Ingeniería en Inteligencia Artificial</option>
-                    <option value="ingenieria_informatica">Ingeniería Informática</option>
-                    <option value="ingenieria_informatica_ade">Ingeniería Informática + ADE</option>
-                    <option value="ingenieria_quimica">Ingeniería Química</option>
-                    <option value="ingenieria_robotica">Ingeniería Robótica</option>
-                    <option value="master_arquitectura">Máster en arquitectura</option>
-                    <option value="master_automatica_robotica">Máster en Automática y Robótica</option>
-                    <option value="master_ciberseguridad">Máster en Ciberseguridad</option>
-                    <option value="master_ciencia_datos">Máster en Ciencia de datos</option>
-                    <option value="master_desarrollo_aplicaciones_servicios_web">Máster en Desarrollo de Aplicaciones y Servicios Web</option>
-                    <option value="master_desarrollo_software_dispositivos_moviles">Máster en Desarrollo de software para dispositivos móviles</option>
-                    <option value="master_gestion_edificacion">Máster en Gestión de Edificación</option>
-                    <option value="master_ingenieria_biomedica">Máster en Ingeniería Biomédica</option>
-                    <option value="master_ingenieria_caminos_canales_puertos">Máster en Ingenieria de Caminos, canales y Puertos</option>
-                    <option value="master_ingenieria_materiales_agua_terreno">Máster en Ingeniería de los Materiales, Agua y Terreno</option>
-                    <option value="master_ingenieria_telecomunicacion">Máster en Ingeniería de Telecomunicación</option>
-                    <option value="master_ingenieria_geologica">Máster en Ingeniería Geológica</option>
-                    <option value="master_ingenieria_informatica">Máster en Ingeniería Informática</option>
-                    <option value="master_ingenieria_quimica">Máster en Ingeniería Química</option>
-                    <option value="master_ingenieria_artificial">Máster en Ingeniería Artificial</option>
-                    <option value="master_nuevas_tecnologias">Máster en Nuevas Tecnologías y Eficiencia Energética en Edificación </option>
-                    <option value="master_prevencion_riesgos_laborales">Máster en Prevención de Riesgos Laborales</option>
+                    <option value="ingenieria_ia">
+                      Ingeniería en Inteligencia Artificial
+                    </option>
+                    <option value="ingenieria_informatica">
+                      Ingeniería Informática
+                    </option>
+                    <option value="ingenieria_informatica_ade">
+                      Ingeniería Informática + ADE
+                    </option>
+                    <option value="ingenieria_quimica">
+                      Ingeniería Química
+                    </option>
+                    <option value="ingenieria_robotica">
+                      Ingeniería Robótica
+                    </option>
+                    <option value="master_arquitectura">
+                      Máster en arquitectura
+                    </option>
+                    <option value="master_automatica_robotica">
+                      Máster en Automática y Robótica
+                    </option>
+                    <option value="master_ciberseguridad">
+                      Máster en Ciberseguridad
+                    </option>
+                    <option value="master_ciencia_datos">
+                      Máster en Ciencia de datos
+                    </option>
+                    <option value="master_desarrollo_aplicaciones_servicios_web">
+                      Máster en Desarrollo de Aplicaciones y Servicios Web
+                    </option>
+                    <option value="master_desarrollo_software_dispositivos_moviles">
+                      Máster en Desarrollo de software para dispositivos móviles
+                    </option>
+                    <option value="master_gestion_edificacion">
+                      Máster en Gestión de Edificación
+                    </option>
+                    <option value="master_ingenieria_biomedica">
+                      Máster en Ingeniería Biomédica
+                    </option>
+                    <option value="master_ingenieria_caminos_canales_puertos">
+                      Máster en Ingenieria de Caminos, canales y Puertos
+                    </option>
+                    <option value="master_ingenieria_materiales_agua_terreno">
+                      Máster en Ingeniería de los Materiales, Agua y Terreno
+                    </option>
+                    <option value="master_ingenieria_telecomunicacion">
+                      Máster en Ingeniería de Telecomunicación
+                    </option>
+                    <option value="master_ingenieria_geologica">
+                      Máster en Ingeniería Geológica
+                    </option>
+                    <option value="master_ingenieria_informatica">
+                      Máster en Ingeniería Informática
+                    </option>
+                    <option value="master_ingenieria_quimica">
+                      Máster en Ingeniería Química
+                    </option>
+                    <option value="master_ingenieria_artificial">
+                      Máster en Ingeniería Artificial
+                    </option>
+                    <option value="master_nuevas_tecnologias">
+                      Máster en Nuevas Tecnologías y Eficiencia Energética en
+                      Edificación{" "}
+                    </option>
+                    <option value="master_prevencion_riesgos_laborales">
+                      Máster en Prevención de Riesgos Laborales
+                    </option>
                   </select>
-                  {errors.titulacion?.type === 'required' && <p>El campo es requerido</p>}
-                  {errors.titulacion?.type === 'validate' && <p>Debes elegir una titulacion</p>}
-                  <br /><br />
+                  {errors.titulacion?.type === "required" && (
+                    <p>El campo es requerido</p>
+                  )}
+                  {errors.titulacion?.type === "validate" && (
+                    <p>Debes elegir una titulacion</p>
+                  )}
+                  <br />
+                  <br />
                 </div>
-                <div className="form-group" id="estilo">
-                  <label htmlFor="estilo" className="contenido-letra">Estilo:</label>
-                  <select defaultValue="1" {...register('estilo', {
-                    required: true,
-                    validate: estiloValidator
-                  })}>
+                <div className="form-group" id="titulacion">
+                  <label for="estilo">Estilo:</label>
+                  <select
+                    defaultValue="1"
+                    {...register("estilo", {
+                      required: true,
+                      validate: estiloValidator,
+                    })}
+                  >
                     <option value="none">Selecciona tu estilo</option>
                     <option value="1">Por defecto</option>
                     <option value="2">Letra Grande</option>
                     <option value="3">Alto contraste</option>
                   </select>
-                  {errors.estilo?.type === 'required' && <p>El campo es requerido</p>}
-                  {errors.estilo?.type === 'validate' && <p>Debes elegir un estilo</p>}
-                  <br /><br />
+                  {errors.titulacion?.type === "required" && (
+                    <p>El campo es requerido</p>
+                  )}
+                  {errors.titulacion?.type === "validate" && (
+                    <p>Debes elegir una titulacion</p>
+                  )}
+                  <br />
+                  <br />
                 </div>
                 <div className="form-group" id="direccion">
-                  <label htmlFor="direccion" className="contenido-letra">Dirección:</label>
-                  <input type="text" id="direccion" name="direccion" defaultValue="Calle Altozano, Alicante" {...register('direccion', {
-                    required: true,
-                  })} />
-                  {errors.direccion?.type === 'required' && <p>El campo es requerido</p>}
-                  <br /><br />
+                  <label for="direccion">Dirección:</label>
+                  <input
+                    type="text"
+                    id="direccion"
+                    name="direccion"
+                    defaultValue="Calle Altozano, Alicante"
+                    {...register("direccion", {
+                      required: true,
+                    })}
+                  />
+                  {errors.direccion?.type === "required" && (
+                    <p>El campo es requerido</p>
+                  )}
+                  <br />
+                  <br />
                 </div>
                 <div className="form-group" id="nacimiento">
-                  <label htmlFor="fecha_nacimiento" className="contenido-letra">Fecha de Nacimiento:</label>
-                  <input type="date" id="fecha_nacimiento" name="fecha_nacimiento" defaultValue="2023-05-24" {...register('fecha_nacimiento', {
-                    required: true,
-                    validate: edadValidator
-                  })} />
-                  {errors.fecha_nacimiento?.type === 'required' && <p>El campo es requerido</p>}
-                  {errors.fecha_nacimiento?.type === 'validate' && <p>Debes ser mayor de 17 años</p>}
-                  <br /><br />
+                  <label for="fecha_nacimiento">Fecha de Nacimiento:</label>
+                  <input
+                    type="date"
+                    id="fecha_nacimiento"
+                    name="fecha_nacimiento"
+                    defaultValue="2023-05-24"
+                    {...register("fecha_nacimiento", {
+                      required: true,
+                      validate: edadValidator,
+                    })}
+                  />
+                  {errors.fecha_nacimiento?.type === "required" && (
+                    <p>El campo es requerido</p>
+                  )}
+                  {errors.fecha_nacimiento?.type === "validate" && (
+                    <p>Debes ser mayor de 17 años</p>
+                  )}
+                  <br />
+                  <br />
                 </div>
               </div>
               <div className="boton-editar">
-              <Link to="../perfil" className="btn  btn-primary btn-letra" value="Aceptar">Aceptar</Link>
+                <button type="submit" className="btn" value="Editar perfil">
+                  Editar
+                </button>
               </div>
             </div>
           </form>
         </div>
-      </div >
-    </main >
+      </div>
+    </main>
   );
-}
+};
 
 export default EditarPerfil;

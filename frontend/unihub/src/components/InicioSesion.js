@@ -1,10 +1,14 @@
 import { useForm } from "react-hook-form";
-import React, { useState } from 'react';
-import { FaEye, FaEyeSlash } from 'react-icons/fa';
+import React, { useState } from "react";
+import { FaEye, FaEyeSlash } from "react-icons/fa";
 import "../styles/formulario.css";
 
 const InicioSesion = () => {
-  const { register, formState: { errors }, handleSubmit } = useForm();
+  const {
+    register,
+    formState: { errors },
+    handleSubmit,
+  } = useForm();
   const [mostrarContrasena, setMostrarContrasena] = useState(false);
 
   const onSubmit = (data) => {
@@ -16,7 +20,7 @@ const InicioSesion = () => {
   };
 
   const handleKeyDownTogglePassword = (event) => {
-    if (event.key === 'Enter') {
+    if (event.key === "Enter") {
       toggleMostrarContrasena();
     }
   };
@@ -38,14 +42,19 @@ const InicioSesion = () => {
                     id="correo"
                     name="correo"
                     placeholder="tu@correo.com"
-                    {...register('correo', {
+                    {...register("correo", {
                       required: true,
-                      pattern: /^[^\s@]+@[^\s@]+\.[^\s@]+$/i
+                      pattern: /^[^\s@]+@[^\s@]+\.[^\s@]+$/i,
                     })}
                   />
-                  {errors.correo?.type === 'required' && <p>El campo es requerido</p>}
-                  {errors.correo?.type === 'maxLength' && <p>El formato del correo no es adecuado</p>}
-                  <br /><br />
+                  {errors.correo?.type === "required" && (
+                    <p>El campo es requerido</p>
+                  )}
+                  {errors.correo?.type === "maxLength" && (
+                    <p>El formato del correo no es adecuado</p>
+                  )}
+                  <br />
+                  <br />
                 </div>
                 <div className="form-group" id="contrasenia">
                   <div className="input-contrasenia">
@@ -54,19 +63,32 @@ const InicioSesion = () => {
                       type={mostrarContrasena ? "text" : "password"}
                       id="contrasena"
                       name="contrasena"
-                      {...register('contrasena', {
+                      {...register("contrasena", {
                         required: true,
-                        pattern: /(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}/
+                        pattern: /(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}/,
                       })}
                     />
                   </div>
                   <div className="boton-contrasenia">
-                    <span type="button" tabIndex="0" onKeyDown={handleKeyDownTogglePassword} onClick={toggleMostrarContrasena}>
-                      {mostrarContrasena ? <FaEyeSlash className="icono-grande" /> : <FaEye className="icono-grande" />}
+                    <span
+                      type="button"
+                      tabIndex="0"
+                      onKeyDown={handleKeyDownTogglePassword}
+                      onClick={toggleMostrarContrasena}
+                    >
+                      {mostrarContrasena ? (
+                        <FaEyeSlash className="icono-grande" />
+                      ) : (
+                        <FaEye className="icono-grande" />
+                      )}
                     </span>
                   </div>
-                  {errors.contrasena?.type === 'required' && <p>El campo es requerido</p>}
-                  {errors.contrasena?.type === 'pattern' && <p>El formato no es adecuado</p>}
+                  {errors.contrasena?.type === "required" && (
+                    <p>El campo es requerido</p>
+                  )}
+                  {errors.contrasena?.type === "pattern" && (
+                    <p>El formato no es adecuado</p>
+                  )}
                   <br />
                 </div>
               </div>
@@ -75,7 +97,13 @@ const InicioSesion = () => {
                 <a href="registro">Regístrate</a>
               </div>
               <div className="boton-entrar">
-                <button type="submit" className="btn  btn-primary" value="Editar perfil">Entrar</button>
+                <button
+                  type="submit"
+                  className="btn btn-primary"
+                  value="Editar perfil"
+                >
+                  Entrar
+                </button>
               </div>
             </div>
           </form>

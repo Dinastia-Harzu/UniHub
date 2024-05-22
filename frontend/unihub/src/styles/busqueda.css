@@ -44,6 +44,11 @@
   border: 2px solid white;
 }
 
+.contenedor-botones-busqueda {
+  display: flex;
+  justify-content: end;
+}
+
 .formulario-busqueda button:hover,button:focus {
   font-weight: bold;
   color: var(--color-bg);
@@ -80,6 +85,4 @@ select {
   }
 }
 
-@media screen and (max-width: 574px) {
-
-}
+@media screen and (max-width: 574px) {}

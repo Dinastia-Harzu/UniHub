@@ -1,46 +1,47 @@
 import React from "react";
+import { Link } from "react-router-dom";
 
 import "../styles/carta-busqueda.css";
 
+const cardsData = [
+  {
+    id: 1,
+    title: "Trabajo 1",
+    description:
+      "Descripción breve del trabajo 1 Descripción breve del trabajo 1 Descripción breve del trabajo 1",
+    image: "/assets/Cabecera.jpg",
+  },
+  {
+    id: 2,
+    title: "Trabajo 2",
+    description: "Descripción breve del trabajo 2",
+    image: "/assets/Clase.png",
+  },
+  {
+    id: 3,
+    title: "Trabajo 3",
+    description: "Descripción breve del trabajo 3",
+    image: "/assets/Habitacion.png",
+  },
+  // Añadir más datos de cartas según sea necesario
+];
+
 export default function CartaBusqueda() {
   return (
-    // <div className="carta-busqueda">
-    //   <img className="img-busqueda" alt={proyecto.nombre} />
-    //   <div className="carta-contenido">
-    //     <h3><strong>{proyecto.nombre}</strong></h3>
-    //     <p><strong>Autor</strong>: {proyecto.autor}</p>
-    //     <p><strong>Titulación</strong>: {proyecto.titulacion}</p>
-    //     <p><strong>Fecha</strong>: {proyecto.publicacion}</p>
-    //     <p>{proyecto.resumen}</p>
-    //   </div>
-    // </div>
     <>
-    <div className="carta-busqueda">
-      <img
-        className="img-busqueda"
-        alt="Cortometraje de animación 3D"
-        src="assets/TFG_Similar1.png"
-      />
-      <div className="carta-contenido">
-        <h2>
-          <a href="#" className="titulo-letra"><strong>Cortometraje de animación 3D</strong></a>
-        </h2>
-        <br />
-        <p className="contenido-letra">
-          <strong >Autor</strong>: Jane Doe
-        </p>
-        <p className="contenido-letra">
-          <strong>Titulación</strong>: Máster en Arte y Animación
-        </p>
-        <p className="contenido-letra">
-          <strong>Fecha</strong>: 19/05/2022
-        </p>
-        <p className="contenido-letra">
-          Pequeño cortometraje realizado para la práctica número 2 de la
-          asignatura "Animación por computador"
-        </p>
+      <div className="cards-container">
+        {cardsData.map((card) => (
+          <Link key={card.id} to="/trabajo" className="card">
+            <img src={card.image} alt={card.title} />
+            <div className="card-content">
+              <h3>{card.title}</h3>
+              <div className="descripcion">
+                <p>{card.description}</p>
+              </div>
+            </div>
+          </Link>
+        ))}
       </div>
-    </div>
     </>
   );
 }

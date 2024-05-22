@@ -1,0 +1,42 @@
+h3 {
+  margin-top: 1em;
+  border-bottom: 2px solid var(--color-tertiary);
+  width: 100%;
+}
+
+.contenedor-contacto {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 20px;
+  border-radius: 10px;
+}
+
+.contact-title {
+  font-size: 2em;
+  margin-bottom: 20px;
+}
+
+.contact-container {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+}
+
+.contact-card {
+  background-color: var(--color-bg-form);
+  border: 1px solid var(--color-bg-form);
+  border-radius: 10px;
+  padding: 20px;
+  width: 250px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.card-title {
+  font-size: 1.5em;
+  margin-bottom: 10px;
+}
+
+strong {
+  font-size: 1.2em;
+}

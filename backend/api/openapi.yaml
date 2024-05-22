@@ -10,13 +10,13 @@ info:
     url: http://www.apache.org/licenses/LICENSE-2.0.html
   version: 1.0.0
 servers:
-- url: http://localhost:8192
-  description: Servidor ApiRest
+  - url: http://localhost:8192
+    description: Servidor ApiRest
 paths:
   /usuarios:
     get:
       tags:
-      - Usuarios
+        - Usuarios
       description: GET Usuarios
       operationId: usuariosGET
       responses:
@@ -25,198 +25,198 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/OK-GET'
+                $ref: "#/components/schemas/OK-GET"
         "404":
           description: Not Found
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/NotFound'
+                $ref: "#/components/schemas/NotFound"
         "500":
           description: Internal Server Error
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/InternalServerError'
+                $ref: "#/components/schemas/InternalServerError"
       x-swagger-router-controller: Usuarios
     post:
       tags:
-      - Usuarios
+        - Usuarios
       description: POST Usuarios
       operationId: usuariosPOST
       requestBody:
-        $ref: '#/components/requestBodies/Usuario'
+        $ref: "#/components/requestBodies/Usuario"
       responses:
         "201":
           description: Created
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Created'
+                $ref: "#/components/schemas/Created"
         "400":
           description: Bad Request
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/BadRequest-POST'
+                $ref: "#/components/schemas/BadRequest-POST"
         "401":
           description: Unauthorized
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Unauthorized'
+                $ref: "#/components/schemas/Unauthorized"
         "403":
           description: Forbidden
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Forbidden'
+                $ref: "#/components/schemas/Forbidden"
         "500":
           description: Internal Server Error
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/InternalServerError'
+                $ref: "#/components/schemas/InternalServerError"
       x-swagger-router-controller: Usuarios
   /usuarios/{id}:
     get:
       tags:
-      - Usuarios
+        - Usuarios
       description: GET usuario
       operationId: usuariosIdGET
       parameters:
-      - name: id
-        in: path
-        description: el identificador del usuario
-        required: true
-        style: simple
-        explode: false
-        schema:
-          type: integer
+        - name: id
+          in: path
+          description: el identificador del usuario
+          required: true
+          style: simple
+          explode: false
+          schema:
+            type: integer
       responses:
         "200":
           description: OK
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/OK-GETidPUT'
+                $ref: "#/components/schemas/OK-GETidPUT"
         "404":
           description: Not Found
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/NotFound'
+                $ref: "#/components/schemas/NotFound"
         "500":
           description: Internal Server Error
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/InternalServerError'
+                $ref: "#/components/schemas/InternalServerError"
       x-swagger-router-controller: Usuarios
     put:
       tags:
-      - Usuarios
+        - Usuarios
       description: PUT Usuario
       operationId: usuariosIdPUT
       parameters:
-      - name: id
-        in: path
-        description: el identificador del usuario
-        required: true
-        style: simple
-        explode: false
-        schema:
-          type: integer
+        - name: id
+          in: path
+          description: el identificador del usuario
+          required: true
+          style: simple
+          explode: false
+          schema:
+            type: integer
       requestBody:
-        $ref: '#/components/requestBodies/Usuario'
+        $ref: "#/components/requestBodies/Usuario"
       responses:
         "200":
           description: OK
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/OK-GETidPUT'
+                $ref: "#/components/schemas/OK-GETidPUT"
         "400":
           description: Bad Request
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/BadRequest-POST'
+                $ref: "#/components/schemas/BadRequest-POST"
         "401":
           description: Unauthorized
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Unauthorized'
+                $ref: "#/components/schemas/Unauthorized"
         "403":
           description: Forbidden
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Forbidden'
+                $ref: "#/components/schemas/Forbidden"
         "404":
           description: Not Found
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/NotFound'
+                $ref: "#/components/schemas/NotFound"
         "500":
           description: Internal Server Error
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/InternalServerError'
+                $ref: "#/components/schemas/InternalServerError"
       x-swagger-router-controller: Usuarios
     delete:
       tags:
-      - Usuarios
+        - Usuarios
       description: DELETE Usuario
       operationId: usuariosIdDELETE
       parameters:
-      - name: id
-        in: path
-        description: el identificador del usuario
-        required: true
-        style: simple
-        explode: false
-        schema:
-          type: integer
+        - name: id
+          in: path
+          description: el identificador del usuario
+          required: true
+          style: simple
+          explode: false
+          schema:
+            type: integer
       responses:
         "204":
           description: No Content
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/NoContent'
+                $ref: "#/components/schemas/NoContent"
         "401":
           description: Unauthorized
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Unauthorized'
+                $ref: "#/components/schemas/Unauthorized"
         "403":
           description: Forbidden
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Forbidden'
+                $ref: "#/components/schemas/Forbidden"
         "404":
           description: Not Found
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/NotFound'
+                $ref: "#/components/schemas/NotFound"
         "500":
           description: Internal Server Error
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/InternalServerError'
+                $ref: "#/components/schemas/InternalServerError"
       x-swagger-router-controller: Usuarios
   /trabajos:
     get:
       tags:
-      - Trabajos
+        - Trabajos
       description: GET Trabajos
       operationId: trabajosGET
       responses:
@@ -225,259 +225,466 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/OK-GET'
+                $ref: "#/components/schemas/OK-GET"
         "404":
           description: Not Found
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/NotFound'
+                $ref: "#/components/schemas/NotFound"
         "500":
           description: Internal Server Error
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/InternalServerError'
+                $ref: "#/components/schemas/InternalServerError"
       x-swagger-router-controller: Trabajos
     post:
       tags:
-      - Trabajos
+        - Trabajos
       description: POST Trabajos
       operationId: trabajosPOST
       requestBody:
-        $ref: '#/components/requestBodies/Trabajo'
+        $ref: "#/components/requestBodies/Trabajo"
       responses:
         "201":
           description: Created
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Created'
+                $ref: "#/components/schemas/Created"
         "400":
           description: Bad Request
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/BadRequest-POST'
+                $ref: "#/components/schemas/BadRequest-POST"
         "401":
           description: Unauthorized
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Unauthorized'
+                $ref: "#/components/schemas/Unauthorized"
         "403":
           description: Forbidden
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Forbidden'
+                $ref: "#/components/schemas/Forbidden"
         "500":
           description: Internal Server Error
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/InternalServerError'
+                $ref: "#/components/schemas/InternalServerError"
       x-swagger-router-controller: Trabajos
   /trabajos/{id}:
     get:
       tags:
-      - Trabajos
+        - Trabajos
       description: GET Trabajo
       operationId: trabajosIdGET
       parameters:
-      - name: id
-        in: path
-        description: el identificador del trabajo
-        required: true
-        style: simple
-        explode: false
-        schema:
-          type: integer
+        - name: id
+          in: path
+          description: el identificador del trabajo
+          required: true
+          style: simple
+          explode: false
+          schema:
+            type: integer
       responses:
         "200":
           description: OK
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/OK-GETidPUT'
+                $ref: "#/components/schemas/OK-GETidPUT"
         "404":
           description: Not Found
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/NotFound'
+                $ref: "#/components/schemas/NotFound"
         "500":
           description: Internal Server Error
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/InternalServerError'
+                $ref: "#/components/schemas/InternalServerError"
       x-swagger-router-controller: Trabajos
     put:
       tags:
-      - Trabajos
+        - Trabajos
       description: PUT Trabajo
       operationId: trabajosIdPUT
       parameters:
-      - name: id
-        in: path
-        description: el identificador del trabajo
-        required: true
-        style: simple
-        explode: false
-        schema:
-          type: integer
+        - name: id
+          in: path
+          description: el identificador del trabajo
+          required: true
+          style: simple
+          explode: false
+          schema:
+            type: integer
       requestBody:
-        $ref: '#/components/requestBodies/Trabajo'
+        $ref: "#/components/requestBodies/Trabajo"
       responses:
         "200":
           description: OK
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/OK-GETidPUT'
+                $ref: "#/components/schemas/OK-GETidPUT"
         "400":
           description: Bad Request
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/BadRequest-POST'
+                $ref: "#/components/schemas/BadRequest-POST"
         "401":
           description: Unauthorized
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Unauthorized'
+                $ref: "#/components/schemas/Unauthorized"
         "403":
           description: Forbidden
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Forbidden'
+                $ref: "#/components/schemas/Forbidden"
         "404":
           description: Not Found
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/NotFound'
+                $ref: "#/components/schemas/NotFound"
         "500":
           description: Internal Server Error
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/InternalServerError'
+                $ref: "#/components/schemas/InternalServerError"
       x-swagger-router-controller: Trabajos
     delete:
       tags:
-      - Trabajos
+        - Trabajos
       description: DELETE Trabajo
       operationId: trabajosIdDELETE
       parameters:
-      - name: id
-        in: path
-        description: el identificador del trabajo
-        required: true
-        style: simple
-        explode: false
-        schema:
-          type: integer
+        - name: id
+          in: path
+          description: el identificador del trabajo
+          required: true
+          style: simple
+          explode: false
+          schema:
+            type: integer
       responses:
         "204":
           description: No Content
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/NoContent'
+                $ref: "#/components/schemas/NoContent"
         "401":
           description: Unauthorized
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Unauthorized'
+                $ref: "#/components/schemas/Unauthorized"
         "403":
           description: Forbidden
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Forbidden'
+                $ref: "#/components/schemas/Forbidden"
         "404":
           description: Not Found
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/NotFound'
+                $ref: "#/components/schemas/NotFound"
         "500":
           description: Internal Server Error
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/InternalServerError'
+                $ref: "#/components/schemas/InternalServerError"
       x-swagger-router-controller: Trabajos
-  /universidades:
+  /trabajos/palabras-clave:
     get:
       tags:
-      - Universidades
-      description: GET Universidades
-      operationId: universidadesGET
+        - Trabajos
+      description: GET Trabajo
+      operationId: trabajos_palabras_claveGET
+      requestBody:
+        content:
+          application/json:
+            schema:
+              properties:
+                palabras-clave:
+                  type: array
       responses:
         "200":
           description: OK
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/OK-GET'
+                $ref: "#/components/schemas/OK-GETidPUT"
         "404":
           description: Not Found
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/NotFound'
+                $ref: "#/components/schemas/NotFound"
         "500":
           description: Internal Server Error
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/InternalServerError'
-      x-swagger-router-controller: Universidades
-  /universidades/{id}:
+                $ref: "#/components/schemas/InternalServerError"
+      x-swagger-router-controller: Trabajos
+  /palabras-clave:
     get:
       tags:
-      - Universidades
-      description: GET Universidad
-      operationId: universidadesIdGET
+        - Palabras clave
+      description: GET Palabras clave
+      operationId: palabras_claveGET
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/OK-GET"
+        "404":
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/NotFound"
+        "500":
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/InternalServerError"
+      x-swagger-router-controller: PalabrasClave
+    post:
+      tags:
+        - Palabras clave
+      description: POST Palabra clave
+      operationId: palabras_clavePOST
+      requestBody:
+        $ref: "#/components/requestBodies/PalabraClave"
+      responses:
+        "201":
+          description: Created
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Created"
+        "400":
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/BadRequest-POST"
+        "401":
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Unauthorized"
+        "403":
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Forbidden"
+        "500":
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/InternalServerError"
+      x-swagger-router-controller: PalabrasClave
+  /palabras-clave/{id}:
+    get:
+      tags:
+        - Palabras clave
+      description: GET Palabra clave
+      operationId: palabras_claveIdGET
       parameters:
-      - name: id
-        in: path
-        description: el identificador del trabajo
-        required: true
-        style: simple
-        explode: false
-        schema:
-          type: integer
+        - name: id
+          in: path
+          description: el identificador de la palabra clave
+          required: true
+          style: simple
+          explode: false
+          schema:
+            type: integer
       responses:
         "200":
           description: OK
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/OK-GETidPUT'
+                $ref: "#/components/schemas/OK-GETidPUT"
         "404":
           description: Not Found
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/NotFound'
+                $ref: "#/components/schemas/NotFound"
         "500":
           description: Internal Server Error
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/InternalServerError'
-      x-swagger-router-controller: Universidades
+                $ref: "#/components/schemas/InternalServerError"
+      x-swagger-router-controller: PalabrasClave
+    put:
+      tags:
+        - Palabras clave
+      description: PUT Palabra clave
+      operationId: palabras_claveIdPUT
+      parameters:
+        - name: id
+          in: path
+          description: el identificador de la palabra clave
+          required: true
+          style: simple
+          explode: false
+          schema:
+            type: integer
+      requestBody:
+        $ref: "#/components/requestBodies/PalabraClave"
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/OK-GETidPUT"
+        "400":
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/BadRequest-POST"
+        "401":
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Unauthorized"
+        "403":
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Forbidden"
+        "404":
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/NotFound"
+        "500":
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/InternalServerError"
+      x-swagger-router-controller: PalabrasClave
+    delete:
+      tags:
+        - Palabras clave
+      description: DELETE Palabra clave
+      operationId: palabras_claveIdDELETE
+      parameters:
+        - name: id
+          in: path
+          description: el identificador del tema
+          required: true
+          style: simple
+          explode: false
+          schema:
+            type: integer
+      responses:
+        "204":
+          description: No Content
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/NoContent"
+        "401":
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Unauthorized"
+        "403":
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Forbidden"
+        "404":
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/NotFound"
+        "500":
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/InternalServerError"
+      x-swagger-router-controller: PalabrasClave
+  /palabras-clave/trabajo/{id}:
+    get:
+      tags:
+        - Palabras clave
+      description: GET Palabras clave de un trabajo
+      operationId: palabras_clave_trabajoGET
+      parameters:
+        - name: id
+          in: path
+          description: el identificador del trabajo asociado
+          required: true
+          style: simple
+          explode: false
+          schema:
+            type: integer
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/OK-GETidPUT"
+        "404":
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/NotFound"
+        "500":
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/InternalServerError"
+      x-swagger-router-controller: PalabrasClave
   /titulaciones:
     get:
       tags:
-      - Titulaciones
+        - Titulaciones
       description: GET Titulaciones
       operationId: titulacionesGET
       responses:
@@ -486,198 +693,198 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/OK-GET'
+                $ref: "#/components/schemas/OK-GET"
         "404":
           description: Not Found
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/NotFound'
+                $ref: "#/components/schemas/NotFound"
         "500":
           description: Internal Server Error
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/InternalServerError'
+                $ref: "#/components/schemas/InternalServerError"
       x-swagger-router-controller: Titulaciones
     post:
       tags:
-      - Titulaciones
+        - Titulaciones
       description: POST Titulaciones
       operationId: titulacionesPOST
       requestBody:
-        $ref: '#/components/requestBodies/Titulacion'
+        $ref: "#/components/requestBodies/Titulacion"
       responses:
         "201":
           description: Created
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Created'
+                $ref: "#/components/schemas/Created"
         "400":
           description: Bad Request
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/BadRequest-POST'
+                $ref: "#/components/schemas/BadRequest-POST"
         "401":
           description: Unauthorized
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Unauthorized'
+                $ref: "#/components/schemas/Unauthorized"
         "403":
           description: Forbidden
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Forbidden'
+                $ref: "#/components/schemas/Forbidden"
         "500":
           description: Internal Server Error
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/InternalServerError'
+                $ref: "#/components/schemas/InternalServerError"
       x-swagger-router-controller: Titulaciones
   /titulaciones/{id}:
     get:
       tags:
-      - Titulaciones
+        - Titulaciones
       description: GET Titulación
       operationId: titulacionesIdGET
       parameters:
-      - name: id
-        in: path
-        description: el identificador del trabajo
-        required: true
-        style: simple
-        explode: false
-        schema:
-          type: integer
+        - name: id
+          in: path
+          description: el identificador del trabajo
+          required: true
+          style: simple
+          explode: false
+          schema:
+            type: integer
       responses:
         "200":
           description: OK
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/OK-GETidPUT'
+                $ref: "#/components/schemas/OK-GETidPUT"
         "404":
           description: Not Found
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/NotFound'
+                $ref: "#/components/schemas/NotFound"
         "500":
           description: Internal Server Error
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/InternalServerError'
+                $ref: "#/components/schemas/InternalServerError"
       x-swagger-router-controller: Titulaciones
     put:
       tags:
-      - Titulaciones
+        - Titulaciones
       description: PUT Titulacion
       operationId: titulacionesIdPUT
       parameters:
-      - name: id
-        in: path
-        description: el identificador de la titulación
-        required: true
-        style: simple
-        explode: false
-        schema:
-          type: integer
+        - name: id
+          in: path
+          description: el identificador de la titulación
+          required: true
+          style: simple
+          explode: false
+          schema:
+            type: integer
       requestBody:
-        $ref: '#/components/requestBodies/Titulacion'
+        $ref: "#/components/requestBodies/Titulacion"
       responses:
         "200":
           description: OK
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/OK-GETidPUT'
+                $ref: "#/components/schemas/OK-GETidPUT"
         "400":
           description: Bad Request
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/BadRequest-POST'
+                $ref: "#/components/schemas/BadRequest-POST"
         "401":
           description: Unauthorized
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Unauthorized'
+                $ref: "#/components/schemas/Unauthorized"
         "403":
           description: Forbidden
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Forbidden'
+                $ref: "#/components/schemas/Forbidden"
         "404":
           description: Not Found
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/NotFound'
+                $ref: "#/components/schemas/NotFound"
         "500":
           description: Internal Server Error
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/InternalServerError'
+                $ref: "#/components/schemas/InternalServerError"
       x-swagger-router-controller: Titulaciones
     delete:
       tags:
-      - Titulaciones
+        - Titulaciones
       description: DELETE Titulacion
       operationId: titulacionesIdDELETE
       parameters:
-      - name: id
-        in: path
-        description: el identificador de la titulación
-        required: true
-        style: simple
-        explode: false
-        schema:
-          type: integer
+        - name: id
+          in: path
+          description: el identificador de la titulación
+          required: true
+          style: simple
+          explode: false
+          schema:
+            type: integer
       responses:
         "204":
           description: No Content
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/NoContent'
+                $ref: "#/components/schemas/NoContent"
         "401":
           description: Unauthorized
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Unauthorized'
+                $ref: "#/components/schemas/Unauthorized"
         "403":
           description: Forbidden
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Forbidden'
+                $ref: "#/components/schemas/Forbidden"
         "404":
           description: Not Found
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/NotFound'
+                $ref: "#/components/schemas/NotFound"
         "500":
           description: Internal Server Error
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/InternalServerError'
+                $ref: "#/components/schemas/InternalServerError"
       x-swagger-router-controller: Titulaciones
   /tipos-trabajo:
     get:
       tags:
-      - Tipos de trabajo
+        - Tipos de trabajo
       description: GET Tipos de trabajo
       operationId: tipos_trabajoGET
       responses:
@@ -686,198 +893,198 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/OK-GET'
+                $ref: "#/components/schemas/OK-GET"
         "404":
           description: Not Found
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/NotFound'
+                $ref: "#/components/schemas/NotFound"
         "500":
           description: Internal Server Error
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/InternalServerError'
+                $ref: "#/components/schemas/InternalServerError"
       x-swagger-router-controller: TiposDeTrabajo
     post:
       tags:
-      - Tipos de trabajo
+        - Tipos de trabajo
       description: POST Tipos de trabajo
       operationId: tipos_trabajoPOST
       requestBody:
-        $ref: '#/components/requestBodies/TipoTrabajo'
+        $ref: "#/components/requestBodies/TipoTrabajo"
       responses:
         "201":
           description: Created
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Created'
+                $ref: "#/components/schemas/Created"
         "400":
           description: Bad Request
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/BadRequest-POST'
+                $ref: "#/components/schemas/BadRequest-POST"
         "401":
           description: Unauthorized
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Unauthorized'
+                $ref: "#/components/schemas/Unauthorized"
         "403":
           description: Forbidden
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Forbidden'
+                $ref: "#/components/schemas/Forbidden"
         "500":
           description: Internal Server Error
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/InternalServerError'
+                $ref: "#/components/schemas/InternalServerError"
       x-swagger-router-controller: TiposDeTrabajo
   /tipos-trabajo/{id}:
     get:
       tags:
-      - Tipos de trabajo
+        - Tipos de trabajo
       description: GET Tipo de trabajo
       operationId: tipos_trabajoIdGET
       parameters:
-      - name: id
-        in: path
-        description: el identificador del trabajo
-        required: true
-        style: simple
-        explode: false
-        schema:
-          type: integer
+        - name: id
+          in: path
+          description: el identificador del trabajo
+          required: true
+          style: simple
+          explode: false
+          schema:
+            type: integer
       responses:
         "200":
           description: OK
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/OK-GETidPUT'
+                $ref: "#/components/schemas/OK-GETidPUT"
         "404":
           description: Not Found
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/NotFound'
+                $ref: "#/components/schemas/NotFound"
         "500":
           description: Internal Server Error
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/InternalServerError'
+                $ref: "#/components/schemas/InternalServerError"
       x-swagger-router-controller: TiposDeTrabajo
     put:
       tags:
-      - Tipos de trabajo
+        - Tipos de trabajo
       description: PUT Tipo de trabajo
       operationId: tipos_trabajoIdPUT
       parameters:
-      - name: id
-        in: path
-        description: el identificador del tipo de trabajo
-        required: true
-        style: simple
-        explode: false
-        schema:
-          type: integer
+        - name: id
+          in: path
+          description: el identificador del tipo de trabajo
+          required: true
+          style: simple
+          explode: false
+          schema:
+            type: integer
       requestBody:
-        $ref: '#/components/requestBodies/TipoTrabajo'
+        $ref: "#/components/requestBodies/TipoTrabajo"
       responses:
         "200":
           description: OK
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/OK-GETidPUT'
+                $ref: "#/components/schemas/OK-GETidPUT"
         "400":
           description: Bad Request
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/BadRequest-POST'
+                $ref: "#/components/schemas/BadRequest-POST"
         "401":
           description: Unauthorized
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Unauthorized'
+                $ref: "#/components/schemas/Unauthorized"
         "403":
           description: Forbidden
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Forbidden'
+                $ref: "#/components/schemas/Forbidden"
         "404":
           description: Not Found
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/NotFound'
+                $ref: "#/components/schemas/NotFound"
         "500":
           description: Internal Server Error
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/InternalServerError'
+                $ref: "#/components/schemas/InternalServerError"
       x-swagger-router-controller: TiposDeTrabajo
     delete:
       tags:
-      - Tipos de trabajo
+        - Tipos de trabajo
       description: DELETE Tipo de trabajo
       operationId: tipos_trabajoIdDELETE
       parameters:
-      - name: id
-        in: path
-        description: el identificador del tipo de trabajo
-        required: true
-        style: simple
-        explode: false
-        schema:
-          type: integer
+        - name: id
+          in: path
+          description: el identificador del tipo de trabajo
+          required: true
+          style: simple
+          explode: false
+          schema:
+            type: integer
       responses:
         "204":
           description: No Content
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/NoContent'
+                $ref: "#/components/schemas/NoContent"
         "401":
           description: Unauthorized
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Unauthorized'
+                $ref: "#/components/schemas/Unauthorized"
         "403":
           description: Forbidden
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Forbidden'
+                $ref: "#/components/schemas/Forbidden"
         "404":
           description: Not Found
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/NotFound'
+                $ref: "#/components/schemas/NotFound"
         "500":
           description: Internal Server Error
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/InternalServerError'
+                $ref: "#/components/schemas/InternalServerError"
       x-swagger-router-controller: TiposDeTrabajo
   /temas:
     get:
       tags:
-      - Temas
+        - Temas
       description: GET Temas
       operationId: temasGET
       responses:
@@ -886,198 +1093,198 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/OK-GET'
+                $ref: "#/components/schemas/OK-GET"
         "404":
           description: Not Found
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/NotFound'
+                $ref: "#/components/schemas/NotFound"
         "500":
           description: Internal Server Error
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/InternalServerError'
+                $ref: "#/components/schemas/InternalServerError"
       x-swagger-router-controller: Temas
     post:
       tags:
-      - Temas
+        - Temas
       description: POST Temas
       operationId: temasPOST
       requestBody:
-        $ref: '#/components/requestBodies/Tema'
+        $ref: "#/components/requestBodies/Tema"
       responses:
         "201":
           description: Created
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Created'
+                $ref: "#/components/schemas/Created"
         "400":
           description: Bad Request
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/BadRequest-POST'
+                $ref: "#/components/schemas/BadRequest-POST"
         "401":
           description: Unauthorized
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Unauthorized'
+                $ref: "#/components/schemas/Unauthorized"
         "403":
           description: Forbidden
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Forbidden'
+                $ref: "#/components/schemas/Forbidden"
         "500":
           description: Internal Server Error
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/InternalServerError'
+                $ref: "#/components/schemas/InternalServerError"
       x-swagger-router-controller: Temas
   /temas/{id}:
     get:
       tags:
-      - Temas
+        - Temas
       description: GET Tema
       operationId: temasIdGET
       parameters:
-      - name: id
-        in: path
-        description: el identificador del trabajo
-        required: true
-        style: simple
-        explode: false
-        schema:
-          type: integer
+        - name: id
+          in: path
+          description: el identificador del trabajo
+          required: true
+          style: simple
+          explode: false
+          schema:
+            type: integer
       responses:
         "200":
           description: OK
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/OK-GETidPUT'
+                $ref: "#/components/schemas/OK-GETidPUT"
         "404":
           description: Not Found
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/NotFound'
+                $ref: "#/components/schemas/NotFound"
         "500":
           description: Internal Server Error
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/InternalServerError'
+                $ref: "#/components/schemas/InternalServerError"
       x-swagger-router-controller: Temas
     put:
       tags:
-      - Temas
+        - Temas
       description: PUT Tema
       operationId: temasIdPUT
       parameters:
-      - name: id
-        in: path
-        description: el identificador del tema
-        required: true
-        style: simple
-        explode: false
-        schema:
-          type: integer
+        - name: id
+          in: path
+          description: el identificador del tema
+          required: true
+          style: simple
+          explode: false
+          schema:
+            type: integer
       requestBody:
-        $ref: '#/components/requestBodies/Tema'
+        $ref: "#/components/requestBodies/Tema"
       responses:
         "200":
           description: OK
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/OK-GETidPUT'
+                $ref: "#/components/schemas/OK-GETidPUT"
         "400":
           description: Bad Request
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/BadRequest-POST'
+                $ref: "#/components/schemas/BadRequest-POST"
         "401":
           description: Unauthorized
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Unauthorized'
+                $ref: "#/components/schemas/Unauthorized"
         "403":
           description: Forbidden
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Forbidden'
+                $ref: "#/components/schemas/Forbidden"
         "404":
           description: Not Found
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/NotFound'
+                $ref: "#/components/schemas/NotFound"
         "500":
           description: Internal Server Error
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/InternalServerError'
+                $ref: "#/components/schemas/InternalServerError"
       x-swagger-router-controller: Temas
     delete:
       tags:
-      - Temas
+        - Temas
       description: DELETE Tema
       operationId: temasIdDELETE
       parameters:
-      - name: id
-        in: path
-        description: el identificador del tema
-        required: true
-        style: simple
-        explode: false
-        schema:
-          type: integer
+        - name: id
+          in: path
+          description: el identificador del tema
+          required: true
+          style: simple
+          explode: false
+          schema:
+            type: integer
       responses:
         "204":
           description: No Content
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/NoContent'
+                $ref: "#/components/schemas/NoContent"
         "401":
           description: Unauthorized
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Unauthorized'
+                $ref: "#/components/schemas/Unauthorized"
         "403":
           description: Forbidden
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Forbidden'
+                $ref: "#/components/schemas/Forbidden"
         "404":
           description: Not Found
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/NotFound'
+                $ref: "#/components/schemas/NotFound"
         "500":
           description: Internal Server Error
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/InternalServerError'
+                $ref: "#/components/schemas/InternalServerError"
       x-swagger-router-controller: Temas
   /multimedia:
     get:
       tags:
-      - Multimedia
+        - Multimedia
       description: GET Ficheros multimedia
       operationId: multimediaGET
       responses:
@@ -1086,198 +1293,233 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/OK-GET'
+                $ref: "#/components/schemas/OK-GET"
         "404":
           description: Not Found
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/NotFound'
+                $ref: "#/components/schemas/NotFound"
         "500":
           description: Internal Server Error
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/InternalServerError'
+                $ref: "#/components/schemas/InternalServerError"
       x-swagger-router-controller: Multimedia
     post:
       tags:
-      - Multimedia
+        - Multimedia
       description: POST Multimedia
       operationId: multimediaPOST
       requestBody:
-        $ref: '#/components/requestBodies/Multimedia'
+        $ref: "#/components/requestBodies/Multimedia"
       responses:
         "201":
           description: Created
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Created'
+                $ref: "#/components/schemas/Created"
         "400":
           description: Bad Request
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/BadRequest-POST'
+                $ref: "#/components/schemas/BadRequest-POST"
         "401":
           description: Unauthorized
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Unauthorized'
+                $ref: "#/components/schemas/Unauthorized"
         "403":
           description: Forbidden
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Forbidden'
+                $ref: "#/components/schemas/Forbidden"
         "500":
           description: Internal Server Error
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/InternalServerError'
+                $ref: "#/components/schemas/InternalServerError"
       x-swagger-router-controller: Multimedia
   /multimedia/{id}:
     get:
       tags:
-      - Multimedia
+        - Multimedia
       description: GET Fichero multimedia
       operationId: multimediaIdGET
       parameters:
-      - name: id
-        in: path
-        description: el identificador del trabajo
-        required: true
-        style: simple
-        explode: false
-        schema:
-          type: integer
+        - name: id
+          in: path
+          description: el identificador del archivo multimedia
+          required: true
+          style: simple
+          explode: false
+          schema:
+            type: integer
       responses:
         "200":
           description: OK
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/OK-GETidPUT'
+                $ref: "#/components/schemas/OK-GETidPUT"
         "404":
           description: Not Found
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/NotFound'
+                $ref: "#/components/schemas/NotFound"
         "500":
           description: Internal Server Error
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/InternalServerError'
+                $ref: "#/components/schemas/InternalServerError"
       x-swagger-router-controller: Multimedia
     put:
       tags:
-      - Multimedia
+        - Multimedia
       description: PUT Multimedia
       operationId: multimediaIdPUT
       parameters:
-      - name: id
-        in: path
-        description: el identificador del archivo multimedia
-        required: true
-        style: simple
-        explode: false
-        schema:
-          type: integer
+        - name: id
+          in: path
+          description: el identificador del archivo multimedia
+          required: true
+          style: simple
+          explode: false
+          schema:
+            type: integer
       requestBody:
-        $ref: '#/components/requestBodies/Multimedia'
+        $ref: "#/components/requestBodies/Multimedia"
       responses:
         "200":
           description: OK
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/OK-GETidPUT'
+                $ref: "#/components/schemas/OK-GETidPUT"
         "400":
           description: Bad Request
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/BadRequest-POST'
+                $ref: "#/components/schemas/BadRequest-POST"
         "401":
           description: Unauthorized
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Unauthorized'
+                $ref: "#/components/schemas/Unauthorized"
         "403":
           description: Forbidden
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Forbidden'
+                $ref: "#/components/schemas/Forbidden"
         "404":
           description: Not Found
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/NotFound'
+                $ref: "#/components/schemas/NotFound"
         "500":
           description: Internal Server Error
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/InternalServerError'
+                $ref: "#/components/schemas/InternalServerError"
       x-swagger-router-controller: Multimedia
     delete:
       tags:
-      - Multimedia
+        - Multimedia
       description: DELETE Multimedia
       operationId: multimediaIdDELETE
       parameters:
-      - name: id
-        in: path
-        description: el identificador del archivo multimedia
-        required: true
-        style: simple
-        explode: false
-        schema:
-          type: integer
+        - name: id
+          in: path
+          description: el identificador del archivo multimedia
+          required: true
+          style: simple
+          explode: false
+          schema:
+            type: integer
       responses:
         "204":
           description: No Content
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/NoContent'
+                $ref: "#/components/schemas/NoContent"
         "401":
           description: Unauthorized
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Unauthorized'
+                $ref: "#/components/schemas/Unauthorized"
         "403":
           description: Forbidden
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Forbidden'
+                $ref: "#/components/schemas/Forbidden"
         "404":
           description: Not Found
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/NotFound'
+                $ref: "#/components/schemas/NotFound"
         "500":
           description: Internal Server Error
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/InternalServerError'
+                $ref: "#/components/schemas/InternalServerError"
+      x-swagger-router-controller: Multimedia
+  /multimedia/trabajo/{id}:
+    get:
+      tags:
+        - Multimedia
+      description: GET Multimedia de un trabajo
+      operationId: multimedia_trabajoGET
+      parameters:
+        - name: id
+          in: path
+          description: el identificador del trabajo asociado
+          required: true
+          style: simple
+          explode: false
+          schema:
+            type: integer
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/OK-GET"
+        "404":
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/NotFound"
+        "500":
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/InternalServerError"
       x-swagger-router-controller: Multimedia
   /comentarios:
     get:
       tags:
-      - Comentarios
+        - Comentarios
       description: GET Comentarios
       operationId: comentariosGET
       responses:
@@ -1286,193 +1528,228 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/OK-GET'
+                $ref: "#/components/schemas/OK-GET"
         "404":
           description: Not Found
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/NotFound'
+                $ref: "#/components/schemas/NotFound"
         "500":
           description: Internal Server Error
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/InternalServerError'
+                $ref: "#/components/schemas/InternalServerError"
       x-swagger-router-controller: Comentarios
     post:
       tags:
-      - Comentarios
+        - Comentarios
       description: POST Comentarios
       operationId: comentariosPOST
       requestBody:
-        $ref: '#/components/requestBodies/Comentario'
+        $ref: "#/components/requestBodies/Comentario"
       responses:
         "201":
           description: Created
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Created'
+                $ref: "#/components/schemas/Created"
         "400":
           description: Bad Request
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/BadRequest-POST'
+                $ref: "#/components/schemas/BadRequest-POST"
         "401":
           description: Unauthorized
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Unauthorized'
+                $ref: "#/components/schemas/Unauthorized"
         "403":
           description: Forbidden
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Forbidden'
+                $ref: "#/components/schemas/Forbidden"
         "500":
           description: Internal Server Error
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/InternalServerError'
+                $ref: "#/components/schemas/InternalServerError"
       x-swagger-router-controller: Comentarios
   /comentarios/{id}:
     get:
       tags:
-      - Comentarios
+        - Comentarios
       description: GET Comentario
       operationId: comentariosIdGET
       parameters:
-      - name: id
-        in: path
-        description: el identificador del trabajo
-        required: true
-        style: simple
-        explode: false
-        schema:
-          type: integer
+        - name: id
+          in: path
+          description: el identificador del comentario
+          required: true
+          style: simple
+          explode: false
+          schema:
+            type: integer
       responses:
         "200":
           description: OK
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/OK-GETidPUT'
+                $ref: "#/components/schemas/OK-GETidPUT"
         "404":
           description: Not Found
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/NotFound'
+                $ref: "#/components/schemas/NotFound"
         "500":
           description: Internal Server Error
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/InternalServerError'
+                $ref: "#/components/schemas/InternalServerError"
       x-swagger-router-controller: Comentarios
     put:
       tags:
-      - Comentarios
+        - Comentarios
       description: PUT Comentario
       operationId: comentariosIdPUT
       parameters:
-      - name: id
-        in: path
-        description: el identificador del comentario
-        required: true
-        style: simple
-        explode: false
-        schema:
-          type: integer
+        - name: id
+          in: path
+          description: el identificador del comentario
+          required: true
+          style: simple
+          explode: false
+          schema:
+            type: integer
       requestBody:
-        $ref: '#/components/requestBodies/Comentario'
+        $ref: "#/components/requestBodies/Comentario"
       responses:
         "200":
           description: OK
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/OK-GETidPUT'
+                $ref: "#/components/schemas/OK-GETidPUT"
         "400":
           description: Bad Request
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/BadRequest-POST'
+                $ref: "#/components/schemas/BadRequest-POST"
         "401":
           description: Unauthorized
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Unauthorized'
+                $ref: "#/components/schemas/Unauthorized"
         "403":
           description: Forbidden
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Forbidden'
+                $ref: "#/components/schemas/Forbidden"
         "404":
           description: Not Found
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/NotFound'
+                $ref: "#/components/schemas/NotFound"
         "500":
           description: Internal Server Error
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/InternalServerError'
+                $ref: "#/components/schemas/InternalServerError"
       x-swagger-router-controller: Comentarios
     delete:
       tags:
-      - Comentarios
+        - Comentarios
       description: DELETE Comentario
       operationId: comentariosIdDELETE
       parameters:
-      - name: id
-        in: path
-        description: el identificador del comentario
-        required: true
-        style: simple
-        explode: false
-        schema:
-          type: integer
+        - name: id
+          in: path
+          description: el identificador del comentario
+          required: true
+          style: simple
+          explode: false
+          schema:
+            type: integer
       responses:
         "204":
           description: No Content
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/NoContent'
+                $ref: "#/components/schemas/NoContent"
         "401":
           description: Unauthorized
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Unauthorized'
+                $ref: "#/components/schemas/Unauthorized"
         "403":
           description: Forbidden
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Forbidden'
+                $ref: "#/components/schemas/Forbidden"
         "404":
           description: Not Found
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/NotFound'
+                $ref: "#/components/schemas/NotFound"
         "500":
           description: Internal Server Error
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/InternalServerError'
+                $ref: "#/components/schemas/InternalServerError"
+      x-swagger-router-controller: Comentarios
+  /comentarios/trabajo/{id}:
+    get:
+      tags:
+        - Comentarios
+      description: GET Comentarios de un trabajo
+      operationId: comentarios_trabajoGET
+      parameters:
+        - name: id
+          in: path
+          description: el identificador del trabajo asociado
+          required: true
+          style: simple
+          explode: false
+          schema:
+            type: integer
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/OK-GETidPUT"
+        "404":
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/NotFound"
+        "500":
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/InternalServerError"
       x-swagger-router-controller: Comentarios
 components:
   schemas:
@@ -1518,6 +1795,12 @@ components:
           type: string
         documento:
           type: string
+        palabras-clave:
+          type: array
+    ReqPalabraClave:
+      properties:
+        nombre:
+          type: string
     ReqTitulacion:
       properties:
         nombre:
@@ -1543,6 +1826,8 @@ components:
     ReqComentario:
       properties:
         autor:
+          type: integer
+        trabajo:
           type: integer
         comentario:
           type: string
@@ -1653,41 +1938,47 @@ components:
       content:
         application/json:
           schema:
-            $ref: '#/components/schemas/ReqUsuario'
+            $ref: "#/components/schemas/ReqUsuario"
       required: true
     Trabajo:
       content:
         application/json:
           schema:
-            $ref: '#/components/schemas/ReqTrabajo'
+            $ref: "#/components/schemas/ReqTrabajo"
+      required: true
+    PalabraClave:
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/ReqPalabraClave"
       required: true
     Titulacion:
       content:
         application/json:
           schema:
-            $ref: '#/components/schemas/ReqTitulacion'
+            $ref: "#/components/schemas/ReqTitulacion"
       required: true
     TipoTrabajo:
       content:
         application/json:
           schema:
-            $ref: '#/components/schemas/ReqTipoTrabajo'
+            $ref: "#/components/schemas/ReqTipoTrabajo"
       required: true
     Tema:
       content:
         application/json:
           schema:
-            $ref: '#/components/schemas/ReqTema'
+            $ref: "#/components/schemas/ReqTema"
       required: true
     Multimedia:
       content:
         application/json:
           schema:
-            $ref: '#/components/schemas/ReqMultimedia'
+            $ref: "#/components/schemas/ReqMultimedia"
       required: true
     Comentario:
       content:
         application/json:
           schema:
-            $ref: '#/components/schemas/ReqComentario'
+            $ref: "#/components/schemas/ReqComentario"
       required: true

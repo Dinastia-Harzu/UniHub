@@ -5,8 +5,12 @@ export default function FormBusqueda() {
     <div className="formulario-busqueda titulo-letra">
       <h2>¿Qué estás buscando?</h2>
       <form>
-        <div className="contenedor-apartados-formulario contenido-letra">
-          <input className = "contenido-letra" type="text" name="nombre" placeholder="Título del trabajo"></input>
+        <div className="contenedor-apartados-formulario">
+          <input
+            type="text"
+            name="nombre"
+            placeholder="Título del trabajo"
+          ></input>
         </div>
         <div className="contenedor-apartados-formulario  contenido-letra">
           <input  className = "contenido-letra" type="text" name="autor" placeholder="Autor"></input>
@@ -20,8 +24,12 @@ export default function FormBusqueda() {
             <option className = "contenido-letra" value="2">Grado en ingeniería informática</option>
           </select>
         </div>
-        <button className="btn" type="submit">Buscar</button>
+        <div className="contenedor-botones-busqueda">
+          <button className="btn" type="submit">
+            Buscar
+          </button>
+        </div>
       </form>
-    </div>
+    </div >
   );
 }

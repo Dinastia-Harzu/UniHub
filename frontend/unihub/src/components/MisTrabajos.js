@@ -1,17 +1,33 @@
-import React, { useState } from 'react';
-import { MdTune } from 'react-icons/md';
-import { Link } from 'react-router-dom';
-import '../styles/mis-trabajos.css';
+import React, { useState } from "react";
+import { MdTune } from "react-icons/md";
+import { Link } from "react-router-dom";
+import "../styles/mis-trabajos.css";
 
 const MisTrabajos = () => {
   const [filterOpen, setFilterOpen] = useState(false);
-  const [selectedFilter, setSelectedFilter] = useState('');
+  const [selectedFilter, setSelectedFilter] = useState("");
 
   // Datos de ejemplo de las cartas
   const cardsData = [
-    { id: 1, title: 'Trabajo 1', description: 'Descripción breve del trabajo 1 Descripción breve del trabajo 1 Descripción breve del trabajo 1', image: '/assets/Cabecera.jpg' },
-    { id: 2, title: 'Trabajo 2', description: 'Descripción breve del trabajo 2', image: '/assets/Clase.png' },
-    { id: 3, title: 'Trabajo 3', description: 'Descripción breve del trabajo 3', image: '/assets/Habitacion.png' },
+    {
+      id: 1,
+      title: "Trabajo 1",
+      description:
+        "Descripción breve del trabajo 1 Descripción breve del trabajo 1 Descripción breve del trabajo 1",
+      image: "/assets/Cabecera.jpg",
+    },
+    {
+      id: 2,
+      title: "Trabajo 2",
+      description: "Descripción breve del trabajo 2",
+      image: "/assets/Clase.png",
+    },
+    {
+      id: 3,
+      title: "Trabajo 3",
+      description: "Descripción breve del trabajo 3",
+      image: "/assets/Habitacion.png",
+    },
     // Añadir más datos de cartas según sea necesario
   ];
 

@@ -60,7 +60,7 @@ exports.multimediaIdDELETE = function (id) {
 /**
  * GET Fichero multimedia
  *
- * id Integer el identificador del trabajo
+ * id Integer el identificador del archivo multimedia
  * returns OK-GETidPUT
  **/
 exports.multimediaIdGET = function (id) {
@@ -75,6 +75,28 @@ exports.multimediaIdGET = function (id) {
         resolve(responder(200, res[0]));
       }
     });
+  });
+};
+
+/**
+ * GET Multimedia de un trabajo
+ *
+ * id Integer el identificador del trabajo asociado
+ * returns OK-GETidPUT
+ **/
+exports.multimedia_trabajoGET = function (id) {
+  return new Promise(function (resolve, reject) {
+    conexion.query(
+      `SELECT * FROM multimedia WHERE trabajo = ${id}`,
+      (err, filas) => {
+        if (err) {
+          console.error(err);
+          reject(responder(500, respuestas[500]));
+        } else {
+          resolve(responder(200, filas));
+        }
+      }
+    );
   });
 };
 

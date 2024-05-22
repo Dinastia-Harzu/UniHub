@@ -60,21 +60,44 @@ exports.comentariosIdDELETE = function (id) {
 /**
  * GET Comentario
  *
- * id Integer el identificador del trabajo
+ * id Integer el identificador del comentario
  * returns OK-GETidPUT
  **/
 exports.comentariosIdGET = function (id) {
   return new Promise(function (resolve, reject) {
-    conexion.query(`SELECT * FROM comentario WHERE id = ${id}`, (err, res) => {
-      if (err) {
-        console.error(err);
-        reject(responder(500, respuestas[500]));
-      } else if (res.length == 0) {
-        reject(responder(204));
-      } else {
-        resolve(responder(200, res[0]));
+    conexion.query(
+      `SELECT * FROM comentario WHERE id = ${id}`,
+      (err, filas) => {
+        if (err) {
+          console.error(err);
+          reject(responder(500, respuestas[500]));
+        } else {
+          resolve(responder(200, filas));
+        }
       }
-    });
+    );
+  });
+};
+
+/**
+ * GET Comentarios de un trabajo
+ *
+ * id Integer el identificador del trabajo asociado
+ * returns OK-GETidPUT
+ **/
+exports.comentarios_trabajoGET = function (id) {
+  return new Promise(function (resolve, reject) {
+    conexion.query(
+      `SELECT * FROM comentario WHERE trabajo = ${id}`,
+      (err, filas) => {
+        if (err) {
+          console.error(err);
+          reject(responder(500, respuestas[500]));
+        } else {
+          resolve(responder(200, filas));
+        }
+      }
+    );
   });
 };
 
@@ -124,6 +147,7 @@ exports.comentariosPOST = function (body) {
       `INSERT INTO comentario VALUES (
         ${$()},
         ${$(body.autor)},
+        ${$(body.trabajo)},
         ${$(body.comentario)},
         ${$(body.valoracion)}
     )`,
