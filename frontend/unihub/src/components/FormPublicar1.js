@@ -35,6 +35,7 @@ export default function FormPublicar1({ setPagina, formData, setFormData }) {
                 onChange={(event) =>
                   setFormData({ ...formData, nombre: event.target.value })
                 }
+                className="contenido-letra"
               ></input>
             </div>
 
@@ -66,6 +67,7 @@ export default function FormPublicar1({ setPagina, formData, setFormData }) {
                     palabras_clave: event.target.value,
                   })
                 }
+                className="contenido-letra"
               ></input>
             </div>
           </form>

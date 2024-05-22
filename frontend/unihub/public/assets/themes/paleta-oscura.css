@@ -1,7 +1,7 @@
 :root {
   --color-primary: #96CDB2;
   --color-secondary: #FCA964;
-  --color-tertiary: #F79B68;
+  --color-tertiary: #ec7433;
   --color-text: #f7f1ec;
 
   /*Fondos*/
@@ -11,4 +11,9 @@
   --color-bg-form-2: #524a4a;
 
   --color-bg-comment: #403535;
+
+  --title: x-large;
+  --content: large;
+  --butons: large;
+
 }

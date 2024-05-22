@@ -21,8 +21,9 @@ export function SelectorTipoTrabajo({ formData, setFormData }) {
 
   return (
     <div className="contenedor-apartados-formulario">
-      <label htmlFor="nivel">Tipo del trabajo</label>
+      <label htmlFor="tipoTrabajo">Tipo del trabajo</label>
       <select
+        id="tipoTrabajo"
         title="tipos-trabajo"
         name="tipo"
         onChange={(event) =>
@@ -63,8 +64,9 @@ export function SelectorTitulaciones({ formData, setFormData }) {
 
   return (
     <div className="contenedor-apartados-formulario">
-      <label htmlFor="nivel">Titulación</label>
+      <label htmlFor="titulacion">Titulación</label>
       <select
+        id="titulacion"
         title="titulaciones"
         name="titulacion"
         onChange={(event) =>

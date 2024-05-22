@@ -49,34 +49,24 @@
   justify-content: end;
 }
 
-.formulario-busqueda button:hover {
+.formulario-busqueda button:hover,button:focus {
   font-weight: bold;
   color: var(--color-bg);
   background-color: transparent;
   border: none;
 }
 
-.contenedor-apartados-formulario {
-  margin-bottom: 15px;
-  /* Espacio entre los campos */
-}
-
 input[type="text"],
 input[type="date"],
 select {
   width: 100%;
-  /* El campo de entrada ocupará todo el ancho disponible */
   padding: 10px;
-  /* Espacio interno */
   border: 1px solid #ccc;
-  /* Borde del campo */
   border-radius: 5px;
-  /* Bordes redondeados */
 }
 
 select {
   appearance: none;
-  /* Elimina la apariencia nativa del selector */
 }
 
 @media screen and (max-width: 870px) {

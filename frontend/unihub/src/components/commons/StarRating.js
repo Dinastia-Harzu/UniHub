@@ -1,15 +1,23 @@
 import React, { act, useState } from "react";
 
-export default function StarRating({ formComentario, setFormComentario }) {
-  const [rating, setRating] = useState(null);
+export default function StarRating({ formComentario, setFormComentario, ratinginicial, desabilitado }) {
+  const [rating, setRating] = useState(ratinginicial);
   const [hover, setHover] = useState(null);
 
   function actualizarValoracion(currentRating) {
-    setFormComentario(prevComentario => ({
-      ...prevComentario,
-      valoracion: currentRating
-    }));
-    setRating(currentRating);
+    if (!desabilitado) {
+      setFormComentario(prevComentario => ({
+        ...prevComentario,
+        valoracion: currentRating
+      }));
+      setRating(currentRating);
+    }
+  }
+
+  function actualizarHoverEstrellas(currentRating) {
+    if (!desabilitado) {
+      setHover(currentRating);
+    }
   }
 
   return (
@@ -30,9 +38,11 @@ export default function StarRating({ formComentario, setFormComentario }) {
               style={{
                 color:
                   currentRating <= (hover || rating) ? "#ffc107" : "#959595",
+                cursor:
+                  desabilitado ? "default" : "pointer",
               }}
-              onMouseEnter={() => setHover(currentRating)}
-              onMouseLeave={() => setHover(null)}
+              onMouseEnter={() => actualizarHoverEstrellas(currentRating)}
+              onMouseLeave={() => actualizarHoverEstrellas(null)}
             >
               &#9733;
             </span>

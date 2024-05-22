@@ -35,9 +35,9 @@ const MisTrabajos = () => {
     setFilterOpen(!filterOpen);
   };
 
-  const handleFilterChange = (e) => {
-    setSelectedFilter(e.target.value);
-    handleSearch(e.target.value);
+  const handleFilterChange = (event) => {
+    setSelectedFilter(event.target.value);
+    event.target.form.submit();
   };
 
   const handleSearch = (filter) => {
@@ -47,46 +47,36 @@ const MisTrabajos = () => {
 
   return (
     <main>
-      <section className="main-mis-trabajos">
-        <h2 className="titulo">Mis Trabajos</h2>
-        <div className="actions-container">
-          <div className="filter">
-            <button className="filter-button" onClick={handleFilterClick}>
-              <MdTune className="icon-filter" />
-            </button>
-            {filterOpen && (
-              <form action="submit">
-                <select
-                  className="filter-select"
-                  value={selectedFilter}
-                  onChange={handleFilterChange}
-                >
-                  <option value="">Seleccione un filtro</option>
-                  <option value="Trabajo 1">Trabajo 1</option>
-                  <option value="Trabajo 2">Trabajo 2</option>
-                  <option value="Trabajo 3">Trabajo 3</option>
-                </select>
-              </form>
-            )}
-          </div>
-          <Link to="/publicar" className="btn publish-button">
-            Publicar
+      <h2 className='titulo'>Mis Trabajos</h2>
+      <div className='actions-container'>
+        <div className='filter'>
+          <button className='filter-button' onClick={handleFilterClick} tabIndex="0">
+            <MdTune className='icon-filter' />
+          </button>
+          {filterOpen && (
+            <form action='submit' method='post'>
+              <select tabIndex="0" className='filter-select contenido-letra'  onChange={handleFilterChange} value={selectedFilter} >
+                <option value='' className="contenido-letra">Elige filtro</option>
+                <option value='Trabajo 1'className="contenido-letra">Trabajo 1</option>
+                <option value='Trabajo 2'className="contenido-letra">Trabajo 2</option>
+                <option value='Trabajo 3'className="contenido-letra">Trabajo 3</option>
+              </select>
+            </form>
+          )}
+        </div>
+        <div className="btn-letra"><Link to='/publicar' className='btn publish-button btn-primary btn-letra'>Publicar</Link></div>
+      </div>
+      <div className="cards-container">
+        {cardsData.map(card => (
+          <Link key={card.id} to='/trabajo' className="card btn-letra">
+            <img src={card.image} alt={card.title} />
+            <div className="card-content btn-letra">
+              <h3>{card.title}</h3>
+              <div className='descripcion btn-letra'><p>{card.description}</p></div>
+            </div>
           </Link>
-        </div>
-        <div className="cards-container">
-          {cardsData.map((card) => (
-            <Link key={card.id} to="/trabajo" className="card">
-              <img src={card.image} alt={card.title} />
-              <div className="card-content">
-                <h3>{card.title}</h3>
-                <div className="descripcion">
-                  <p>{card.description}</p>
-                </div>
-              </div>
-            </Link>
-          ))}
-        </div>
-      </section>
+        ))}
+      </div>
     </main>
   );
 };

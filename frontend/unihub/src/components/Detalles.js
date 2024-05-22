@@ -1,12 +1,13 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faDownload, faEye, faStar } from "@fortawesome/free-solid-svg-icons";
+import { faDownload, faEye } from "@fortawesome/free-solid-svg-icons";
 import StarRating from "./commons/StarRating";
-import { ModalDetalle } from "./commons/Modales";
+import { ModalDetalle, ModalPDF } from "./commons/Modales";
 import "../styles/detalles.css";
 import { useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
 import axios from "axios";
 import { URL_BASE } from "../utils/constantes";
+
 
 export default function Detalles() {
 
@@ -25,6 +26,7 @@ export default function Detalles() {
         // Formateamos fecha de publicacion
         let data = result.data;
         data.publicacion = data.publicacion.split('T').at(0);
+        // Creamos objeto trabajo
         setTrabajo({
           nombre: data.nombre,
           autor: data.autor,
@@ -34,13 +36,16 @@ export default function Detalles() {
           recursos: [],
           documento: data.documento
         });
-        // Hacemos peticion para conocer el autor
+
+        // Hacemos peticion para conocer el autor y ponerlo
         axios.get(URL_BASE + "usuarios/" + result.data.autor).then((usuario) => {
           setTrabajo(prevTrabajo => ({
             ...prevTrabajo,
             autor: usuario.data.nombre
           }));
-        })
+        }).catch((err) => {
+          console.log(err);
+        });
 
         // Hacer peticion para obtener los recursos
         // TODO: Hacer eso cuando Arturo haya hecho la query
@@ -57,48 +62,52 @@ export default function Detalles() {
       <main className="contenedor-detalles">
         <section className="contenedor-portada">
           <div className="contenedor-ver-y-descargar">
-            <a href="https://www.omfgdogs.com/" target="blank">
+            <a href={`/documentos/${trabajo.documento}`} download={trabajo.documento} target="blank">
               <FontAwesomeIcon
                 icon={faDownload}
                 size="2xl"
-                style={{ color: "#FFFFFF" }}
                 className="boton-descargar"
               />
             </a>
-            <FontAwesomeIcon icon={faEye} size="2xl" className="boton-ver" />
+            <ModalPDF archivo={trabajo.documento} />
           </div>
-          <img src={"/assets/" + trabajo.portada} alt="portada"></img>
+          <img src={`/assets/${trabajo.portada}`} alt="portada"></img>
         </section>
         <section className="contenedor-datos">
           <article className="datos">
             <h2>{trabajo.nombre}</h2>
             <div className="ver-y-descargar-oculto">
-              <a href="https://www.omfgdogs.com/" target="blank">
+              <a href="https://www.omfgdogs.com/" target="blank" tabIndex="0">
                 <FontAwesomeIcon
                   icon={faDownload}
                   size="xl"
                   className="boton-descargar"
                 />
               </a>
-              <FontAwesomeIcon icon={faEye} size="xl" className="boton-ver" />
+              <FontAwesomeIcon
+                icon={faEye}
+                size="xl"
+                className="boton-ver"
+                tabIndex="0"
+              />
             </div>
             <p>
               <b>Autor: </b>{trabajo.autor}
             </p>
-            <p>
+            <p className="contenido-letra">
               <b>Fecha de Publicación:</b> 24 de enero de 2024
             </p>
             <p>
-              <b>Valoración:</b> 5 <FontAwesomeIcon icon={faStar} size="lg" />
+              <StarRating formComentario={null} setFormComentario={null} ratinginicial={3} desabilitado={true} />
             </p>
-            <p>
+            <p className="contenido-letra">
               <b>Palabras clave:</b> Animación 3D | Modelado 3D | Cortometraje |
               Texturizado | Blender | Substance Painter
             </p>
           </article>
 
           <article className="resumen">
-            <p>
+            <p className="contenido-letra">
               <b>Resumen:</b>
             </p>
             <p>
@@ -106,8 +115,8 @@ export default function Detalles() {
             </p>
           </article>
 
-          <article className="recursos-asociados">
-            <h3>Recursos multimedia asociados:</h3>
+          <article className="recursos-asociados ">
+            <h3 className="contenido-letra">Recursos multimedia asociados:</h3>
             <div>
               <img src="
               /assets/Clase.png" alt="clase"></img>
@@ -116,7 +125,7 @@ export default function Detalles() {
           </article>
 
           <article className="trabajos-similares">
-            <h3>Trabajos asociados: </h3>
+            <h3 className="titulo-letra">Trabajos asociados: </h3>
             <div>
               <p>
                 <img src="/assets/TFG_Similar1.png" alt="TFG-similar1"></img>
@@ -134,7 +143,7 @@ export default function Detalles() {
           </article>
 
           <article className="seccion-comentarios">
-            <h3>Comentarios:</h3>
+            <h3 className="titulo-letra">Comentarios:</h3>
             <div>
               <div className="contenedor-comentar">
                 <p>Escribe tu opinión sobre este trabajo:</p>
@@ -146,14 +155,14 @@ export default function Detalles() {
                     src="/assets/Foto_Usuario.jpg"
                     alt="foto-usuario"
                     className="foto-usuario"
-                  ></img>
-                  <span>
+                  />
+                  <span className="contenido-letra">
                     <b>Carmina Lucía</b>
                   </span>
                 </p>
                 <p className="fecha-comentario">Publicado en Marzo de 2024 </p>
                 <p>
-                  <b>Valoración:</b> 5 <FontAwesomeIcon icon={faStar} size="lg" />
+                  <StarRating formComentario={null} setFormComentario={null} ratinginicial={3} desabilitado={true} />
                 </p>
                 <p className="texto-comentario">
                   Creo que la autora ha creado una escena original y atractiva.

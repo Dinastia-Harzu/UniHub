@@ -1,3 +1,5 @@
+import axios from "axios";
+import { URL_BASE } from "../utils/constantes";
 import { useState } from "react";
 
 export const useModal = (initialValue = false) => {
@@ -5,9 +7,13 @@ export const useModal = (initialValue = false) => {
 
   const abrirModal = () => setEstaAbierto(true);
   const cerrarModal = () => setEstaAbierto(false);
+
   const publicar = (event, formComentario) => {
     event.preventDefault();
-    console.log(formComentario);
+
+    axios.post(URL_BASE + "comentarios/", formComentario).then((result) => {
+      console.log(result);
+    }).catch((err) => console.log(err))
   };
 
   return [estaAbierto, abrirModal, cerrarModal, publicar];

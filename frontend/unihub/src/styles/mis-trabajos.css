@@ -25,12 +25,13 @@
   align-items: center;
 }
 
+
 .filter-button {
   padding: 10px;
   font-size: 2em;
   color: var(--color-text);
   background-color: transparent;
-  border: 2px solid var(--color-text);
+  border: 2px solid var(--color-bg-form);
   border-radius: 50%;
   cursor: pointer;
   width: 50px;
@@ -41,9 +42,13 @@
   margin-right: 10px;
 }
 
-.filter-button:hover {
+.filter-button:hover,
+.filter-button:focus {
   background-color: rgba(0, 0, 0, 0.1);
+  color: var(--color-text);
 }
+
+
 
 .filter-button .icon-filter {
   font-size: 1.5em;
@@ -58,39 +63,38 @@
   margin-right: 10px;
   cursor: pointer;
   -webkit-appearance: none;
-  /* Remove default styling in Safari */
   -moz-appearance: none;
-  /* Remove default styling in Firefox */
   appearance: none;
-  /* Remove default styling in modern browsers */
+
 }
 
 .filter-select option {
   background-color: var(--background-color);
-  /* Ensure options have a background color to be readable */
   color: black;
 }
 
 .filter-select option:checked {
-  background-color: var(--color-text);
   color: black;
 }
 
 .publish-button {
   padding: 10px;
   font-size: 1em;
-  color: #fff;
+  color: var(--color-text);
   background-color: var(--color-text);
   border: none;
   border-radius: 5px;
   cursor: pointer;
 }
 
-.publish-button:hover {
-  background-color: var(--color-text-dark);
+.publish-button:hover,
+.publish-button:focus {
+  background-color: transparent;
+  color: var(--color-bg-form) !important;
+  box-shadow: inset 0 0 0 .2em var(--color-bg-form) !important;
 }
 
-/* Container for the cards */
+
 .cards-container {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
@@ -102,15 +106,12 @@
 .card {
   position: relative;
   background-color: var(--color-bg-form);
-  border: 2px solid var(--color-text);
   border-radius: 10px;
   overflow: hidden;
   transition: transform 0.3s;
   cursor: pointer;
   text-decoration: none;
-  /* Remove underline from links */
   color: inherit;
-  /* Inherit color from parent */
 }
 
 .card img {
@@ -129,7 +130,7 @@
   transition: transform 0.3s;
   padding: 10px;
   box-sizing: border-box;
-  transform: translateY(30%);
+  transform: translateY(40%);
 }
 
 .card h3 {
@@ -149,13 +150,20 @@
   align-items: center;
   max-height: 3em;
   overflow: hidden;
-  text-overflow: ellipsis;
+  
   white-space: nowrap;
 }
 
-.card:hover .card-content {
+.descripcion p{
+  padding:.5em;
+  text-overflow: ellipsis !important;
+}
+
+.card:hover .card-content,
+.card:focus .card-content {
   transform: translateY(0);
 }
+
 
 @media (max-width: 600px) {
   .cards-container {

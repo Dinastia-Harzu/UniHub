@@ -8,8 +8,18 @@ body {
     min-width: 500px;
 }
 
-.boton-descargar {
+.boton-descargar,
+.boton-ver {
     margin-right: 0.3em;
+    color: var(--color-text);
+}
+
+.boton-descargar:hover,
+.boton-ver:hover,
+.boton-descargar:focus,
+.boton-ver:focus {
+    cursor: pointer;
+    color: var(--color-tertiary);
 }
 
 .contenedor-detalles {
@@ -31,6 +41,12 @@ body {
     margin-bottom: 1em;
     top: 30px;
     position: sticky;
+    display: flex;
+    justify-content: flex-end;
+}
+
+.contenedor-modal-pdf {
+    z-index: 3;
 }
 
 .contenedor-portada a {
@@ -41,6 +57,7 @@ body {
     width: 410px;
     top: 75px;
     position: sticky;
+    z-index: -1;
 }
 
 .ver-y-descargar-oculto {
@@ -99,10 +116,11 @@ body {
     padding: 0.3em;
     text-align: center;
     text-decoration: none;
-    font-size: 16px;
+    font-size: var(--title);
 }
 
-.boton-comentar:hover {
+.boton-comentar:hover,
+.boton-comentar:focus {
     background-color: #bbbbbb;
 }
 
