@@ -5,11 +5,12 @@ export default function FormBusqueda() {
     <div className="formulario-busqueda titulo-letra">
       <h2>¿Qué estás buscando?</h2>
       <form>
-        <div className="contenedor-apartados-formulario">
+        <div className="contenedor-apartados-formulario contenido-letra">
           <input
             type="text"
             name="nombre"
             placeholder="Título del trabajo"
+            className="contenido-letra"
           ></input>
         </div>
         <div className="contenedor-apartados-formulario  contenido-letra">

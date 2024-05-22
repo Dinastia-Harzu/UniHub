@@ -55,24 +55,24 @@ const MisTrabajos = () => {
           </button>
           {filterOpen && (
             <form action='submit' method='post'>
-              <select tabIndex="0" className='filter-select'  onChange={handleFilterChange} value={selectedFilter} onChange={handleFilterChange}>
-                <option value=''>Elige filtro</option>
-                <option value='Trabajo 1'>Trabajo 1</option>
-                <option value='Trabajo 2'>Trabajo 2</option>
-                <option value='Trabajo 3'>Trabajo 3</option>
+              <select tabIndex="0" className='filter-select contenido-letra'  onChange={handleFilterChange} value={selectedFilter} >
+                <option value='' className="contenido-letra">Elige filtro</option>
+                <option value='Trabajo 1'className="contenido-letra">Trabajo 1</option>
+                <option value='Trabajo 2'className="contenido-letra">Trabajo 2</option>
+                <option value='Trabajo 3'className="contenido-letra">Trabajo 3</option>
               </select>
             </form>
           )}
         </div>
-        <Link to='/publicar' className='btn publish-button btn-primary'>Publicar</Link>
+        <div className="btn-letra"><Link to='/publicar' className='btn publish-button btn-primary btn-letra'>Publicar</Link></div>
       </div>
       <div className="cards-container">
         {cardsData.map(card => (
-          <Link key={card.id} to='/trabajo' className="card">
+          <Link key={card.id} to='/trabajo' className="card btn-letra">
             <img src={card.image} alt={card.title} />
-            <div className="card-content">
+            <div className="card-content btn-letra">
               <h3>{card.title}</h3>
-              <div className='descripcion'><p>{card.description}</p></div>
+              <div className='descripcion btn-letra'><p>{card.description}</p></div>
             </div>
           </Link>
         ))}

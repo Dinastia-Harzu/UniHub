@@ -29,7 +29,7 @@ export default function App() {
   const [userTheme, setUserTheme] = useState("");
 
   useEffect(() => {
-    const userThemeFromBackend = "normal-lg"; // Ejemplo: 'normal', 'dark', 'alternative', etc.
+    const userThemeFromBackend = "normal"; // Ejemplo: 'normal', 'dark', 'alternative', etc.
     setUserTheme(userThemeFromBackend);
 
     const link = document.createElement("link");

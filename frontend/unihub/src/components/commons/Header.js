@@ -22,7 +22,7 @@ export default function Header() {
           </Link>
         </div>
         <nav ref={navRef}>
-          <div className="container2">
+          <div className="container2 btn-letra">
             <Link to="/" className="navbar-item btn-letra">
               Inicio
             </Link>
@@ -33,7 +33,7 @@ export default function Header() {
               Buscar
             </Link>
           </div>
-          <div className="navbar-buttons">
+          <div className="navbar-buttons btn-letra">
             <Link to="/login" className="btn btn-secondary btn-letra">
               Identificarse
             </Link>

@@ -15,23 +15,23 @@ export function ModalDetalle({ id_trabajo }) {
 
   return (
     <div>
-      <button onClick={abrirModal1} className="btn">
+      <button onClick={abrirModal1} className="btn btn-letra">
         Comentar
       </button>
       <Modal estaAbierto={modalEstaAbierto1} cerrarModal={cerrarModal1}>
         <form>
-          <p className="parrafo-valoracion">
+          <p className="parrafo-valoracion titulo-letra">
             <label htmlFor="valoracion">Introduce tu valoración:</label>
           </p>
           <StarRating formComentario={formComentario} setFormComentario={setFormComentario} ratinginicial={0} desabilitado={false} />
           <p>
-            <label htmlFor="comentario">Escribe tu comentario:</label>
+            <label htmlFor="comentario" className="contenido-letra">Escribe tu comentario:</label>
           </p>
           <textarea rows={8} cols={50} className="textarea-comentario" onChange={(event) =>
             setFormComentario({ ...formComentario, comentario: event.target.value })
           }></textarea>
           <button
-            className="btn"
+            className="btn btn-letra"
             onClick={(event) => publicarModal1(event, formComentario)}
           >
             <b>Publicar comentario</b>

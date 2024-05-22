@@ -25,7 +25,6 @@ export default function Detalles() {
         // Formateamos fecha de publicacion
         let data = result.data;
         data.publicacion = data.publicacion.split('T').at(0);
-
         // Creamos objeto trabajo
         setTrabajo({
           nombre: data.nombre,

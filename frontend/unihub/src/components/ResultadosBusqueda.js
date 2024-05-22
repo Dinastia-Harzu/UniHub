@@ -6,7 +6,7 @@ import "../styles/busqueda.css";
 export default function ResultadosBusqueda() {
   return (
     <div className="contenedor-resultados-busqueda">
-      <h3>Se han encontrado X resultados</h3>
+      <h3 className="titulo-letra"> Se han encontrado X resultados</h3>
       <div className="resultados">
         <CartaBusqueda />
       </div>
