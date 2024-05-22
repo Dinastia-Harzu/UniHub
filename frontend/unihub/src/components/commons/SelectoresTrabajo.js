@@ -20,7 +20,7 @@ export function SelectorTipoTrabajo({ formData, setFormData }) {
   }, []);
 
   return (
-    <div className="contenedor-apartados-formulario">
+    <div className="contenedor-apartados-formulario contenido-letra">
       <label htmlFor="tipoTrabajo">Tipo del trabajo</label>
       <select
         id="tipoTrabajo"
@@ -63,7 +63,7 @@ export function SelectorTitulaciones({ formData, setFormData }) {
   }, []);
 
   return (
-    <div className="contenedor-apartados-formulario">
+    <div className="contenedor-apartados-formulario contenido-letra">
       <label htmlFor="titulacion">Titulación</label>
       <select
         id="titulacion"

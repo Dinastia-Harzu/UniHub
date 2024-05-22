@@ -4,7 +4,7 @@ import {
   SelectorTitulaciones,
 } from "./commons/SelectoresTrabajo";
 
-export default function FormBusqueda({ setPagina, formData, setFormData }) {
+export default function FormBusqueda({ formData, setFormData }) {
   return (
     <div className="formulario-busqueda titulo-letra">
       <h2>¿Qué estás buscando?</h2>
