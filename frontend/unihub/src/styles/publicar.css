@@ -6,6 +6,11 @@
     display: none;
 }
 
+.titulo-publicar{
+    display: flex;
+    justify-content: center;
+}
+
 .seccion-botones-publicar {
     display: flex;
     justify-content: center;

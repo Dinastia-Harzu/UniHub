@@ -104,6 +104,12 @@
 "publicar":"Publish",
 "TFG":"Bachelor's Final Project",
 "TFM":"Masters's Final Project",
-"ABP":"Project-Based Learning"
+"ABP":"Project-Based Learning",
+
+"descubrir": "Discover",
+"texto-contacto-email":"You can contact us through email",
+"correo-ejemplo":"mail@example.com",
+"tlf":"Telephone number",
+"texto-contacto-tlf":"You can call"
 
   }

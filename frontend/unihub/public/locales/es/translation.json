@@ -102,5 +102,11 @@
     "publicar":"Publicar",
     "TFG":"Trabajo de fin de grado",
     "TFM":"Trabajo de fin de máster",
-    "ABP":"Aprendizaje basado en proyectos"
+    "ABP":"Aprendizaje basado en proyectos",
+
+    "descubrir": "Descubrir",
+    "texto-contacto-email":"Puedes contactarnos a través del siguiente correo",
+    "correo-ejemplo":"correo@ejemplo.com",
+    "tlf":"Número de Teléfono",
+    "texto-contacto-tlf":"También puedes llamarnos al"
   }
