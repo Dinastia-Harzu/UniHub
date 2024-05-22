@@ -1,28 +1,40 @@
 import React from "react";
+import {
+  SelectorTipoTrabajo,
+  SelectorTitulaciones,
+} from "./commons/SelectoresTrabajo";
 
-export default function FormBusqueda() {
+export default function FormBusqueda({ setPagina, formData, setFormData }) {
   return (
     <div className="formulario-busqueda">
       <h2>¿Qué estás buscando?</h2>
       <form>
         <div className="contenedor-apartados-formulario">
-          <input
-            type="text"
-            name="nombre"
-            placeholder="Título del trabajo"
-          ></input>
+          <label htmlFor="nombre-tmp">Título
+          </label>
+          <input id="nombre-tmp" type="text" name="nombre" placeholder="Introduce el título del trabajo"></input>
         </div>
         <div className="contenedor-apartados-formulario">
-          <input type="text" name="autor" placeholder="Autor"></input>
+          <label htmlFor="autor">Autor
+          </label>
+          <input type="text" id="autor" name="autor" placeholder="Introduce el nombre del autor"></input>
         </div>
         <div className="contenedor-apartados-formulario">
-          <input type="date" name="Fecha" placeholder="Fecha"></input>
+          <label htmlFor="publicacion">Fecha
+          </label>
+          <input id="publicacion" type="date" name="publicacion"></input>
         </div>
         <div className="contenedor-apartados-formulario">
-          <select>
-            <option value="1">Grado en ingeniería multimedia</option>
-            <option value="2">Grado en ingeniería informática</option>
-          </select>
+          <SelectorTitulaciones
+            formData={formData}
+            setFormData={setFormData}
+          />
+        </div>
+        <div className="contenedor-apartados-formulario">
+          <SelectorTipoTrabajo
+            formData={formData}
+            setFormData={setFormData}
+          />
         </div>
         <div className="contenedor-botones-busqueda">
           <button className="btn" type="submit">
