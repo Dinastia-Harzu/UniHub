@@ -26,9 +26,9 @@ export default function Header() {
             <Link to="/" className="navbar-item btn-letra">
               Inicio
             </Link>
-            {/* <Link to="/descubrir" className="navbar-item">
+            <Link to="/trabajos" className="navbar-item">
               Descubrir
-            </Link> */}
+            </Link>
             <Link to="/buscar" className="navbar-item btn-letra">
               Buscar
             </Link>
