@@ -33,6 +33,7 @@ export function SelectorTipoTrabajo({ formData, setFormData }) {
           setFormData({ ...formData, tipo: parseInt(event.target.value) })
         }
         defaultValue={formData.tipo}
+        className="contenido-letra"
       >
         {tiposTrabajo.map((tipo, idx) => {
           return (
@@ -68,7 +69,7 @@ export function SelectorTitulaciones({ formData, setFormData }) {
 
   return (
     <div className="contenedor-apartados-formulario">
-      <label htmlFor="titulacion">Titulación</label>
+      <label htmlFor="titulacion">{t('titulacion')}</label>
       <select
         id="titulacion"
         title="titulaciones"
@@ -77,6 +78,7 @@ export function SelectorTitulaciones({ formData, setFormData }) {
           setFormData({ ...formData, titulacion: parseInt(event.target.value) })
         }
         defaultValue={formData.titulacion}
+        className="contenido-letra"
       >
         {titulaciones.map((titulacion, idx) => {
           return (
