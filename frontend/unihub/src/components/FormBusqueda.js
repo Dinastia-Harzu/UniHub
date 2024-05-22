@@ -6,7 +6,7 @@ import {
 
 export default function FormBusqueda({ setPagina, formData, setFormData }) {
   return (
-    <div className="formulario-busqueda">
+    <div className="formulario-busqueda titulo-letra">
       <h2>¿Qué estás buscando?</h2>
       <form>
         <div className="contenedor-apartados-formulario">
@@ -17,20 +17,15 @@ export default function FormBusqueda({ setPagina, formData, setFormData }) {
         <div className="contenedor-apartados-formulario">
           <label htmlFor="autor">Autor
           </label>
-          <input type="text" id="autor" name="autor" placeholder="Introduce el nombre del autor"></input>
+          <input className="contenido-letra" type="text" id="autor" name="autor" placeholder="Introduce el nombre del autor"></input>
         </div>
-        <div className="contenedor-apartados-formulario">
-          <label htmlFor="publicacion">Fecha
-          </label>
-          <input id="publicacion" type="date" name="publicacion"></input>
+        <div className="contenedor-apartados-formulario contenido-letra">
+          <input className="contenido-letra" type="text" name="autor" placeholder="Autor"></input>
         </div>
-        <div className="contenedor-apartados-formulario">
-          <SelectorTitulaciones
-            formData={formData}
-            setFormData={setFormData}
-          />
+        <div className="contenedor-apartados-formulario contenido-letra">
+          <input className="contenido-letra" type="date" name="Fecha" placeholder="Fecha"></input>
         </div>
-        <div className="contenedor-apartados-formulario">
+        <div className="contenedor-apartados-formulario c">
           <SelectorTipoTrabajo
             formData={formData}
             setFormData={setFormData}

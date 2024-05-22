@@ -49,7 +49,7 @@
   justify-content: end;
 }
 
-.formulario-busqueda button:hover {
+.formulario-busqueda button:hover,button:focus {
   font-weight: bold;
   color: var(--color-bg);
   background-color: transparent;

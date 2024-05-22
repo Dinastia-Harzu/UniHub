@@ -1,6 +1,9 @@
 import "../styles/inicio.css";
+import { useTranslation } from 'react-i18next';
 
 export default function Inicio() {
+  const { t } = useTranslation();
+
   return (
     <main className="contenedor-inicio">
       <section className="cabecera-inicio">
@@ -11,7 +14,7 @@ export default function Inicio() {
         />
       </section>
       <section className="contenedor-inicio-2">
-        <h1 className="titulo-inicio">¡Bienvenido a UniHub!</h1>
+        <h1 className="titulo-inicio titulo-letra">{t('welcome')}</h1>
         <section className="contenedor-articulos-inicio">
           <article className="articulo-inicio">
             <img
