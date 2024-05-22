@@ -1,5 +1,5 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faDownload, faEye, faStar } from "@fortawesome/free-solid-svg-icons";
+import { faDownload, faEye } from "@fortawesome/free-solid-svg-icons";
 import StarRating from "./commons/StarRating";
 import { ModalDetalle } from "./commons/Modales";
 import "../styles/detalles.css";
@@ -25,6 +25,8 @@ export default function Detalles() {
         // Formateamos fecha de publicacion
         let data = result.data;
         data.publicacion = data.publicacion.split('T').at(0);
+
+        // Creamos objeto trabajo
         setTrabajo({
           nombre: data.nombre,
           autor: data.autor,
@@ -34,13 +36,16 @@ export default function Detalles() {
           recursos: [],
           documento: data.documento
         });
-        // Hacemos peticion para conocer el autor
+
+        // Hacemos peticion para conocer el autor y ponerlo
         axios.get(URL_BASE + "usuarios/" + result.data.autor).then((usuario) => {
           setTrabajo(prevTrabajo => ({
             ...prevTrabajo,
             autor: usuario.data.nombre
           }));
-        })
+        }).catch((err) => {
+          console.log(err);
+        });
 
         // Hacer peticion para obtener los recursos
         // TODO: Hacer eso cuando Arturo haya hecho la query
@@ -57,7 +62,7 @@ export default function Detalles() {
       <main className="contenedor-detalles">
         <section className="contenedor-portada">
           <div className="contenedor-ver-y-descargar">
-            <a href="https://www.omfgdogs.com/" target="blank">
+            <a href={"/documentos/" + trabajo.documento} download={trabajo.documento} target="blank">
               <FontAwesomeIcon
                 icon={faDownload}
                 size="2xl"
@@ -89,7 +94,7 @@ export default function Detalles() {
               <b>Fecha de Publicación:</b> 24 de enero de 2024
             </p>
             <p>
-              <b>Valoración:</b> 5 <FontAwesomeIcon icon={faStar} size="lg" />
+              <StarRating formComentario={null} setFormComentario={null} ratinginicial={3} desabilitado={true} />
             </p>
             <p>
               <b>Palabras clave:</b> Animación 3D | Modelado 3D | Cortometraje |
@@ -153,7 +158,7 @@ export default function Detalles() {
                 </p>
                 <p className="fecha-comentario">Publicado en Marzo de 2024 </p>
                 <p>
-                  <b>Valoración:</b> 5 <FontAwesomeIcon icon={faStar} size="lg" />
+                  <StarRating formComentario={null} setFormComentario={null} ratinginicial={3} desabilitado={true} />
                 </p>
                 <p className="texto-comentario">
                   Creo que la autora ha creado una escena original y atractiva.

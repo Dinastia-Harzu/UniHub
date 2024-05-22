@@ -23,7 +23,7 @@ export function ModalDetalle({ id_trabajo }) {
           <p className="parrafo-valoracion">
             <label htmlFor="valoracion">Introduce tu valoración:</label>
           </p>
-          <StarRating formComentario={formComentario} setFormComentario={setFormComentario} />
+          <StarRating formComentario={formComentario} setFormComentario={setFormComentario} ratinginicial={0} desabilitado={false} />
           <p>
             <label htmlFor="comentario">Escribe tu comentario:</label>
           </p>
