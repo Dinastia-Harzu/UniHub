@@ -37,7 +37,7 @@ export default function FormBusqueda({ setPagina, formData, setFormData }) {
         </div>
         <div className="contenedor-botones-busqueda">
           <button className="btn" type="submit">
-          {t("buscar")}
+            {t("buscar")}
           </button>
         </div>
       </form>

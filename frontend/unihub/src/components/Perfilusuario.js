@@ -126,7 +126,7 @@ const Perfilusuario = () => {
                 <div className="form-group" id="contrasenia">
                   <div className="input-contrasenia" >
                     <label htmlFor="contrasena" className="contenido-letra">{t('contrasenia')}:</label>
-                  <input className="solo-mostrar contenido-letra" defaultValue="miriam34@gmail.com" readOnly
+                    <input className="solo-mostrar contenido-letra" defaultValue="miriam34@gmail.com" readOnly
                       type={mostrarContrasena ? "text" : "password"}
                       id="contrasena"
                       name="contrasena"
@@ -202,7 +202,7 @@ const Perfilusuario = () => {
                 </div>
               </div>
               <div className="boton-editar btn-letra">
-                <Link to="../editar" className="btn btn-primary btn-letra" value="Editar">{t('editar')}</Link>
+                <Link to="editar" className="btn btn-primary btn-letra" value="Editar">{t('editar')}</Link>
               </div>
             </div>
           </form>

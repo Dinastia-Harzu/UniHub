@@ -8,7 +8,7 @@ export function SelectorTipoTrabajo({ formData, setFormData }) {
   const [tiposTrabajo, settiposTrabajo] = useState([]);
 
   function recogerTiposTrabajo() {
-    
+
     axios
       .get(URL_BASE + "tipos-trabajo")
       .then((result) => {
@@ -23,7 +23,7 @@ export function SelectorTipoTrabajo({ formData, setFormData }) {
   }, []);
 
   return (
-    <div className="contenedor-apartados-formulario">
+    <div className="contenedor-apartados-formulario contenido-letra">
       <label htmlFor="tipoTrabajo">{t("tipo-trabajo")}</label>
       <select
         id="tipoTrabajo"
@@ -68,7 +68,7 @@ export function SelectorTitulaciones({ formData, setFormData }) {
 
   return (
     <div className="contenedor-apartados-formulario">
-      <label htmlFor="titulacion">{t("titulo")}</label>
+      <label htmlFor="titulacion">Titulación</label>
       <select
         id="titulacion"
         title="titulaciones"
