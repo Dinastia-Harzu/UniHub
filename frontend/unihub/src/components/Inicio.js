@@ -23,10 +23,10 @@ export default function Inicio() {
               className="imagen-articulo-inicio"
             />
             <div className="contenido-articulo-inicio">
-              <h2 className="titulo-articulo-inicio">
-                La plataforma perfecta para subir tu trabajo
+              <h2 className="titulo-articulo-inicio titulo-letra">
+              {t('titulo-articulo-inicio')}
               </h2>
-              <p className="texto-articulo-inicio">
+              <p className="texto-articulo-inicio contenido-letra">
                 Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean
                 eget lacus sed nibh lacinia hendrerit et at dolor. Duis a nibh
                 neque. Nam feugiat dignissim nunc, vel porttitor diam. Duis
@@ -37,10 +37,10 @@ export default function Inicio() {
           </article>
           <article className="articulo-inicio">
             <div className="contenido-articulo-inicio">
-              <h2 className="titulo-articulo-inicio">
-                Consigue que el mundo vea tu progreso
+              <h2 className="titulo-articulo-inicio titulo-letra">
+              {t('titulo-articulo-inicio-dos')}
               </h2>
-              <p className="texto-articulo-inicio">
+              <p className="texto-articulo-inicio contenido-letra">
                 Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean
                 eget lacus sed nibh lacinia hendrerit et at dolor. Duis a nibh
                 neque. Nam feugiat dignissim nunc, vel porttitor diam. Duis

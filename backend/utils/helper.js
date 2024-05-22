@@ -44,6 +44,7 @@ const connection = mysql.createConnection({
     }
     return useDefaultTypeCasting();
   },
+  multipleStatements: true
 });
 
 function getHttpCodeFromErrNo(errno) {

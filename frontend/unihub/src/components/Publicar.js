@@ -85,21 +85,21 @@ export default function Publicar() {
     return (
         <main className="pagina-publicar">
             <div>
-                <div className={pagina === 0 ? "form-mostrado" : "form-oculto"}>
+                <div className={pagina === 0 ? "form-mostrado contenido-letra" : "form-oculto"}>
                     <FormPublicar1
                         setPagina={setPagina}
                         formData={formData}
                         setFormData={setFormData}
                     />
                 </div>
-                <div className={pagina === 1 ? "form-mostrado" : "form-oculto"}>
+                <div className={pagina === 1 ? "form-mostrado contenido-letra" : "form-oculto"}>
                     <FormPublicar2
                         setPagina={setPagina}
                         formData={formData}
                         setFormData={setFormData}
                     />
                 </div>
-                <div className={pagina === 2 ? "form-mostrado" : "form-oculto"}>
+                <div className={pagina === 2 ? "form-mostrado contenido-letra" : "form-oculto"}>
                     <FormPublicar3
                         setPagina={setPagina}
                         formData={formData}
@@ -110,17 +110,17 @@ export default function Publicar() {
 
             <section className="seccion-botones-publicar">
                 <div className="contenedor-botones-publicar">
-                    <div className={pagina === 0 ? "boton-oculto" : "boton-anterior"}>
-                        <button className="btn btn-fondo" onClick={() => atrasarPagina()}>
+                    <div className={pagina === 0 ? "boton-oculto" : "boton-anterior btn-letra"}>
+                        <button className="btn btn-fondo btn-letra" onClick={() => atrasarPagina()}>
                             Anterior
                         </button>
                     </div>
-                    <div className={pagina === 2 ? "boton-oculto" : "boton-siguiente"}>
+                    <div className={pagina === 2 ? "boton-oculto" : "boton-siguiente btn-letra"}>
                         <button className="btn btn-fondo" onClick={() => adelantarPagina()}>
                             Siguiente
                         </button>
                     </div>
-                    <div className="boton-publicar">
+                    <div className="boton-publicar btn-letra">
                         <button
                             className="btn btn-fondo"
                             hidden={!(pagina === 2)}

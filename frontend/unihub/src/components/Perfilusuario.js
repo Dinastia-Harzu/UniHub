@@ -1,4 +1,5 @@
 import { useForm } from "react-hook-form";
+import { useTranslation } from 'react-i18next';
 import {
   edadValidator,
   titulacionValidator,
@@ -11,6 +12,7 @@ import { useRef } from 'react';
 import { Link } from 'react-router-dom';
 
 const Perfilusuario = () => {
+  const { t } = useTranslation();
   const {
     register,
     formState: { errors },
@@ -59,13 +61,13 @@ const Perfilusuario = () => {
     <main>
       <div className="contenedor-inicial">
         <div className="titulo">
-          <h2>Mi Perfil</h2>
+          <h2 className="titulo-letra">{t('mi-perfil')}</h2>
         </div>
         <div className="form-container">
           <form onSubmit={handleSubmit(onSubmit)} className="pos-wrapper">
             <div className="wrapper">
               <div className="form-group" id="nombre-titulo">
-                <h1>Miriam</h1>
+                <h1 className="titulo-letra contenido-letra">Miriam</h1>
               </div>
               <div className="contenedor-apartados-formulario_usuario">
                 <label htmlFor="portada"></label>
@@ -78,9 +80,9 @@ const Perfilusuario = () => {
                 />
               </div>
               <div className="form-group" id="nombre">
-                <label htmlFor="nombre">Nombre:</label>
+                <label htmlFor="nombre" className="contenido-letra">{t('nombre')}:</label>
                 <input
-                  className="solo-mostrar"
+                  className="solo-mostrar contenido-letra"
                   type="text"
                   id="nombre"
                   name="nombre"
@@ -91,17 +93,11 @@ const Perfilusuario = () => {
                   })}
                   readOnly
                 />
-                {errors.nombre?.type === "required" && (
-                  <p>El campo es requerido</p>
-                )}
-                {errors.nombre?.type === "maxLength" && (
-                  <p>El nombre introducido es demasiado largo</p>
-                )}
               </div>
               <div className="form-group" id="apellidos">
-                <label htmlFor="apellidos">Apellidos:</label>
+                <label htmlFor="apellidos" className="contenido-letra">{t('apellidos')}:</label>
                 <input
-                  className="solo-mostrar"
+                  className="solo-mostrar contenido-letra"
                   type="text"
                   id="apellidos"
                   name="apellidos"
@@ -112,18 +108,12 @@ const Perfilusuario = () => {
                   })}
                   readOnly
                 />
-                {errors.apellidos?.type === "required" && (
-                  <p>El campo es requerido</p>
-                )}
-                {errors.apellidos?.type === "maxLength" && (
-                  <p>El nombre introducido es demasiado largo</p>
-                )}
               </div>
               <div id="parte-inferior">
                 <div className="form-group" id="correo">
-                  <label for="correo">Correo electrónico:</label>
+                  <label for="correo" className="contenido-letra">{t('correo')}:</label>
                   <input
-                    className="solo-mostrar"
+                    className="solo-mostrar contenido-letra"
                     type="email"
                     id="correo"
                     name="correo"
@@ -134,16 +124,16 @@ const Perfilusuario = () => {
                   <br />
                 </div>
                 <div className="form-group" id="contrasenia">
-                  <div className="input-contrasenia">
-                    <label htmlFor="contrasena">Contraseña:</label>
-                  <input class="solo-mostrar" defaultValue="miriam34@gmail.com" readOnly
+                  <div className="input-contrasenia" >
+                    <label htmlFor="contrasena" className="contenido-letra">{t('contrasenia')}:</label>
+                  <input className="solo-mostrar contenido-letra" defaultValue="miriam34@gmail.com" readOnly
                       type={mostrarContrasena ? "text" : "password"}
                       id="contrasena"
                       name="contrasena"
                     />
                   </div>
                   <div
-                    className="boton-contrasenia"
+                    className="boton-contrasenia contenido-letra"
                     tabIndex="0"
                     onKeyDown={handleKeyDownTogglePassword}
                     onClick={toggleMostrarContrasena}
@@ -159,35 +149,35 @@ const Perfilusuario = () => {
                   <br />
                 </div>
                 <div className="form-group" id="titulacion">
-                  <label for="titulacion">Grado o máster:</label>
+                  <label for="titulacion" className="contenido-letra">{t('sel-tit')}:</label>
                   <input
-                    className="solo-mostrar"
+                    className="solo-mostrar contenido-letra"
                     type="text"
                     id="titulacion"
                     name="titulacion"
-                    defaultValue="Arquitectura"
+                    defaultValue={t('arquitectura')}
                     readOnly
                   />
                   <br />
                   <br />
                 </div>
                 <div className="form-group" id="titulacion">
-                  <label for="estilo">Estilo:</label>
+                  <label for="estilo" className="contenido-letra">{t('sel-estilo')}:</label>
                   <input
-                    className="solo-mostrar"
+                    className="solo-mostrar contenido-letra"
                     type="text"
                     id="estilo"
                     name="estilo"
-                    defaultValue="Letras grandes"
+                    defaultValue={t('normal-lg')}
                     readOnly
                   />
                   <br />
                   <br />
                 </div>
                 <div className="form-group" id="direccion">
-                  <label for="direccion">Dirección:</label>
+                  <label for="direccion" className="contenido-letra">{t('direccion')}:</label>
                   <input
-                    className="solo-mostrar"
+                    className="solo-mostrar contenido-letra"
                     type="text"
                     id="direccion"
                     name="direccion"
@@ -198,9 +188,9 @@ const Perfilusuario = () => {
                   <br />
                 </div>
                 <div className="form-group" id="nacimiento">
-                  <label for="fecha_nacimiento">Fecha de Nacimiento:</label>
+                  <label for="fecha_nacimiento" className="contenido-letra">{t('fecnac')}:</label>
                   <input
-                    className="solo-mostrar"
+                    className="solo-mostrar contenido-letra"
                     type="date"
                     id="fecha_nacimiento"
                     name="fecha_nacimiento"
@@ -211,8 +201,8 @@ const Perfilusuario = () => {
                   <br />
                 </div>
               </div>
-              <div className="boton-editar">
-                <Link to="../editar" className="btn btn-primary" value="Editar">Editar</Link>
+              <div className="boton-editar btn-letra">
+                <Link to="../editar" className="btn btn-primary btn-letra" value="Editar">{t('editar')}</Link>
               </div>
             </div>
           </form>

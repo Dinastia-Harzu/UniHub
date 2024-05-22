@@ -247,7 +247,7 @@ button {
   .boton-entrar {
     display: flex;
     justify-content: center;
-    grid-column: 2;
+    grid-column: 3;
     grid-row: 7;
   }
 }

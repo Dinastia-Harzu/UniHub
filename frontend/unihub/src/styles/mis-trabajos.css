@@ -63,11 +63,9 @@
   margin-right: 10px;
   cursor: pointer;
   -webkit-appearance: none;
-  /* Remove default styling in Safari */
   -moz-appearance: none;
-  /* Remove default styling in Firefox */
   appearance: none;
-  /* Remove default styling in modern browsers */
+
 }
 
 .filter-select option {
@@ -76,7 +74,6 @@
 }
 
 .filter-select option:checked {
-  /* background-color: var(--color-text); */
   color: black;
 }
 
@@ -97,7 +94,7 @@
   box-shadow: inset 0 0 0 .2em var(--color-bg-form) !important;
 }
 
-/* Container for the cards */
+
 .cards-container {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
@@ -109,15 +106,12 @@
 .card {
   position: relative;
   background-color: var(--color-bg-form);
-  /* border: 2px solid var(--color-text); */
   border-radius: 10px;
   overflow: hidden;
   transition: transform 0.3s;
   cursor: pointer;
   text-decoration: none;
-  /* Remove underline from links */
   color: inherit;
-  /* Inherit color from parent */
 }
 
 .card img {
@@ -136,7 +130,7 @@
   transition: transform 0.3s;
   padding: 10px;
   box-sizing: border-box;
-  transform: translateY(30%);
+  transform: translateY(40%);
 }
 
 .card h3 {
@@ -156,11 +150,16 @@
   align-items: center;
   max-height: 3em;
   overflow: hidden;
-  text-overflow: ellipsis;
+  
   white-space: nowrap;
 }
 
-.card:hover,
+.descripcion p{
+  padding:.5em;
+  text-overflow: ellipsis !important;
+}
+
+.card:hover .card-content,
 .card:focus .card-content {
   transform: translateY(0);
 }

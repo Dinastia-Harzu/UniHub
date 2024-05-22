@@ -3,11 +3,13 @@ import { useRef } from "react";
 import { FaBars, FaTimes } from "react-icons/fa";
 import { ReactDOM } from "react-dom/client";
 // import { slide as Menu } from 'react-burger-menu';
+import { useTranslation } from 'react-i18next';
 
 import "../../styles/header.css";
 import { Link, Outlet } from "react-router-dom";
 
 export default function Header() {
+  const { t } = useTranslation();
   const navRef = useRef();
   const showNavbar = () => {
     navRef.current.classList.toggle("responsive-nav");
@@ -22,23 +24,23 @@ export default function Header() {
           </Link>
         </div>
         <nav ref={navRef}>
-          <div className="container2">
+          <div className="container2 btn-letra">
             <Link to="/" className="navbar-item btn-letra">
-              Inicio
+            {t('inicio')}
             </Link>
-            {/* <Link to="/descubrir" className="navbar-item">
+            <Link to="/trabajos" className="navbar-item">
               Descubrir
-            </Link> */}
+            </Link>
             <Link to="/buscar" className="navbar-item btn-letra">
-              Buscar
+            {t('buscar')}
             </Link>
           </div>
-          <div className="navbar-buttons">
+          <div className="navbar-buttons btn-letra">
             <Link to="/login" className="btn btn-secondary btn-letra">
-              Identificarse
+            {t('login')}
             </Link>
             <Link to="/registro" className="btn btn-primary btn-letra" >
-              Registrarse
+            {t('registro')}
             </Link>
           </div>
           <button className="nav-btn nav-close-btn" onClick={showNavbar}>

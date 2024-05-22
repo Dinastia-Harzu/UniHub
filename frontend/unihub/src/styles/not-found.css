@@ -7,19 +7,17 @@
 }
 
 .error-title {
-  font-size: 6em;
   margin: 0;
   color: var(--color-text);
 }
 
 .error-message {
-  font-size: 1.5em;
   margin: 20px 0;
   color: var(--color-text);
 }
 
 .home-link {
-  font-size: 1.2em;
+
   color: var(--color-text);
   text-decoration: none;
   background-color: var(--color-bg);
