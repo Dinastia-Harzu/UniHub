@@ -41,12 +41,24 @@ body {
     margin-bottom: 1em;
     top: 30px;
     position: sticky;
+    z-index: 2;
     display: flex;
     justify-content: flex-end;
 }
 
 .contenedor-modal-pdf {
-    z-index: 3;
+    display: flex;
+    flex-direction: column;
+}
+
+.contenedor-pdf {
+    text-align: center;
+    height: 630px;
+    padding: 1em;
+}
+
+.titulo-pdf {
+    margin-bottom: 1em;
 }
 
 .contenedor-portada a {
@@ -216,8 +228,8 @@ input[type="radio"] {
 @media only screen and (max-width: 900px) {
     .modal {
         top: 20%;
-        left: 15%;
-        width: 70%;
+        left: 5%;
+        width: 90%;
     }
 }
 
@@ -227,11 +239,11 @@ input[type="radio"] {
         padding: 2em;
     }
 
-    .ver-y-descargar-oculto {
-        display: inline-block;
+    .contenedor-portada {
+        align-items: flex-start;
     }
 
-    .contenedor-portada {
+    .contenedor-portada img {
         display: none;
     }
 

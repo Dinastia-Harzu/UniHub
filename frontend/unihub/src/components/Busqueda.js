@@ -3,10 +3,12 @@ import FormBusqueda from "./FormBusqueda";
 import ResultadosBusqueda from "./ResultadosBusqueda";
 import { useState } from "react";
 import axios from "axios";
+import { useTranslation } from 'react-i18next';
 
 import "../styles/busqueda.css";
 
 export default function Busqueda({ proyecto }) {
+  const { t } = useTranslation();
   const [pagina, setPagina] = useState(0);
   const [formData, setFormData] = useState({
     nombre: "",

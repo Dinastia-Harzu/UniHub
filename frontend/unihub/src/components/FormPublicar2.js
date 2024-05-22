@@ -22,7 +22,7 @@ export default function FormPublicar2({ setPagina, formData, setFormData }) {
   };
 
   return (
-    <main className="contenedor-publicar">
+    <div className="contenedor-publicar">
       <section className="titulo-publicar">
         <h1>Publica tu trabajo</h1>
       </section>
@@ -79,6 +79,6 @@ export default function FormPublicar2({ setPagina, formData, setFormData }) {
           </form>
         </div>
       </section>
-    </main>
+    </div>
   );
 }

@@ -2,8 +2,10 @@ import { useForm } from "react-hook-form";
 import React, { useState } from "react";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
 import "../styles/formulario.css";
+import { useTranslation } from 'react-i18next';
 
 const InicioSesion = () => {
+  const { t } = useTranslation();
   const {
     register,
     formState: { errors },
@@ -29,37 +31,37 @@ const InicioSesion = () => {
     <main>
       <div className="contenedor-inicial">
         <div className="titulo">
-          <h2 className="titulo-letra">Iniciar sesión</h2>
+          <h2 className="titulo-letra">{t('titulo-inicio-sesion')}</h2>
         </div>
         <div className="form-container">
           <form onSubmit={handleSubmit(onSubmit)} className="pos-wrapper">
             <div className="wrapper">
               <div id="parte-inferior">
                 <div className="form-group contenido-letra" id="correo">
-                  <label htmlFor="correo">Correo electrónico:</label>
+                  <label htmlFor="correo">{t('correo')}:</label>
                   <input
                   className="contenido-letra"
                     type="email"
                     id="correo"
                     name="correo"
-                    placeholder="tu@correo.com"
+                    placeholder={t('placeholder-correo')}
                     {...register("correo", {
                       required: true,
                       pattern: /^[^\s@]+@[^\s@]+\.[^\s@]+$/i,
                     })}
                   />
                   {errors.correo?.type === "required" && (
-                    <p className="contenido-letra">El campo es requerido</p>
+                    <p className="contenido-letra">{t('campo-requerido')}</p>
                   )}
                   {errors.correo?.type === "maxLength" && (
-                    <p className="contenido-letra">El formato del correo no es adecuado</p>
+                    <p className="contenido-letra">{t('correo-erróneo')}</p>
                   )}
                   <br />
                   <br />
                 </div>
                 <div className="form-group" id="contrasenia">
                   <div className="input-contrasenia contenido-letra">
-                    <label htmlFor="contrasena">Contraseña:</label>
+                    <label htmlFor="contrasena">{t('contrasenia')}:</label>
                     <input
                     className="contenido-letra"
                       type={mostrarContrasena ? "text" : "password"}
@@ -87,17 +89,17 @@ const InicioSesion = () => {
                     </span>
                   </div>
                   {errors.contrasena?.type === "required" && (
-                    <p className="contenido-letra">El campo es requerido</p>
+                    <p className="contenido-letra">{t('campo-requerido')}</p>
                   )}
                   {errors.contrasena?.type === "pattern" && (
-                    <p className="contenido-letra">El formato no es adecuado</p>
+                    <p className="contenido-letra">{t('contra-erróneo')}</p>
                   )}
                   <br />
                 </div>
               </div>
               <div className="recomendacion">
-                <span className="contenido-letra">¿No tienes cuenta?</span>
-                <a href="registro" className="contenido-letra">Regístrate</a>
+                <span className="contenido-letra">{t('pregunta-inicio-sesion')}</span>
+                <a href="registro" className="contenido-letra">{t('regis')}</a>
               </div>
               <div className="boton-entrar btn-letra">
                 <button
@@ -105,7 +107,7 @@ const InicioSesion = () => {
                   className="btn btn-primary  btn-letra"
                   value="Editar perfil"
                 >
-                  Entrar
+                  {t('login')}
                 </button>
               </div>
             </div>

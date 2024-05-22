@@ -12,7 +12,8 @@ export const useModal = (initialValue = false) => {
     event.preventDefault();
 
     axios.post(URL_BASE + "comentarios/", formComentario).then((result) => {
-      console.log(result);
+      alert("Comentario enviado!");
+      window.location.reload();
     }).catch((err) => console.log(err))
   };
 
