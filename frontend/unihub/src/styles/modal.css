@@ -38,12 +38,11 @@
 
 .boton-publicar-comentario:hover,
 .boton-publicar-comentario:focus {
-    background-color: #e35555;
-    /*TODO: CAMBIAR CUANDO LOS COLORES ESTEN ESTABLECIDOS*/
+    background-color: var(--color-bg);
 }
 
 .contenedor-modal {
-    background-color: rgb(238, 238, 238);
+    background-color: var(--color-bg-2);
     border-radius: 0.45em;
     padding: 2.8em 2em 2em;
     position: relative;
