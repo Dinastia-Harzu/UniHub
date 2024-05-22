@@ -38,6 +38,21 @@ module.exports.multimediaIdGET = function multimediaIdGET(req, res, next, id) {
     });
 };
 
+module.exports.multimedia_trabajoGET = function multimedia_trabajoGET(
+  req,
+  res,
+  next,
+  id
+) {
+  Multimedia.multimedia_trabajoGET(id)
+    .then(function (response) {
+      utils.writeJson(res, response);
+    })
+    .catch(function (response) {
+      utils.writeJson(res, response);
+    });
+};
+
 module.exports.multimediaIdPUT = function multimediaIdPUT(
   req,
   res,
