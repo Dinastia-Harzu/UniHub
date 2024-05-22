@@ -413,6 +413,39 @@ paths:
               schema:
                 $ref: "#/components/schemas/InternalServerError"
       x-swagger-router-controller: Trabajos
+  /trabajos/palabras-clave:
+    get:
+      tags:
+        - Trabajos
+      description: GET Trabajo
+      operationId: trabajos_palabras_claveGET
+      requestBody:
+        content:
+          application/json:
+            schema:
+              properties:
+                palabras-clave:
+                  type: array
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/OK-GETidPUT"
+        "404":
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/NotFound"
+        "500":
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/InternalServerError"
+      x-swagger-router-controller: Trabajos
   /palabras-clave:
     get:
       tags:
@@ -600,6 +633,41 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/Forbidden"
+        "404":
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/NotFound"
+        "500":
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/InternalServerError"
+      x-swagger-router-controller: PalabrasClave
+  /palabras-clave/trabajo/{id}:
+    get:
+      tags:
+        - Palabras clave
+      description: GET Palabras clave de un trabajo
+      operationId: palabras_clave_trabajoGET
+      parameters:
+        - name: id
+          in: path
+          description: el identificador del trabajo asociado
+          required: true
+          style: simple
+          explode: false
+          schema:
+            type: integer
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/OK-GETidPUT"
         "404":
           description: Not Found
           content:
@@ -1287,7 +1355,7 @@ paths:
       parameters:
         - name: id
           in: path
-          description: el identificador del trabajo
+          description: el identificador del archivo multimedia
           required: true
           style: simple
           explode: false
@@ -1419,6 +1487,15 @@ paths:
         - Multimedia
       description: GET Multimedia de un trabajo
       operationId: multimedia_trabajoGET
+      parameters:
+        - name: id
+          in: path
+          description: el identificador del trabajo asociado
+          required: true
+          style: simple
+          explode: false
+          schema:
+            type: integer
       responses:
         "200":
           description: OK
@@ -1438,6 +1515,7 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/InternalServerError"
+      x-swagger-router-controller: Multimedia
   /comentarios:
     get:
       tags:
@@ -1512,7 +1590,7 @@ paths:
       parameters:
         - name: id
           in: path
-          description: el identificador del trabajo
+          description: el identificador del comentario
           required: true
           style: simple
           explode: false
@@ -1638,6 +1716,41 @@ paths:
               schema:
                 $ref: "#/components/schemas/InternalServerError"
       x-swagger-router-controller: Comentarios
+  /comentarios/trabajo/{id}:
+    get:
+      tags:
+        - Comentarios
+      description: GET Comentarios de un trabajo
+      operationId: comentarios_trabajoGET
+      parameters:
+        - name: id
+          in: path
+          description: el identificador del trabajo asociado
+          required: true
+          style: simple
+          explode: false
+          schema:
+            type: integer
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/OK-GETidPUT"
+        "404":
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/NotFound"
+        "500":
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/InternalServerError"
+      x-swagger-router-controller: Comentarios
 components:
   schemas:
     ReqUsuario:
@@ -1682,6 +1795,8 @@ components:
           type: string
         documento:
           type: string
+        palabras-clave:
+          type: array
     ReqPalabraClave:
       properties:
         nombre:

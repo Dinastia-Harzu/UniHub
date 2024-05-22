@@ -8,6 +8,7 @@ const respuestas = helper.respuestas;
 const camposPut = helper.determinarCamposPut;
 const $ = helper.json2sql;
 const _ = require("./TrabajosService");
+const palabrasClave = require("./PalabrasClaveService");
 
 /**
  * GET Trabajos
@@ -144,16 +145,41 @@ exports.trabajosPOST = function (body) {
           );
         } else {
           _.trabajosGET().then(
-            (res) =>
-              resolve(
-                responder(
-                  201,
-                  Object.assign({}, respuestas[201], {
-                    trabajo: res.payload.at(-1),
-                  })
+            (resultado) =>
+              new Promise((resolve0, reject0) => {
+                const trabajo = resultado.payload.at(-1);
+                body["palabras-clave"].map((palabra) => {
+                  palabrasClave.palabras_clavePOST({ nombre: palabra }).then(
+                    (res) =>
+                      new Promise((resolve1, reject1) => {
+                        conexion
+                          .query(
+                            `
+                        INSERT INTO \`palabra-clave-trabajo\` VALUES(
+                          ${trabajo.id},
+                          ${resultado["palabra-clave"].id}
+                        )
+                      `
+                          )
+                          .then(
+                            (r) => resolve1(r),
+                            (e) => reject1(e)
+                          );
+                      }),
+                    (err) => reject(err)
+                  );
+                });
+              }).then(
+                resolve(
+                  responder(
+                    201,
+                    Object.assign({}, respuestas[201], {
+                      trabajo: trabajo,
+                    })
+                  )
                 )
               ),
-            (err) => reject(err)
+            (error) => reject(error)
           );
         }
       }

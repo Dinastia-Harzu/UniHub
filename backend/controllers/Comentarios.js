@@ -43,6 +43,21 @@ module.exports.comentariosIdGET = function comentariosIdGET(
     });
 };
 
+module.exports.comentarios_trabajoGET = function comentarios_trabajoGET(
+  req,
+  res,
+  next,
+  id
+) {
+  Comentarios.comentarios_trabajoGET(id)
+    .then(function (response) {
+      utils.writeJson(res, response);
+    })
+    .catch(function (response) {
+      utils.writeJson(res, response);
+    });
+};
+
 module.exports.comentariosIdPUT = function comentariosIdPUT(
   req,
   res,

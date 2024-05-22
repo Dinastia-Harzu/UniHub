@@ -28,6 +28,10 @@ html {
   width: 100%;
 }
 
+main {
+  margin-bottom: 7em;
+}
+
 .logotipo {
   content: url('../Logotipo.PNG');
   width: 180px;
