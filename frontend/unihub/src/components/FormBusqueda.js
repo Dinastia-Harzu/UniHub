@@ -1,29 +1,37 @@
 import React from "react";
+import {
+  SelectorTipoTrabajo,
+  SelectorTitulaciones,
+} from "./commons/SelectoresTrabajo";
 
-export default function FormBusqueda() {
+export default function FormBusqueda({ setPagina, formData, setFormData }) {
   return (
     <div className="formulario-busqueda titulo-letra">
       <h2>¿Qué estás buscando?</h2>
-      <form>
+      <form method="post">
         <div className="contenedor-apartados-formulario contenido-letra">
-          <input
-            type="text"
-            name="nombre"
-            placeholder="Título del trabajo"
-            className="contenido-letra"
-          ></input>
-        </div>
-        <div className="contenedor-apartados-formulario  contenido-letra">
-          <input  className = "contenido-letra" type="text" name="autor" placeholder="Autor"></input>
-        </div>
-        <div className="contenedor-apartados-formulario  contenido-letra">
-          <input  className = "contenido-letra" type="date" name="Fecha" placeholder="Fecha"></input>
+          <label htmlFor="nombre-tmp">Título</label>
+          <input className="contenido-letra" id="nombre-tmp" type="text" name="nombre" placeholder="Introduce el título del trabajo"></input>
         </div>
         <div className="contenedor-apartados-formulario contenido-letra">
-          <select className = "contenido-letra">
-            <option className = "contenido-letra" value="1">Grado en ingeniería multimedia</option>
-            <option className = "contenido-letra" value="2">Grado en ingeniería informática</option>
-          </select>
+          <label htmlFor="autor">Autor</label>
+          <input className="contenido-letra" type="text" id="autor" name="autor" placeholder="Introduce el nombre del autor"></input>
+        </div>
+        <div className="contenedor-apartados-formulario contenido-letra">
+          <label htmlFor="fecha">Fecha</label>
+          <input className="contenido-letra" id="fecha" type="date" name="publicacion" placeholder="Fecha"></input>
+        </div>
+        <div className="contenedor-apartados-formulario contenido-letra">
+          <SelectorTipoTrabajo
+            formData={formData}
+            setFormData={setFormData}
+          />
+        </div>
+        <div className="contenedor-apartados-formulario contenido-letra">
+          <SelectorTitulaciones
+            formData={formData}
+            setFormData={setFormData}
+          />
         </div>
         <div className="contenedor-botones-busqueda">
           <button className="btn" type="submit">

@@ -51,6 +51,7 @@ export default function FormPublicar2({ setPagina, formData, setFormData }) {
                 onChange={(event) =>
                   setFormData({ ...formData, resumen: event.target.value })
                 }
+                className="contenido-letra"
               ></textarea>
             </div>
 
