@@ -8,8 +8,18 @@ body {
     min-width: 500px;
 }
 
-.boton-descargar {
+.boton-descargar,
+.boton-ver {
     margin-right: 0.3em;
+    color: var(--color-text);
+}
+
+.boton-descargar:hover,
+.boton-ver:hover,
+.boton-descargar:focus,
+.boton-ver:focus {
+    cursor: pointer;
+    color: var(--color-tertiary);
 }
 
 .contenedor-detalles {
@@ -102,7 +112,8 @@ body {
     font-size: var(--title);
 }
 
-.boton-comentar:hover,.boton-comentar:focus {
+.boton-comentar:hover,
+.boton-comentar:focus {
     background-color: #bbbbbb;
 }
 

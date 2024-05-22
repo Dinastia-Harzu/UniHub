@@ -15,7 +15,7 @@ export function ModalDetalle({ id_trabajo }) {
 
   return (
     <div>
-      <button onClick={abrirModal1} className="btn">
+      <button onClick={abrirModal1} className="btn btn-fondo">
         Comentar
       </button>
       <Modal estaAbierto={modalEstaAbierto1} cerrarModal={cerrarModal1}>
