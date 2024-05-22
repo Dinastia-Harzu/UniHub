@@ -48,6 +48,7 @@ export default function FormPublicar3({ setPagina, formData, setFormData }) {
                     documento: event.target.files[0].name,
                   })
                 }
+                className="contenido-letra"
               ></input>
             </div>
 

@@ -1,12 +1,13 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faDownload, faEye } from "@fortawesome/free-solid-svg-icons";
 import StarRating from "./commons/StarRating";
-import { ModalDetalle } from "./commons/Modales";
+import { ModalDetalle, ModalPDF } from "./commons/Modales";
 import "../styles/detalles.css";
 import { useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
 import axios from "axios";
 import { URL_BASE } from "../utils/constantes";
+
 
 export default function Detalles() {
 
@@ -62,7 +63,7 @@ export default function Detalles() {
       <main className="contenedor-detalles">
         <section className="contenedor-portada">
           <div className="contenedor-ver-y-descargar">
-            <a href={"/documentos/" + trabajo.documento} download={trabajo.documento} target="blank">
+            <a href={`/documentos/${trabajo.documento}`} download={trabajo.documento} target="blank">
               <FontAwesomeIcon
                 icon={faDownload}
                 size="2xl"
@@ -70,9 +71,9 @@ export default function Detalles() {
                 className="boton-descargar"
               />
             </a>
-            <FontAwesomeIcon icon={faEye} size="2xl" className="boton-ver" />
+            <ModalPDF archivo={trabajo.documento} />
           </div>
-          <img src={"/assets/" + trabajo.portada} alt="portada"></img>
+          <img src={`/assets/${trabajo.portada}`} alt="portada"></img>
         </section>
         <section className="contenedor-datos">
           <article className="datos">

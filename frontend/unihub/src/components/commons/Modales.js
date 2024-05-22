@@ -2,6 +2,8 @@ import { useState } from "react";
 import { useModal } from "../../hooks/useModal";
 import Modal from "./Modal";
 import StarRating from "./StarRating";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faEye } from "@fortawesome/free-solid-svg-icons";
 
 export function ModalDetalle({ id_trabajo }) {
   const [modalEstaAbierto1, abrirModal1, cerrarModal1, publicarModal1] =
@@ -40,4 +42,18 @@ export function ModalDetalle({ id_trabajo }) {
       </Modal>
     </div>
   );
+}
+
+export function ModalPDF({ archivo }) {
+  const [modalEstaAbierto2, abrirModal2, cerrarModal2, publicarModal2] =
+    useModal(false);
+
+  return (
+    <div className="contenedor-modal-pdf">
+      <FontAwesomeIcon icon={faEye} size="xl" className="boton-ver" onClick={abrirModal2} />
+      <Modal estaAbierto={modalEstaAbierto2} cerrarModal={cerrarModal2}>
+        <p>{archivo}</p>
+      </Modal>
+    </div>
+  )
 }

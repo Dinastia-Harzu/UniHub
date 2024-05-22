@@ -31,6 +31,12 @@ body {
     margin-bottom: 1em;
     top: 30px;
     position: sticky;
+    display: flex;
+    justify-content: flex-end;
+}
+
+.contenedor-modal-pdf {
+    z-index: 3;
 }
 
 .contenedor-portada a {
@@ -41,6 +47,7 @@ body {
     width: 410px;
     top: 75px;
     position: sticky;
+    z-index: -1;
 }
 
 .ver-y-descargar-oculto {
