@@ -32,7 +32,7 @@ export default function CartaBusqueda({ cardsData }) {
       <div className="cards-container">
         {cardsData.map((card) => (
           <Link key={card.id} to="/trabajo" className="card">
-            <img src={card.image} alt={card.title} />
+            <img src={card.image} alt={card.title} title={card.title} />
             <div className="card-content contenido-letra">
               <h3>{card.title}</h3>
               <div className="descripcion">

@@ -8,7 +8,6 @@ import {
 export default function FormPublicar1({ setPagina, formData, setFormData }) {
   const { t } = useTranslation();
   return (
-
     <section className="contenedor-publicar">
       <section className="contenedor-formulario-publicar">
         <div className="contenedor-apartados-publicar">

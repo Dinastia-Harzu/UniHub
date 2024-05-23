@@ -65,7 +65,7 @@ exports.usuariosIdDELETE = function (id) {
  **/
 exports.usuariosIdGET = function (id) {
   return new Promise(function (resolve, reject) {
-    conexion.query(`SELECT * FROM usuario WHERE id = ${id}`, (err, res) => {
+    conexion.query(`SELECT u.*,t.css ruta from usuario u JOIN tema t on(u.tema = t.id) where u.id=${id}`, (err, res) => {
       if (err) {
         console.error(err);
         reject(responder(500, respuestas[500]));
