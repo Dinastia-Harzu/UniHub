@@ -7,7 +7,6 @@ export default function Inicio() {
   const [correo, setCorreo] = useState('');
   useEffect(() => {
     const usuario = JSON.parse(sessionStorage.getItem('usuario'));
-    console.log(usuario);
   }, []);
 
   return (

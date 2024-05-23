@@ -12,8 +12,9 @@ export default function Header() {
 
   useEffect(() => {
     const usuario = JSON.parse(sessionStorage.getItem('usuario'));
+    console.log("usuario");
     console.log(usuario);
-    console.log("Hola");
+    
   }, []);
 
   const showNavbar = () => {
@@ -65,7 +66,7 @@ export default function Header() {
           <div className="navbar-buttons btn-letra">
             {sessionStorage.getItem('usuario') ? (
               <div className="contenido-letra">
-                {t('bienvenido')} {JSON.parse(sessionStorage.getItem('usuario')).data.nombre}!
+                {t('bienvenido')} {JSON.parse(sessionStorage.getItem('usuario')).nombre}!
                 <Link to="/login" className="navbar-item btn-letra" onClick={handleLogout}>
               {t('salir')}
             </Link>
