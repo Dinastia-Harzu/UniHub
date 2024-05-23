@@ -39,7 +39,7 @@ const Registro = () => {
     direccion: "uwu",
     nacimiento: "2003-02-02",
     clave: "uwu",
-    "foto-perfil": "nphoto"
+    "foto-perfil": "no_photo.png"
   });
   
 
@@ -69,10 +69,10 @@ const Registro = () => {
       const img = refImagen.current;
       img.src = URL.createObjectURL(fichero);
       setImagenSeleccionada(fichero);
-      setFormData({ ...formData, "foto-perfil": fichero }); // Update formData with the file
+      setFormData({ ...formData, "foto-perfil": fichero.name }); 
     } else {
       setImagenSeleccionada(null);
-      setFormData({ ...formData, "foto-perfil": "" }); // Clear the file in formData
+      setFormData({ ...formData, "foto-perfil": null }); 
     }
   };
 
@@ -89,7 +89,7 @@ const Registro = () => {
   
     axios.post(`${URL_BASE}usuarios`, formData, {
       headers: {
-        'Content-Type': 'application/json', // Set the correct Content-Type header
+        'Content-Type': 'application/json', 
       },
     })
     .then((result) => {
@@ -131,7 +131,7 @@ const Registro = () => {
                 />
               </div>
               <div className="form-group" id="nombre">
-                <label htmlFor="nombre" className="contenido-letra">{t('registro')}:</label>
+                <label htmlFor="nombre" className="contenido-letra">{t('nombre')}:</label>
                 <input
                   className="contenido-letra"
                   type="text"
@@ -215,7 +215,7 @@ const Registro = () => {
                         pattern: /(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}/,
                       })}
                       onChange={(event) =>
-                        setFormData({ ...formData, contrasena: event.target.value })
+                        setFormData({ ...formData, clave: event.target.value })
                       }
                     />
                   </div>
@@ -322,7 +322,7 @@ const Registro = () => {
                 <a href="login" className="contenido-letra">{t('in')}</a>
               </div>
               <div className="boton-entrar btn-letra">
-                <button onClick={enviarData} className="btn btn-primary btn-letra" value="Editar perfil">{t('registro')}</button>
+                <button onClick={handleSubmit(enviarData)} className="btn btn-primary btn-letra" value="Editar perfil">{t('registro')}</button>
               </div>
             </div>
           </form>
