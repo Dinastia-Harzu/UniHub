@@ -9,6 +9,7 @@ import Footer from "./components/commons/Footer.js";
 import Perfilusuario from "./components/Perfilusuario.js";
 import InicioSesion from "./components/InicioSesion.js";
 import Busqueda from "./components/Busqueda.js";
+import Descubrir from "./components/Descubrir.js";
 import Registro from "./components/Registro.js";
 import EditarPerfil from "./components/EditarPerfil.js";
 import Contacto from "./components/Contacto.js";
@@ -65,6 +66,7 @@ export default function App() {
             <Route path="publicar" element={<Publicar />} />
             <Route path="contacto" element={<Contacto />} />
             <Route path="trabajos" element={<MisTrabajos />} />
+            <Route path="descubrir" element={<Descubrir />} />
             <Route path="algo" element={<Inicio />}>
               <Route path="lol" element={<MisTrabajos />} />
             </Route>

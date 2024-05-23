@@ -26,7 +26,7 @@ const cardsData = [
   // Añadir más datos de cartas según sea necesario
 ];
 
-export default function CartaBusqueda() {
+export default function CartaBusqueda({ cardsData }) {
   return (
     <>
       <div className="cards-container">

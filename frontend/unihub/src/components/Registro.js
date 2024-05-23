@@ -65,7 +65,7 @@ const Registro = () => {
         <div className="form-container">
           <form onSubmit={handleSubmit(onSubmit)} className="pos-wrapper">
             <div className="wrapper">
-              <div className="contenedor-apartados-formulario_usuario">
+              <div className="contenedor-apartados-formulario-usuario">
                 <label htmlFor="portada"></label>
                 <img
                   ref={refImagen}
@@ -89,7 +89,7 @@ const Registro = () => {
               <div className="form-group" id="nombre">
                 <label htmlFor="nombre" className="contenido-letra">{t('registro')}:</label>
                 <input
-                 className="contenido-letra"
+                  className="contenido-letra"
                   type="text"
                   id="nombre"
                   name="nombre"
@@ -100,16 +100,16 @@ const Registro = () => {
                   })}
                 />
                 {errors.nombre?.type === "required" && (
-                  <p  className="contenido-letra">{t('campo-requerido')}</p>
+                  <p className="contenido-letra">{t('campo-requerido')}</p>
                 )}
                 {errors.nombre?.type === "maxLength" && (
-                  <p  className="contenido-letra">{t('nombre-largo')}</p>
+                  <p className="contenido-letra">{t('nombre-largo')}</p>
                 )}
               </div>
               <div className="form-group" id="apellidos">
-                <label htmlFor="apellidos"  className="contenido-letra">{t('apellidos')}:</label>
+                <label htmlFor="apellidos" className="contenido-letra">{t('apellidos')}:</label>
                 <input
-                 className="contenido-letra"
+                  className="contenido-letra"
                   type="text"
                   id="apellidos"
                   name="apellidos"
@@ -120,17 +120,17 @@ const Registro = () => {
                   })}
                 />
                 {errors.apellidos?.type === "required" && (
-                  <p  className="contenido-letra">{t('campo-requerido')}</p>
+                  <p className="contenido-letra">{t('campo-requerido')}</p>
                 )}
                 {errors.apellidos?.type === "maxLength" && (
-                  <p  className="contenido-letra">{t('nombre-largo')}</p>
+                  <p className="contenido-letra">{t('nombre-largo')}</p>
                 )}
               </div>
               <div id="parte-inferior">
                 <div className="form-group" id="correo">
-                  <label htmlFor="correo"  className="contenido-letra">{t('correo')}:</label>
+                  <label htmlFor="correo" className="contenido-letra">{t('correo')}:</label>
                   <input
-                   className="contenido-letra"
+                    className="contenido-letra"
                     type="email"
                     id="correo"
                     name="correo"
@@ -141,19 +141,19 @@ const Registro = () => {
                     })}
                   />
                   {errors.correo?.type === "required" && (
-                    <p  className="contenido-letra">{t('campo-requerido')}</p>
+                    <p className="contenido-letra">{t('campo-requerido')}</p>
                   )}
                   {errors.correo?.type === "pattern" && (
-                    <p  className="contenido-letra">{t('correo-erróneo')}</p>
+                    <p className="contenido-letra">{t('correo-erróneo')}</p>
                   )}
                   <br />
                   <br />
                 </div>
                 <div className="form-group" id="contrasenia">
                   <div className="input-contrasenia">
-                    <label htmlFor="contrasena"  className="contenido-letra">{t('contrasenia')}:</label>
+                    <label htmlFor="contrasena" className="contenido-letra">{t('contrasenia')}:</label>
                     <input
-                     className="contenido-letra"
+                      className="contenido-letra"
                       type={mostrarContrasena ? "text" : "password"}
                       id="contrasena"
                       name="contrasena"
@@ -164,7 +164,7 @@ const Registro = () => {
                     />
                   </div>
                   <div
-                  
+
                     className="boton-contrasenia contenido-letra"
                     tabIndex="0"
                     onKeyDown={handleKeyDownTogglePassword}
@@ -179,137 +179,137 @@ const Registro = () => {
                     </span>
                   </div>
                   {errors.contrasena?.type === "required" && (
-                    <p  className="contenido-letra">{t('campo-requerido')}</p>
+                    <p className="contenido-letra">{t('campo-requerido')}</p>
                   )}
                   {errors.contrasena?.type === "pattern" && (
-                    <p  className="contenido-letra">{t('contra-erróneo')}</p>
+                    <p className="contenido-letra">{t('contra-erróneo')}</p>
                   )}
                   <br />
                 </div>
                 <div className="form-group" id="titulacion">
-                  <label htmlFor="titulacion"  className="contenido-letra">{t('sel-tit')}:</label>
+                  <label htmlFor="titulacion" className="contenido-letra">{t('sel-tit')}:</label>
                   <select
-                  className="contenido-letra"
+                    className="contenido-letra"
                     defaultValue="none"
                     {...register("titulacion", {
                       required: true,
                       validate: titulacionValidator,
                     })}
                   >
-                    <option value="none"  className="contenido-letra">{t('sel-tutit')}</option>
-                    <option value="ingenieria_multimedia"  className="contenido-letra">
-                    {t('ingenieria_multimedia')}
+                    <option value="none" className="contenido-letra">{t('sel-tutit')}</option>
+                    <option value="ingenieria_multimedia" className="contenido-letra">
+                      {t('ingenieria_multimedia')}
                     </option>
-                    <option value="arquitectura"  className="contenido-letra">{t('arquitectura')}</option>
+                    <option value="arquitectura" className="contenido-letra">{t('arquitectura')}</option>
                     <option value="arquitectura_tecnica">
-                    {t('arquitectura_tecnica')}
+                      {t('arquitectura_tecnica')}
                     </option>
-                    <option value="fundamentos_arquitectura"  className="contenido-letra">
-                    {t('fundamentos_arquitectura')}
+                    <option value="fundamentos_arquitectura" className="contenido-letra">
+                      {t('fundamentos_arquitectura')}
                     </option>
-                    <option value="ingenieria_aeroespacial"  className="contenido-letra">
-                    {t('ingenieria_aeroespacial')}
+                    <option value="ingenieria_aeroespacial" className="contenido-letra">
+                      {t('ingenieria_aeroespacial')}
                     </option>
-                    <option value="ingenieria_biomedica"  className="contenido-letra">
-                    {t('ingenieria_biomedica')}
+                    <option value="ingenieria_biomedica" className="contenido-letra">
+                      {t('ingenieria_biomedica')}
                     </option>
-                    <option value="ingenieria_sonido_imagen"  className="contenido-letra">
-                    {t('ingenieria_sonido_imagen')}
+                    <option value="ingenieria_sonido_imagen" className="contenido-letra">
+                      {t('ingenieria_sonido_imagen')}
                     </option>
-                    <option value="ingenieria_civil"  className="contenido-letra">{t('ingenieria_civil')}</option>
+                    <option value="ingenieria_civil" className="contenido-letra">{t('ingenieria_civil')}</option>
                     <option value="ingenieria_ia">
-                    {t('ingenieria_ia')}
+                      {t('ingenieria_ia')}
                     </option>
-                    <option value="ingenieria_informatica"  className="contenido-letra">
-                    {t('ingenieria_informatica')}
+                    <option value="ingenieria_informatica" className="contenido-letra">
+                      {t('ingenieria_informatica')}
                     </option>
-                    <option value="ingenieria_informatica_ade"  className="contenido-letra">
-                    {t('ingenieria_informatica_ade')}
+                    <option value="ingenieria_informatica_ade" className="contenido-letra">
+                      {t('ingenieria_informatica_ade')}
                     </option>
-                    <option value="ingenieria_quimica"  className="contenido-letra">
-                    {t('ingenieria_quimica')}
+                    <option value="ingenieria_quimica" className="contenido-letra">
+                      {t('ingenieria_quimica')}
                     </option>
-                    <option value="ingenieria_robotica"  className="contenido-letra">
-                    {t('ingenieria_robotica')}
+                    <option value="ingenieria_robotica" className="contenido-letra">
+                      {t('ingenieria_robotica')}
                     </option>
-                    <option value="master_arquitectura"  className="contenido-letra">
-                    {t('master_arquitectura')}
+                    <option value="master_arquitectura" className="contenido-letra">
+                      {t('master_arquitectura')}
                     </option>
-                    <option value="master_automatica_robotica"  className="contenido-letra">
-                    {t('master_automatica_robotica')}
+                    <option value="master_automatica_robotica" className="contenido-letra">
+                      {t('master_automatica_robotica')}
                     </option>
-                    <option value="master_ciberseguridad"  className="contenido-letra">
-                    {t('master_ciberseguridad')}
+                    <option value="master_ciberseguridad" className="contenido-letra">
+                      {t('master_ciberseguridad')}
                     </option>
-                    <option value="master_ciencia_datos"  className="contenido-letra">
-                    {t('master_ciencia_datos')}
+                    <option value="master_ciencia_datos" className="contenido-letra">
+                      {t('master_ciencia_datos')}
                     </option>
-                    <option value="master_desarrollo_aplicaciones_servicios_web"  className="contenido-letra">
-                    {t('master_desarrollo_aplicaciones_servicios_web')}
+                    <option value="master_desarrollo_aplicaciones_servicios_web" className="contenido-letra">
+                      {t('master_desarrollo_aplicaciones_servicios_web')}
                     </option>
-                    <option value="master_desarrollo_software_dispositivos_moviles"  className="contenido-letra">
-                    {t('master_desarrollo_software_dispositivos_moviles')}
+                    <option value="master_desarrollo_software_dispositivos_moviles" className="contenido-letra">
+                      {t('master_desarrollo_software_dispositivos_moviles')}
                     </option>
-                    <option value="master_gestion_edificacion"  className="contenido-letra">
-                    {t('master_gestion_edificacion')}
+                    <option value="master_gestion_edificacion" className="contenido-letra">
+                      {t('master_gestion_edificacion')}
                     </option>
-                    <option value="master_ingenieria_biomedica"  className="contenido-letra">
-                    {t('master_ingenieria_biomedica')}
+                    <option value="master_ingenieria_biomedica" className="contenido-letra">
+                      {t('master_ingenieria_biomedica')}
                     </option>
-                    <option value="master_ingenieria_caminos_canales_puertos"  className="contenido-letra">
-                    {t('master_ingenieria_caminos_canales_puertos')}
+                    <option value="master_ingenieria_caminos_canales_puertos" className="contenido-letra">
+                      {t('master_ingenieria_caminos_canales_puertos')}
                     </option>
-                    <option value="master_ingenieria_materiales_agua_terreno"  className="contenido-letra">
-                    {t('master_ingenieria_materiales_agua_terreno')}
+                    <option value="master_ingenieria_materiales_agua_terreno" className="contenido-letra">
+                      {t('master_ingenieria_materiales_agua_terreno')}
                     </option>
-                    <option value="master_ingenieria_telecomunicacion"  className="contenido-letra">
-                    {t('master_ingenieria_telecomunicacion')}
+                    <option value="master_ingenieria_telecomunicacion" className="contenido-letra">
+                      {t('master_ingenieria_telecomunicacion')}
                     </option>
-                    <option value="master_ingenieria_geologica"  className="contenido-letra">
-                    {t('master_ingenieria_geologica')}
+                    <option value="master_ingenieria_geologica" className="contenido-letra">
+                      {t('master_ingenieria_geologica')}
                     </option>
-                    <option value="master_ingenieria_informatica"  className="contenido-letra">
-                    {t('master_ingenieria_informatica')}
+                    <option value="master_ingenieria_informatica" className="contenido-letra">
+                      {t('master_ingenieria_informatica')}
                     </option>
-                    <option value="master_ingenieria_quimica"  className="contenido-letra">
-                    {t('master_ingenieria_quimica')}
+                    <option value="master_ingenieria_quimica" className="contenido-letra">
+                      {t('master_ingenieria_quimica')}
                     </option>
-                    <option value="master_ingenieria_artificial"  className="contenido-letra">
-                    {t('master_ingenieria_artificial')}
+                    <option value="master_ingenieria_artificial" className="contenido-letra">
+                      {t('master_ingenieria_artificial')}
                     </option>
-                    <option value="master_nuevas_tecnologias"  className="contenido-letra">
-                    {t('master_nuevas_tecnologias')}
+                    <option value="master_nuevas_tecnologias" className="contenido-letra">
+                      {t('master_nuevas_tecnologias')}
                     </option>
-                    <option value="master_prevencion_riesgos_laborales"  className="contenido-letra">
-                    {t('master_prevencion_riesgos_laborales')}
+                    <option value="master_prevencion_riesgos_laborales" className="contenido-letra">
+                      {t('master_prevencion_riesgos_laborales')}
                     </option>
                   </select>
                   {errors.titulacion?.type === "required" && (
-                    <p  className="contenido-letra">{t('campo-requerido')}</p>
+                    <p className="contenido-letra">{t('campo-requerido')}</p>
                   )}
                   {errors.titulacion?.type === "validate" && (
-                    <p  className="contenido-letra">{t('titulacion-obligatoria')}</p>
+                    <p className="contenido-letra">{t('titulacion-obligatoria')}</p>
                   )}
                   <br />
                   <br />
                 </div>
                 <div className="form-group" id="titulacion">
-                  <label htmlFor="estilo"  className="contenido-letra">{t('estilo')}:</label>
+                  <label htmlFor="estilo" className="contenido-letra">{t('estilo')}:</label>
                   <select
-                   className="contenido-letra"
+                    className="contenido-letra"
                     defaultValue="none"
                     {...register("estilo", {
                       required: true,
                       validate: estiloValidator,
                     })}
                   >
-                    <option value="none"  className="contenido-letra">{t('sel-estilo')}</option>
-                    <option value="1"  className="contenido-letra">{t('normal')}</option>
-                    <option value="2"  className="contenido-letra">{t('oscuro')}</option>
-                    <option value="3"  className="contenido-letra">{t('ac')}</option>
-                    <option value="4"  className="contenido-letra">{t('normal-lg')}</option>
-                    <option value="5"  className="contenido-letra">{t('oscuro-lg')}</option>
-                    <option value="6"  className="contenido-letra">{t('ac-lg')}</option>
+                    <option value="none" className="contenido-letra">{t('sel-estilo')}</option>
+                    <option value="1" className="contenido-letra">{t('normal')}</option>
+                    <option value="2" className="contenido-letra">{t('oscuro')}</option>
+                    <option value="3" className="contenido-letra">{t('ac')}</option>
+                    <option value="4" className="contenido-letra">{t('normal-lg')}</option>
+                    <option value="5" className="contenido-letra">{t('oscuro-lg')}</option>
+                    <option value="6" className="contenido-letra">{t('ac-lg')}</option>
                   </select>
                   {errors.estilo?.type === "required" && (
                     <p className="contenido-letra">{t('campo-requerido')}</p>
@@ -323,7 +323,7 @@ const Registro = () => {
                 <div className="form-group" id="direccion">
                   <label htmlFor="direccion" className="contenido-letra">{t('direccion')}:</label>
                   <input
-                  className="contenido-letra"
+                    className="contenido-letra"
                     type="text"
                     id="direccion"
                     name="direccion"
@@ -341,7 +341,7 @@ const Registro = () => {
                 <div className="form-group contenido-letra" id="nacimiento">
                   <label htmlFor="fecha_nacimiento" className="contenido-letra">{t('fecnac')}:</label>
                   <input
-                  className="contenido-letra"
+                    className="contenido-letra"
                     type="date"
                     id="fecha_nacimiento"
                     name="fecha_nacimiento"
