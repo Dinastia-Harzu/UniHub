@@ -49,17 +49,17 @@ export default function Publicar() {
     function enviarData() {
         console.log(formData);
 
-        // if (formData["palabras-clave"].length != 0)
-        //     formData["palabras-clave"] = formData["palabras-clave"].split(",");
+        if (formData["palabras-clave"].length != 0)
+            formData["palabras-clave"] = formData["palabras-clave"].split(",");
 
-        // axios.post(`${URL_BASE}trabajos`, formData).then((result) => {
-        //     console.log(result);
-        // }).catch((err) => {
-        //     console.log(err);
-        // });
+        axios.post(`${URL_BASE}trabajos`, formData).then((result) => {
+            console.log(result);
+        }).catch((err) => {
+            console.log(err);
+        });
 
-        // alert("Trabajo publicado!");
-        // window.location.replace("");
+        alert("Trabajo publicado!");
+        window.location.replace("");
     }
 
     return (
