@@ -17,7 +17,7 @@ const _ = require("./LoginService");
 exports.loginPOST = function (body) {
     return new Promise(function (resolve, reject) {
         conexion.query(
-            `SELECT * FROM usuario WHERE correo=${$(body.correo)} AND clave=${$(body.clave)}`,
+            `SELECT u.*,t.nombre tema_nombre,o.nombre titulacion_nombre FROM usuario u, tema t,titulacion o WHERE correo=${$(body.correo)} AND clave=${$(body.clave)} AND titulacion = o.id AND tema = t.id`,
             (err, filas) => {
                 if (err) {
                     console.error(err);

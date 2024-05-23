@@ -10,7 +10,7 @@ import { useNavigate } from 'react-router-dom';
 const InicioSesion = () => {
   const { t } = useTranslation();
   const navigate = useNavigate();
-  
+  //if(sessionStorage.getItem('usuario') != null) { navigate('../');}
   const {
     register,
     formState: { errors },
@@ -24,15 +24,14 @@ const InicioSesion = () => {
       const response = await axios.post(`${URL_BASE}login`, {
         correo: data.correo,
         clave: data.contrasena,
+        nombre: data.nombre
       });
-
-      console.log('Server response:', response); 
 
       if (response.status === 200) {
         setMessage(t('usuario-logueado'));
-        console.log('User data:', response.data); 
-        sessionStorage.setItem('usuario', JSON.stringify(response.data));
-        navigate('../');
+        console.log(response);
+        sessionStorage.setItem('usuario', JSON.stringify(response));
+       navigate('../');
       } else {
         setMessage(t('usuario-no-logueado'));
       }
@@ -114,6 +113,9 @@ const InicioSesion = () => {
                   </div>
                   {errors.contrasena?.type === "required" && (
                     <p className="contenido-letra">{t('campo-requerido')}</p>
+                  )}
+                  {errors.contrasena?.type === "pattern" && (
+                    <p className="contenido-letra">{t('contra-erróneo')}</p>
                   )}
                   <br />
                 </div>
