@@ -14,7 +14,7 @@ export default function Header() {
     const usuario = JSON.parse(sessionStorage.getItem('usuario'));
     console.log("usuario");
     console.log(usuario);
-    
+
   }, []);
 
   const showNavbar = () => {
@@ -23,6 +23,12 @@ export default function Header() {
 
   const handleLogout = () => {
     sessionStorage.removeItem('usuario');
+    if (document.getElementById("tema-de-usuario")) { document.head.removeChild(document.getElementById("tema-de-usuario")); }
+    const link = document.createElement("link");
+    link.setAttribute("id", "tema-de-usuario");
+    link.rel = "stylesheet";
+    link.href = `/assets/themes/general-normal.css`;
+    document.head.appendChild(link);
     navigate('/login');
   };
 
@@ -46,16 +52,16 @@ export default function Header() {
               <Link to="/trabajos" className="navbar-item btn-letra">
                 {t('mis-trabajos')}
               </Link>
-              
+
             ) : (
               console.log("No hay usuario registrado")
             )}
 
-              {sessionStorage.getItem('usuario') ? (
+            {sessionStorage.getItem('usuario') ? (
               <Link to="/perfil" className="navbar-item btn-letra">
                 {t('mi-perfil')}
               </Link>
-              
+
             ) : (
               console.log("No hay usuario registrado")
             )}
@@ -68,8 +74,8 @@ export default function Header() {
               <div className="contenido-letra">
                 {t('bienvenido')} {JSON.parse(sessionStorage.getItem('usuario')).nombre}!
                 <Link to="/login" className="navbar-item btn-letra" onClick={handleLogout}>
-              {t('salir')}
-            </Link>
+                  {t('salir')}
+                </Link>
               </div>
             ) : (
               <>

@@ -35,7 +35,8 @@ export default function App() {
 
   useEffect(() => {
     if (idUsuarioLoggeado) {
-      axios.get(`${URL_BASE}usuarios/${idUsuarioLoggeado}`).then((result) => {
+      console.log(JSON.parse(idUsuarioLoggeado).id);
+      axios.get(`${URL_BASE}usuarios/${JSON.parse(idUsuarioLoggeado).id}`).then((result) => {
         const userThemeFromBackend = result.data.ruta;
         setUserTheme(userThemeFromBackend);
 
