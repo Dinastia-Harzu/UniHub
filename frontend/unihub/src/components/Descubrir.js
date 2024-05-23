@@ -76,7 +76,13 @@ const Descubrir = () => {
             </form>
           )}
         </div>
-        <div className="btn-letra"><Link to='/publicar' className='btn publish-button btn-primary btn-letra'>{t('publicar')}</Link></div>
+
+
+        {sessionStorage.getItem('usuario') ? (
+              <div className="btn-letra"><Link to='/publicar' className='btn publish-button btn-primary btn-letra'>{t('publicar')}</Link></div>
+            ) : (
+              console.log("No hay usuario registrado")
+            )}
       </div>
       <div className="cards-container">
         {cardsData.map(card => (

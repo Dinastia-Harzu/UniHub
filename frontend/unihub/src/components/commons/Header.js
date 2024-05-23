@@ -12,9 +12,8 @@ export default function Header() {
 
   useEffect(() => {
     const usuario = JSON.parse(sessionStorage.getItem('usuario'));
-    if (usuario && usuario.correo) {
-      setCorreo(usuario.correo);
-    }
+    console.log(usuario);
+    console.log("Hola");
   }, []);
 
   const showNavbar = () => {
@@ -42,10 +41,20 @@ export default function Header() {
             <Link to="/descubrir" className="navbar-item btn-letra">
               {t('descubrir')}
             </Link>
-            {correo ? (
+            {sessionStorage.getItem('usuario') ? (
               <Link to="/trabajos" className="navbar-item btn-letra">
                 {t('mis-trabajos')}
               </Link>
+              
+            ) : (
+              console.log("No hay usuario registrado")
+            )}
+
+              {sessionStorage.getItem('usuario') ? (
+              <Link to="/perfil" className="navbar-item btn-letra">
+                {t('mi-perfil')}
+              </Link>
+              
             ) : (
               console.log("No hay usuario registrado")
             )}
@@ -54,12 +63,12 @@ export default function Header() {
             </Link>
           </div>
           <div className="navbar-buttons btn-letra">
-            {correo ? (
+            {sessionStorage.getItem('usuario') ? (
               <div className="contenido-letra">
-                {t('bienvenido')} {correo}!
-                <button className="btn btn-secondary btn-letra" onClick={handleLogout}>
-                  {t('logout')}
-                </button>
+                {t('bienvenido')} {JSON.parse(sessionStorage.getItem('usuario')).data.nombre}!
+                <Link to="/login" className="navbar-item btn-letra" onClick={handleLogout}>
+              {t('salir')}
+            </Link>
               </div>
             ) : (
               <>

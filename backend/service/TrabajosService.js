@@ -7,6 +7,8 @@ const conexion = helper.connection;
 const respuestas = helper.respuestas;
 const camposPut = helper.determinarCamposPut;
 const $ = helper.json2sql;
+const filtro = helper.filtro;
+const select = helper.select;
 const _ = require("./TrabajosService");
 const palabrasClave = require("./PalabrasClaveService");
 
@@ -18,7 +20,35 @@ const palabrasClave = require("./PalabrasClaveService");
 exports.trabajosGET = function (params) {
   console.log(params);
   return new Promise(function (resolve, reject) {
-    conexion.query(`SELECT * FROM trabajo`, (err, filas) => {
+    let palabras_clave = [];
+    if (params["palabras-clave"]) {
+      palabras_clave = params["palabras-clave"].split('_');
+    }
+    conexion.query(`
+      SELECT t.*, u.nombre nombre_autor, tt.nombre nombre_tipotrabajo, tl.nombre nombre_titulacion
+      FROM trabajo t
+      JOIN usuario u ON(u.id = t.autor)
+      JOIN \`tipo-trabajo\` tt ON(tt.id = t.\`tipo-trabajo\`)
+      JOIN titulacion tl ON(tl.id = t.titulacion)
+      JOIN titulacion tl ON(tl.id = t.titulacion)
+      SELECT t.*
+      ${select("autor", params.nombre)}
+      ${select("tipo-trabajo", params["tipo-trabajo"])}
+      ${select("titulacion", params.titulacion)}
+      ${select("palabras-clave", params["palabras-clave"])}
+      FROM trabajo t
+      ${params.autor && "JOIN `tipo-trabajo` ON(`tipo-trabajo`.id = " + $(params["tipo-trabajo"]) + ")"}
+      ${params["tipo-trabajo"] && "JOIN `tipo-trabajo` ON(`tipo-trabajo`.id = " + $(params["tipo-trabajo"]) + ")"}
+      ${params["tipo-trabajo"] && "JOIN `tipo-trabajo` ON(`tipo-trabajo`.id = " + $(params["tipo-trabajo"]) + ")"}
+      ${params["tipo-trabajo"] && "JOIN `tipo-trabajo` ON(`tipo-trabajo`.id = " + $(params["tipo-trabajo"]) + ")"}
+      WHERE 1
+      && ${filtro("nombre", params.nombre)}
+      && ${filtro("autor", params.autor)}
+      && ${filtro("fecha", params.fecha)}
+      && ${filtro("tipo-trabajo", params["tipo-trabajo"])}
+      && ${filtro("titulacion", params.titulacion)}
+      && ${filtro("palabras-clave", params["palabras-clave"])}
+    `, (err, filas) => {
       if (err) {
         console.error(err);
         reject(responder(500, respuestas[500]));

@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 21-05-2024 a las 21:15:09
+-- Tiempo de generación: 23-05-2024 a las 11:42:55
 -- Versión del servidor: 10.4.32-MariaDB
 -- Versión de PHP: 8.2.12
 
@@ -48,6 +48,13 @@ CREATE TABLE `multimedia` (
   `trabajo` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
+--
+-- Volcado de datos para la tabla `multimedia`
+--
+
+INSERT INTO `multimedia` (`id`, `nombre`, `ruta`, `trabajo`) VALUES
+(1, 'muestra1', 'muestra1.png', 2);
+
 -- --------------------------------------------------------
 
 --
@@ -64,7 +71,12 @@ CREATE TABLE `palabra-clave` (
 --
 
 INSERT INTO `palabra-clave` (`id`, `nombre`) VALUES
-(1, 'animacion');
+(1, 'animacion'),
+(2, 'videojuego'),
+(3, 'ia'),
+(4, 'motor'),
+(5, 'juego'),
+(6, 'trabajo');
 
 -- --------------------------------------------------------
 
@@ -76,6 +88,17 @@ CREATE TABLE `palabra-clave-trabajo` (
   `id-trabajo` int(11) NOT NULL,
   `id-palabra-clave` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Volcado de datos para la tabla `palabra-clave-trabajo`
+--
+
+INSERT INTO `palabra-clave-trabajo` (`id-trabajo`, `id-palabra-clave`) VALUES
+(2, 2),
+(2, 3),
+(2, 4),
+(2, 5),
+(2, 6);
 
 -- --------------------------------------------------------
 
@@ -130,7 +153,34 @@ CREATE TABLE `titulacion` (
 --
 
 INSERT INTO `titulacion` (`id`, `nombre`) VALUES
-(1, 'Grado en Ingeniería Multimedia');
+(2, 'arquitectura_tecnica'),
+(3, 'fundamentos_arquitectura'),
+(4, 'ingenieria_aeroespacial'),
+(5, 'ingenieria_biomedica'),
+(7, 'ingenieria_ia'),
+(8, 'ingenieria_informatica'),
+(9, 'ingenieria_informatica_ade'),
+(1, 'ingenieria_multimedia'),
+(10, 'ingenieria_quimica'),
+(11, 'ingenieria_robotica'),
+(6, 'ingenieria_sonido_imagen'),
+(12, 'master_arquitectura'),
+(13, 'master_automatica_robotica'),
+(14, 'master_ciberseguridad'),
+(15, 'master_ciencia_datos'),
+(16, 'master_desarrollo_aplicaciones_servicios_web'),
+(17, 'master_desarrollo_software_dispositivos_moviles'),
+(18, 'master_gestion_edificacion'),
+(26, 'master_ingenieria_artificial'),
+(19, 'master_ingenieria_biomedica'),
+(20, 'master_ingenieria_caminos_canales_puertos'),
+(23, 'master_ingenieria_geologica'),
+(24, 'master_ingenieria_informatica'),
+(21, 'master_ingenieria_materiales_agua_terreno'),
+(25, 'master_ingenieria_quimica'),
+(22, 'master_ingenieria_telecomunicacion'),
+(27, 'master_nuevas_tecnologias'),
+(28, 'master_prevencion_riesgos_laborales');
 
 -- --------------------------------------------------------
 
@@ -155,7 +205,8 @@ CREATE TABLE `trabajo` (
 --
 
 INSERT INTO `trabajo` (`id`, `nombre`, `tipo`, `autor`, `titulacion`, `publicacion`, `resumen`, `portada`, `documento`) VALUES
-(1, 'Realización de un cortometraje de animación en 3D', 1, 14, 1, '2024-05-02', 'Este trabajo consiste en la realización de un cortometraje que narra el día de un niño a través de la caracterización de un avión de papel. Este día comienza en el colegio y, al terminar las clases, se va al parque a disfrutar de su entorno...', 'portada.png', 'documento.pdf');
+(1, 'Realización de un cortometraje de animación en 3D', 1, 14, 1, '2024-05-02', 'Este trabajo consiste en la realización de un cortometraje que narra el día de un niño a través de la caracterización de un avión de papel. Este día comienza en el colegio y, al terminar las clases, se va al parque a disfrutar de su entorno...', 'portada.png', 'documento.pdf'),
+(2, 'Melatonia', 1, 14, 1, '2024-05-23', 'Trabajo chulo', 'miportada.jpg', 'melatonia.pdf');
 
 -- --------------------------------------------------------
 
@@ -267,13 +318,13 @@ ALTER TABLE `comentario`
 -- AUTO_INCREMENT de la tabla `multimedia`
 --
 ALTER TABLE `multimedia`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT de la tabla `palabra-clave`
 --
 ALTER TABLE `palabra-clave`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT de la tabla `tema`
@@ -291,13 +342,13 @@ ALTER TABLE `tipo-trabajo`
 -- AUTO_INCREMENT de la tabla `titulacion`
 --
 ALTER TABLE `titulacion`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=29;
 
 --
 -- AUTO_INCREMENT de la tabla `trabajo`
 --
 ALTER TABLE `trabajo`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT de la tabla `usuario`
