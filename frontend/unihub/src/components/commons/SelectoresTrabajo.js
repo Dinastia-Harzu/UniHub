@@ -35,12 +35,11 @@ export function SelectorTipoTrabajo({ formData, setFormData }) {
           setFormData({ ...formData, tipo: parseInt(event.target.value) })
         }
         defaultValue={formData.tipo}
-        className="contenido-letra"
       >
         {tiposTrabajo.map((tipo, idx) => {
           return (
             <option value={tipo.id} key={idx}>
-              {tipo.nombre}
+              {t(tipo.nombre)}
             </option>
           );
         })}
@@ -82,12 +81,11 @@ export function SelectorTitulaciones({ formData, setFormData }) {
           setFormData({ ...formData, titulacion: parseInt(event.target.value) })
         }
         defaultValue={formData.titulacion}
-        className="contenido-letra"
       >
         {titulaciones.map((titulacion, idx) => {
           return (
             <option value={titulacion.id} key={idx}>
-              {titulacion.nombre}
+              {t(titulacion.nombre)}
             </option>
           );
         })}
@@ -132,7 +130,7 @@ export function SelectorTema({ formData, setFormData }) {
         {temas.map((tema, idx) => {
           return (
             <option value={tema.id} key={idx}>
-              {tema.nombre}
+              {t(tema.nombre)}
             </option>
           );
         })}
