@@ -27,6 +27,7 @@ export default function Detalles() {
     documento: '',
     valoracion: -1
   });
+  const [trabajosAsociados, setTrabajosAsociados] = useState([]);
 
   useEffect(() => {
     obtenerDatosTrabajo();
@@ -90,6 +91,18 @@ export default function Detalles() {
         "palabras-clave": palabras_clave.data
       }));
 
+      // Obtener trabajos asociados
+      const ids = [];
+      palabras_clave.data.forEach((palabra) => {
+        ids.push(palabra.id);
+      });
+      const palabras_juntas = ids.join("_");
+      axios.get(`${URL_BASE}trabajos?palabras-clave=${palabras_juntas}`).then((result) => {
+        setTrabajosAsociados(result.data);
+      }).catch((err) => {
+        console.log(err);
+      })
+
     } catch (err) {
       console.log(err);
     }
@@ -121,8 +134,8 @@ export default function Detalles() {
               <b>{t('fecha-publicacion')}:</b> {trabajo.publicacion}
             </p>
             <p>
-              <b>Valoración:</b>
-              {trabajo.valoracion != -1 ? (<StarRating formComentario={null} setFormComentario={null} ratinginicial={trabajo.valoracion} desabilitado={true} />) : <p>"No hay valoracion"</p>}
+              <b className="contenido-letra">Valoración:</b>
+              {trabajo.valoracion != -1 ? (<StarRating formComentario={null} setFormComentario={null} ratinginicial={trabajo.valoracion} desabilitado={true} />) : <p>No hay valoracion</p>}
             </p>
             <p className="contenido-letra">
               <b>{t('palabras-clave')}:</b> {trabajo['palabras-clave'].length > 0 ? (
