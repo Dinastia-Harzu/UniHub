@@ -5,7 +5,8 @@ header {
   background-color: var(--color-bg-2);
   color: var(--color-text);
   padding: 1.5em;
-  z-index: 1000; /* Añadir z-index aquí para el header */
+  z-index: 1000;
+  /* Añadir z-index aquí para el header */
 }
 
 header .nav-btn {
@@ -23,7 +24,8 @@ nav {
   justify-content: space-between;
   align-items: center;
   width: 100%;
-  z-index: 1000; /* Añadir z-index aquí para el nav */
+  z-index: 1000;
+  /* Añadir z-index aquí para el nav */
 }
 
 nav .navbar-buttons {
@@ -39,7 +41,7 @@ nav .container2 {
   justify-content: end;
 }
 
-@media only screen and (max-width: 970px) {
+@media only screen and (max-width: 1180px) {
   header .nav-btn {
     visibility: visible;
     opacity: 1;
@@ -59,7 +61,8 @@ nav .container2 {
     background-color: var(--color-bg-2);
     transition: 1s;
     transform: translateY(-150vh);
-    z-index: 1000; /* Añadir z-index aquí para el nav en modo responsivo */
+    z-index: 1000;
+    /* Añadir z-index aquí para el nav en modo responsivo */
   }
 
   header .responsive-nav {

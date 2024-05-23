@@ -31,9 +31,9 @@ export function SelectorTipoTrabajo({ formData, setFormData }) {
         title="tipos-trabajo"
         name="tipo"
         className="contenido-letra"
-        onChange={(event) =>
-          setFormData({ ...formData, tipo: parseInt(event.target.value) })
-        }
+        onChange={(event) => {
+          setFormData({ ...formData, "tipo-trabajo": parseInt(event.target.value) })
+        }}
         defaultValue={formData.tipo}
       >
         {tiposTrabajo.map((tipo, idx) => {
@@ -45,7 +45,7 @@ export function SelectorTipoTrabajo({ formData, setFormData }) {
         })}
         ;
       </select>
-    </div>
+    </div >
   );
 }
 
@@ -100,7 +100,7 @@ export function SelectorTema({ formData, setFormData }) {
 
   function recogerEstilos() {
     axios
-      .get(URL_BASE + "temas")
+      .get(`${URL_BASE}temas`)
       .then((result) => {
         setTemas(result.data);
       })
@@ -116,7 +116,7 @@ export function SelectorTema({ formData, setFormData }) {
   return (
     <div className="contenedor-apartados-formulario">
       <label htmlFor="tema" className="contenido-letra"
-      >Tema</label>
+      >{t('estilo')}</label>
       <select
         id="tema"
         title="temas"

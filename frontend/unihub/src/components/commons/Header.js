@@ -36,7 +36,7 @@ export default function Header() {
     <>
       <header>
         <div className="container1">
-          <Link to="/">
+          <Link to="/" className="logotipo">
             <div className="logotipo"></div>
           </Link>
         </div>

@@ -10,7 +10,7 @@ import { useNavigate } from 'react-router-dom';
 const InicioSesion = () => {
   const { t } = useTranslation();
   const navigate = useNavigate();
-  
+
   const {
     register,
     formState: { errors },
@@ -26,13 +26,31 @@ const InicioSesion = () => {
         clave: data.contrasena,
       });
 
-      console.log('Server response:', response); 
+      console.log('Server response:', response);
 
       if (response.status === 200) {
         setMessage(t('usuario-logueado'));
-        console.log('User data:', response.data); 
+        console.log('User data:', response.data);
         sessionStorage.setItem('usuario', JSON.stringify(response.data));
         navigate('../');
+
+        axios.get(`${URL_BASE}usuarios/${JSON.parse(sessionStorage.getItem('usuario')).id}`).then((result) => {
+          const userThemeFromBackend = result.data.ruta;
+
+          console.log(userThemeFromBackend);
+
+          if (document.getElementById("tema-de-usuario")) { document.head.removeChild(document.getElementById("tema-de-usuario")); }
+
+          const link = document.createElement("link");
+          link.setAttribute("id", "tema-de-usuario");
+          link.rel = "stylesheet";
+          link.href = `/assets/themes/${userThemeFromBackend}`;
+          document.head.appendChild(link);
+
+          if (userThemeFromBackend === "general-ac.css" || userThemeFromBackend === "general-ac-lg.css" || userThemeFromBackend === "general-osc-lg.css" || userThemeFromBackend === "general-osc.css") {
+            document.getElementsByClassName("logotipo").src = "/assets/W_Logotipo.PNG";
+          }
+        });
       } else {
         setMessage(t('usuario-no-logueado'));
       }
