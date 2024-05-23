@@ -85,6 +85,31 @@ exports.palabras_claveIdGET = function (id) {
 };
 
 /**
+ * GET Palabras clave de un trabajo
+ *
+ * id Integer el identificador del trabajo asociado
+ * returns OK-GETidPUT
+ **/
+exports.palabras_clave_trabajoGET = function (id) {
+  return new Promise(function (resolve, reject) {
+    conexion.query(`
+      SELECT p.*
+      FROM \`palabra-clave-trabajo\`
+      JOIN \`palabra-clave\` p ON(\`id-palabra-clave\` = p.id)
+      WHERE \`id-trabajo\` = ${id}
+    `, (err, filas) => {
+      if (err) {
+        console.error(err);
+        reject(responder(500, respuestas[500]));
+      } else {
+        resolve(responder(200, filas));
+      }
+    }
+    );
+  });
+};
+
+/**
  * PUT Palabra clave
  *
  * body ReqPalabraClave

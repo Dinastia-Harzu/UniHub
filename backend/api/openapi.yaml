@@ -225,6 +225,16 @@ paths:
           description: IDs de las palabras clave separadas por coma
           schema:
             type: string
+        - name: titulacion
+          in: query
+          description: titulación
+          schema:
+            type: string
+        - name: tipo-trabajo
+          in: query
+          description: tipo de trabajo
+          schema:
+            type: string
       responses:
         "200":
           description: OK
