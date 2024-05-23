@@ -9,11 +9,15 @@ import React, { useState, useRef } from "react";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
 import "../styles/formulario.css";
 import { useNavigate } from 'react-router-dom';
+import axios from 'axios';
+import { URL_BASE } from "../utils/constantes";
+import { SelectorTitulaciones, SelectorTema } from "./commons/SelectoresTrabajo";
 
 const Registro = () => {
-  
   const navigate = useNavigate();
-  if(sessionStorage.getItem('usuario') != null) { navigate('../');} 
+  if (sessionStorage.getItem('usuario') != null) {
+    navigate('../');
+  }
   const { t } = useTranslation();
   const {
     register,
@@ -25,9 +29,19 @@ const Registro = () => {
   const refPortada = useRef();
   const refImagen = useRef();
 
-  const onSubmit = (data) => {
-    console.log(data);
-  };
+
+  const [formData, setFormData] = useState({
+    nombre: "UWU",
+    apellidos: "uwu",
+    titulacion: 1,
+    correo: "uwu@gmia.com",
+    tema: 1,
+    direccion: "uwu",
+    nacimiento: "2003-02-02",
+    clave: "uwu",
+    "foto-perfil": "nphoto"
+  });
+  
 
   const toggleMostrarContrasena = () => {
     setMostrarContrasena(!mostrarContrasena);
@@ -49,15 +63,41 @@ const Registro = () => {
       setPortada();
     }
   };
-
   const cambiarFoto = (inp) => {
     if (inp.target.files.length > 0) {
       const fichero = inp.target.files[0];
       const img = refImagen.current;
       img.src = URL.createObjectURL(fichero);
+      setImagenSeleccionada(fichero);
+      setFormData({ ...formData, "foto-perfil": fichero }); // Update formData with the file
     } else {
       setImagenSeleccionada(null);
+      setFormData({ ...formData, "foto-perfil": "" }); // Clear the file in formData
     }
+  };
+
+  const formatoFecha = (event) => {
+    const date = new Date(event.target.value);
+    const fechaFormateada = date.toISOString().split('T')[0];
+    setFormData({ ...formData, nacimiento: fechaFormateada });
+    console.log(fechaFormateada);
+    }
+ 
+  const enviarData = () => {
+    console.log("enviardata");
+    console.log(formData);
+  
+    axios.post(`${URL_BASE}usuarios`, formData, {
+      headers: {
+        'Content-Type': 'application/json', // Set the correct Content-Type header
+      },
+    })
+    .then((result) => {
+      console.log(result);
+    })
+    .catch((err) => {
+      console.log(err);
+    });
   };
 
   return (
@@ -67,7 +107,7 @@ const Registro = () => {
           <h2 className="titulo-letra">{t('registro')}</h2>
         </div>
         <div className="form-container">
-          <form onSubmit={handleSubmit(onSubmit)} className="pos-wrapper">
+          <form  className="pos-wrapper" method="get">
             <div className="wrapper">
               <div className="contenedor-apartados-formulario-usuario">
                 <label htmlFor="portada"></label>
@@ -102,6 +142,9 @@ const Registro = () => {
                     required: true,
                     maxLength: 20,
                   })}
+                  onChange={(event) =>
+                    setFormData({ ...formData, nombre: event.target.value })
+                  }
                 />
                 {errors.nombre?.type === "required" && (
                   <p className="contenido-letra">{t('campo-requerido')}</p>
@@ -122,6 +165,9 @@ const Registro = () => {
                     required: true,
                     maxLength: 50,
                   })}
+                  onChange={(event) =>
+                    setFormData({ ...formData, apellidos: event.target.value })
+                  }
                 />
                 {errors.apellidos?.type === "required" && (
                   <p className="contenido-letra">{t('campo-requerido')}</p>
@@ -143,6 +189,9 @@ const Registro = () => {
                       required: true,
                       pattern: /^[^\s@]+@[^\s@]+\.[^\s@]+$/i,
                     })}
+                    onChange={(event) =>
+                      setFormData({ ...formData, correo: event.target.value })
+                    }
                   />
                   {errors.correo?.type === "required" && (
                     <p className="contenido-letra">{t('campo-requerido')}</p>
@@ -165,10 +214,12 @@ const Registro = () => {
                         required: true,
                         pattern: /(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}/,
                       })}
+                      onChange={(event) =>
+                        setFormData({ ...formData, contrasena: event.target.value })
+                      }
                     />
                   </div>
                   <div
-
                     className="boton-contrasenia contenido-letra"
                     tabIndex="0"
                     onKeyDown={handleKeyDownTogglePassword}
@@ -192,102 +243,10 @@ const Registro = () => {
                 </div>
                 <div className="form-group" id="titulacion">
                   <label htmlFor="titulacion" className="contenido-letra">{t('sel-tit')}:</label>
-                  <select
-                    className="contenido-letra"
-                    defaultValue="none"
-                    {...register("titulacion", {
-                      required: true,
-                      validate: titulacionValidator,
-                    })}
-                  >
-                    <option value="none" className="contenido-letra">{t('sel-tutit')}</option>
-                    <option value="ingenieria_multimedia" className="contenido-letra">
-                      {t('ingenieria_multimedia')}
-                    </option>
-                    <option value="arquitectura" className="contenido-letra">{t('arquitectura')}</option>
-                    <option value="arquitectura_tecnica">
-                      {t('arquitectura_tecnica')}
-                    </option>
-                    <option value="fundamentos_arquitectura" className="contenido-letra">
-                      {t('fundamentos_arquitectura')}
-                    </option>
-                    <option value="ingenieria_aeroespacial" className="contenido-letra">
-                      {t('ingenieria_aeroespacial')}
-                    </option>
-                    <option value="ingenieria_biomedica" className="contenido-letra">
-                      {t('ingenieria_biomedica')}
-                    </option>
-                    <option value="ingenieria_sonido_imagen" className="contenido-letra">
-                      {t('ingenieria_sonido_imagen')}
-                    </option>
-                    <option value="ingenieria_civil" className="contenido-letra">{t('ingenieria_civil')}</option>
-                    <option value="ingenieria_ia">
-                      {t('ingenieria_ia')}
-                    </option>
-                    <option value="ingenieria_informatica" className="contenido-letra">
-                      {t('ingenieria_informatica')}
-                    </option>
-                    <option value="ingenieria_informatica_ade" className="contenido-letra">
-                      {t('ingenieria_informatica_ade')}
-                    </option>
-                    <option value="ingenieria_quimica" className="contenido-letra">
-                      {t('ingenieria_quimica')}
-                    </option>
-                    <option value="ingenieria_robotica" className="contenido-letra">
-                      {t('ingenieria_robotica')}
-                    </option>
-                    <option value="master_arquitectura" className="contenido-letra">
-                      {t('master_arquitectura')}
-                    </option>
-                    <option value="master_automatica_robotica" className="contenido-letra">
-                      {t('master_automatica_robotica')}
-                    </option>
-                    <option value="master_ciberseguridad" className="contenido-letra">
-                      {t('master_ciberseguridad')}
-                    </option>
-                    <option value="master_ciencia_datos" className="contenido-letra">
-                      {t('master_ciencia_datos')}
-                    </option>
-                    <option value="master_desarrollo_aplicaciones_servicios_web" className="contenido-letra">
-                      {t('master_desarrollo_aplicaciones_servicios_web')}
-                    </option>
-                    <option value="master_desarrollo_software_dispositivos_moviles" className="contenido-letra">
-                      {t('master_desarrollo_software_dispositivos_moviles')}
-                    </option>
-                    <option value="master_gestion_edificacion" className="contenido-letra">
-                      {t('master_gestion_edificacion')}
-                    </option>
-                    <option value="master_ingenieria_biomedica" className="contenido-letra">
-                      {t('master_ingenieria_biomedica')}
-                    </option>
-                    <option value="master_ingenieria_caminos_canales_puertos" className="contenido-letra">
-                      {t('master_ingenieria_caminos_canales_puertos')}
-                    </option>
-                    <option value="master_ingenieria_materiales_agua_terreno" className="contenido-letra">
-                      {t('master_ingenieria_materiales_agua_terreno')}
-                    </option>
-                    <option value="master_ingenieria_telecomunicacion" className="contenido-letra">
-                      {t('master_ingenieria_telecomunicacion')}
-                    </option>
-                    <option value="master_ingenieria_geologica" className="contenido-letra">
-                      {t('master_ingenieria_geologica')}
-                    </option>
-                    <option value="master_ingenieria_informatica" className="contenido-letra">
-                      {t('master_ingenieria_informatica')}
-                    </option>
-                    <option value="master_ingenieria_quimica" className="contenido-letra">
-                      {t('master_ingenieria_quimica')}
-                    </option>
-                    <option value="master_ingenieria_artificial" className="contenido-letra">
-                      {t('master_ingenieria_artificial')}
-                    </option>
-                    <option value="master_nuevas_tecnologias" className="contenido-letra">
-                      {t('master_nuevas_tecnologias')}
-                    </option>
-                    <option value="master_prevencion_riesgos_laborales" className="contenido-letra">
-                      {t('master_prevencion_riesgos_laborales')}
-                    </option>
-                  </select>
+                  <SelectorTitulaciones
+                        formData={formData}
+                        setFormData={setFormData}
+                    />
                   {errors.titulacion?.type === "required" && (
                     <p className="contenido-letra">{t('campo-requerido')}</p>
                   )}
@@ -299,22 +258,10 @@ const Registro = () => {
                 </div>
                 <div className="form-group" id="titulacion">
                   <label htmlFor="estilo" className="contenido-letra">{t('estilo')}:</label>
-                  <select
-                    className="contenido-letra"
-                    defaultValue="none"
-                    {...register("estilo", {
-                      required: true,
-                      validate: estiloValidator,
-                    })}
-                  >
-                    <option value="none" className="contenido-letra">{t('sel-estilo')}</option>
-                    <option value="1" className="contenido-letra">{t('normal')}</option>
-                    <option value="2" className="contenido-letra">{t('oscuro')}</option>
-                    <option value="3" className="contenido-letra">{t('ac')}</option>
-                    <option value="4" className="contenido-letra">{t('normal-lg')}</option>
-                    <option value="5" className="contenido-letra">{t('oscuro-lg')}</option>
-                    <option value="6" className="contenido-letra">{t('ac-lg')}</option>
-                  </select>
+                  <SelectorTema
+                        formData={formData}
+                        setFormData={setFormData}
+                    />
                   {errors.estilo?.type === "required" && (
                     <p className="contenido-letra">{t('campo-requerido')}</p>
                   )}
@@ -335,6 +282,9 @@ const Registro = () => {
                     {...register("direccion", {
                       required: true,
                     })}
+                    onChange={(event) =>
+                      setFormData({ ...formData, direccion: event.target.value })
+                    }
                   />
                   {errors.direccion?.type === "required" && (
                     <p className="contenido-letra">{t('campo-requerido')}</p>
@@ -354,6 +304,8 @@ const Registro = () => {
                       required: true,
                       validate: edadValidator,
                     })}
+                    onChange={(event) =>formatoFecha(event)
+                    }
                   />
                   {errors.fecha_nacimiento?.type === "required" && (
                     <p className="contenido-letra">{t('campo-requerido')}</p>
@@ -370,7 +322,7 @@ const Registro = () => {
                 <a href="login" className="contenido-letra">{t('in')}</a>
               </div>
               <div className="boton-entrar btn-letra">
-                <button type="submit" className="btn  btn-primary btn-letra" value="Editar perfil">{t('registro')}</button>
+                <button onClick={enviarData} className="btn btn-primary btn-letra" value="Editar perfil">{t('registro')}</button>
               </div>
             </div>
           </form>
