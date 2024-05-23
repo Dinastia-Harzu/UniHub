@@ -97,8 +97,8 @@ const Descubrir = () => {
                 setFormData={setFormData}
               />
               <div className="filter-form">
-                <button type="button" className="btn btn-secondary" onClick={handleCancel}>{t('cancelar')}</button>
-                <button type="submit" className="btn btn-primary">{t('buscar')}</button>
+                <button type="button" className="btn btn-secondary contenido-letra" onClick={handleCancel}>{t('cancelar')}</button>
+                <button type="submit" className="btn btn-primary contenido-letra">{t('buscar')}</button>
               </div>
             </form>
           )}

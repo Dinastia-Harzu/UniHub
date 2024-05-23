@@ -31,10 +31,10 @@ export function SelectorTipoTrabajo({ formData, setFormData }) {
         title="tipos-trabajo"
         name="tipo"
         className="contenido-letra"
+        defaultValue={formData.tipo}
         onChange={(event) => {
           setFormData({ ...formData, "tipo-trabajo": parseInt(event.target.value) })
         }}
-        defaultValue={formData.tipo}
       >
         {tiposTrabajo.map((tipo, idx) => {
           return (

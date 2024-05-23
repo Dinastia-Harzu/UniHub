@@ -38,24 +38,27 @@ const buildQuery = (params) => {
     conditions.push("u.nombre LIKE ?");
     values.push(`% ${params.autor}% `);
   }
+  if (params.autorId) {
+    conditions.push("u.id = ?");
+    values.push(params.autorId);
+  }
   if (params.fecha) {
     conditions.push("t.fecha = ?");
     values.push(params.fecha);
   }
-  if (params["tipo-trabajo"]) {
+  if (params["tipo-trabajo"] && params["tipo-trabajo"] != "-1") {
     conditions.push("tt.id = ?");
     values.push(params["tipo-trabajo"]);
   }
-  if (params.titulacion) {
+  if (params.titulacion && params.titulacion != "-1") {
     conditions.push("tl.id = ?");
     values.push(params.titulacion);
   }
   if (params["palabras-clave"]) {
     const palabras_clave = params["palabras-clave"].split('_');
-    conditions.push("(" + palabras_clave.map(() => "t.`palabras - clave` LIKE ?").join(" OR ") + ")");
+    conditions.push("(" + palabras_clave.map(() => "t.`palabras-clave` LIKE ?").join(" OR ") + ")");
     values.push(...palabras_clave.map(palabra => `% ${palabra}% `));
   }
-
   if (conditions.length > 0) {
     query += " AND " + conditions.join(" AND ");
   }
