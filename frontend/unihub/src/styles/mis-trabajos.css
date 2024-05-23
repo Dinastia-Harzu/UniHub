@@ -25,7 +25,6 @@
   align-items: center;
 }
 
-
 .filter-button {
   padding: 10px;
   font-size: 2em;
@@ -48,8 +47,6 @@
   color: var(--color-text);
 }
 
-
-
 .filter-button .icon-filter {
   font-size: 1.5em;
 }
@@ -65,7 +62,6 @@
   -webkit-appearance: none;
   -moz-appearance: none;
   appearance: none;
-
 }
 
 .filter-select option {
@@ -94,7 +90,6 @@
   box-shadow: inset 0 0 0 .2em var(--color-bg-form) !important;
 }
 
-
 .cards-container {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
@@ -112,6 +107,7 @@
   cursor: pointer;
   text-decoration: none;
   color: inherit;
+  z-index: 1; /* Añadir z-index aquí para las cartas */
 }
 
 .card img {
@@ -150,12 +146,11 @@
   align-items: center;
   max-height: 3em;
   overflow: hidden;
-  
   white-space: nowrap;
 }
 
-.descripcion p{
-  padding:.5em;
+.descripcion p {
+  padding: .5em;
   text-overflow: ellipsis !important;
 }
 
@@ -163,7 +158,6 @@
 .card:focus .card-content {
   transform: translateY(0);
 }
-
 
 @media (max-width: 600px) {
   .cards-container {

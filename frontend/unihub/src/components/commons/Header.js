@@ -28,8 +28,8 @@ export default function Header() {
             <Link to="/" className="navbar-item btn-letra">
             {t('inicio')}
             </Link>
-            <Link to="/trabajos" className="navbar-item">
-              Descubrir
+            <Link to="/trabajos" className="navbar-item btn-letra">
+            {t('descubrir')}
             </Link>
             <Link to="/buscar" className="navbar-item btn-letra">
             {t('buscar')}

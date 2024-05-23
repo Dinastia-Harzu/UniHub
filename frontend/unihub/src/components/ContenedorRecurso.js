@@ -16,15 +16,34 @@ export default function ContenedorRecurso({
     recurso_actual.click();
   }
 
+  const handleKeyDown = (event) => {
+    if (event.key === "Enter") {
+      setRecurso();
+    }
+  }
+  const handleKeyDownDelete = (event) => {
+    if (event.key === "Enter") {
+      eliminar();
+    }
+  }
+
+
   function cambiarFoto(inp) {
     const fichero = inp.target.files[0];
     const img = refImagen.current;
     img.src = URL.createObjectURL(fichero);
 
+    let nombre_fichero = fichero.name.split('.');
+    nombre_fichero.pop();
+    nombre_fichero = nombre_fichero.join(".");
+
     // Actualizamos formData
     const nuevoFormData = {
       ...formData,
-      recursos: [...formData.recursos, inp.target.files[0].name],
+      multimedia: [...formData.multimedia, {
+        nombre: nombre_fichero,
+        ruta: fichero.name
+      }]
     };
     setFormData(nuevoFormData);
   }
@@ -33,12 +52,12 @@ export default function ContenedorRecurso({
     eliminarRecurso(id);
     const ruta_recurso = refRecurso.current.value.split("\\")[2];
 
-    const nuevosRecursos = formData.recursos.filter(
-      (ruta, _) => ruta !== ruta_recurso
+    const nuevosRecursos = formData.multimedia.filter(
+      (ruta, _) => ruta.ruta !== ruta_recurso
     );
     const nuevoFormData = {
       ...formData,
-      recursos: nuevosRecursos,
+      multimedia: nuevosRecursos,
     };
     setFormData(nuevoFormData);
   }
@@ -51,9 +70,11 @@ export default function ContenedorRecurso({
           src="/assets/Foto_defecto_recurso.png"
           alt="Recurso"
           onClick={() => setRecurso()}
+          onKeyDown={handleKeyDown}
+          tabIndex="0"
         />
       </label>
-      <p className="boton-eliminar-recurso" onClick={() => eliminar()}>
+      <p className="boton-eliminar-recurso" tabIndex="0" onKeyDown={handleKeyDownDelete} onClick={() => eliminar()}>
         <FontAwesomeIcon icon={faXmark} />
       </p>
       <input
@@ -62,6 +83,7 @@ export default function ContenedorRecurso({
         name="recursos[]"
         accept="image/*"
         hidden
+        tabIndex="0"
         onChange={(event) => cambiarFoto(event)}
       ></input>
     </div>

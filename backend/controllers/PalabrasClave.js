@@ -43,6 +43,21 @@ module.exports.palabras_claveIdGET = function palabras_claveIdGET(
     });
 };
 
+module.exports.palabras_clave_trabajoGET = function palabras_clave_trabajoGET(
+  req,
+  res,
+  next,
+  id
+) {
+  PalabrasClave.palabras_clave_trabajoGET(id)
+    .then(function (response) {
+      utils.writeJson(res, response);
+    })
+    .catch(function (response) {
+      utils.writeJson(res, response);
+    });
+};
+
 module.exports.palabras_claveIdPUT = function palabras_claveIdPUT(
   req,
   res,

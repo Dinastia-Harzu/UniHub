@@ -219,6 +219,22 @@ paths:
         - Trabajos
       description: GET Trabajos
       operationId: trabajosGET
+      parameters:
+        - name: palabras-clave
+          in: query
+          description: IDs de las palabras clave separadas por coma
+          schema:
+            type: string
+        - name: titulacion
+          in: query
+          description: titulación
+          schema:
+            type: string
+        - name: tipo-trabajo
+          in: query
+          description: tipo de trabajo
+          schema:
+            type: string
       responses:
         "200":
           description: OK
@@ -400,41 +416,6 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/Forbidden"
-        "404":
-          description: Not Found
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/NotFound"
-        "500":
-          description: Internal Server Error
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/InternalServerError"
-      x-swagger-router-controller: Trabajos
-  /trabajos/palabras-clave:
-    get:
-      tags:
-        - Trabajos
-      description: GET Trabajos a partir de palabras clave
-      operationId: trabajos_palabras_claveGET
-      requestBody:
-        content:
-          application/json:
-            schema:
-              properties:
-                palabras-clave:
-                  type: array
-                  items:
-                    type: integer
-      responses:
-        "200":
-          description: OK
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/OK-GETidPUT"
         "404":
           description: Not Found
           content:
@@ -1797,6 +1778,15 @@ components:
           type: string
         documento:
           type: string
+        multimedia:
+          type: array
+          items:
+            type: object
+            properties:
+              nombre:
+                type: string
+              ruta:
+                type: string
         palabras-clave:
           type: array
           items:

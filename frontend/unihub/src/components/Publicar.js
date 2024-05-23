@@ -10,8 +10,10 @@ import "../styles/publicar.css";
 import { useState } from "react";
 import axios from "axios";
 import { URL_BASE } from "../utils/constantes.js";
+import { useTranslation } from 'react-i18next';
 
 export default function Publicar() {
+    const { t } = useTranslation();
     const [pagina, setPagina] = useState(0);
     const [formData, setFormData] = useState({
         nombre: "",
@@ -24,69 +26,41 @@ export default function Publicar() {
             .toISOString()
             .split("T")[0],
         resumen: "",
-        documento: "",
         portada: "",
-        recursos: [],
-        palabras_clave: "",
+        documento: "",
+        multimedia: [],
+        "palabras-clave": []
     });
 
-    const adelantarPagina = () => {
-        console.log("Antes de adelantar: " + pagina);
+    function adelantarPagina(event) {
         setPagina(pagina + 1);
-        console.log("Despues de adelantar: " + pagina);
+        event.target.blur();
     }
 
-    const atrasarPagina = () => {
-        console.log("Antes de atrasar: " + pagina);
+    function atrasarPagina(event) {
         setPagina(pagina - 1);
-        console.log(pagina);
-        console.log("Despues de atrasar: " + pagina);
+        event.target.blur();
     }
 
     function enviarData() {
-        const { recursos, palabras_clave, ...formDataEnviar } = formData;
-        console.log(formDataEnviar);
+        console.log(formData);
 
-        let trabajoEnviadoId = 0;
+        if (formData["palabras-clave"].length != 0)
+            formData["palabras-clave"] = formData["palabras-clave"].split(",");
 
-        // Enviamos trabajo
-        axios.post(URL_BASE + "trabajos", formDataEnviar).then((result) => {
+        axios.post(`${URL_BASE}trabajos`, formData).then((result) => {
             console.log(result);
-            let trabajoEnviadoId = result.data.trabajo.id;
-            console.log(trabajoEnviadoId);
-
-            // Enviamos palabras clave
-            const palabrasClaveEnviar = formData.palabras_clave.split(',');
-            console.log(palabrasClaveEnviar);
-
-            // TODO: Enviar peticion a palabras clave cuando Arturo tenga la peticion
-
-            // Enviamos recursos
-            formData.recursos.forEach(recurso => {
-                const formRecurso = {
-                    nombre: recurso.split('.').at(0),
-                    ruta: recurso,
-                    trabajo: trabajoEnviadoId
-                }
-
-                console.log(formRecurso);
-
-                axios.post(URL_BASE + "multimedia", formRecurso).then((result) => {
-                    console.log(result);
-                }).catch((err) => {
-                    console.log(err);
-                });
-            });
-
         }).catch((err) => {
             console.log(err);
         });
-        alert("Trabajo publicado!");
-        window.location.replace("");
+
+        // alert("Trabajo publicado!");
+        // window.location.replace("");
     }
 
     return (
         <main className="pagina-publicar">
+            <h1>{t('publicar-trabajo')}</h1>
             <div>
                 <div className={pagina === 0 ? "form-mostrado contenido-letra" : "form-oculto"}>
                     <FormPublicar1
@@ -113,14 +87,14 @@ export default function Publicar() {
 
             <section className="seccion-botones-publicar">
                 <div className="contenedor-botones-publicar">
-                    <div className={pagina === 0 ? "boton-oculto" : "boton-anterior"}>
-                        <button className="btn btn-fondo btn-letra" onClick={atrasarPagina}>
-                            Anterior
+                    <div className={pagina === 0 ? "boton-oculto" : "boton-anterior btn-letra"}>
+                        <button className="btn btn-fondo btn-letra" onClick={(event) => atrasarPagina(event)}>
+                            {t('anterior')}
                         </button>
                     </div>
-                    <div className={pagina === 2 ? "boton-oculto" : "boton-siguiente"}>
-                        <button className="btn btn-fondo btn-letra" onClick={adelantarPagina}>
-                            Siguiente
+                    <div className={pagina === 2 ? "boton-oculto" : "boton-siguiente btn-letra"}>
+                        <button className="btn btn-fondo btn-letra" onClick={(event) => adelantarPagina(event)}>
+                            {t('siguiente')}
                         </button>
                     </div>
                     <div className="boton-publicar btn-letra">
@@ -129,7 +103,7 @@ export default function Publicar() {
                             hidden={!(pagina === 2)}
                             onClick={() => enviarData()}
                         >
-                            Publicar
+                            {t('publicar')}
                         </button>
                     </div>
                 </div>

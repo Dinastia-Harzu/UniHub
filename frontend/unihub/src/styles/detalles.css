@@ -41,7 +41,7 @@ body {
     margin-bottom: 1em;
     top: 30px;
     position: sticky;
-    z-index: 2;
+    z-index: 1001;
     display: flex;
     justify-content: flex-end;
 }
@@ -107,6 +107,9 @@ body {
     margin-top: 0;
     text-align: center;
     overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 
 .trabajos-similares img {

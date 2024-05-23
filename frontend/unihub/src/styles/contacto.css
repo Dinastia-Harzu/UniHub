@@ -15,6 +15,8 @@ h3 {
 .contact-title {
   font-size: 2em;
   margin-bottom: 20px;
+  display: flex;
+  justify-content: center;
 }
 
 .contact-container {

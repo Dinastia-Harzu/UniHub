@@ -15,7 +15,8 @@ const palabrasClave = require("./PalabrasClaveService");
  *
  * returns OK-GET
  **/
-exports.trabajosGET = function () {
+exports.trabajosGET = function (params) {
+  console.log(params);
   return new Promise(function (resolve, reject) {
     conexion.query(`SELECT * FROM trabajo`, (err, filas) => {
       if (err) {
@@ -188,30 +189,39 @@ exports.trabajosPOST = function (body) {
     //       });
     //     });
 
-
-
-
     conexion.query(
+      //   `
+      //   START TRANSACTION;
+      //   INSERT INTO trabajo VALUES (
+      //     ${$()},
+      //     ${$(body.nombre)},
+      //     ${$(body.tipo)},
+      //     ${$(body.autor)},
+      //     ${$(body.titulacion)},
+      //     ${$(body.publicacion)},
+      //     ${$(body.resumen)},
+      //     ${$(body.portada)},
+      //     ${$(body.documento)}
+      // );
+      // SET @id_trabajo = LAST_INSERT_ID();
+      // INSERT INTO \`palabra-clave\` VALUES(${$()}, ${$(palabra)});
+      // SET @id_palabra_clave = LAST_INSERT_ID();
+      // INSERT INTO \`palabra-clave-trabajo\` VALUES(@id_trabajo, @id_palabra_clave);
+      // COMMIT;
+      // `
       `
-      START TRANSACTION;
-      INSERT INTO trabajo VALUES (
-        ${$()},
-        ${$(body.nombre)},
-        ${$(body.tipo)},
-        ${$(body.autor)},
-        ${$(body.titulacion)},
-        ${$(body.publicacion)},
-        ${$(body.resumen)},
-        ${$(body.portada)},
-        ${$(body.documento)}
-    );
-    SET @id_trabajo = LAST_INSERT_ID();
-    INSERT INTO \`palabra-clave\` VALUES(${$()}, ${$(palabra)});
-    SET @id_palabra_clave = LAST_INSERT_ID();
-    INSERT INTO \`palabra-clave-trabajo\` VALUES(@id_trabajo, @id_palabra_clave);
-    COMMIT;
-    `,
-      (err) => {
+        INSERT INTO trabajo VALUES (
+          ${$()},
+          ${$(body.nombre)},
+          ${$(body.tipo)},
+          ${$(body.autor)},
+          ${$(body.titulacion)},
+          ${$(body.publicacion)},
+          ${$(body.resumen)},
+          ${$(body.portada)},
+          ${$(body.documento)}
+        );`,
+      (err, res) => {
         if (err) {
           console.error(err);
           const codigo = helper.getHttpCodeFromErrNo(err.code);
@@ -222,6 +232,93 @@ exports.trabajosPOST = function (body) {
             )
           );
         } else {
+          const id_trabajo = res.insertId;
+          const inserciones_multimedia = body.multimedia.map((multimedia) => {
+            return new Promise((resolve, reject) => {
+              conexion.query(
+                `
+                INSERT INTO multimedia VALUES(
+                  ${$()},
+                  ${$(multimedia.nombre)},
+                  ${$(multimedia.ruta)},
+                  ${$(id_trabajo)}
+                )
+              `,
+                (err, result) => {
+                  if (err) {
+                    reject(err);
+                  } else {
+                    resolve(result);
+                  }
+                }
+              );
+            });
+          });
+          const inserciones_palabras_clave = body["palabras-clave"].map(
+            (nombre) => {
+              return new Promise((resolve, reject) => {
+                conexion.query(
+                  `
+                INSERT INTO \`palabra-clave\` VALUES(${$()}, ${$(nombre)})
+              `,
+                  (err, result) => {
+                    if (err) {
+                      reject(err);
+                    } else {
+                      resolve(result);
+                    }
+                  }
+                );
+              });
+            }
+          );
+          Promise.all(inserciones_multimedia)
+            .then(() => {
+              return Promise.all(inserciones_palabras_clave);
+            })
+            .then((resultados) => {
+              const inserciones_palabras_clave_trabajos = resultados.map(
+                (resultado) => {
+                  return new Promise((resolve, reject) => {
+                    conexion.query(
+                      `
+                    INSERT INTO \`palabra-clave-trabajo\` VALUES(
+                      ${$(id_trabajo)},
+                      ${$(resultado.insertId)}
+                    );
+                  `,
+                      (err, result) => {
+                        if (err) {
+                          return reject(err);
+                        }
+                        resolve(result);
+                      }
+                    );
+                  });
+                }
+              );
+              return Promise.all(inserciones_palabras_clave_trabajos);
+            })
+            .then(() => {
+              conexion.commit((err) => {
+                if (err) {
+                  return conexion.rollback(() => {
+                    reject(err);
+                  });
+                }
+                resolve(
+                  responder(
+                    201,
+                    Object.assign({}, respuestas[201], { trabajo: id_trabajo })
+                  )
+                );
+              });
+            })
+            .catch((err) => {
+              conexion.rollback(() => {
+                reject(err);
+              });
+            });
           // let promesas = [];
           // _.trabajosGET().then(
           //   res => {
@@ -257,32 +354,55 @@ exports.trabajosPOST = function (body) {
           //   )
           // }, err => { console.error(err); reject(err) });
 
-          _.trabajosGET().then(res => {
-            const trabajo = res.payload.at(-1);
-            for (const palabra of body["palabras-clave"]) {
-              const promesas = [];
-              promesas.push(new Promise((resolve, reject) => {
-                conexion.query(`
-                  
-                `, err => {
-                  if (err) {
-                    console.error(err); reject(err);
-                  } else {
-                    resolve(responder(201, Object.assign({}, respuestas[201])));
-                  }
-                })
-              }));
-              Promise.all(promesas).then(() => {
-                resolve(
-                  responder(
-                    201,
-                    Object.assign({}, respuestas[201], {
-                      trabajo: Object.assign(trabajo, { "palabras-clave": body["palabras-clave"] }),
-                    })
-                  ));
-              }, e => { console.error(e); reject(e); })
-            }
-          }, error => { console.error(error); reject(error) });
+          // _.trabajosGET().then(
+          //   (res) => {
+          //     const trabajo = res.payload.at(-1);
+          //     for (const palabra of body["palabras-clave"]) {
+          //       const promesas = [];
+          //       promesas.push(
+          //         new Promise((resolve, reject) => {
+          //           conexion.query(
+          //             `
+
+          //       `,
+          //             (err) => {
+          //               if (err) {
+          //                 console.error(err);
+          //                 reject(err);
+          //               } else {
+          //                 resolve(
+          //                   responder(201, Object.assign({}, respuestas[201]))
+          //                 );
+          //               }
+          //             }
+          //           );
+          //         })
+          //       );
+          //       Promise.all(promesas).then(
+          //         () => {
+          //           resolve(
+          //             responder(
+          //               201,
+          //               Object.assign({}, respuestas[201], {
+          //                 trabajo: Object.assign(trabajo, {
+          //                   "palabras-clave": body["palabras-clave"],
+          //                 }),
+          //               })
+          //             )
+          //           );
+          //         },
+          //         (e) => {
+          //           console.error(e);
+          //           reject(e);
+          //         }
+          //       );
+          //     }
+          //   },
+          //   (error) => {
+          //     console.error(error);
+          //     reject(error);
+          //   }
+          // );
         }
       }
     );

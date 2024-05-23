@@ -4,7 +4,7 @@ var utils = require("../utils/writer.js");
 var Trabajos = require("../service/TrabajosService");
 
 module.exports.trabajosGET = function trabajosGET(req, res, next) {
-  Trabajos.trabajosGET()
+  Trabajos.trabajosGET(req.query)
     .then(function (response) {
       utils.writeJson(res, response);
     })
