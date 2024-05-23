@@ -69,7 +69,7 @@ const Perfilusuario = () => {
               <div className="form-group" id="nombre-titulo">
                 <h1 className="titulo-letra contenido-letra">Miriam</h1>
               </div>
-              <div className="contenedor-apartados-formulario_usuario">
+              <div className="contenedor-apartados-formulario-usuario">
                 <label htmlFor="portada"></label>
                 <img
                   ref={refImagen}

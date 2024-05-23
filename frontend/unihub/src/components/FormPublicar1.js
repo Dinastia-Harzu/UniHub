@@ -10,8 +10,6 @@ export default function FormPublicar1({ setPagina, formData, setFormData }) {
   return (
 
     <section className="contenedor-publicar">
-      <section className="titulo-publicar">
-      </section>
       <section className="contenedor-formulario-publicar">
         <div className="contenedor-apartados-publicar">
           <p className="apartado actual" onClick={() => setPagina(0)}>
@@ -20,7 +18,7 @@ export default function FormPublicar1({ setPagina, formData, setFormData }) {
           <p className="apartado no-actual" onClick={() => setPagina(1)}>
             {t('multimedia')}
           </p>
-          <p className="apartado actual contenido-letra" onClick={() => setPagina(2)}>
+          <p className="apartado no-actual contenido-letra" onClick={() => setPagina(2)}>
             {t('portada')}
           </p>
         </div>
@@ -62,11 +60,11 @@ export default function FormPublicar1({ setPagina, formData, setFormData }) {
                 type="text"
                 name="palabras-clave"
                 placeholder={t('introduce-pc')}
-                value={formData.palabras_clave}
+                value={formData['palabras-clave']}
                 onChange={(event) =>
                   setFormData({
                     ...formData,
-                    palabras_clave: event.target.value,
+                    "palabras-clave": event.target.value,
                   })
                 }
                 className="contenido-letra"

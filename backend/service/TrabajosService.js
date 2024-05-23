@@ -15,7 +15,8 @@ const palabrasClave = require("./PalabrasClaveService");
  *
  * returns OK-GET
  **/
-exports.trabajosGET = function () {
+exports.trabajosGET = function (params) {
+  console.log(params);
   return new Promise(function (resolve, reject) {
     conexion.query(`SELECT * FROM trabajo`, (err, filas) => {
       if (err) {

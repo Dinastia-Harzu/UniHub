@@ -26,10 +26,10 @@ export default function Publicar() {
             .toISOString()
             .split("T")[0],
         resumen: "",
-        documento: "",
         portada: "",
-        recursos: [],
-        palabras_clave: "",
+        documento: "",
+        multimedia: [],
+        "palabras-clave": []
     });
 
     function adelantarPagina(event) {
@@ -43,45 +43,19 @@ export default function Publicar() {
     }
 
     function enviarData() {
-        const { recursos, palabras_clave, ...formDataEnviar } = formData;
-        console.log(formDataEnviar);
+        console.log(formData);
 
-        let trabajoEnviadoId = 0;
+        if (formData["palabras-clave"].length != 0)
+            formData["palabras-clave"] = formData["palabras-clave"].split(",");
 
-        // Enviamos trabajo
-        axios.post(URL_BASE + "trabajos", formDataEnviar).then((result) => {
+        axios.post(`${URL_BASE}trabajos`, formData).then((result) => {
             console.log(result);
-            let trabajoEnviadoId = result.data.trabajo.id;
-            console.log(trabajoEnviadoId);
-
-            // Enviamos palabras clave
-            const palabrasClaveEnviar = formData.palabras_clave.split(',');
-            console.log(palabrasClaveEnviar);
-
-            // TODO: Enviar peticion a palabras clave cuando Arturo tenga la peticion
-
-            // Enviamos recursos
-            formData.recursos.forEach(recurso => {
-                const formRecurso = {
-                    nombre: recurso.split('.').at(0),
-                    ruta: recurso,
-                    trabajo: trabajoEnviadoId
-                }
-
-                console.log(formRecurso);
-
-                axios.post(URL_BASE + "multimedia", formRecurso).then((result) => {
-                    console.log(result);
-                }).catch((err) => {
-                    console.log(err);
-                });
-            });
-
         }).catch((err) => {
             console.log(err);
         });
-        alert("Trabajo publicado!");
-        window.location.replace("");
+
+        // alert("Trabajo publicado!");
+        // window.location.replace("");
     }
 
     return (

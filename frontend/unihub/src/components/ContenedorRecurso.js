@@ -18,23 +18,32 @@ export default function ContenedorRecurso({
 
   const handleKeyDown = (event) => {
     if (event.key === "Enter") {
-       setRecurso();
-    }}
-    const handleKeyDownDelete = (event) => {
-      if (event.key === "Enter") {
-        eliminar();
-      }}
-    
+      setRecurso();
+    }
+  }
+  const handleKeyDownDelete = (event) => {
+    if (event.key === "Enter") {
+      eliminar();
+    }
+  }
+
 
   function cambiarFoto(inp) {
     const fichero = inp.target.files[0];
     const img = refImagen.current;
     img.src = URL.createObjectURL(fichero);
 
+    let nombre_fichero = fichero.name.split('.');
+    nombre_fichero.pop();
+    nombre_fichero = nombre_fichero.join(".");
+
     // Actualizamos formData
     const nuevoFormData = {
       ...formData,
-      recursos: [...formData.recursos, inp.target.files[0].name],
+      multimedia: [...formData.multimedia, {
+        nombre: nombre_fichero,
+        ruta: fichero.name
+      }]
     };
     setFormData(nuevoFormData);
   }
@@ -43,12 +52,12 @@ export default function ContenedorRecurso({
     eliminarRecurso(id);
     const ruta_recurso = refRecurso.current.value.split("\\")[2];
 
-    const nuevosRecursos = formData.recursos.filter(
-      (ruta, _) => ruta !== ruta_recurso
+    const nuevosRecursos = formData.multimedia.filter(
+      (ruta, _) => ruta.ruta !== ruta_recurso
     );
     const nuevoFormData = {
       ...formData,
-      recursos: nuevosRecursos,
+      multimedia: nuevosRecursos,
     };
     setFormData(nuevoFormData);
   }

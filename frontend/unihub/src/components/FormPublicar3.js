@@ -21,8 +21,6 @@ export default function FormPublicar3({ setPagina, formData, setFormData }) {
 
   return (
     <div className="contenedor-publicar">
-      <section className="titulo-publicar">
-      </section>
       <section className="contenedor-formulario-publicar">
         <div className="contenedor-apartados-publicar">
           <p className="apartado no-actual contenido-letra" onClick={() => setPagina(0)}>

@@ -41,7 +41,7 @@ body {
     margin-bottom: 1em;
     top: 30px;
     position: sticky;
-    z-index: 2;
+    z-index: 1001;
     display: flex;
     justify-content: flex-end;
 }
