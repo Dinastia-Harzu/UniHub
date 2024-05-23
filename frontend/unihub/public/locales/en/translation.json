@@ -127,5 +127,6 @@
   "anterior": "Previous",
   "siguiente": "Next",
   "bienvenido": "Welcome",
-  "salir":"Log out"
+  "salir": "Log out",
+  "cancelar": "Dismiss"
 }

@@ -17,38 +17,58 @@ const palabrasClave = require("./PalabrasClaveService");
  *
  * returns OK-GET
  **/
+const buildQuery = (params) => {
+  let query = `
+    SELECT t.*, u.nombre AS nombre_autor, tt.nombre AS nombre_tipotrabajo, tl.nombre AS nombre_titulacion
+    FROM trabajo t
+    JOIN usuario u ON u.id = t.autor
+    JOIN \`tipo-trabajo\` tt ON tt.id = t.\`tipo\`
+    JOIN titulacion tl ON tl.id = t.titulacion
+    WHERE 1 = 1
+    `;
+
+  let conditions = [];
+  let values = [];
+
+  if (params.nombre) {
+    conditions.push("t.nombre LIKE ?");
+    values.push(`% ${params.nombre}% `);
+  }
+  if (params.autor) {
+    conditions.push("u.nombre LIKE ?");
+    values.push(`% ${params.autor}% `);
+  }
+  if (params.fecha) {
+    conditions.push("t.fecha = ?");
+    values.push(params.fecha);
+  }
+  if (params["tipo-trabajo"]) {
+    conditions.push("tt.id = ?");
+    values.push(params["tipo-trabajo"]);
+  }
+  if (params.titulacion) {
+    conditions.push("tl.id = ?");
+    values.push(params.titulacion);
+  }
+  if (params["palabras-clave"]) {
+    const palabras_clave = params["palabras-clave"].split('_');
+    conditions.push("(" + palabras_clave.map(() => "t.`palabras - clave` LIKE ?").join(" OR ") + ")");
+    values.push(...palabras_clave.map(palabra => `% ${palabra}% `));
+  }
+
+  if (conditions.length > 0) {
+    query += " AND " + conditions.join(" AND ");
+  }
+
+  return { query, values };
+};
+
 exports.trabajosGET = function (params) {
   console.log(params);
-  return new Promise(function (resolve, reject) {
-    let palabras_clave = [];
-    if (params["palabras-clave"]) {
-      palabras_clave = params["palabras-clave"].split('_');
-    }
-    conexion.query(`
-      SELECT t.*, u.nombre nombre_autor, tt.nombre nombre_tipotrabajo, tl.nombre nombre_titulacion
-      FROM trabajo t
-      JOIN usuario u ON(u.id = t.autor)
-      JOIN \`tipo-trabajo\` tt ON(tt.id = t.\`tipo-trabajo\`)
-      JOIN titulacion tl ON(tl.id = t.titulacion)
-      JOIN titulacion tl ON(tl.id = t.titulacion)
-      SELECT t.*
-      ${select("autor", params.nombre)}
-      ${select("tipo-trabajo", params["tipo-trabajo"])}
-      ${select("titulacion", params.titulacion)}
-      ${select("palabras-clave", params["palabras-clave"])}
-      FROM trabajo t
-      ${params.autor && "JOIN `tipo-trabajo` ON(`tipo-trabajo`.id = " + $(params["tipo-trabajo"]) + ")"}
-      ${params["tipo-trabajo"] && "JOIN `tipo-trabajo` ON(`tipo-trabajo`.id = " + $(params["tipo-trabajo"]) + ")"}
-      ${params["tipo-trabajo"] && "JOIN `tipo-trabajo` ON(`tipo-trabajo`.id = " + $(params["tipo-trabajo"]) + ")"}
-      ${params["tipo-trabajo"] && "JOIN `tipo-trabajo` ON(`tipo-trabajo`.id = " + $(params["tipo-trabajo"]) + ")"}
-      WHERE 1
-      && ${filtro("nombre", params.nombre)}
-      && ${filtro("autor", params.autor)}
-      && ${filtro("fecha", params.fecha)}
-      && ${filtro("tipo-trabajo", params["tipo-trabajo"])}
-      && ${filtro("titulacion", params.titulacion)}
-      && ${filtro("palabras-clave", params["palabras-clave"])}
-    `, (err, filas) => {
+  return new Promise((resolve, reject) => {
+    const { query, values } = buildQuery(params);
+
+    conexion.query(query, values, (err, filas) => {
       if (err) {
         console.error(err);
         reject(responder(500, respuestas[500]));
@@ -69,7 +89,7 @@ exports.trabajosIdDELETE = function (id) {
   return new Promise(function (resolve, reject) {
     _.trabajosIdGET(id).then(
       (res) => {
-        conexion.query(`DELETE FROM trabajo WHERE id = ${id}`, (err) => {
+        conexion.query(`DELETE FROM trabajo WHERE id = ${id} `, (err) => {
           if (err) {
             console.error(err);
             reject(responder(500, respuestas[500]));
@@ -97,7 +117,7 @@ exports.trabajosIdDELETE = function (id) {
  **/
 exports.trabajosIdGET = function (id) {
   return new Promise(function (resolve, reject) {
-    conexion.query(`SELECT * FROM trabajo WHERE id = ${id}`, (err, res) => {
+    conexion.query(`SELECT * FROM trabajo WHERE id = ${id} `, (err, res) => {
       if (err) {
         console.error(err);
         reject(responder(500, respuestas[500]));

@@ -25,6 +25,11 @@
   align-items: center;
 }
 
+.filter-form {
+  display: flex;
+  justify-content: space-between;
+}
+
 .filter-button {
   padding: 10px;
   font-size: 2em;
@@ -107,7 +112,8 @@
   cursor: pointer;
   text-decoration: none;
   color: inherit;
-  z-index: 1; /* Añadir z-index aquí para las cartas */
+  z-index: 1;
+  /* Añadir z-index aquí para las cartas */
 }
 
 .card img {
