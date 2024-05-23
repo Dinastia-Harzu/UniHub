@@ -31,21 +31,41 @@ export default function ContenedorRecurso({
   function cambiarFoto(inp) {
     const fichero = inp.target.files[0];
     const img = refImagen.current;
-    img.src = URL.createObjectURL(fichero);
 
-    let nombre_fichero = fichero.name.split('.');
-    nombre_fichero.pop();
-    nombre_fichero = nombre_fichero.join(".");
+    if (fichero) { // Si el fichero existe (es decir) que el "files" del input tiene algo
+      if (img.alt !== "imagen_defecto") {
+        const recursoExistenteIndex = formData.multimedia.findIndex(
+          (ruta) => ruta.ruta === img.alt
+        );
+        console.log(recursoExistenteIndex);
 
-    // Actualizamos formData
-    const nuevoFormData = {
-      ...formData,
-      multimedia: [...formData.multimedia, {
-        nombre: nombre_fichero,
-        ruta: fichero.name
-      }]
-    };
-    setFormData(nuevoFormData);
+        let nuevoMultimedia;
+
+        if (recursoExistenteIndex !== -1) {
+          // Si existe, reemplazarlo
+          nuevoMultimedia = [...formData.multimedia];
+          nuevoMultimedia.splice(recursoExistenteIndex, 1);
+          formData.multimedia = nuevoMultimedia;
+        }
+      }
+
+      img.src = URL.createObjectURL(fichero);
+      img.alt = fichero.name;
+
+      let nombre_fichero = fichero.name.split('.');
+      nombre_fichero.pop();
+      nombre_fichero = nombre_fichero.join(".");
+
+      // Actualizamos formData
+      const nuevoFormData = {
+        ...formData,
+        multimedia: [...formData.multimedia, {
+          nombre: nombre_fichero,
+          ruta: fichero.name
+        }]
+      };
+      setFormData(nuevoFormData);
+    }
   }
 
   function eliminar() {
@@ -68,7 +88,7 @@ export default function ContenedorRecurso({
         <img
           ref={refImagen}
           src="/assets/Foto_defecto_recurso.png"
-          alt="Recurso"
+          alt="imagen_defecto"
           onClick={() => setRecurso()}
           onKeyDown={handleKeyDown}
           tabIndex="0"
