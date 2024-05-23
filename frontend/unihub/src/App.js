@@ -31,7 +31,6 @@ import axios from 'axios';
 
 export default function App() {
   const [userTheme, setUserTheme] = useState("");
-  window.sessionStorage.setItem('usuario', '22');
   const idUsuarioLoggeado = window.sessionStorage.getItem('usuario');
 
   useEffect(() => {
@@ -61,6 +60,14 @@ export default function App() {
       }).catch((error) => {
         console.error("Error al obtener el tema del usuario:", error);
       });
+    }
+    else {
+      if (document.getElementById("tema-de-usuario")) { document.head.removeChild(document.getElementById("tema-de-usuario")); }
+      const link = document.createElement("link");
+      link.setAttribute("id", "tema-de-usuario");
+      link.rel = "stylesheet";
+      link.href = `/assets/themes/general-normal.css`;
+      document.head.appendChild(link);
     }
   }, [idUsuarioLoggeado]);
 
