@@ -126,5 +126,6 @@
   "introduce-res": "Write your project's summary...",
   "anterior": "Previous",
   "siguiente": "Next",
-  "bienvenido": "Welcome"
+  "bienvenido": "Welcome",
+  "salir":"Log out"
 }

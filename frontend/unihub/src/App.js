@@ -31,7 +31,6 @@ import axios from 'axios';
 
 export default function App() {
   const [userTheme, setUserTheme] = useState("");
-  window.sessionStorage.setItem('usuario', '22');
   const idUsuarioLoggeado = window.sessionStorage.getItem('usuario');
 
   useEffect(() => {
