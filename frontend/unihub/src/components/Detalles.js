@@ -22,8 +22,10 @@ export default function Detalles() {
     resumen: '',
     portada: '',
     recursos: [],
+    "palabras-clave": [],
     comentarios: [],
-    documento: ''
+    documento: '',
+    valoracion: -1
   });
 
   useEffect(() => {
@@ -45,6 +47,9 @@ export default function Detalles() {
         resumen: data.resumen,
         portada: data.portada,
         documento: data.documento,
+        recursos: [],
+        'palabras-clave': [],
+        valoracion: -1
       }));
 
       // Obtenemos nombre de usuario
@@ -66,6 +71,23 @@ export default function Detalles() {
       setTrabajo((prevTrabajo) => ({
         ...prevTrabajo,
         comentarios: comentarios.data
+      }));
+      // Obtenemos la valoracion a partir de los comentarios
+      const valoraciones = [];
+      comentarios.data.forEach(comentario => {
+        valoraciones.push(comentario.valoracion);
+      });
+      const valoracionMedia = Math.round(valoraciones.reduce((a, b) => a + b) / valoraciones.length);
+      setTrabajo((prevTrabajo) => ({
+        ...prevTrabajo,
+        valoracion: valoracionMedia
+      }));
+
+      // Obtenemos palabras clave
+      const palabras_clave = await axios.get(`${URL_BASE}palabras-clave/trabajo/${data.id}`);
+      setTrabajo((prevTrabajo) => ({
+        ...prevTrabajo,
+        "palabras-clave": palabras_clave.data
       }));
 
     } catch (err) {
@@ -99,11 +121,17 @@ export default function Detalles() {
               <b>{t('fecha-publicacion')}:</b> {trabajo.publicacion}
             </p>
             <p>
-              <StarRating formComentario={null} setFormComentario={null} ratinginicial={3} desabilitado={true} />
+              <b>Valoración:</b>
+              {trabajo.valoracion != -1 ? (<StarRating formComentario={null} setFormComentario={null} ratinginicial={trabajo.valoracion} desabilitado={true} />) : <p>"No hay valoracion"</p>}
             </p>
             <p className="contenido-letra">
-              <b>{t('palabras-clave')}:</b> Animación 3D | Modelado 3D | Cortometraje |
-              Texturizado | Blender | Substance Painter
+              <b>{t('palabras-clave')}:</b> {trabajo['palabras-clave'].length > 0 ? (
+                trabajo['palabras-clave'].map((palabra, idx) => (
+                  <span>{idx != 0 ? " |" : ""} {palabra.nombre}</span>
+                ))
+              ) : (
+                <p>{t('no-resultados')}</p>
+              )}
             </p>
           </article>
 
