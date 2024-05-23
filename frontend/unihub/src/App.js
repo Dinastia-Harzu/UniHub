@@ -35,7 +35,8 @@ export default function App() {
 
   useEffect(() => {
     if (idUsuarioLoggeado) {
-      axios.get(`${URL_BASE}usuarios/${idUsuarioLoggeado}`).then((result) => {
+      console.log(JSON.parse(idUsuarioLoggeado).id);
+      axios.get(`${URL_BASE}usuarios/${JSON.parse(idUsuarioLoggeado).id}`).then((result) => {
         const userThemeFromBackend = result.data.ruta;
         setUserTheme(userThemeFromBackend);
 
@@ -68,6 +69,9 @@ export default function App() {
       link.rel = "stylesheet";
       link.href = `/assets/themes/general-normal.css`;
       document.head.appendChild(link);
+      return () => {
+        document.head.removeChild(link);
+      };
     }
   }, [idUsuarioLoggeado]);
 
