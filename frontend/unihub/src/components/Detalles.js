@@ -10,10 +10,11 @@ import { URL_BASE } from "../utils/constantes";
 import ContenedorComentario from "./ContenedorComentario";
 import { useTranslation } from 'react-i18next';
 import { useNavigate } from 'react-router-dom';
+import ContenedorTrabajoAsociado from "./ContenedorTrabajoAsociado";
 
 export default function Detalles() {
   const navigate = useNavigate();
-  
+
   const { t } = useTranslation();
 
   const params = useParams();
@@ -177,18 +178,15 @@ export default function Detalles() {
           <article className="trabajos-similares">
             <h3 className="titulo-letra">{t('trabajos-asociados')}: </h3>
             <div>
-              <p>
-                <img src="/assets/TFG_Similar1.png" alt="TFG-similar1"></img>
-                <Link to="index" className="link-fondo">La Tierra - Cortometraje de Animación 3D</Link>
-              </p>
-              <p>
-                <img src="/assets/TFG_Similar2.png" alt="TFG-similar2"></img>
-                <Link to="index" className="link-fondo">Sons of Odin - Corto de animación 3D</Link>
-              </p>
-              <p>
-                <img src="/assets/TFG_Similar3.png" alt="TFG-similar3"></img>
-                <Link to="index" className="link-fondo">Loop animado 3D estilo cartoon</Link>
-              </p>
+              {trabajosAsociados.length > 0 ? (
+                trabajosAsociados.map((trabajo) => (
+                  <ContenedorTrabajoAsociado
+                    trabajo={trabajo}
+                  />
+                ))
+              ) : (
+                <p>{t('no-resultados')}</p>
+              )}
             </div>
           </article>
 
@@ -196,7 +194,7 @@ export default function Detalles() {
             <h3 className="titulo-letra">{t('comentarios')}:</h3>
             <div>
               <div className="contenedor-comentar">
-                
+
                 <ModalDetalle id_trabajo={id_trabajo} />
               </div>
               <div>

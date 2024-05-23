@@ -129,6 +129,40 @@ function json2sql(valor) {
   return valor;
 }
 
+function filtro(nombre, valor) {
+  if (typeof valor === "undefined" || typeof valor === "null") {
+    return 1;
+  }
+  if (typeof valor === "string") {
+    return `'${valor}'`;
+  }
+  switch (nombre) {
+    case "nombre":
+      return `nombre = ${json2sql(valor)}`;
+    case "autor":
+      return `autor = ${json2sql(valor)}`;
+    case "fecha":
+      return `fecha = ${json2sql(valor)}`;
+    case "tipo-trabajo":
+      return;
+    case "titulacion":
+      return;
+    case "palabras-clave":
+      return;
+  }
+  return valor;
+}
+
+function select(nombre, valor) {
+  if (typeof valor === "undefined" || typeof valor === "null") {
+    return "";
+  }
+  if (typeof valor === "string") {
+    return `, '${valor}'`;
+  }
+  return `, ${valor}`;
+}
+
 const SECRETO = "loremipsum";
 const TIEMPO_EXPIRACION_TOKEN = 7 * 24 * 60;
 
@@ -168,6 +202,8 @@ module.exports = {
   respuestas,
   determinarCamposPut,
   json2sql,
+  filtro,
+  select,
   SECRETO,
   TIEMPO_EXPIRACION_TOKEN,
   creaToken,
