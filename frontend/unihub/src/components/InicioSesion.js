@@ -10,6 +10,7 @@ import { useNavigate } from 'react-router-dom';
 const InicioSesion = () => {
   const { t } = useTranslation();
   const navigate = useNavigate();
+  //if(sessionStorage.getItem('usuario') != null) { navigate('../');}
   const {
     register,
     formState: { errors },
@@ -23,12 +24,14 @@ const InicioSesion = () => {
       const response = await axios.post(`${URL_BASE}login`, {
         correo: data.correo,
         clave: data.contrasena,
+        nombre: data.nombre
       });
 
       if (response.status === 200) {
         setMessage(t('usuario-logueado'));
-        sessionStorage.setItem('usuario', JSON.stringify(data));
-        navigate('../');
+        console.log(response);
+        sessionStorage.setItem('usuario', JSON.stringify(response));
+       navigate('../');
       } else {
         setMessage(t('usuario-no-logueado'));
       }

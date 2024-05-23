@@ -25,30 +25,44 @@ import CartaBusqueda from "./components/CartaBusqueda.js";
 import Root from "./components/Root.js";
 import Publicar from "./components/Publicar.js";
 import Detalles from "./components/Detalles.js";
+import { URL_BASE } from './utils/constantes.js';
+
+import axios from 'axios';
 
 export default function App() {
   const [userTheme, setUserTheme] = useState("");
+  window.sessionStorage.setItem('usuario', '22');
+  const idUsuarioLoggeado = window.sessionStorage.getItem('usuario');
 
   useEffect(() => {
-    const userThemeFromBackend = "normal"; // Ejemplo: 'normal', 'dark', 'alternative', etc.
-    setUserTheme(userThemeFromBackend);
+    if (idUsuarioLoggeado) {
+      axios.get(`${URL_BASE}usuarios/${idUsuarioLoggeado}`).then((result) => {
+        const userThemeFromBackend = result.data.ruta;
+        setUserTheme(userThemeFromBackend);
 
-    const link = document.createElement("link");
-    link.rel = "stylesheet";
-    link.href = `/assets/themes/general-${userThemeFromBackend}.css`;
-    document.head.appendChild(link);
+        console.log(userThemeFromBackend);
 
-    if (userThemeFromBackend == "ac" || userThemeFromBackend == "osc") {
-      document.getElementsByClassName("logotipo").src =
-        "/assets/W_Logotipo.PNG";
-      console.log(document.getElementsByClassName("logotipo"));
+        if (document.getElementById("tema-de-usuario")) { document.head.removeChild(document.getElementById("tema-de-usuario")); }
+
+        const link = document.createElement("link");
+        link.setAttribute("id", "tema-de-usuario");
+        link.rel = "stylesheet";
+        link.href = `/assets/themes/${userThemeFromBackend}`;
+        document.head.appendChild(link);
+
+        if (userThemeFromBackend === "general-ac.css" || userThemeFromBackend === "general-ac-lg.css" || userThemeFromBackend === "general-osc-lg.css" || userThemeFromBackend === "general-osc.css") {
+          document.getElementsByClassName("logotipo").src = "/assets/W_Logotipo.PNG";
+        }
+
+        // Limpia el enlace cuando el componente se desmonta
+        return () => {
+          document.head.removeChild(link);
+        };
+      }).catch((error) => {
+        console.error("Error al obtener el tema del usuario:", error);
+      });
     }
-
-    // Limpia el enlace cuando el componente se desmonta
-    return () => {
-      document.head.removeChild(link);
-    };
-  }, []);
+  }, [idUsuarioLoggeado]);
 
   return (
     <BrowserRouter>

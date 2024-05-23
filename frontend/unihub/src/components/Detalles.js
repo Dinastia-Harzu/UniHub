@@ -9,10 +9,14 @@ import axios from "axios";
 import { URL_BASE } from "../utils/constantes";
 import ContenedorComentario from "./ContenedorComentario";
 import { useTranslation } from 'react-i18next';
+import { useNavigate } from 'react-router-dom';
 import ContenedorTrabajoAsociado from "./ContenedorTrabajoAsociado";
 
 export default function Detalles() {
+  const navigate = useNavigate();
+
   const { t } = useTranslation();
+
   const params = useParams();
   const id_trabajo = params.id;
   const [trabajo, setTrabajo] = useState({
@@ -190,7 +194,7 @@ export default function Detalles() {
             <h3 className="titulo-letra">{t('comentarios')}:</h3>
             <div>
               <div className="contenedor-comentar">
-                <p>{t('opinion-sobre-trabajo')}:</p>
+
                 <ModalDetalle id_trabajo={id_trabajo} />
               </div>
               <div>

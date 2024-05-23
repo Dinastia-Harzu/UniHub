@@ -9,8 +9,14 @@ import React, { useState } from "react";
 import "../styles/formulario.css";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
 import { useRef } from "react";
+import { useNavigate } from 'react-router-dom';
 
 const EditarPerfil = () => {
+
+  const navigate = useNavigate();
+  if(sessionStorage.getItem('usuario') == null) { navigate('/login');} 
+ 
+  
   const { t } = useTranslation();
   const {
     register,
