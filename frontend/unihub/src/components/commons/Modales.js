@@ -5,8 +5,10 @@ import StarRating from "./StarRating";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEye } from "@fortawesome/free-solid-svg-icons";
 import { useTranslation } from 'react-i18next';
+import { useNavigate } from 'react-router-dom';
 
 export function ModalDetalle({ id_trabajo }) {
+  const navigate = useNavigate();
   const { t } = useTranslation();
   const [modalEstaAbierto1, abrirModal1, cerrarModal1, publicarModal1] =
     useModal(false);
@@ -19,15 +21,27 @@ export function ModalDetalle({ id_trabajo }) {
 
   return (
     <div>
-      <button
+     
+     {sessionStorage.getItem('usuario') ? (
+      <p>{t('opinion-sobre-trabajo')}:</p> 
+      ): (
+        console.log("no puede comentar")
+      )}
+      
+     {sessionStorage.getItem('usuario') ? (
+       <button
         onClick={(event) => {
-          abrirModal1(); // Ejecuta la función abrirModal1
-          event.target.blur(); // Elimina el foco del botón
+          abrirModal1(); 
+          event.target.blur(); 
         }}
         className="btn btn-letra btn-fondo"
       >
         {t('comentar')}
-      </button>
+      </button> ) : (
+              console.log("no puede comentar")
+            )}
+
+
       <Modal estaAbierto={modalEstaAbierto1} cerrarModal={cerrarModal1}>
         <form>
           <p className="parrafo-valoracion titulo-letra">

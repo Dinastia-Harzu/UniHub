@@ -3,8 +3,12 @@ import { MdTune } from "react-icons/md";
 import { Link } from "react-router-dom";
 import "../styles/mis-trabajos.css";
 import { useTranslation } from 'react-i18next';
+import { useNavigate } from 'react-router-dom';
 
 const MisTrabajos = () => {
+
+  const navigate = useNavigate();
+  if(sessionStorage.getItem('usuario') == null) { navigate('/login');} 
   const { t } = useTranslation();
   const [filterOpen, setFilterOpen] = useState(false);
   const [selectedFilter, setSelectedFilter] = useState("");
@@ -29,7 +33,7 @@ const MisTrabajos = () => {
       description: "Descripción breve del trabajo 3",
       image: "/assets/Habitacion.png",
     },
-    // Añadir más datos de cartas según sea necesario
+    
   ];
 
   const handleFilterClick = () => {
@@ -42,7 +46,7 @@ const MisTrabajos = () => {
   };
 
   const handleSearch = (filter) => {
-    // Lógica de búsqueda basada en el filtro seleccionado
+    
     console.log(`Buscar trabajos filtrados por: ${filter}`);
   };
 
@@ -155,7 +159,12 @@ const MisTrabajos = () => {
             </form>
           )}
         </div>
-        <div className="btn-letra"><Link to='/publicar' className='btn publish-button btn-primary btn-letra'>{t('publicar')}</Link></div>
+        {sessionStorage.getItem('usuario') ? (
+              <div className="btn-letra"><Link to='/publicar' className='btn publish-button btn-primary btn-letra'>{t('publicar')}</Link></div>
+            ) : (
+              console.log("No hay usuario registrado")
+            )}
+        
       </div>
       <div className="cards-container">
         {cardsData.map(card => (

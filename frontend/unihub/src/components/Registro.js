@@ -8,8 +8,12 @@ import {
 import React, { useState, useRef } from "react";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
 import "../styles/formulario.css";
+import { useNavigate } from 'react-router-dom';
 
 const Registro = () => {
+  
+  const navigate = useNavigate();
+  if(sessionStorage.getItem('usuario') != null) { navigate('../');} 
   const { t } = useTranslation();
   const {
     register,

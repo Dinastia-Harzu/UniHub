@@ -11,8 +11,12 @@ import { useState } from "react";
 import axios from "axios";
 import { URL_BASE } from "../utils/constantes.js";
 import { useTranslation } from 'react-i18next';
+import { useNavigate } from 'react-router-dom';
 
 export default function Publicar() {
+    const navigate = useNavigate();
+  if(sessionStorage.getItem('usuario') == null) { navigate('/login');} 
+ 
     const { t } = useTranslation();
     const [pagina, setPagina] = useState(0);
     const [formData, setFormData] = useState({
