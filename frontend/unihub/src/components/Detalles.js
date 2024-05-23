@@ -83,11 +83,14 @@ export default function Detalles() {
       comentarios.data.forEach(comentario => {
         valoraciones.push(comentario.valoracion);
       });
-      const valoracionMedia = Math.round(valoraciones.reduce((a, b) => a + b) / valoraciones.length);
-      setTrabajo((prevTrabajo) => ({
-        ...prevTrabajo,
-        valoracion: valoracionMedia
-      }));
+
+      if (valoraciones.length > 0) {
+        const valoracionMedia = Math.round(valoraciones.reduce((a, b) => a + b) / valoraciones.length);
+        setTrabajo((prevTrabajo) => ({
+          ...prevTrabajo,
+          valoracion: valoracionMedia
+        }));
+      }
 
       // Obtenemos palabras clave
       const palabras_clave = await axios.get(`${URL_BASE}palabras-clave/trabajo/${data.id}`);
@@ -155,7 +158,7 @@ export default function Detalles() {
 
           <article className="resumen">
             <p className="contenido-letra">
-              <b>{t('resumen')}:</b>
+              <b onClick={() => console.log(trabajo)}>{t('resumen')}:</b>
             </p>
             <p>
               {trabajo.resumen}
@@ -194,7 +197,6 @@ export default function Detalles() {
             <h3 className="titulo-letra">{t('comentarios')}:</h3>
             <div>
               <div className="contenedor-comentar">
-
                 <ModalDetalle id_trabajo={id_trabajo} />
               </div>
               <div>
@@ -211,7 +213,7 @@ export default function Detalles() {
             </div>
           </article>
         </section>
-      </main>
+      </main >
     </>
   );
 }

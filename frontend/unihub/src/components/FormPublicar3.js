@@ -67,6 +67,7 @@ export default function FormPublicar3({ setPagina, formData, setFormData }) {
                 name="portada"
                 accept="image/*"
                 onChange={(event) => cambiarFoto(event)}
+                className="contenido-letra"
               ></input>
             </div>
           </form>
