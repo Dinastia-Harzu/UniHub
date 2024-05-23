@@ -1,8 +1,14 @@
+import React, { useEffect, useState } from "react";
 import "../styles/inicio.css";
 import { useTranslation } from 'react-i18next';
 
 export default function Inicio() {
   const { t } = useTranslation();
+  const [correo, setCorreo] = useState('');
+  useEffect(() => {
+    const usuario = JSON.parse(sessionStorage.getItem('usuario'));
+    console.log(usuario);
+  }, []);
 
   return (
     <main className="contenedor-inicio">
@@ -11,6 +17,7 @@ export default function Inicio() {
           className="img-cabecera"
           src="/assets/Cabecera.jpg"
           alt="Imagen de cabecera"
+          title="Imagen de cabecera"
         />
       </section>
       <section className="contenedor-inicio-2">
@@ -21,10 +28,11 @@ export default function Inicio() {
               src="/assets/Cabecera.jpg"
               alt="Imagen"
               className="imagen-articulo-inicio"
+              title="Imagen"
             />
             <div className="contenido-articulo-inicio">
               <h2 className="titulo-articulo-inicio titulo-letra">
-              {t('titulo-articulo-inicio')}
+                {t('titulo-articulo-inicio')}
               </h2>
               <p className="texto-articulo-inicio contenido-letra">
                 Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean
@@ -38,7 +46,7 @@ export default function Inicio() {
           <article className="articulo-inicio">
             <div className="contenido-articulo-inicio">
               <h2 className="titulo-articulo-inicio titulo-letra">
-              {t('titulo-articulo-inicio-dos')}
+                {t('titulo-articulo-inicio-dos')}
               </h2>
               <p className="texto-articulo-inicio contenido-letra">
                 Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean
@@ -52,6 +60,7 @@ export default function Inicio() {
               src="/assets/Cabecera.jpg"
               alt="Imagen"
               className="imagen-articulo-inicio"
+              title="Imagen"
             />
           </article>
         </section>

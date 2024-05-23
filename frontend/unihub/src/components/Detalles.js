@@ -9,9 +9,14 @@ import axios from "axios";
 import { URL_BASE } from "../utils/constantes";
 import ContenedorComentario from "./ContenedorComentario";
 import { useTranslation } from 'react-i18next';
+import { useNavigate } from 'react-router-dom';
+import ContenedorTrabajoAsociado from "./ContenedorTrabajoAsociado";
 
 export default function Detalles() {
+  const navigate = useNavigate();
+
   const { t } = useTranslation();
+
   const params = useParams();
   const id_trabajo = params.id;
   const [trabajo, setTrabajo] = useState({
@@ -22,9 +27,12 @@ export default function Detalles() {
     resumen: '',
     portada: '',
     recursos: [],
+    "palabras-clave": [],
     comentarios: [],
-    documento: ''
+    documento: '',
+    valoracion: -1
   });
+  const [trabajosAsociados, setTrabajosAsociados] = useState([]);
 
   useEffect(() => {
     obtenerDatosTrabajo();
@@ -45,6 +53,9 @@ export default function Detalles() {
         resumen: data.resumen,
         portada: data.portada,
         documento: data.documento,
+        recursos: [],
+        'palabras-clave': [],
+        valoracion: -1
       }));
 
       // Obtenemos nombre de usuario
@@ -67,6 +78,35 @@ export default function Detalles() {
         ...prevTrabajo,
         comentarios: comentarios.data
       }));
+      // Obtenemos la valoracion a partir de los comentarios
+      const valoraciones = [];
+      comentarios.data.forEach(comentario => {
+        valoraciones.push(comentario.valoracion);
+      });
+      const valoracionMedia = Math.round(valoraciones.reduce((a, b) => a + b) / valoraciones.length);
+      setTrabajo((prevTrabajo) => ({
+        ...prevTrabajo,
+        valoracion: valoracionMedia
+      }));
+
+      // Obtenemos palabras clave
+      const palabras_clave = await axios.get(`${URL_BASE}palabras-clave/trabajo/${data.id}`);
+      setTrabajo((prevTrabajo) => ({
+        ...prevTrabajo,
+        "palabras-clave": palabras_clave.data
+      }));
+
+      // Obtener trabajos asociados
+      const ids = [];
+      palabras_clave.data.forEach((palabra) => {
+        ids.push(palabra.id);
+      });
+      const palabras_juntas = ids.join("_");
+      axios.get(`${URL_BASE}trabajos?palabras-clave=${palabras_juntas}`).then((result) => {
+        setTrabajosAsociados(result.data);
+      }).catch((err) => {
+        console.log(err);
+      })
 
     } catch (err) {
       console.log(err);
@@ -99,11 +139,17 @@ export default function Detalles() {
               <b>{t('fecha-publicacion')}:</b> {trabajo.publicacion}
             </p>
             <p>
-              <StarRating formComentario={null} setFormComentario={null} ratinginicial={3} desabilitado={true} />
+              <b className="contenido-letra">Valoración:</b>
+              {trabajo.valoracion != -1 ? (<StarRating formComentario={null} setFormComentario={null} ratinginicial={trabajo.valoracion} desabilitado={true} />) : <p>No hay valoracion</p>}
             </p>
             <p className="contenido-letra">
-              <b>{t('palabras-clave')}:</b> Animación 3D | Modelado 3D | Cortometraje |
-              Texturizado | Blender | Substance Painter
+              <b>{t('palabras-clave')}:</b> {trabajo['palabras-clave'].length > 0 ? (
+                trabajo['palabras-clave'].map((palabra, idx) => (
+                  <span>{idx != 0 ? " |" : ""} {palabra.nombre}</span>
+                ))
+              ) : (
+                <p>{t('no-resultados')}</p>
+              )}
             </p>
           </article>
 
@@ -132,18 +178,15 @@ export default function Detalles() {
           <article className="trabajos-similares">
             <h3 className="titulo-letra">{t('trabajos-asociados')}: </h3>
             <div>
-              <p>
-                <img src="/assets/TFG_Similar1.png" alt="TFG-similar1"></img>
-                <Link to="index" className="link-fondo">La Tierra - Cortometraje de Animación 3D</Link>
-              </p>
-              <p>
-                <img src="/assets/TFG_Similar2.png" alt="TFG-similar2"></img>
-                <Link to="index" className="link-fondo">Sons of Odin - Corto de animación 3D</Link>
-              </p>
-              <p>
-                <img src="/assets/TFG_Similar3.png" alt="TFG-similar3"></img>
-                <Link to="index" className="link-fondo">Loop animado 3D estilo cartoon</Link>
-              </p>
+              {trabajosAsociados.length > 0 ? (
+                trabajosAsociados.map((trabajo) => (
+                  <ContenedorTrabajoAsociado
+                    trabajo={trabajo}
+                  />
+                ))
+              ) : (
+                <p>{t('no-resultados')}</p>
+              )}
             </div>
           </article>
 
@@ -151,7 +194,7 @@ export default function Detalles() {
             <h3 className="titulo-letra">{t('comentarios')}:</h3>
             <div>
               <div className="contenedor-comentar">
-                <p>{t('opinion-sobre-trabajo')}:</p>
+
                 <ModalDetalle id_trabajo={id_trabajo} />
               </div>
               <div>

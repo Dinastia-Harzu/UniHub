@@ -9,8 +9,14 @@ import React, { useState } from "react";
 import "../styles/formulario.css";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
 import { useRef } from "react";
+import { useNavigate } from 'react-router-dom';
 
 const EditarPerfil = () => {
+
+  const navigate = useNavigate();
+  if(sessionStorage.getItem('usuario') == null) { navigate('/login');} 
+ 
+  
   const { t } = useTranslation();
   const {
     register,
@@ -67,7 +73,7 @@ const EditarPerfil = () => {
               <div className="form-group" id="nombre-titulo">
                 <h1 className="titulo-letra">Miriam</h1>
               </div>
-              <div className="contenedor-apartados-formulario_usuario">
+              <div className="contenedor-apartados-formulario-usuario">
                 <label htmlFor="portada"></label>
                 <img
                   ref={refImagen}
@@ -88,7 +94,7 @@ const EditarPerfil = () => {
               <div className="form-group" id="nombre">
                 <label htmlFor="nombre" className="contenido-letra">{t('nombre')}:</label>
                 <input
-                className="contenido-letra"
+                  className="contenido-letra"
                   type="text"
                   id="nombre"
                   name="nombre"
@@ -108,7 +114,7 @@ const EditarPerfil = () => {
               <div className="form-group" id="apellidos">
                 <label htmlFor="apellidos" className="contenido-letra">{t('apellidos')}:</label>
                 <input
-                className="contenido-letra"
+                  className="contenido-letra"
                   type="text"
                   id="apellidos"
                   name="apellidos"
@@ -129,7 +135,7 @@ const EditarPerfil = () => {
                 <div className="form-group" id="correo">
                   <label for="correo" className="contenido-letra">{t('correo')}:</label>
                   <input
-                  className="contenido-letra"
+                    className="contenido-letra"
                     type="email"
                     id="correo"
                     name="correo"
@@ -152,7 +158,7 @@ const EditarPerfil = () => {
                   <div className="input-contrasenia">
                     <label htmlFor="contrasena" className="contenido-letra">{t('contrasenia')}:</label>
                     <input
-                    className="contenido-letra"
+                      className="contenido-letra"
                       type={mostrarContrasena ? "text" : "password"}
                       id="contrasena"
                       name="contrasena"
@@ -161,7 +167,7 @@ const EditarPerfil = () => {
                         required: true,
                         pattern: /(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}/,
                       })}
-                    
+
                     />
                   </div>
                   <div className="boton-contrasenia contenido-letra">
@@ -184,7 +190,7 @@ const EditarPerfil = () => {
                 <div className="form-group" id="titulacion">
                   <label for="titulacion" className="contenido-letra">{t('sel-tit')}:</label>
                   <select
-                  className="contenido-letra"
+                    className="contenido-letra"
                     defaultValue="arquitectura"
                     {...register("titulacion", {
                       required: true,
@@ -192,98 +198,98 @@ const EditarPerfil = () => {
                     })}
                   >
                     <option value="none" className="contenido-letra">{t('sel-tutit')}</option>
-                    <option value="ingenieria_multimedia"  className="contenido-letra">
-                    {t('ingenieria_multimedia')}
+                    <option value="ingenieria_multimedia" className="contenido-letra">
+                      {t('ingenieria_multimedia')}
                     </option>
-                    <option value="arquitectura"  className="contenido-letra">{t('arquitectura')}</option>
+                    <option value="arquitectura" className="contenido-letra">{t('arquitectura')}</option>
                     <option value="arquitectura_tecnica">
-                    {t('arquitectura_tecnica')}
+                      {t('arquitectura_tecnica')}
                     </option>
-                    <option value="fundamentos_arquitectura"  className="contenido-letra">
-                    {t('fundamentos_arquitectura')}
+                    <option value="fundamentos_arquitectura" className="contenido-letra">
+                      {t('fundamentos_arquitectura')}
                     </option>
-                    <option value="ingenieria_aeroespacial"  className="contenido-letra">
-                    {t('ingenieria_aeroespacial')}
+                    <option value="ingenieria_aeroespacial" className="contenido-letra">
+                      {t('ingenieria_aeroespacial')}
                     </option>
-                    <option value="ingenieria_biomedica"  className="contenido-letra">
-                    {t('ingenieria_biomedica')}
+                    <option value="ingenieria_biomedica" className="contenido-letra">
+                      {t('ingenieria_biomedica')}
                     </option>
-                    <option value="ingenieria_sonido_imagen"  className="contenido-letra">
-                    {t('ingenieria_sonido_imagen')}
+                    <option value="ingenieria_sonido_imagen" className="contenido-letra">
+                      {t('ingenieria_sonido_imagen')}
                     </option>
-                    <option value="ingenieria_civil"  className="contenido-letra">{t('ingenieria_civil')}</option>
+                    <option value="ingenieria_civil" className="contenido-letra">{t('ingenieria_civil')}</option>
                     <option value="ingenieria_ia">
-                    {t('ingenieria_ia')}
+                      {t('ingenieria_ia')}
                     </option>
-                    <option value="ingenieria_informatica"  className="contenido-letra">
-                    {t('ingenieria_informatica')}
+                    <option value="ingenieria_informatica" className="contenido-letra">
+                      {t('ingenieria_informatica')}
                     </option>
-                    <option value="ingenieria_informatica_ade"  className="contenido-letra">
-                    {t('ingenieria_informatica_ade')}
+                    <option value="ingenieria_informatica_ade" className="contenido-letra">
+                      {t('ingenieria_informatica_ade')}
                     </option>
-                    <option value="ingenieria_quimica"  className="contenido-letra">
-                    {t('ingenieria_quimica')}
+                    <option value="ingenieria_quimica" className="contenido-letra">
+                      {t('ingenieria_quimica')}
                     </option>
-                    <option value="ingenieria_robotica"  className="contenido-letra">
-                    {t('ingenieria_robotica')}
+                    <option value="ingenieria_robotica" className="contenido-letra">
+                      {t('ingenieria_robotica')}
                     </option>
-                    <option value="master_arquitectura"  className="contenido-letra">
-                    {t('master_arquitectura')}
+                    <option value="master_arquitectura" className="contenido-letra">
+                      {t('master_arquitectura')}
                     </option>
-                    <option value="master_automatica_robotica"  className="contenido-letra">
-                    {t('master_automatica_robotica')}
+                    <option value="master_automatica_robotica" className="contenido-letra">
+                      {t('master_automatica_robotica')}
                     </option>
-                    <option value="master_ciberseguridad"  className="contenido-letra">
-                    {t('master_ciberseguridad')}
+                    <option value="master_ciberseguridad" className="contenido-letra">
+                      {t('master_ciberseguridad')}
                     </option>
-                    <option value="master_ciencia_datos"  className="contenido-letra">
-                    {t('master_ciencia_datos')}
+                    <option value="master_ciencia_datos" className="contenido-letra">
+                      {t('master_ciencia_datos')}
                     </option>
-                    <option value="master_desarrollo_aplicaciones_servicios_web"  className="contenido-letra">
-                    {t('master_desarrollo_aplicaciones_servicios_web')}
+                    <option value="master_desarrollo_aplicaciones_servicios_web" className="contenido-letra">
+                      {t('master_desarrollo_aplicaciones_servicios_web')}
                     </option>
-                    <option value="master_desarrollo_software_dispositivos_moviles"  className="contenido-letra">
-                    {t('master_desarrollo_software_dispositivos_moviles')}
+                    <option value="master_desarrollo_software_dispositivos_moviles" className="contenido-letra">
+                      {t('master_desarrollo_software_dispositivos_moviles')}
                     </option>
-                    <option value="master_gestion_edificacion"  className="contenido-letra">
-                    {t('master_gestion_edificacion')}
+                    <option value="master_gestion_edificacion" className="contenido-letra">
+                      {t('master_gestion_edificacion')}
                     </option>
-                    <option value="master_ingenieria_biomedica"  className="contenido-letra">
-                    {t('master_ingenieria_biomedica')}
+                    <option value="master_ingenieria_biomedica" className="contenido-letra">
+                      {t('master_ingenieria_biomedica')}
                     </option>
-                    <option value="master_ingenieria_caminos_canales_puertos"  className="contenido-letra">
-                    {t('master_ingenieria_caminos_canales_puertos')}
+                    <option value="master_ingenieria_caminos_canales_puertos" className="contenido-letra">
+                      {t('master_ingenieria_caminos_canales_puertos')}
                     </option>
-                    <option value="master_ingenieria_materiales_agua_terreno"  className="contenido-letra">
-                    {t('master_ingenieria_materiales_agua_terreno')}
+                    <option value="master_ingenieria_materiales_agua_terreno" className="contenido-letra">
+                      {t('master_ingenieria_materiales_agua_terreno')}
                     </option>
-                    <option value="master_ingenieria_telecomunicacion"  className="contenido-letra">
-                    {t('master_ingenieria_telecomunicacion')}
+                    <option value="master_ingenieria_telecomunicacion" className="contenido-letra">
+                      {t('master_ingenieria_telecomunicacion')}
                     </option>
-                    <option value="master_ingenieria_geologica"  className="contenido-letra">
-                    {t('master_ingenieria_geologica')}
+                    <option value="master_ingenieria_geologica" className="contenido-letra">
+                      {t('master_ingenieria_geologica')}
                     </option>
-                    <option value="master_ingenieria_informatica"  className="contenido-letra">
-                    {t('master_ingenieria_informatica')}
+                    <option value="master_ingenieria_informatica" className="contenido-letra">
+                      {t('master_ingenieria_informatica')}
                     </option>
-                    <option value="master_ingenieria_quimica"  className="contenido-letra">
-                    {t('master_ingenieria_quimica')}
+                    <option value="master_ingenieria_quimica" className="contenido-letra">
+                      {t('master_ingenieria_quimica')}
                     </option>
-                    <option value="master_ingenieria_artificial"  className="contenido-letra">
-                    {t('master_ingenieria_artificial')}
+                    <option value="master_ingenieria_artificial" className="contenido-letra">
+                      {t('master_ingenieria_artificial')}
                     </option>
-                    <option value="master_nuevas_tecnologias"  className="contenido-letra">
-                    {t('master_nuevas_tecnologias')}
+                    <option value="master_nuevas_tecnologias" className="contenido-letra">
+                      {t('master_nuevas_tecnologias')}
                     </option>
-                    <option value="master_prevencion_riesgos_laborales"  className="contenido-letra">
-                    {t('master_prevencion_riesgos_laborales')}
+                    <option value="master_prevencion_riesgos_laborales" className="contenido-letra">
+                      {t('master_prevencion_riesgos_laborales')}
                     </option>
                   </select>
                   {errors.titulacion?.type === "required" && (
-                    <p  className="contenido-letra">{t('campo-requerido')}</p>
+                    <p className="contenido-letra">{t('campo-requerido')}</p>
                   )}
                   {errors.titulacion?.type === "validate" && (
-                    <p  className="contenido-letra">{t('titulacion-obligatoria')}</p>
+                    <p className="contenido-letra">{t('titulacion-obligatoria')}</p>
                   )}
                   <br />
                   <br />
@@ -291,20 +297,20 @@ const EditarPerfil = () => {
                 <div className="form-group" id="titulacion" >
                   <label for="estilo" className="contenido-letra">{t('estilo')}:</label>
                   <select
-                  className="contenido-letra"
+                    className="contenido-letra"
                     defaultValue="1"
                     {...register("estilo", {
                       required: true,
                       validate: estiloValidator,
                     })}
                   >
-                  <option value="none"  className="contenido-letra">{t('sel-estilo')}</option>
-                    <option value="1"  className="contenido-letra">{t('normal')}</option>
-                    <option value="2"  className="contenido-letra">{t('oscuro')}</option>
-                    <option value="3"  className="contenido-letra">{t('ac')}</option>
-                    <option value="4"  className="contenido-letra">{t('normal-lg')}</option>
-                    <option value="5"  className="contenido-letra">{t('oscuro-lg')}</option>
-                    <option value="6"  className="contenido-letra">{t('ac-lg')}</option>
+                    <option value="none" className="contenido-letra">{t('sel-estilo')}</option>
+                    <option value="1" className="contenido-letra">{t('normal')}</option>
+                    <option value="2" className="contenido-letra">{t('oscuro')}</option>
+                    <option value="3" className="contenido-letra">{t('ac')}</option>
+                    <option value="4" className="contenido-letra">{t('normal-lg')}</option>
+                    <option value="5" className="contenido-letra">{t('oscuro-lg')}</option>
+                    <option value="6" className="contenido-letra">{t('ac-lg')}</option>
                   </select>
                   {errors.estilo?.type === "required" && (
                     <p className="contenido-letra">{t('campo-requerido')}</p>
@@ -318,7 +324,7 @@ const EditarPerfil = () => {
                 <div className="form-group" id="direccion">
                   <label for="direccion" className="contenido-letra">{t('direccion')}:</label>
                   <input
-                  className="contenido-letra"
+                    className="contenido-letra"
                     type="text"
                     id="direccion"
                     name="direccion"
@@ -336,7 +342,7 @@ const EditarPerfil = () => {
                 <div className="form-group" id="nacimiento">
                   <label for="fecha_nacimiento" className="contenido-letra">{t('fecnac')}:</label>
                   <input
-                  className="contenido-letra"
+                    className="contenido-letra"
                     type="date"
                     id="fecha_nacimiento"
                     name="fecha_nacimiento"
@@ -358,7 +364,7 @@ const EditarPerfil = () => {
               </div>
               <div className="boton-editar btn-letra">
                 <button type="submit" className="btn btn-letra" value="Editar perfil">
-                {t('editar')}
+                  {t('editar')}
                 </button>
               </div>
             </div>

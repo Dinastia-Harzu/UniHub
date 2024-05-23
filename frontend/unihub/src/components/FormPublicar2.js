@@ -25,18 +25,16 @@ export default function FormPublicar2({ setPagina, formData, setFormData }) {
 
   return (
     <div className="contenedor-publicar">
-      <section className="titulo-publicar">
-      </section>
       <section className="contenedor-formulario-publicar">
         <div className="contenedor-apartados-publicar">
           <p className="apartado no-actual" onClick={() => setPagina(0)}>
-          {t('detalles')}
+            {t('detalles')}
           </p>
-          <p className="apartado no-actual" onClick={() => setPagina(1)}>
-          {t('multimedia')}
+          <p className="apartado actual" onClick={() => setPagina(1)}>
+            {t('multimedia')}
           </p>
-          <p className="apartado actual contenido-letra" onClick={() => setPagina(2)}>
-          {t('portada')}
+          <p className="apartado no-actual contenido-letra" onClick={() => setPagina(2)}>
+            {t('portada')}
           </p>
         </div>
         <div className="formulario-publicar">
@@ -57,12 +55,12 @@ export default function FormPublicar2({ setPagina, formData, setFormData }) {
             </div>
 
             <label className="titulo-recursos contenido-letra" htmlFor="recursos[]">
-            {t('recursos-multimedia-2')}:
+              {t('recursos-multimedia-2')}:
             </label>
             <section className="contenedor-todos-los-recursos">
               {recursos.map((recurso) => (
                 <ContenedorRecurso
-                  
+
                   key={recurso.id}
                   id={recurso.id}
                   eliminarRecurso={eliminarRecurso}

@@ -10,8 +10,13 @@ import "../styles/formulario.css";
 import { FaEye, FaEyeSlash } from 'react-icons/fa';
 import { useRef } from 'react';
 import { Link } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
 const Perfilusuario = () => {
+
+  const navigate = useNavigate();
+  if(sessionStorage.getItem('usuario') == null) { navigate('/login');} 
+ 
   const { t } = useTranslation();
   const {
     register,
@@ -67,14 +72,14 @@ const Perfilusuario = () => {
           <form onSubmit={handleSubmit(onSubmit)} className="pos-wrapper">
             <div className="wrapper">
               <div className="form-group" id="nombre-titulo">
-                <h1 className="titulo-letra contenido-letra">Miriam</h1>
+                <h1 className="titulo-letra contenido-letra">{JSON.parse(sessionStorage.getItem('usuario')).data.nombre}</h1>
               </div>
-              <div className="contenedor-apartados-formulario_usuario">
+              <div className="contenedor-apartados-formulario-usuario">
                 <label htmlFor="portada"></label>
                 <img
                   ref={refImagen}
                   src="/assets/no_photo.png"
-                  alt="Portada"
+                  alt="foto-perfil"
                   width={240}
                   height={320}
                 />
@@ -86,7 +91,7 @@ const Perfilusuario = () => {
                   type="text"
                   id="nombre"
                   name="nombre"
-                  defaultValue="Miriam"
+                  defaultValue={JSON.parse(sessionStorage.getItem('usuario')).data.nombre}
                   {...register("nombre", {
                     required: true,
                     maxLength: 20,
@@ -101,7 +106,7 @@ const Perfilusuario = () => {
                   type="text"
                   id="apellidos"
                   name="apellidos"
-                  defaultValue="García"
+                  defaultValue={JSON.parse(sessionStorage.getItem('usuario')).data.apellidos}
                   {...register("apellidos", {
                     required: true,
                     maxLength: 50,
@@ -117,7 +122,7 @@ const Perfilusuario = () => {
                     type="email"
                     id="correo"
                     name="correo"
-                    defaultValue="miriam34@gmail.com"
+                    defaultValue={JSON.parse(sessionStorage.getItem('usuario')).data.correo}
                     readOnly
                   />
                   <br />
@@ -126,7 +131,7 @@ const Perfilusuario = () => {
                 <div className="form-group" id="contrasenia">
                   <div className="input-contrasenia" >
                     <label htmlFor="contrasena" className="contenido-letra">{t('contrasenia')}:</label>
-                    <input className="solo-mostrar contenido-letra" defaultValue="miriam34@gmail.com" readOnly
+                    <input className="solo-mostrar contenido-letra" defaultValue={JSON.parse(sessionStorage.getItem('usuario')).data.clave} readOnly
                       type={mostrarContrasena ? "text" : "password"}
                       id="contrasena"
                       name="contrasena"
@@ -155,7 +160,8 @@ const Perfilusuario = () => {
                     type="text"
                     id="titulacion"
                     name="titulacion"
-                    defaultValue={t('arquitectura')}
+                    //  tit = {JSON.parse(sessionStorage.getItem('usuario')).data.titulacion}
+                    defaultValue={t(JSON.parse(sessionStorage.getItem('usuario')).data.titulacion)}
                     readOnly
                   />
                   <br />
@@ -168,7 +174,7 @@ const Perfilusuario = () => {
                     type="text"
                     id="estilo"
                     name="estilo"
-                    defaultValue={t('normal-lg')}
+                    defaultValue={t(JSON.parse(sessionStorage.getItem('usuario')).data.tema)}
                     readOnly
                   />
                   <br />
@@ -181,7 +187,7 @@ const Perfilusuario = () => {
                     type="text"
                     id="direccion"
                     name="direccion"
-                    defaultValue="Calle Altozano, Alicante"
+                    defaultValue={JSON.parse(sessionStorage.getItem('usuario')).data.direccion}
                     readOnly
                   />
                   <br />
@@ -194,7 +200,7 @@ const Perfilusuario = () => {
                     type="date"
                     id="fecha_nacimiento"
                     name="fecha_nacimiento"
-                    defaultValue="2023-05-24"
+                    defaultValue={JSON.parse(sessionStorage.getItem('usuario')).data.nacimiento}
                     readOnly
                   />
                   <br />
