@@ -51,7 +51,7 @@ const Perfilusuario = () => {
     }
   };
 
-  const user = JSON.parse(sessionStorage.getItem('usuario'));
+  const user = JSON.parse(sessionStorage.getItem('usuario')).data;
   const profilePhoto = user && user['foto-perfil'] ? user['foto-perfil'] : "/assets/no_photo.png";
 
   const formattedFechaNacimiento = user && user.nacimiento ? new Date(user.nacimiento).toLocaleDateString('es-ES') : '';

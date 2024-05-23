@@ -27,27 +27,29 @@ const EditarPerfil = () => {
   const refPortada = useRef();
   const refImagen = useRef();
 
-  const user = JSON.parse(sessionStorage.getItem('usuario'));
+  const user = JSON.parse(sessionStorage.getItem('usuario')).data;
   const profilePhoto = user && user['foto-perfil'] ? user['foto-perfil'] : "/assets/no_photo.png";
   const formattedFechaNacimiento = user && user.nacimiento ? new Date(user.nacimiento).toISOString().split('T')[0] : '';
 
   const [formData, setFormData] = useState({
+    id:user.id,
     nombre: user.nombre,
     apellidos: user.apellidos,
     correo: user.correo,
-    contrasena: user.clave,
+    clave: user.clave,
     titulacion: user.titulacion,
-    estilo: user.tema,
     direccion: user.direccion,
-    fecha_nacimiento: formattedFechaNacimiento,
+    
+    tema: user.tema,
+    "foto-perfil": "no_photo.png"
   });
 
   const onSubmit = async (data) => {
     const updatedData = { ...formData, ...data };
-
+    console.log(updatedData);
     try {
       const response = await axios.put(`${URL_BASE}usuarios/${user.id}`, updatedData);
-
+     
       if (response.status === 200) {
         console.log('User data:', response.data);
         sessionStorage.setItem('usuario', JSON.stringify(response.data));

@@ -72,7 +72,7 @@ export default function Header() {
           <div className="navbar-buttons btn-letra">
             {sessionStorage.getItem('usuario') ? (
               <div className="contenido-letra">
-                {t('bienvenido')} {JSON.parse(sessionStorage.getItem('usuario')).nombre}!
+                {t('bienvenido')} {JSON.parse(sessionStorage.getItem('usuario')).data.nombre}!
                 <Link to="/login" className="navbar-item btn-letra" onClick={handleLogout}>
                   {t('salir')}
                 </Link>
