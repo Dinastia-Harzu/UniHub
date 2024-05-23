@@ -220,9 +220,24 @@ paths:
       description: GET Trabajos
       operationId: trabajosGET
       parameters:
-        - name: palabras-clave
+        - name: nombre
           in: query
-          description: IDs de las palabras clave separadas por coma
+          description: título
+          schema:
+            type: string
+        - name: autor
+          in: query
+          description: autor
+          schema:
+            type: string
+        - name: fecha
+          in: query
+          description: fecha
+          schema:
+            type: string
+        - name: tipo-trabajo
+          in: query
+          description: tipo de trabajo
           schema:
             type: string
         - name: titulacion
@@ -230,9 +245,9 @@ paths:
           description: titulación
           schema:
             type: string
-        - name: tipo-trabajo
+        - name: palabras-clave
           in: query
-          description: tipo de trabajo
+          description: IDs de las palabras clave separadas por coma
           schema:
             type: string
       responses:
