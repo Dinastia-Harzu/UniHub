@@ -33,12 +33,12 @@ const MisTrabajos = () => {
 
   const handleSearch = (event) => {
     event.preventDefault(); // Evita que el formulario se envíe y la página se recargue
-    handleLoad();
+    handleLoad(formData);
   };
 
-  const handleLoad = () => {
+  const handleLoad = (data) => {
     setLoading(true);
-    axios.get(`${URL_BASE}trabajos`, { params: formData })
+    axios.get(`${URL_BASE}trabajos`, { params: data })
       .then((response) => {
         setCardsData(response.data);
         setLoading(false);
@@ -55,12 +55,14 @@ const MisTrabajos = () => {
   };
 
   const handleCancel = () => {
-    setFormData({
+    const defaultFormData = {
       "tipo-trabajo": -1,
       titulacion: -1,
       autorId: JSON.parse(sessionStorage.getItem('usuario')).id,
-    });
-    handleLoad();
+    };
+    setFormData(defaultFormData);
+    handleLoad(defaultFormData);
+    setFilterOpen(false);
   };
 
   if (loading) {
