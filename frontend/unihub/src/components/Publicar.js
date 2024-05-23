@@ -15,8 +15,8 @@ import { useNavigate } from 'react-router-dom';
 
 export default function Publicar() {
     const navigate = useNavigate();
-  if(sessionStorage.getItem('usuario') == null) { navigate('/login');} 
- 
+    if (sessionStorage.getItem('usuario') == null) { navigate('/login'); }
+
     const { t } = useTranslation();
     const [pagina, setPagina] = useState(0);
     const [formData, setFormData] = useState({
@@ -49,17 +49,17 @@ export default function Publicar() {
     function enviarData() {
         console.log(formData);
 
-        if (formData["palabras-clave"].length != 0)
-            formData["palabras-clave"] = formData["palabras-clave"].split(",");
+        // if (formData["palabras-clave"].length != 0)
+        //     formData["palabras-clave"] = formData["palabras-clave"].split(",");
 
-        axios.post(`${URL_BASE}trabajos`, formData).then((result) => {
-            console.log(result);
-        }).catch((err) => {
-            console.log(err);
-        });
+        // axios.post(`${URL_BASE}trabajos`, formData).then((result) => {
+        //     console.log(result);
+        // }).catch((err) => {
+        //     console.log(err);
+        // });
 
-        alert("Trabajo publicado!");
-        window.location.replace("");
+        // alert("Trabajo publicado!");
+        // window.location.replace("");
     }
 
     return (

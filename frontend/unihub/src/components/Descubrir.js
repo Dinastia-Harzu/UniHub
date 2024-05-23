@@ -1,58 +1,81 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { MdTune } from "react-icons/md";
 import { Link } from "react-router-dom";
 import "../styles/mis-trabajos.css";
 import { useTranslation } from 'react-i18next';
-
+import axios from 'axios';
+import { URL_BASE } from "../utils/constantes";
 import { SelectorTipoTrabajo, SelectorTitulaciones } from "./commons/SelectoresTrabajo";
 
 const Descubrir = () => {
   const { t } = useTranslation();
   const [filterOpen, setFilterOpen] = useState(false);
-  const [selectedFilter, setSelectedFilter] = useState("");
   const [formData, setFormData] = useState({
-    tipo: 0,
-    titulacion: 0,
+    "tipo-trabajo": 1,
+    titulacion: 2,
   });
+  const [cardsData, setCardsData] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
 
-  const cardsData = [
-    {
-      id: 1,
-      title: "Trabajo 1",
-      description:
-        "Descripción breve del trabajo 1 Descripción breve del trabajo 1 Descripción breve del trabajo 1",
-      image: "/assets/Cabecera.jpg",
-    },
-    {
-      id: 2,
-      title: "Trabajo 2",
-      description: "Descripción breve del trabajo 2",
-      image: "/assets/Clase.png",
-    },
-    {
-      id: 3,
-      title: "Trabajo 3",
-      description: "Descripción breve del trabajo 3",
-      image: "/assets/Habitacion.png",
-    },
-    // Añadir más datos de cartas según sea necesario
-  ];
+  useEffect(() => {
+    handleLoad();
+  }, []);
 
   const handleFilterClick = () => {
     setFilterOpen(!filterOpen);
   };
 
-  const handleFilterChange = (event) => {
-    setSelectedFilter(event.target.value);
-    event.target.form.submit();
+  const handleSearch = (event) => {
+    event.preventDefault(); // Evita que el formulario se envíe y la página se recargue
+    setLoading(true);
+    axios.get(`${URL_BASE}trabajos`, { params: formData })
+      .then((response) => {
+        setCardsData(response.data);
+        setLoading(false);
+      })
+      .catch((err) => {
+        console.log(err);
+        window.location = "/error";
+      });
+    setFormData({
+      "tipo-trabajo": 1,
+      titulacion: 2,
+    });
   };
 
-  const handleSearch = (filter) => {
-    // Lógica de búsqueda basada en el filtro seleccionado
-    console.log(`Buscar trabajos filtrados por: ${filter}`);
+  const handleLoad = () => {
+    setLoading(true);
+    setFormData({
+      "tipo-trabajo": 1,
+      titulacion: 2,
+    });
+    axios.get(`${URL_BASE}trabajos`)
+      .then((response) => {
+        setCardsData(response.data);
+        setLoading(false);
+      })
+      .catch((err) => {
+        setError(err);
+        setLoading(false);
+      });
   };
 
+  const handleCancel = () => {
+    setFormData({
+      "tipo-trabajo": 1,
+      titulacion: 2,
+    });
+    handleLoad();
+  };
 
+  if (loading) {
+    return <div>Cargando...</div>;
+  }
+
+  if (error) {
+    return <div>Error al cargar los trabajos: {error.message}</div>;
+  }
 
   return (
     <main>
@@ -63,7 +86,7 @@ const Descubrir = () => {
             <MdTune className='icon-filter' />
           </button>
           {filterOpen && (
-            <form action='submit' method='post'>
+            <form onSubmit={handleSearch}>
               <SelectorTipoTrabajo
                 formData={formData}
                 setFormData={setFormData}
@@ -73,17 +96,21 @@ const Descubrir = () => {
                 formData={formData}
                 setFormData={setFormData}
               />
+              <div className="filter-form">
+                <button type="button" className="btn btn-secondary" onClick={handleCancel}>{t('cancelar')}</button>
+                <button type="submit" className="btn btn-primary">{t('buscar')}</button>
+              </div>
             </form>
           )}
         </div>
       </div>
       <div className="cards-container">
         {cardsData.map(card => (
-          <Link key={card.id} to='/trabajo' className="card btn-letra">
-            <img src={card.image} alt={card.title} />
+          <Link key={card.id} to={`/detalles/${card.id}`} className="card btn-letra">
+            <img src={card.portada} alt={card.nombre} title={card.nombre} />
             <div className="card-content btn-letra">
-              <h3>{card.title}</h3>
-              <div className='descripcion btn-letra'><p>{card.description}</p></div>
+              <h3>{card.nombre}</h3>
+              <div className='descripcion btn-letra'><p>{card.resumen}</p></div>
             </div>
           </Link>
         ))}

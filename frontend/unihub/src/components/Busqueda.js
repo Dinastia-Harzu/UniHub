@@ -13,7 +13,7 @@ import {
 
 import "../styles/busqueda.css";
 
-export default function Busqueda({ proyecto }) {
+export default function Busqueda() {
   const { t } = useTranslation();
   const [formData, setFormData] = useState({
     nombre: "",
@@ -33,7 +33,7 @@ export default function Busqueda({ proyecto }) {
 
     axios.get(`${URL_BASE}trabajos`, formData).then((result) => {
       console.log(result);
-      setResultados(result);
+      setResultados(result.data);
     }).catch((err) => { console.log(err); });
   }
 
