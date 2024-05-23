@@ -120,6 +120,10 @@ header .nav-btn {
   background-color: var(--color-secondary);
 }
 
+.link-fondo {
+  color: var(--color-bg-form) !important;
+}
+
 .navbar-buttons {
   display: flex;
   justify-content: space-between;

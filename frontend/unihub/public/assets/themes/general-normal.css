@@ -117,6 +117,10 @@ main {
   background-color: var(--color-secondary);
 }
 
+.link-fondo {
+  color: var(--color-bg-form) !important;
+}
+
 .navbar-buttons {
   display: flex;
   justify-content: space-between;
@@ -135,10 +139,6 @@ main {
   justify-content: center;
   align-items: center;
 }
-
-.footer .language-selector {}
-
-
 
 @media screen and (max-width: 870px) {
   .navbar {

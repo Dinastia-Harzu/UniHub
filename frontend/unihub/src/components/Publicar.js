@@ -30,14 +30,17 @@ export default function Publicar() {
         palabras_clave: "",
     });
 
-    function adelantarPagina() {
+    const adelantarPagina = () => {
+        console.log("Antes de adelantar: " + pagina);
         setPagina(pagina + 1);
-        console.log(pagina);
+        console.log("Despues de adelantar: " + pagina);
     }
 
-    function atrasarPagina() {
+    const atrasarPagina = () => {
+        console.log("Antes de atrasar: " + pagina);
         setPagina(pagina - 1);
         console.log(pagina);
+        console.log("Despues de atrasar: " + pagina);
     }
 
     function enviarData() {
@@ -110,19 +113,19 @@ export default function Publicar() {
 
             <section className="seccion-botones-publicar">
                 <div className="contenedor-botones-publicar">
-                    <div className={pagina === 0 ? "boton-oculto" : "boton-anterior btn-letra"}>
-                        <button className="btn btn-fondo btn-letra" onClick={() => atrasarPagina()}>
+                    <div className={pagina === 0 ? "boton-oculto" : "boton-anterior"}>
+                        <button className="btn btn-fondo btn-letra" onClick={atrasarPagina}>
                             Anterior
                         </button>
                     </div>
-                    <div className={pagina === 2 ? "boton-oculto" : "boton-siguiente btn-letra"}>
-                        <button className="btn btn-fondo" onClick={() => adelantarPagina()}>
+                    <div className={pagina === 2 ? "boton-oculto" : "boton-siguiente"}>
+                        <button className="btn btn-fondo btn-letra" onClick={adelantarPagina}>
                             Siguiente
                         </button>
                     </div>
                     <div className="boton-publicar btn-letra">
                         <button
-                            className="btn btn-fondo"
+                            className="btn btn-fondo btn-letra"
                             hidden={!(pagina === 2)}
                             onClick={() => enviarData()}
                         >
