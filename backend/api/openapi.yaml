@@ -13,6 +13,46 @@ servers:
   - url: http://localhost:8192
     description: Servidor ApiRest
 paths:
+  /login:
+    post:
+      tags:
+        - login
+      description: POST login
+      operationId: loginPOST
+      requestBody:
+        $ref: "#/components/requestBodies/Login"
+      responses:
+        "201":
+          description: Created
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Created"
+        "400":
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/BadRequest-POST"
+        "401":
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Unauthorized"
+        "403":
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Forbidden"
+        "500":
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/InternalServerError"
+      x-swagger-router-controller: Login
   /usuarios:
     get:
       tags:
@@ -1726,6 +1766,14 @@ paths:
       x-swagger-router-controller: Comentarios
 components:
   schemas:
+    ReqLogin:
+      properties:
+        correo:
+          type: string
+          format: email
+        clave:
+          type: string
+          format: password
     ReqUsuario:
       properties:
         nombre:
@@ -1918,6 +1966,11 @@ components:
       example:
         "500": Ha ocurrido un error interno en el servidor.
   requestBodies:
+    Login: 
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/ReqLogin"
     Usuario:
       content:
         application/json:
