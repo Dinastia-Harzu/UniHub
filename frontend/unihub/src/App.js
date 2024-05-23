@@ -68,6 +68,9 @@ export default function App() {
       link.rel = "stylesheet";
       link.href = `/assets/themes/general-normal.css`;
       document.head.appendChild(link);
+      return () => {
+        document.head.removeChild(link);
+      };
     }
   }, [idUsuarioLoggeado]);
 
