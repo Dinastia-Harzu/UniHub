@@ -1,4 +1,4 @@
-import { useRef } from "react";
+import { useRef, useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faXmark } from "@fortawesome/free-solid-svg-icons";
 
@@ -10,6 +10,7 @@ export default function ContenedorRecurso({
 }) {
   const refRecurso = useRef();
   const refImagen = useRef();
+  const [nombreRecursoNoImg, setNombreRecursoNoImg] = useState(null);
 
   function setRecurso() {
     const recurso_actual = refRecurso.current;
@@ -27,7 +28,6 @@ export default function ContenedorRecurso({
     }
   }
 
-
   function cambiarFoto(inp) {
     const fichero = inp.target.files[0];
     const img = refImagen.current;
@@ -35,7 +35,7 @@ export default function ContenedorRecurso({
     if (fichero) { // Si el fichero existe (es decir) que el "files" del input tiene algo
       if (img.alt !== "imagen_defecto") {
         const recursoExistenteIndex = formData.multimedia.findIndex(
-          (ruta) => ruta.ruta === img.alt
+          (ruta) => ruta.ruta === img.alt // El alt es el nombre del fichero
         );
         console.log(recursoExistenteIndex);
 
@@ -49,6 +49,7 @@ export default function ContenedorRecurso({
         }
       }
 
+      // Actualizar la fuente y el nombre del fichero (alt)
       img.src = URL.createObjectURL(fichero);
       img.alt = fichero.name;
 
@@ -65,6 +66,13 @@ export default function ContenedorRecurso({
         }]
       };
       setFormData(nuevoFormData);
+
+      // Si no es una imagen lo que pillamos, cambiamos el <img> por un <p> con el nombre
+      if (!fichero.type.startsWith('image/')) {
+        setNombreRecursoNoImg(fichero.name);
+      } else {
+        setNombreRecursoNoImg(null);
+      }
     }
   }
 
@@ -92,7 +100,15 @@ export default function ContenedorRecurso({
           onClick={() => setRecurso()}
           onKeyDown={handleKeyDown}
           tabIndex="0"
+          style={{ display: !nombreRecursoNoImg ? 'block' : 'none' }}
         />
+        <p
+          className="recurso-no-img"
+          onClick={() => setRecurso()}
+          onKeyDown={handleKeyDown}
+          style={{ display: nombreRecursoNoImg ? 'flex' : 'none' }}
+          tabIndex="0">{nombreRecursoNoImg}
+        </p>
       </label>
       <p className="boton-eliminar-recurso" tabIndex="0" onKeyDown={handleKeyDownDelete} onClick={() => eliminar()}>
         <FontAwesomeIcon icon={faXmark} />
@@ -101,7 +117,6 @@ export default function ContenedorRecurso({
         ref={refRecurso}
         type="file"
         name="recursos[]"
-        accept="image/*"
         hidden
         tabIndex="0"
         onChange={(event) => cambiarFoto(event)}
