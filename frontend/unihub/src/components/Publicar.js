@@ -54,8 +54,8 @@ export default function Publicar() {
             console.log(err);
         });
 
-        // alert("Trabajo publicado!");
-        // window.location.replace("");
+        alert("Trabajo publicado!");
+        window.location.replace("");
     }
 
     return (
