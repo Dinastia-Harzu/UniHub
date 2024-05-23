@@ -1,38 +1,67 @@
 import { useForm } from "react-hook-form";
 import { useTranslation } from 'react-i18next';
-import {
-  edadValidator,
-  titulacionValidator,
-  estiloValidator,
-} from "./validators";
-import React, { useState } from "react";
-import "../styles/formulario.css";
+import React, { useState, useRef } from "react";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
-import { useRef } from "react";
 import { useNavigate } from 'react-router-dom';
+import axios from 'axios';
+import { URL_BASE } from "../utils/constantes";
+import { SelectorTitulaciones, SelectorTema } from "./commons/SelectoresTrabajo";
+import "../styles/formulario.css";
+import { edadValidator } from "./validators";
 
 const EditarPerfil = () => {
-
   const navigate = useNavigate();
-  if(sessionStorage.getItem('usuario') == null) { navigate('/login');} 
- 
-  
+  if (sessionStorage.getItem('usuario') == null) {
+    navigate('/login');
+  }
+
   const { t } = useTranslation();
   const {
     register,
     formState: { errors },
     handleSubmit,
+    setValue
   } = useForm();
   const [mostrarContrasena, setMostrarContrasena] = useState(false);
   const [imagenSeleccionada, setImagenSeleccionada] = useState(null);
   const refPortada = useRef();
   const refImagen = useRef();
-  function setPortada() {
-    const recurso_actual = refPortada.current;
-    recurso_actual.click();
-  }
 
-  function cambiarFoto(inp) {
+  const user = JSON.parse(sessionStorage.getItem('usuario'));
+  const profilePhoto = user && user['foto-perfil'] ? user['foto-perfil'] : "/assets/no_photo.png";
+  const formattedFechaNacimiento = user && user.nacimiento ? new Date(user.nacimiento).toISOString().split('T')[0] : '';
+
+  const [formData, setFormData] = useState({
+    nombre: user.nombre,
+    apellidos: user.apellidos,
+    correo: user.correo,
+    contrasena: user.clave,
+    titulacion: user.titulacion,
+    estilo: user.tema,
+    direccion: user.direccion,
+    fecha_nacimiento: formattedFechaNacimiento,
+  });
+
+  const onSubmit = async (data) => {
+    const updatedData = { ...formData, ...data };
+
+    try {
+      const response = await axios.put(`${URL_BASE}usuarios/${user.id}`, updatedData);
+
+      if (response.status === 200) {
+        console.log('User data:', response.data);
+        sessionStorage.setItem('usuario', JSON.stringify(response.data));
+        navigate('../');
+      } else {
+        console.log('User data:', response.data);
+        console.error('Error updating user data');
+      }
+    } catch (error) {
+      console.error('Error updating user data:', error);
+    }
+  };
+
+  const cambiarFoto = (inp) => {
     if (inp.target.files.length > 0) {
       const fichero = inp.target.files[0];
       const img = refImagen.current;
@@ -40,10 +69,6 @@ const EditarPerfil = () => {
     } else {
       setImagenSeleccionada(null);
     }
-  }
-
-  const onSubmit = (data) => {
-    console.log(data);
   };
 
   const toggleMostrarContrasena = () => {
@@ -56,11 +81,6 @@ const EditarPerfil = () => {
     }
   };
 
-  const handleKeyDownSetPortada = (event) => {
-    if (event.key === 'Enter') {
-      setPortada();
-    }
-  };
   return (
     <main>
       <div className="contenedor-inicial">
@@ -71,15 +91,15 @@ const EditarPerfil = () => {
           <form onSubmit={handleSubmit(onSubmit)} className="pos-wrapper">
             <div className="wrapper">
               <div className="form-group" id="nombre-titulo">
-                <h1 className="titulo-letra">Miriam</h1>
+                <h1 className="titulo-letra">{user.nombre}</h1>
               </div>
               <div className="contenedor-apartados-formulario-usuario">
                 <label htmlFor="portada"></label>
                 <img
                   ref={refImagen}
-                  src="/assets/no_photo.png"
+                  src={profilePhoto}
                   alt="Portada"
-                  onClick={() => setPortada()}
+                  onClick={() => refPortada.current.click()}
                   width={240}
                   height={320}
                 />
@@ -89,7 +109,8 @@ const EditarPerfil = () => {
                   name="portada"
                   accept="image/*"
                   onChange={(event) => cambiarFoto(event)}
-                ></input>
+                  style={{ display: 'none' }}
+                />
               </div>
               <div className="form-group" id="nombre">
                 <label htmlFor="nombre" className="contenido-letra">{t('nombre')}:</label>
@@ -98,11 +119,12 @@ const EditarPerfil = () => {
                   type="text"
                   id="nombre"
                   name="nombre"
-                  defaultValue="Miriam"
+                  defaultValue={formData.nombre}
                   {...register("nombre", {
                     required: true,
                     maxLength: 20,
                   })}
+                  onChange={(e) => setFormData({ ...formData, nombre: e.target.value })}
                 />
                 {errors.nombre?.type === "required" && (
                   <p className="contenido-letra">{t('campo-requerido')}</p>
@@ -118,11 +140,12 @@ const EditarPerfil = () => {
                   type="text"
                   id="apellidos"
                   name="apellidos"
-                  defaultValue="García"
+                  defaultValue={formData.apellidos}
                   {...register("apellidos", {
                     required: true,
                     maxLength: 50,
                   })}
+                  onChange={(e) => setFormData({ ...formData, apellidos: e.target.value })}
                 />
                 {errors.apellidos?.type === "required" && (
                   <p className="contenido-letra">{t('campo-requerido')}</p>
@@ -133,26 +156,25 @@ const EditarPerfil = () => {
               </div>
               <div id="parte-inferior">
                 <div className="form-group" id="correo">
-                  <label for="correo" className="contenido-letra">{t('correo')}:</label>
+                  <label htmlFor="correo" className="contenido-letra">{t('correo')}:</label>
                   <input
                     className="contenido-letra"
                     type="email"
                     id="correo"
                     name="correo"
-                    defaultValue="miriam34@gmail.com"
+                    defaultValue={formData.correo}
                     {...register("correo", {
                       required: true,
                       pattern: /^[^\s@]+@[^\s@]+\.[^\s@]+$/i,
                     })}
+                    onChange={(e) => setFormData({ ...formData, correo: e.target.value })}
                   />
                   {errors.correo?.type === "required" && (
                     <p className="contenido-letra">{t('campo-requerido')}</p>
                   )}
-                  {errors.correo?.type === "maxLength" && (
+                  {errors.correo?.type === "pattern" && (
                     <p className="contenido-letra">{t('correo-erróneo')}</p>
                   )}
-                  <br />
-                  <br />
                 </div>
                 <div className="form-group" id="contrasenia">
                   <div className="input-contrasenia">
@@ -162,21 +184,17 @@ const EditarPerfil = () => {
                       type={mostrarContrasena ? "text" : "password"}
                       id="contrasena"
                       name="contrasena"
-                      defaultValue="1234Pepito"
+                      defaultValue={formData.contrasena}
                       {...register("contrasena", {
                         required: true,
                         pattern: /(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}/,
                       })}
-
+                      onChange={(e) => setFormData({ ...formData, contrasena: e.target.value })}
                     />
                   </div>
-                  <div className="boton-contrasenia contenido-letra">
-                    <span type="button" onClick={toggleMostrarContrasena}>
-                      {mostrarContrasena ? (
-                        <FaEyeSlash className="icono-grande" />
-                      ) : (
-                        <FaEye className="icono-grande" />
-                      )}
+                  <div className="boton-contrasenia contenido-letra" tabIndex="0" onKeyDown={handleKeyDownTogglePassword} onClick={toggleMostrarContrasena}>
+                    <span type="button">
+                      {mostrarContrasena ? <FaEyeSlash className="icono-grande" /> : <FaEye className="icono-grande" />}
                     </span>
                   </div>
                   {errors.contrasena?.type === "required" && (
@@ -185,172 +203,65 @@ const EditarPerfil = () => {
                   {errors.contrasena?.type === "pattern" && (
                     <p className="contenido-letra">{t('contra-erróneo')}</p>
                   )}
-                  <br />
                 </div>
                 <div className="form-group" id="titulacion">
-                  <label for="titulacion" className="contenido-letra">{t('sel-tit')}:</label>
-                  <select
-                    className="contenido-letra"
-                    defaultValue="arquitectura"
-                    {...register("titulacion", {
-                      required: true,
-                      validate: titulacionValidator,
-                    })}
-                  >
-                    <option value="none" className="contenido-letra">{t('sel-tutit')}</option>
-                    <option value="ingenieria_multimedia" className="contenido-letra">
-                      {t('ingenieria_multimedia')}
-                    </option>
-                    <option value="arquitectura" className="contenido-letra">{t('arquitectura')}</option>
-                    <option value="arquitectura_tecnica">
-                      {t('arquitectura_tecnica')}
-                    </option>
-                    <option value="fundamentos_arquitectura" className="contenido-letra">
-                      {t('fundamentos_arquitectura')}
-                    </option>
-                    <option value="ingenieria_aeroespacial" className="contenido-letra">
-                      {t('ingenieria_aeroespacial')}
-                    </option>
-                    <option value="ingenieria_biomedica" className="contenido-letra">
-                      {t('ingenieria_biomedica')}
-                    </option>
-                    <option value="ingenieria_sonido_imagen" className="contenido-letra">
-                      {t('ingenieria_sonido_imagen')}
-                    </option>
-                    <option value="ingenieria_civil" className="contenido-letra">{t('ingenieria_civil')}</option>
-                    <option value="ingenieria_ia">
-                      {t('ingenieria_ia')}
-                    </option>
-                    <option value="ingenieria_informatica" className="contenido-letra">
-                      {t('ingenieria_informatica')}
-                    </option>
-                    <option value="ingenieria_informatica_ade" className="contenido-letra">
-                      {t('ingenieria_informatica_ade')}
-                    </option>
-                    <option value="ingenieria_quimica" className="contenido-letra">
-                      {t('ingenieria_quimica')}
-                    </option>
-                    <option value="ingenieria_robotica" className="contenido-letra">
-                      {t('ingenieria_robotica')}
-                    </option>
-                    <option value="master_arquitectura" className="contenido-letra">
-                      {t('master_arquitectura')}
-                    </option>
-                    <option value="master_automatica_robotica" className="contenido-letra">
-                      {t('master_automatica_robotica')}
-                    </option>
-                    <option value="master_ciberseguridad" className="contenido-letra">
-                      {t('master_ciberseguridad')}
-                    </option>
-                    <option value="master_ciencia_datos" className="contenido-letra">
-                      {t('master_ciencia_datos')}
-                    </option>
-                    <option value="master_desarrollo_aplicaciones_servicios_web" className="contenido-letra">
-                      {t('master_desarrollo_aplicaciones_servicios_web')}
-                    </option>
-                    <option value="master_desarrollo_software_dispositivos_moviles" className="contenido-letra">
-                      {t('master_desarrollo_software_dispositivos_moviles')}
-                    </option>
-                    <option value="master_gestion_edificacion" className="contenido-letra">
-                      {t('master_gestion_edificacion')}
-                    </option>
-                    <option value="master_ingenieria_biomedica" className="contenido-letra">
-                      {t('master_ingenieria_biomedica')}
-                    </option>
-                    <option value="master_ingenieria_caminos_canales_puertos" className="contenido-letra">
-                      {t('master_ingenieria_caminos_canales_puertos')}
-                    </option>
-                    <option value="master_ingenieria_materiales_agua_terreno" className="contenido-letra">
-                      {t('master_ingenieria_materiales_agua_terreno')}
-                    </option>
-                    <option value="master_ingenieria_telecomunicacion" className="contenido-letra">
-                      {t('master_ingenieria_telecomunicacion')}
-                    </option>
-                    <option value="master_ingenieria_geologica" className="contenido-letra">
-                      {t('master_ingenieria_geologica')}
-                    </option>
-                    <option value="master_ingenieria_informatica" className="contenido-letra">
-                      {t('master_ingenieria_informatica')}
-                    </option>
-                    <option value="master_ingenieria_quimica" className="contenido-letra">
-                      {t('master_ingenieria_quimica')}
-                    </option>
-                    <option value="master_ingenieria_artificial" className="contenido-letra">
-                      {t('master_ingenieria_artificial')}
-                    </option>
-                    <option value="master_nuevas_tecnologias" className="contenido-letra">
-                      {t('master_nuevas_tecnologias')}
-                    </option>
-                    <option value="master_prevencion_riesgos_laborales" className="contenido-letra">
-                      {t('master_prevencion_riesgos_laborales')}
-                    </option>
-                  </select>
+                  <label htmlFor="titulacion" className="contenido-letra">{t('sel-tit')}:</label>
+                  <SelectorTitulaciones
+                    formData={formData}
+                    setFormData={setFormData}
+                    register={register}
+                  />
                   {errors.titulacion?.type === "required" && (
                     <p className="contenido-letra">{t('campo-requerido')}</p>
                   )}
                   {errors.titulacion?.type === "validate" && (
                     <p className="contenido-letra">{t('titulacion-obligatoria')}</p>
                   )}
-                  <br />
-                  <br />
                 </div>
-                <div className="form-group" id="titulacion" >
-                  <label for="estilo" className="contenido-letra">{t('estilo')}:</label>
-                  <select
-                    className="contenido-letra"
-                    defaultValue="1"
-                    {...register("estilo", {
-                      required: true,
-                      validate: estiloValidator,
-                    })}
-                  >
-                    <option value="none" className="contenido-letra">{t('sel-estilo')}</option>
-                    <option value="1" className="contenido-letra">{t('normal')}</option>
-                    <option value="2" className="contenido-letra">{t('oscuro')}</option>
-                    <option value="3" className="contenido-letra">{t('ac')}</option>
-                    <option value="4" className="contenido-letra">{t('normal-lg')}</option>
-                    <option value="5" className="contenido-letra">{t('oscuro-lg')}</option>
-                    <option value="6" className="contenido-letra">{t('ac-lg')}</option>
-                  </select>
+                <div className="form-group" id="estilo">
+                  <label htmlFor="estilo" className="contenido-letra">{t('estilo')}:</label>
+                  <SelectorTema
+                    formData={formData}
+                    setFormData={setFormData}
+                    register={register}
+                  />
                   {errors.estilo?.type === "required" && (
                     <p className="contenido-letra">{t('campo-requerido')}</p>
                   )}
                   {errors.estilo?.type === "validate" && (
                     <p className="contenido-letra">{t('estilo-obligatorio')}</p>
                   )}
-                  <br />
-                  <br />
                 </div>
                 <div className="form-group" id="direccion">
-                  <label for="direccion" className="contenido-letra">{t('direccion')}:</label>
+                  <label htmlFor="direccion" className="contenido-letra">{t('direccion')}:</label>
                   <input
                     className="contenido-letra"
                     type="text"
                     id="direccion"
                     name="direccion"
-                    defaultValue="Calle Altozano, Alicante"
+                    defaultValue={formData.direccion}
                     {...register("direccion", {
                       required: true,
                     })}
+                    onChange={(e) => setFormData({ ...formData, direccion: e.target.value })}
                   />
                   {errors.direccion?.type === "required" && (
                     <p className="contenido-letra">{t('campo-requerido')}</p>
                   )}
-                  <br />
-                  <br />
                 </div>
                 <div className="form-group" id="nacimiento">
-                  <label for="fecha_nacimiento" className="contenido-letra">{t('fecnac')}:</label>
+                  <label htmlFor="fecha_nacimiento" className="contenido-letra">{t('fecnac')}:</label>
                   <input
                     className="contenido-letra"
                     type="date"
                     id="fecha_nacimiento"
                     name="fecha_nacimiento"
-                    defaultValue="2023-05-24"
+                    defaultValue={formData.fecha_nacimiento}
                     {...register("fecha_nacimiento", {
                       required: true,
                       validate: edadValidator,
                     })}
+                    onChange={(e) => setFormData({ ...formData, fecha_nacimiento: e.target.value })}
                   />
                   {errors.fecha_nacimiento?.type === "required" && (
                     <p className="contenido-letra">{t('campo-requerido')}</p>
@@ -358,8 +269,6 @@ const EditarPerfil = () => {
                   {errors.fecha_nacimiento?.type === "validate" && (
                     <p className="contenido-letra">{t('mayor-edad')}</p>
                   )}
-                  <br />
-                  <br />
                 </div>
               </div>
               <div className="boton-editar btn-letra">
