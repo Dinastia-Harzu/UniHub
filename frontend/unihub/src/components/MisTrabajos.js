@@ -24,7 +24,7 @@ const MisTrabajos = () => {
   const [error, setError] = useState(null);
 
   useEffect(() => {
-    handleLoad();
+    handleLoad(formData);
   }, []);
 
   const handleFilterClick = () => {

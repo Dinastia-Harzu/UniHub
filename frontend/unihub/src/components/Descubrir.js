@@ -67,6 +67,7 @@ const Descubrir = () => {
       titulacion: 2,
     });
     handleLoad();
+    setFilterOpen(false);
   };
 
   if (loading) {
