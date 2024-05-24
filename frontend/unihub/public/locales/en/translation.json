@@ -131,5 +131,6 @@
   "cancelar": "Dismiss",
   "no-encontrado": "No results",
   "mostrar-filtros": "Show more filters",
-  "ocultar-filtros": "Close filters"
+  "ocultar-filtros": "Close filters",
+  "usuario-no-logueado": "This account doesn't exist."
 }
