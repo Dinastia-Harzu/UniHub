@@ -128,5 +128,8 @@
   "siguiente": "Next",
   "bienvenido": "Welcome",
   "salir": "Log out",
-  "cancelar": "Dismiss"
+  "cancelar": "Dismiss",
+  "no-encontrado": "No results",
+  "mostrar-filtros": "Show more filters",
+  "ocultar-filtros": "Close filters"
 }

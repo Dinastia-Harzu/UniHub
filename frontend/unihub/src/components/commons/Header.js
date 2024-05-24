@@ -56,15 +56,6 @@ export default function Header() {
             ) : (
               console.log("No hay usuario registrado")
             )}
-
-            {sessionStorage.getItem('usuario') ? (
-              <Link to="/perfil" className="navbar-item btn-letra">
-                {t('mi-perfil')}
-              </Link>
-
-            ) : (
-              console.log("No hay usuario registrado")
-            )}
             <Link to="/buscar" className="navbar-item btn-letra">
               {t('buscar')}
             </Link>
@@ -73,6 +64,13 @@ export default function Header() {
             {sessionStorage.getItem('usuario') ? (
               <div className="contenido-letra">
                 {t('bienvenido')} {JSON.parse(sessionStorage.getItem('usuario')).nombre}!
+                {sessionStorage.getItem('usuario') ? (
+                  <Link to="/perfil" className="navbar-item btn-letra">
+                    {t('mi-perfil')}
+                  </Link>
+                ) : (
+                  console.log("No hay usuario registrado")
+                )}
                 <Link to="/login" className="navbar-item btn-letra" onClick={handleLogout}>
                   {t('salir')}
                 </Link>

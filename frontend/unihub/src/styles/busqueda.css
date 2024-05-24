@@ -2,6 +2,10 @@
   height: 200px;
 }
 
+.contenedor-resultados-busqueda {
+  width: 100%;
+}
+
 .contenedor-resultados-busqueda>h3 {
   margin-top: 1em;
   border-bottom: 2px solid var(--color-tertiary);
@@ -40,16 +44,16 @@
 .formulario-busqueda button {
   font-weight: bold;
   color: var(--color-texto);
-  background-color: var(--color-primary);
   border: 2px solid white;
 }
 
 .contenedor-botones-busqueda {
   display: flex;
-  justify-content: end;
+  justify-content: space-between;
 }
 
-.formulario-busqueda button:hover,button:focus {
+.formulario-busqueda button:hover,
+button:focus {
   font-weight: bold;
   color: var(--color-bg);
   background-color: transparent;

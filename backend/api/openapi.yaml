@@ -270,9 +270,14 @@ paths:
           description: autor
           schema:
             type: string
-        - name: fecha
+        - name: autorId
           in: query
-          description: fecha
+          description: Id del autor
+          schema:
+            type: string
+        - name: publicacion
+          in: query
+          description: publicacion
           schema:
             type: string
         - name: tipo-trabajo

@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 23-05-2024 a las 11:42:55
--- Versión del servidor: 10.4.32-MariaDB
--- Versión de PHP: 8.2.12
+-- Tiempo de generación: 23-05-2024 a las 20:40:15
+-- Versión del servidor: 10.4.28-MariaDB
+-- Versión de PHP: 8.2.4
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -18,7 +18,7 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Base de datos: `unihub`
+-- Base de datos: `unihub2`
 --
 
 -- --------------------------------------------------------
@@ -117,7 +117,12 @@ CREATE TABLE `tema` (
 --
 
 INSERT INTO `tema` (`id`, `nombre`, `css`) VALUES
-(1, 'Oscuro', 'oscuro.css');
+(1, 'Normal', 'general-normal.css'),
+(2, 'Oscuro', 'general-osc.css'),
+(3, 'Alto Contraste', 'general-ac.css'),
+(4, 'Normal con Letra Grande', 'general-normal-lg.css'),
+(5, 'Oscuro con Letra Grande', 'general-osc-lg.css'),
+(6, 'Alto Contraste con Letra Grande', 'general-ac-lg.css');
 
 -- --------------------------------------------------------
 
@@ -135,7 +140,9 @@ CREATE TABLE `tipo-trabajo` (
 --
 
 INSERT INTO `tipo-trabajo` (`id`, `nombre`) VALUES
-(1, 'Trabajo Fin de Grado');
+(1, 'Trabajo de Fin de Grado'),
+(2, 'Trabajo de Fin de Master'),
+(3, 'Aprendizaje Basado en Proyectos');
 
 -- --------------------------------------------------------
 
@@ -206,7 +213,7 @@ CREATE TABLE `trabajo` (
 
 INSERT INTO `trabajo` (`id`, `nombre`, `tipo`, `autor`, `titulacion`, `publicacion`, `resumen`, `portada`, `documento`) VALUES
 (1, 'Realización de un cortometraje de animación en 3D', 1, 14, 1, '2024-05-02', 'Este trabajo consiste en la realización de un cortometraje que narra el día de un niño a través de la caracterización de un avión de papel. Este día comienza en el colegio y, al terminar las clases, se va al parque a disfrutar de su entorno...', 'portada.png', 'documento.pdf'),
-(2, 'Melatonia', 1, 14, 1, '2024-05-23', 'Trabajo chulo', 'miportada.jpg', 'melatonia.pdf');
+(2, 'Melatonia', 2, 14, 1, '2024-05-23', 'Trabajo chulo', 'miportada.jpg', 'melatonia.pdf');
 
 -- --------------------------------------------------------
 
@@ -232,8 +239,8 @@ CREATE TABLE `usuario` (
 --
 
 INSERT INTO `usuario` (`id`, `nombre`, `apellidos`, `correo`, `clave`, `titulacion`, `direccion`, `nacimiento`, `tema`, `foto-perfil`) VALUES
-(14, 'Arturo', 'García Richardson', 'agrg11@alu.ua.es', 'clave', 1, 'C/ del Presidente Adolfo Suárez, 22', '2002-10-24', 1, NULL),
-(22, 'Paula', 'Lario Llinares', 'paula@alu.ua.es', 'clave', 1, 'C/ del Presidente Adolfo Suárez, 22', '2002-10-24', 1, NULL);
+(14, 'Arturo', 'García Richardson', 'agrg11@alu.ua.es', 'clave', 1, 'C/ del Presidente Adolfo Suárez, 22', '2002-10-24', 2, NULL),
+(22, 'Paula', 'Lario Llinares', 'paula@alu.ua.es', 'clave', 1, 'C/ del Presidente Adolfo Suárez, 22', '2002-10-24', 3, NULL);
 
 --
 -- Índices para tablas volcadas
@@ -330,13 +337,13 @@ ALTER TABLE `palabra-clave`
 -- AUTO_INCREMENT de la tabla `tema`
 --
 ALTER TABLE `tema`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT de la tabla `tipo-trabajo`
 --
 ALTER TABLE `tipo-trabajo`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT de la tabla `titulacion`

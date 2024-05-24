@@ -27,7 +27,7 @@ h3 {
 
 .contact-card {
   background-color: var(--color-bg-form);
-  border: 1px solid var(--color-bg-form);
+  border: 2px solid white;
   border-radius: 10px;
   padding: 20px;
   width: 250px;

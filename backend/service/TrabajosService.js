@@ -32,30 +32,33 @@ const buildQuery = (params) => {
 
   if (params.nombre) {
     conditions.push("t.nombre LIKE ?");
-    values.push(`% ${params.nombre}% `);
+    values.push(`%${params.nombre}%`);
   }
   if (params.autor) {
-    conditions.push("u.nombre LIKE ?");
-    values.push(`% ${params.autor}% `);
+    conditions.push("CONCAT(u.nombre, ' ', u.apellidos) LIKE ?");
+    values.push(`%${params.autor}%`);
   }
-  if (params.fecha) {
-    conditions.push("t.fecha = ?");
-    values.push(params.fecha);
+  if (params.autorId) {
+    conditions.push("u.id = ?");
+    values.push(params.autorId);
   }
-  if (params["tipo-trabajo"]) {
+  if (params.publicacion) {
+    conditions.push("DATE(t.publicacion) = STR_TO_DATE(?, '%Y-%m-%d')");
+    values.push(params.publicacion);
+  }
+  if (params["tipo-trabajo"] && params["tipo-trabajo"] != "-1") {
     conditions.push("tt.id = ?");
     values.push(params["tipo-trabajo"]);
   }
-  if (params.titulacion) {
+  if (params.titulacion && params.titulacion != "-1") {
     conditions.push("tl.id = ?");
     values.push(params.titulacion);
   }
   if (params["palabras-clave"]) {
     const palabras_clave = params["palabras-clave"].split('_');
-    conditions.push("(" + palabras_clave.map(() => "t.`palabras - clave` LIKE ?").join(" OR ") + ")");
-    values.push(...palabras_clave.map(palabra => `% ${palabra}% `));
+    conditions.push("(" + palabras_clave.map(() => "t.`palabras-clave` LIKE ?").join(" OR ") + ")");
+    values.push(...palabras_clave.map(palabra => `%${palabra}%`));
   }
-
   if (conditions.length > 0) {
     query += " AND " + conditions.join(" AND ");
   }
@@ -67,6 +70,8 @@ exports.trabajosGET = function (params) {
   console.log(params);
   return new Promise((resolve, reject) => {
     const { query, values } = buildQuery(params);
+    console.log(query);
+    console.log(values);
 
     conexion.query(query, values, (err, filas) => {
       if (err) {
