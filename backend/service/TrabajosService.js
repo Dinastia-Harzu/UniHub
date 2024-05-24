@@ -48,9 +48,9 @@ const buildQuery = (params) => {
     conditions.push("u.id = ?");
     values.push(params.autorId);
   }
-  if (params.fecha) {
-    conditions.push("t.fecha = ?");
-    values.push(params.fecha);
+  if (params.publicacion) {
+    conditions.push("t.publicacion = ?");
+    values.push(params.publicacion);
   }
   if (params["tipo-trabajo"] && params["tipo-trabajo"] != "-1") {
     conditions.push("tt.id = ?");
