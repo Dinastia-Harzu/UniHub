@@ -38,11 +38,11 @@ const buildQuery = (params) => {
 
   if (params.nombre) {
     conditions.push("t.nombre LIKE ?");
-    values.push(`%${params.nombre}%`);
+    values.push(`%${params.nombre}% `);
   }
   if (params.autor) {
     conditions.push("CONCAT(u.nombre, ' ', u.apellidos) LIKE ?");
-    values.push(`%${params.autor}%`);
+    values.push(`%${params.autor}% `);
   }
   if (params.autorId) {
     conditions.push("u.id = ?");

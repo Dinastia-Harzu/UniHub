@@ -2,6 +2,10 @@
   height: 200px;
 }
 
+.contenedor-resultados-busqueda {
+  width: 100%;
+}
+
 .contenedor-resultados-busqueda>h3 {
   margin-top: 1em;
   border-bottom: 2px solid var(--color-tertiary);
