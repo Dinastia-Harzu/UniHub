@@ -123,6 +123,10 @@ html {
   width: 100%;
 }
 
+.language-selector>option {
+  background-color: black;
+}
+
 @media screen and (max-width: 870px) {
   .navbar {
     display: grid;

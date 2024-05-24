@@ -19,30 +19,24 @@ const palabrasClave = require("./PalabrasClaveService");
  **/
 const buildQuery = (params) => {
   let query = `
-    SELECT
-      t.*,
-      u.nombre AS \`nombre-autor\`,
-      tt.nombre AS \`nombre-tipo\`,
-      tl.nombre AS \`nombre-titulacion\`
+    SELECT t.*, u.nombre AS nombre_autor, tt.nombre AS nombre_tipotrabajo, tl.nombre AS nombre_titulacion
     FROM trabajo t
     JOIN usuario u ON u.id = t.autor
-    JOIN \`tipo-trabajo\` tt ON tt.id = t.tipo
+    JOIN \`tipo-trabajo\` tt ON tt.id = t.\`tipo\`
     JOIN titulacion tl ON tl.id = t.titulacion
-    JOIN \`palabra-clave-trabajo\` pct ON pct.\`id-trabajo\` = t.id
-    JOIN \`palabra-clave\` p ON p.id = pct.\`id-palabra-clave\`
     WHERE 1 = 1
-  `;
+    `;
 
   let conditions = [];
   let values = [];
 
   if (params.nombre) {
     conditions.push("t.nombre LIKE ?");
-    values.push(`%${params.nombre}% `);
+    values.push(`%${params.nombre}%`);
   }
   if (params.autor) {
     conditions.push("CONCAT(u.nombre, ' ', u.apellidos) LIKE ?");
-    values.push(`%${params.autor}% `);
+    values.push(`%${params.autor}%`);
   }
   if (params.autorId) {
     conditions.push("u.id = ?");
