@@ -19,13 +19,19 @@ const palabrasClave = require("./PalabrasClaveService");
  **/
 const buildQuery = (params) => {
   let query = `
-    SELECT t.*, u.nombre AS nombre_autor, tt.nombre AS nombre_tipotrabajo, tl.nombre AS nombre_titulacion
+    SELECT
+      t.*,
+      u.nombre AS \`nombre-autor\`,
+      tt.nombre AS \`nombre-tipo\`,
+      tl.nombre AS \`nombre-titulacion\`
     FROM trabajo t
     JOIN usuario u ON u.id = t.autor
-    JOIN \`tipo-trabajo\` tt ON tt.id = t.\`tipo\`
+    JOIN \`tipo-trabajo\` tt ON tt.id = t.tipo
     JOIN titulacion tl ON tl.id = t.titulacion
+    JOIN \`palabra-clave-trabajo\` pct ON pct.\`id-trabajo\` = t.id
+    JOIN \`palabra-clave\` p ON p.id = pct.\`id-palabra-clave\`
     WHERE 1 = 1
-    `;
+  `;
 
   let conditions = [];
   let values = [];
