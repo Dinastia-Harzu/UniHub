@@ -128,5 +128,8 @@
   "siguiente": "Siguiente",
   "bienvenido": "¡Bienvenid@",
   "salir": "Salir",
-  "cancelar": "Cancelar"
+  "cancelar": "Cancelar",
+  "no-encontrado": "No se encontraron resultados",
+  "mostrar-filtros": "Mostrar más filtros",
+  "ocultar-filtros": "Cerrar filtros"
 }
