@@ -66,11 +66,21 @@ const MisTrabajos = () => {
   };
 
   if (loading) {
-    return <div>Cargando...</div>;
+    return <main className="contenedor-notfound">
+      <div className="error-container">
+        <h1 className="error-title titulo-letra">Cargando...</h1>
+      </div>
+    </main>;
   }
 
   if (error) {
-    return <div>Error al cargar los trabajos: {error.message}</div>;
+    return <main className="contenedor-notfound">
+      <div className="error-container">
+        <h1 className="error-title titulo-letra">Error</h1>
+        <p className="error-message contenido-letra">{error.message}</p>
+        <div className="btn-letra"><Link to="/" className="btn home-link btn-letra">{t('btn-volver2')}</Link></div>
+      </div>
+    </main>;
   }
 
   return (

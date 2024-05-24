@@ -112,7 +112,11 @@ export default function Busqueda() {
                 <CartaBusqueda key={index} cardData={resultado} />
               ))
             ) : (
-              <p>No se encontraron resultados.</p>
+              <main className="contenedor-notfound">
+                <div className="error-container">
+                  <h1 className="error-title titulo-letra">No se encontraron resultados</h1>
+                </div>
+              </main>
             )}
           </div>
         </div>
