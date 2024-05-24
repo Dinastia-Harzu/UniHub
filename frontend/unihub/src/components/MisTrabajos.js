@@ -24,7 +24,10 @@ const MisTrabajos = () => {
   const [error, setError] = useState(null);
 
   useEffect(() => {
-    handleLoad(formData);
+    const searchParams = { ...formData };
+    if (searchParams.titulacion === -1) delete searchParams.titulacion;
+    if (searchParams["tipo-trabajo"] === -1) delete searchParams["tipo-trabajo"];
+    handleLoad(searchParams);
   }, []);
 
   const handleFilterClick = () => {
@@ -55,13 +58,10 @@ const MisTrabajos = () => {
   };
 
   const handleCancel = () => {
-    const defaultFormData = {
-      "tipo-trabajo": -1,
-      titulacion: -1,
-      autorId: JSON.parse(sessionStorage.getItem('usuario')).id,
-    };
-    setFormData(defaultFormData);
-    handleLoad(defaultFormData);
+    const searchParams = { ...formData };
+    delete searchParams.titulacion;
+    delete searchParams["tipo-trabajo"];
+    handleLoad(searchParams);
     setFilterOpen(false);
   };
 
@@ -103,8 +103,8 @@ const MisTrabajos = () => {
                 setFormData={setFormData}
               />
               <div className="filter-form">
-                <button type="button" className="btn btn-secondary contenido-letra" onClick={handleCancel}>{t('cancelar')}</button>
-                <button type="submit" className="btn btn-primary contenido-letra">{t('buscar')}</button>
+                <button type="button" className="btn btn-secondary btn-fondo contenido-letra" onClick={handleCancel}>{t('cancelar')}</button>
+                <button type="submit" className="btn btn-primary btn-fondo contenido-letra">{t('buscar')}</button>
               </div>
             </form>
           )}
