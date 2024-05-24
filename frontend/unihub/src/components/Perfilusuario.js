@@ -56,7 +56,7 @@ const Perfilusuario = () => {
 
   const formattedFechaNacimiento = user && user.nacimiento ? new Date(user.nacimiento).toLocaleDateString('es-ES') : '';
 
-  console.log(user);
+  
   
   function cambiarFoto(inp) {
     if (inp.target.files.length > 0) {
@@ -68,9 +68,6 @@ const Perfilusuario = () => {
     }
   }
 
-  const onSubmit = (data) => {
-    console.log(data);
-  };
 
   return (
     <main>
@@ -79,7 +76,7 @@ const Perfilusuario = () => {
           <h2 className="titulo-letra">{t('mi-perfil')}</h2>
         </div>
         <div className="form-container">
-          <form onSubmit={handleSubmit(onSubmit)} className="pos-wrapper">
+          <form method="get" className="pos-wrapper">
             <div className="wrapper">
               <div className="form-group" id="nombre-titulo">
                 <h1 className="titulo-letra contenido-letra">{user.nombre}</h1>
@@ -88,7 +85,7 @@ const Perfilusuario = () => {
                 <label htmlFor="portada"></label>
                 <img
                   ref={refImagen}
-                  src={profilePhoto}
+                  src={`/assets/${profilePhoto}`} 
                   alt="foto-perfil"
                   width={240}
                   height={320}
@@ -173,7 +170,7 @@ const Perfilusuario = () => {
                     type="text"
                     id="titulacion"
                     name="titulacion"
-                    defaultValue={t(user.titulacion)}
+                    defaultValue={t(user.titulacion_nombre)}
                     readOnly
                   />
                   <br />
@@ -186,7 +183,7 @@ const Perfilusuario = () => {
                     type="text"
                     id="estilo"
                     name="estilo"
-                    defaultValue={t(user.tema)}
+                    defaultValue={t(user.tema_nombre)}
                     readOnly
                   />
                   <br />

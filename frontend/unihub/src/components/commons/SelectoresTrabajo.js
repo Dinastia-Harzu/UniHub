@@ -34,7 +34,7 @@ export function SelectorTipoTrabajo({ formData, setFormData }) {
         onChange={(event) => {
           setFormData({ ...formData, "tipo-trabajo": parseInt(event.target.value) })
         }}
-        defaultValue={formData.tipo}
+        value={formData.tipo}
       >
         {tiposTrabajo.map((tipo, idx) => {
           return (
@@ -80,7 +80,7 @@ export function SelectorTitulaciones({ formData, setFormData }) {
         onChange={(event) =>
           setFormData({ ...formData, titulacion: parseInt(event.target.value) })
         }
-        defaultValue={formData.titulacion}
+        value={formData.titulacion}
       >
         {titulaciones.map((titulacion, idx) => {
           return (
@@ -125,7 +125,7 @@ export function SelectorTema({ formData, setFormData }) {
         onChange={(event) =>
           setFormData({ ...formData, tema: parseInt(event.target.value) })
         }
-        defaultValue={formData.tema}
+        value={formData.tema}
       >
         {temas.map((tema, idx) => {
           return (

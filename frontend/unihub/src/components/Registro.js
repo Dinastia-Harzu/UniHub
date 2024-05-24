@@ -31,14 +31,14 @@ const Registro = () => {
 
 
   const [formData, setFormData] = useState({
-    nombre: "UWU",
-    apellidos: "uwu",
+    nombre: "nuevo",
+    apellidos: "nuevo",
     titulacion: 1,
-    correo: "uwu@gmia.com",
+    correo: "gmail@gmail.com",
     tema: 1,
-    direccion: "uwu",
+    direccion: "casa",
     nacimiento: "2003-02-02",
-    clave: "uwu",
+    clave: "Miclave2024&",
     "foto-perfil": "no_photo.png"
   });
   
@@ -86,7 +86,7 @@ const Registro = () => {
   const enviarData = () => {
     console.log("enviardata");
     console.log(formData);
-  
+    navigate('../login');
     axios.post(`${URL_BASE}usuarios`, formData, {
       headers: {
         'Content-Type': 'application/json', 
@@ -94,6 +94,7 @@ const Registro = () => {
     })
     .then((result) => {
       console.log(result);
+     
     })
     .catch((err) => {
       console.log(err);

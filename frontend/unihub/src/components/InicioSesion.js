@@ -10,7 +10,7 @@ import { useNavigate } from 'react-router-dom';
 const InicioSesion = () => {
   const { t } = useTranslation();
   const navigate = useNavigate();
-  //if(sessionStorage.getItem('usuario') != null) { navigate('../');}
+  if(sessionStorage.getItem('usuario') != null) { navigate('../');}
   const {
     register,
     formState: { errors },
