@@ -132,5 +132,6 @@
   "no-encontrado": "No results",
   "mostrar-filtros": "Show more filters",
   "ocultar-filtros": "Close filters",
-  "usuario-no-logueado": "This account doesn't exist."
+  "usuario-no-logueado": "This account doesn't exist.",
+  "contra-reglas": "At least a capital letter, a lowercase letter, a number and a special character (&,%...)"
 }

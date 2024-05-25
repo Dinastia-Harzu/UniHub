@@ -11,7 +11,7 @@ import { edadValidator } from "./validators";
 
 const EditarPerfil = () => {
 
-  
+
   const navigate = useNavigate();
   if (sessionStorage.getItem('usuario') == null) {
     navigate('/login');
@@ -50,60 +50,61 @@ const EditarPerfil = () => {
   }, [setValue, formattedFechaNacimiento]);
 
   const formatoFecha = (event) => {
-    
+
     const date = new Date(event.target.value);
     const fechaFormateada = date.toISOString().split('T')[0];
     setFormData({ ...formData, nacimiento: fechaFormateada });
   }
 
-  const enviarData =  () => {
+  const enviarData = () => {
     console.log(formData);
-    
+
     axios.put(`${URL_BASE}usuarios/${user.id}`, formData, {
       headers: {
-        'Content-Type': 'application/json', 
+        'Content-Type': 'application/json',
       },
     })
-    .then( async (result) => {
-      try {
-        
-        const response = await axios.post(`${URL_BASE}login`,{
-          correo: formData.correo,
-          clave: formData.clave,
-          nombre: formData.nombre
-        });
-        console.log(response);
+      .then(async (result) => {
+        try {
 
-        if (response.status === 200) {
-          setMessage(t('usuario-logueado'));
-          sessionStorage.setItem('usuario', JSON.stringify(response.data));
-          axios.get(`${URL_BASE}usuarios/${JSON.parse(sessionStorage.getItem('usuario')).id}`).then((result) => {
-            const userThemeFromBackend = result.data.ruta;
-  
-            console.log(userThemeFromBackend);
-  
-            if (document.getElementById("tema-de-usuario")) { document.head.removeChild(document.getElementById("tema-de-usuario")); }
-  
-            const link = document.createElement("link");
-            link.setAttribute("id", "tema-de-usuario");
-            link.rel = "stylesheet";
-            link.href = `/assets/themes/${userThemeFromBackend}`;
-            document.head.appendChild(link);
-  
-            if (userThemeFromBackend === "general-ac.css" || userThemeFromBackend === "general-ac-lg.css" || userThemeFromBackend === "general-osc-lg.css" || userThemeFromBackend === "general-osc.css") {
-              document.getElementsByClassName("logotipo").src = "/assets/W_Logotipo.PNG";
-            }
+          const response = await axios.post(`${URL_BASE}login`, {
+            correo: formData.correo,
+            clave: formData.clave,
+            nombre: formData.nombre
           });
-          navigate('../perfil');
+          console.log(response);
 
-        }} catch (error) {
+          if (response.status === 200) {
+            setMessage(t('usuario-logueado'));
+            sessionStorage.setItem('usuario', JSON.stringify(response.data));
+            axios.get(`${URL_BASE}usuarios/${JSON.parse(sessionStorage.getItem('usuario')).id}`).then((result) => {
+              const userThemeFromBackend = result.data.ruta;
+
+              console.log(userThemeFromBackend);
+
+              if (document.getElementById("tema-de-usuario")) { document.head.removeChild(document.getElementById("tema-de-usuario")); }
+
+              const link = document.createElement("link");
+              link.setAttribute("id", "tema-de-usuario");
+              link.rel = "stylesheet";
+              link.href = `/assets/themes/${userThemeFromBackend}`;
+              document.head.appendChild(link);
+
+              if (userThemeFromBackend === "general-ac.css" || userThemeFromBackend === "general-ac-lg.css" || userThemeFromBackend === "general-osc-lg.css" || userThemeFromBackend === "general-osc.css") {
+                document.getElementsByClassName("logotipo").src = "/assets/W_Logotipo.PNG";
+              }
+            });
+            navigate('../perfil');
+
+          }
+        } catch (error) {
           setMessage(t('usuario-no-logueado'));
         }
-      console.log(result);
-    })
-    .catch((err) => {
-      console.log(err);
-    });
+        console.log(result);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
   };
 
   const cambiarFoto = (inp) => {
@@ -143,13 +144,13 @@ const EditarPerfil = () => {
               <div className="contenedor-apartados-formulario-usuario">
                 <label htmlFor="portada"></label>
                 <img
-                ref={refImagen}
-                src={`/assets/${profilePhoto}`} 
-                alt="Portada"
-                onClick={() => refPortada.current.click()}
-                width={240}
-                height={320}
-              />
+                  ref={refImagen}
+                  src={`/assets/${profilePhoto}`}
+                  alt="Portada"
+                  onClick={() => refPortada.current.click()}
+                  width={240}
+                  height={320}
+                />
                 <input
                   ref={refPortada}
                   type="file"
@@ -263,7 +264,7 @@ const EditarPerfil = () => {
                   <SelectorTitulaciones
                     formData={formData}
                     setFormData={setFormData}
-                   
+
                   />
                   {errors.titulacion?.type === "required" && (
                     <p className="contenido-letra">{t('campo-requerido')}</p>

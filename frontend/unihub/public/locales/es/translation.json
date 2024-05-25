@@ -132,5 +132,6 @@
   "no-encontrado": "No se encontraron resultados",
   "mostrar-filtros": "Mostrar más filtros",
   "ocultar-filtros": "Cerrar filtros",
-  "usuario-no-logueado": "¡Correo o contraseña incorrectos!"
+  "usuario-no-logueado": "¡Correo o contraseña incorrectos!",
+  "contra-reglas": "Debe tener un carácter especial (%,&..), una minúscula, una mayúscula y un número."
 }

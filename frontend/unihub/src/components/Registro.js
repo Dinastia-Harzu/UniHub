@@ -234,6 +234,7 @@ const Registro = () => {
                       )}
                     </span>
                   </div>
+                  <p className="contenido-letra">{t('contra-reglas')}</p>
                   {errors.contrasena?.type === "required" && (
                     <p className="contenido-letra">{t('campo-requerido')}</p>
                   )}
