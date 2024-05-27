@@ -28,18 +28,18 @@ export function SelectorTipoTrabajo({ formData, setFormData }) {
       </label>
       <select
         id="tipoTrabajo"
-        title="tipos-trabajo"
+        title="Tipo de trabajo"
         name="tipo"
         className="contenido-letra"
-        defaultValue={formData.tipo}
         onChange={(event) => {
           setFormData({
             ...formData,
             "tipo-trabajo": parseInt(event.target.value),
           });
         }}
-        value={formData.tipo}
+        value={formData["tipo-trabajo"]}
       >
+        <option value={-1}>Cualquiera</option>
         {tiposTrabajo.map((tipo, idx) => {
           return (
             <option value={tipo.id} key={idx}>
@@ -79,7 +79,7 @@ export function SelectorTitulaciones({ formData, setFormData }) {
       </label>
       <select
         id="titulacion"
-        title="titulaciones"
+        title="Titulación"
         name="titulacion"
         className="contenido-letra"
         onChange={(event) =>
@@ -87,6 +87,7 @@ export function SelectorTitulaciones({ formData, setFormData }) {
         }
         value={formData.titulacion}
       >
+        <option value={-1}>Cualquiera</option>
         {titulaciones.map((titulacion, idx) => {
           return (
             <option value={titulacion.id} key={idx}>
