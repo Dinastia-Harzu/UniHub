@@ -1,6 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import { useTranslation } from "react-i18next";
+import Tiempo from "./Tiempo";
 
 export default function Footer() {
   const { t } = useTranslation();
@@ -15,7 +16,10 @@ export default function Footer() {
   return (
     <footer className="navbar footer">
       <div className="container1">
-        <p className="btn-letra">&copy;2024 UniHub</p>
+        <p className="btn-letra">
+          &copy;
+          <Tiempo fechaHora="2024" formato={"YYYY"} /> UniHub
+        </p>
       </div>
       <div className="container2">
         <Link to="/contacto" className="btn-letra">
