@@ -11,6 +11,7 @@ import ContenedorComentario from "./ContenedorComentario";
 import { useTranslation } from 'react-i18next';
 import { useNavigate } from 'react-router-dom';
 import ContenedorTrabajoAsociado from "./ContenedorTrabajoAsociado";
+import ContenedorRecursoAsociado from "./ContenedorRecursoAsociado";
 
 export default function Detalles() {
   const navigate = useNavigate();
@@ -170,7 +171,7 @@ export default function Detalles() {
             <div>
               {trabajo.recursos.length > 0 ? (
                 trabajo.recursos.map((recurso) => (
-                  <img src={`/assets/${recurso.ruta}`} alt={recurso.nombre}></img>
+                  <ContenedorRecursoAsociado recurso={recurso} />
                 ))
               ) : (
                 <p>{t('no-resultados')}</p>
