@@ -157,7 +157,11 @@ export default function MisTrabajos() {
             to={`/detalles/${card.id}`}
             className="card btn-letra"
           >
-            <img src={card.portada} alt={card.nombre} title={card.nombre} />
+            <img
+              src={`/assets/${card.portada}`}
+              alt={card.nombre}
+              title={card.nombre}
+            />
             <div className="card-content btn-letra">
               <h3>{card.nombre}</h3>
               <div className="descripcion btn-letra">
