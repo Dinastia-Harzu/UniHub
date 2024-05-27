@@ -2,7 +2,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import "../../styles/modal.css";
 import { faXmark } from "@fortawesome/free-solid-svg-icons";
 
-function Modal({ children, estaAbierto, cerrarModal }) {
+export default function Modal({ children, estaAbierto, cerrarModal }) {
   const open = estaAbierto ? "open" : "";
 
   const handleKeyDown = (event) => {
@@ -28,5 +28,3 @@ function Modal({ children, estaAbierto, cerrarModal }) {
     </dialog>
   );
 }
-
-export default Modal;
