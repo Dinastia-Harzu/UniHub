@@ -69,8 +69,8 @@ main {
 }
 
 .navbar-item {
-  margin-right: 2.5em;
-  margin-left: 2.5em;
+  margin-right: 1em;
+  margin-left: 1em;
 }
 
 header .nav-btn {
@@ -136,6 +136,10 @@ header .nav-btn {
   z-index: 500;
   bottom: 0;
   width: 100%;
+}
+
+.language-selector>option {
+  background-color: black;
 }
 
 @media screen and (max-width: 870px) {

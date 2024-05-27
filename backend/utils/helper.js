@@ -102,7 +102,7 @@ const respuestas = {
 
 function determinarCamposPut(tabla, cuerpo, id) {
   const len = Object.keys(cuerpo).length;
-  let sql = `UPDATE ${tabla} SET `;
+  let sql = `UPDATE \`${tabla}\` SET `;
   if (len == 0) {
     sql += `id = ${id}`;
   } else {
@@ -110,7 +110,7 @@ function determinarCamposPut(tabla, cuerpo, id) {
       if (i > 0) {
         sql += ", ";
       }
-      sql += `${Object.keys(cuerpo).at(i)} = ${json2sql(
+      sql += `\`${Object.keys(cuerpo).at(i)}\` = ${json2sql(
         Object.values(cuerpo).at(i)
       )}`;
     }

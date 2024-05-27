@@ -11,15 +11,18 @@ const Descubrir = () => {
   const { t } = useTranslation();
   const [filterOpen, setFilterOpen] = useState(false);
   const [formData, setFormData] = useState({
-    "tipo-trabajo": 1,
-    titulacion: 2,
+    "tipo-trabajo": -1,
+    titulacion: -1,
   });
   const [cardsData, setCardsData] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
   useEffect(() => {
-    handleLoad();
+    const searchParams = { ...formData };
+    if (searchParams.titulacion === -1) delete searchParams.titulacion;
+    if (searchParams["tipo-trabajo"] === -1) delete searchParams["tipo-trabajo"];
+    handleLoad(searchParams);
   }, []);
 
   const handleFilterClick = () => {
@@ -28,29 +31,12 @@ const Descubrir = () => {
 
   const handleSearch = (event) => {
     event.preventDefault(); // Evita que el formulario se envíe y la página se recargue
-    setLoading(true);
-    axios.get(`${URL_BASE}trabajos`, { params: formData })
-      .then((response) => {
-        setCardsData(response.data);
-        setLoading(false);
-      })
-      .catch((err) => {
-        console.log(err);
-        window.location = "/error";
-      });
-    setFormData({
-      "tipo-trabajo": 1,
-      titulacion: 2,
-    });
+    handleLoad(formData);
   };
 
-  const handleLoad = () => {
+  const handleLoad = (data) => {
     setLoading(true);
-    setFormData({
-      "tipo-trabajo": 1,
-      titulacion: 2,
-    });
-    axios.get(`${URL_BASE}trabajos`)
+    axios.get(`${URL_BASE}trabajos`, { params: data })
       .then((response) => {
         setCardsData(response.data);
         setLoading(false);
@@ -59,23 +45,36 @@ const Descubrir = () => {
         setError(err);
         setLoading(false);
       });
-  };
-
-  const handleCancel = () => {
     setFormData({
       "tipo-trabajo": 1,
       titulacion: 2,
     });
-    handleLoad();
+  };
+
+  const handleCancel = () => {
+    const searchParams = { ...formData };
+    delete searchParams.titulacion;
+    delete searchParams["tipo-trabajo"];
+    handleLoad(searchParams);
     setFilterOpen(false);
   };
 
   if (loading) {
-    return <div>Cargando...</div>;
+    return <main className="contenedor-notfound">
+      <div className="error-container">
+        <h1 className="error-title titulo-letra">Cargando...</h1>
+      </div>
+    </main>;
   }
 
   if (error) {
-    return <div>Error al cargar los trabajos: {error.message}</div>;
+    return <main className="contenedor-notfound">
+      <div className="error-container">
+        <h1 className="error-title titulo-letra">Error</h1>
+        <p className="error-message contenido-letra">{error.message}</p>
+        <div className="btn-letra"><Link to="/" className="btn home-link btn-letra">{t('btn-volver2')}</Link></div>
+      </div>
+    </main>;
   }
 
   return (
@@ -98,8 +97,8 @@ const Descubrir = () => {
                 setFormData={setFormData}
               />
               <div className="filter-form">
-                <button type="button" className="btn btn-secondary contenido-letra" onClick={handleCancel}>{t('cancelar')}</button>
-                <button type="submit" className="btn btn-primary contenido-letra">{t('buscar')}</button>
+                <button type="button" className="btn btn-fondo btn-secondary contenido-letra" onClick={handleCancel}>{t('cancelar')}</button>
+                <button type="submit" className="btn btn-fondo btn-primary contenido-letra">{t('buscar')}</button>
               </div>
             </form>
           )}

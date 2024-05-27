@@ -1,6 +1,6 @@
 import { useForm } from "react-hook-form";
 import { useTranslation } from 'react-i18next';
-import React, { useState, useRef } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
@@ -10,6 +10,8 @@ import "../styles/formulario.css";
 import { edadValidator } from "./validators";
 
 const EditarPerfil = () => {
+
+
   const navigate = useNavigate();
   if (sessionStorage.getItem('usuario') == null) {
     navigate('/login');
@@ -27,47 +29,91 @@ const EditarPerfil = () => {
   const refPortada = useRef();
   const refImagen = useRef();
 
-  const user = JSON.parse(sessionStorage.getItem('usuario')).data;
+  const user = JSON.parse(sessionStorage.getItem('usuario'));
   const profilePhoto = user && user['foto-perfil'] ? user['foto-perfil'] : "/assets/no_photo.png";
   const formattedFechaNacimiento = user && user.nacimiento ? new Date(user.nacimiento).toISOString().split('T')[0] : '';
 
   const [formData, setFormData] = useState({
-    id:user.id,
-    nombre: user.nombre,
-    apellidos: user.apellidos,
-    correo: user.correo,
-    clave: user.clave,
-    titulacion: user.titulacion,
-    direccion: user.direccion,
-    
-    tema: user.tema,
-    "foto-perfil": "no_photo.png"
+    nombre: user?.nombre || "",
+    apellidos: user?.apellidos || "",
+    titulacion: user?.titulacion || 1,
+    correo: user?.correo || "",
+    tema: user?.tema || 1,
+    direccion: user?.direccion || "",
+    nacimiento: formattedFechaNacimiento || "",
+    clave: user?.clave || "",
+    'foto-perfil': user['foto-perfil'] || "no_photo.png"
   });
+  const [message, setMessage] = useState("");
+  useEffect(() => {
+    setValue("fecha_nacimiento", formattedFechaNacimiento);
+  }, [setValue, formattedFechaNacimiento]);
 
-  const onSubmit = async (data) => {
-    const updatedData = { ...formData, ...data };
-    console.log(updatedData);
-    try {
-      const response = await axios.put(`${URL_BASE}usuarios/${user.id}`, updatedData);
-     
-      if (response.status === 200) {
-        console.log('User data:', response.data);
-        sessionStorage.setItem('usuario', JSON.stringify(response.data));
-        navigate('../');
-      } else {
-        console.log('User data:', response.data);
-        console.error('Error updating user data');
-      }
-    } catch (error) {
-      console.error('Error updating user data:', error);
-    }
+  const formatoFecha = (event) => {
+
+    const date = new Date(event.target.value);
+    const fechaFormateada = date.toISOString().split('T')[0];
+    setFormData({ ...formData, nacimiento: fechaFormateada });
+  }
+
+  const enviarData = () => {
+    console.log(formData);
+
+    axios.put(`${URL_BASE}usuarios/${user.id}`, formData, {
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    })
+      .then(async (result) => {
+        try {
+
+          const response = await axios.post(`${URL_BASE}login`, {
+            correo: formData.correo,
+            clave: formData.clave,
+            nombre: formData.nombre
+          });
+          console.log(response);
+
+          if (response.status === 200) {
+            setMessage(t('usuario-logueado'));
+            sessionStorage.setItem('usuario', JSON.stringify(response.data));
+            axios.get(`${URL_BASE}usuarios/${JSON.parse(sessionStorage.getItem('usuario')).id}`).then((result) => {
+              const userThemeFromBackend = result.data.ruta;
+
+              console.log(userThemeFromBackend);
+
+              if (document.getElementById("tema-de-usuario")) { document.head.removeChild(document.getElementById("tema-de-usuario")); }
+
+              const link = document.createElement("link");
+              link.setAttribute("id", "tema-de-usuario");
+              link.rel = "stylesheet";
+              link.href = `/assets/themes/${userThemeFromBackend}`;
+              document.head.appendChild(link);
+
+              if (userThemeFromBackend === "general-ac.css" || userThemeFromBackend === "general-ac-lg.css" || userThemeFromBackend === "general-osc-lg.css" || userThemeFromBackend === "general-osc.css") {
+                document.getElementsByClassName("logotipo").src = "/assets/W_Logotipo.PNG";
+              }
+            });
+            navigate('../perfil');
+
+          }
+        } catch (error) {
+          setMessage(t('usuario-no-logueado'));
+        }
+        console.log(result);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
   };
 
   const cambiarFoto = (inp) => {
     if (inp.target.files.length > 0) {
       const fichero = inp.target.files[0];
       const img = refImagen.current;
-      img.src = URL.createObjectURL(fichero);
+      const nuevaURL = URL.createObjectURL(fichero);
+      img.src = nuevaURL;
+      setImagenSeleccionada(nuevaURL); // Actualizar el estado de la imagen seleccionada
     } else {
       setImagenSeleccionada(null);
     }
@@ -90,7 +136,7 @@ const EditarPerfil = () => {
           <h2 className="titulo-letra">{t('mi-perfil')}</h2>
         </div>
         <div className="form-container">
-          <form onSubmit={handleSubmit(onSubmit)} className="pos-wrapper">
+          <form method="get" className="pos-wrapper">
             <div className="wrapper">
               <div className="form-group" id="nombre-titulo">
                 <h1 className="titulo-letra">{user.nombre}</h1>
@@ -99,7 +145,7 @@ const EditarPerfil = () => {
                 <label htmlFor="portada"></label>
                 <img
                   ref={refImagen}
-                  src={profilePhoto}
+                  src={`/assets/${profilePhoto}`}
                   alt="Portada"
                   onClick={() => refPortada.current.click()}
                   width={240}
@@ -126,7 +172,9 @@ const EditarPerfil = () => {
                     required: true,
                     maxLength: 20,
                   })}
-                  onChange={(e) => setFormData({ ...formData, nombre: e.target.value })}
+                  onChange={(event) =>
+                    setFormData({ ...formData, nombre: event.target.value })
+                  }
                 />
                 {errors.nombre?.type === "required" && (
                   <p className="contenido-letra">{t('campo-requerido')}</p>
@@ -147,7 +195,9 @@ const EditarPerfil = () => {
                     required: true,
                     maxLength: 50,
                   })}
-                  onChange={(e) => setFormData({ ...formData, apellidos: e.target.value })}
+                  onChange={(event) =>
+                    setFormData({ ...formData, apellidos: event.target.value })
+                  }
                 />
                 {errors.apellidos?.type === "required" && (
                   <p className="contenido-letra">{t('campo-requerido')}</p>
@@ -169,7 +219,9 @@ const EditarPerfil = () => {
                       required: true,
                       pattern: /^[^\s@]+@[^\s@]+\.[^\s@]+$/i,
                     })}
-                    onChange={(e) => setFormData({ ...formData, correo: e.target.value })}
+                    onChange={(event) =>
+                      setFormData({ ...formData, correo: event.target.value })
+                    }
                   />
                   {errors.correo?.type === "required" && (
                     <p className="contenido-letra">{t('campo-requerido')}</p>
@@ -186,12 +238,14 @@ const EditarPerfil = () => {
                       type={mostrarContrasena ? "text" : "password"}
                       id="contrasena"
                       name="contrasena"
-                      defaultValue={formData.contrasena}
+                      defaultValue={formData.clave}
                       {...register("contrasena", {
                         required: true,
                         pattern: /(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}/,
                       })}
-                      onChange={(e) => setFormData({ ...formData, contrasena: e.target.value })}
+                      onChange={(event) =>
+                        setFormData({ ...formData, clave: event.target.value })
+                      }
                     />
                   </div>
                   <div className="boton-contrasenia contenido-letra" tabIndex="0" onKeyDown={handleKeyDownTogglePassword} onClick={toggleMostrarContrasena}>
@@ -207,11 +261,10 @@ const EditarPerfil = () => {
                   )}
                 </div>
                 <div className="form-group" id="titulacion">
-                  <label htmlFor="titulacion" className="contenido-letra">{t('sel-tit')}:</label>
                   <SelectorTitulaciones
                     formData={formData}
                     setFormData={setFormData}
-                    register={register}
+
                   />
                   {errors.titulacion?.type === "required" && (
                     <p className="contenido-letra">{t('campo-requerido')}</p>
@@ -221,11 +274,9 @@ const EditarPerfil = () => {
                   )}
                 </div>
                 <div className="form-group" id="estilo">
-                  <label htmlFor="estilo" className="contenido-letra">{t('estilo')}:</label>
                   <SelectorTema
                     formData={formData}
                     setFormData={setFormData}
-                    register={register}
                   />
                   {errors.estilo?.type === "required" && (
                     <p className="contenido-letra">{t('campo-requerido')}</p>
@@ -245,7 +296,9 @@ const EditarPerfil = () => {
                     {...register("direccion", {
                       required: true,
                     })}
-                    onChange={(e) => setFormData({ ...formData, direccion: e.target.value })}
+                    onChange={(event) =>
+                      setFormData({ ...formData, direccion: event.target.value })
+                    }
                   />
                   {errors.direccion?.type === "required" && (
                     <p className="contenido-letra">{t('campo-requerido')}</p>
@@ -258,12 +311,12 @@ const EditarPerfil = () => {
                     type="date"
                     id="fecha_nacimiento"
                     name="fecha_nacimiento"
-                    defaultValue={formData.fecha_nacimiento}
+                    defaultValue={formattedFechaNacimiento}
                     {...register("fecha_nacimiento", {
                       required: true,
                       validate: edadValidator,
                     })}
-                    onChange={(e) => setFormData({ ...formData, fecha_nacimiento: e.target.value })}
+                    onChange={(event) => formatoFecha(event)}
                   />
                   {errors.fecha_nacimiento?.type === "required" && (
                     <p className="contenido-letra">{t('campo-requerido')}</p>
@@ -274,9 +327,7 @@ const EditarPerfil = () => {
                 </div>
               </div>
               <div className="boton-editar btn-letra">
-                <button type="submit" className="btn btn-letra" value="Editar perfil">
-                  {t('editar')}
-                </button>
+                <button onClick={handleSubmit(enviarData)} className="btn btn-primary btn-letra" value="Editar perfil">{t('editar')}</button>
               </div>
             </div>
           </form>

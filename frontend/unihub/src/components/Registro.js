@@ -31,17 +31,17 @@ const Registro = () => {
 
 
   const [formData, setFormData] = useState({
-    nombre: "UWU",
-    apellidos: "uwu",
+    nombre: "nuevo",
+    apellidos: "nuevo",
     titulacion: 1,
-    correo: "uwu@gmia.com",
+    correo: "gmail@gmail.com",
     tema: 1,
-    direccion: "uwu",
+    direccion: "casa",
     nacimiento: "2003-02-02",
-    clave: "uwu",
+    clave: "Miclave2024&",
     "foto-perfil": "no_photo.png"
   });
-  
+
 
   const toggleMostrarContrasena = () => {
     setMostrarContrasena(!mostrarContrasena);
@@ -69,10 +69,10 @@ const Registro = () => {
       const img = refImagen.current;
       img.src = URL.createObjectURL(fichero);
       setImagenSeleccionada(fichero);
-      setFormData({ ...formData, "foto-perfil": fichero.name }); 
+      setFormData({ ...formData, "foto-perfil": fichero.name });
     } else {
       setImagenSeleccionada(null);
-      setFormData({ ...formData, "foto-perfil": null }); 
+      setFormData({ ...formData, "foto-perfil": null });
     }
   };
 
@@ -81,23 +81,24 @@ const Registro = () => {
     const fechaFormateada = date.toISOString().split('T')[0];
     setFormData({ ...formData, nacimiento: fechaFormateada });
     console.log(fechaFormateada);
-    }
- 
+  }
+
   const enviarData = () => {
     console.log("enviardata");
     console.log(formData);
-  
+    navigate('../login');
     axios.post(`${URL_BASE}usuarios`, formData, {
       headers: {
-        'Content-Type': 'application/json', 
+        'Content-Type': 'application/json',
       },
     })
-    .then((result) => {
-      console.log(result);
-    })
-    .catch((err) => {
-      console.log(err);
-    });
+      .then((result) => {
+        console.log(result);
+
+      })
+      .catch((err) => {
+        console.log(err);
+      });
   };
 
   return (
@@ -107,7 +108,7 @@ const Registro = () => {
           <h2 className="titulo-letra">{t('registro')}</h2>
         </div>
         <div className="form-container">
-          <form  className="pos-wrapper" method="get">
+          <form className="pos-wrapper" method="get">
             <div className="wrapper">
               <div className="contenedor-apartados-formulario-usuario">
                 <label htmlFor="portada"></label>
@@ -233,6 +234,7 @@ const Registro = () => {
                       )}
                     </span>
                   </div>
+                  <p className="contenido-letra">{t('contra-reglas')}</p>
                   {errors.contrasena?.type === "required" && (
                     <p className="contenido-letra">{t('campo-requerido')}</p>
                   )}
@@ -242,11 +244,10 @@ const Registro = () => {
                   <br />
                 </div>
                 <div className="form-group" id="titulacion">
-                  <label htmlFor="titulacion" className="contenido-letra">{t('sel-tit')}:</label>
                   <SelectorTitulaciones
-                        formData={formData}
-                        setFormData={setFormData}
-                    />
+                    formData={formData}
+                    setFormData={setFormData}
+                  />
                   {errors.titulacion?.type === "required" && (
                     <p className="contenido-letra">{t('campo-requerido')}</p>
                   )}
@@ -257,11 +258,10 @@ const Registro = () => {
                   <br />
                 </div>
                 <div className="form-group" id="titulacion">
-                  <label htmlFor="estilo" className="contenido-letra">{t('estilo')}:</label>
                   <SelectorTema
-                        formData={formData}
-                        setFormData={setFormData}
-                    />
+                    formData={formData}
+                    setFormData={setFormData}
+                  />
                   {errors.estilo?.type === "required" && (
                     <p className="contenido-letra">{t('campo-requerido')}</p>
                   )}
@@ -292,6 +292,8 @@ const Registro = () => {
                   <br />
                   <br />
                 </div>
+                <br />
+                <br />
                 <div className="form-group contenido-letra" id="nacimiento">
                   <label htmlFor="fecha_nacimiento" className="contenido-letra">{t('fecnac')}:</label>
                   <input
@@ -304,7 +306,7 @@ const Registro = () => {
                       required: true,
                       validate: edadValidator,
                     })}
-                    onChange={(event) =>formatoFecha(event)
+                    onChange={(event) => formatoFecha(event)
                     }
                   />
                   {errors.fecha_nacimiento?.type === "required" && (

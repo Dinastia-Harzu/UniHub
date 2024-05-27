@@ -275,9 +275,9 @@ paths:
           description: Id del autor
           schema:
             type: string
-        - name: fecha
+        - name: publicacion
           in: query
-          description: fecha
+          description: publicacion
           schema:
             type: string
         - name: tipo-trabajo

@@ -7,7 +7,6 @@ import { Link, useNavigate } from "react-router-dom";
 export default function Header() {
   const { t } = useTranslation();
   const navRef = useRef();
-  const [correo, setCorreo] = useState('');
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -17,7 +16,7 @@ export default function Header() {
 
   }, []);
 
-  const showNavbar = () => {
+  const toggleMenu = () => {
     navRef.current.classList.toggle("responsive-nav");
   };
 
@@ -42,30 +41,21 @@ export default function Header() {
         </div>
         <nav ref={navRef}>
           <div className="container2 btn-letra">
-            <Link to="/" className="navbar-item btn-letra">
+            <Link to="/" className="navbar-item btn-letra" onClick={toggleMenu}>
               {t('inicio')}
             </Link>
-            <Link to="/descubrir" className="navbar-item btn-letra">
+            <Link to="/descubrir" className="navbar-item btn-letra" onClick={toggleMenu}>
               {t('descubrir')}
             </Link>
             {sessionStorage.getItem('usuario') ? (
-              <Link to="/trabajos" className="navbar-item btn-letra">
+              <Link to="/trabajos" className="navbar-item btn-letra" onClick={toggleMenu}>
                 {t('mis-trabajos')}
               </Link>
 
             ) : (
               console.log("No hay usuario registrado")
             )}
-
-            {sessionStorage.getItem('usuario') ? (
-              <Link to="/perfil" className="navbar-item btn-letra">
-                {t('mi-perfil')}
-              </Link>
-
-            ) : (
-              console.log("No hay usuario registrado")
-            )}
-            <Link to="/buscar" className="navbar-item btn-letra">
+            <Link to="/buscar" className="navbar-item btn-letra" onClick={toggleMenu}>
               {t('buscar')}
             </Link>
           </div>
@@ -73,26 +63,33 @@ export default function Header() {
             {sessionStorage.getItem('usuario') ? (
               <div className="contenido-letra">
                 {t('bienvenido')} {JSON.parse(sessionStorage.getItem('usuario')).nombre}!
+                {sessionStorage.getItem('usuario') ? (
+                  <Link to="/perfil" className="navbar-item btn-letra" onClick={toggleMenu}>
+                    {t('mi-perfil')}
+                  </Link>
+                ) : (
+                  console.log("No hay usuario registrado")
+                )}
                 <Link to="/login" className="navbar-item btn-letra" onClick={handleLogout}>
                   {t('salir')}
                 </Link>
               </div>
             ) : (
               <>
-                <Link to="/login" className="btn btn-secondary btn-letra">
+                <Link to="/login" className="btn btn-secondary btn-letra" onClick={toggleMenu}>
                   {t('login')}
                 </Link>
-                <Link to="/registro" className="btn btn-primary btn-letra">
+                <Link to="/registro" className="btn btn-primary btn-letra" onClick={toggleMenu}>
                   {t('registro')}
                 </Link>
               </>
             )}
           </div>
-          <button className="nav-btn nav-close-btn" onClick={showNavbar}>
+          <button className="nav-btn nav-close-btn" onClick={toggleMenu}>
             <FaTimes />
           </button>
         </nav>
-        <button className="nav-btn" onClick={showNavbar}>
+        <button className="nav-btn" onClick={toggleMenu}>
           <FaBars />
         </button>
       </header>
