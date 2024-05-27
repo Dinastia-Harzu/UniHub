@@ -140,40 +140,45 @@ export default function Detalles() {
         <article className="datos">
           <h2>{trabajo.nombre}</h2>
           <dl>
-            <dt>{t("autor")}:</dt>
-            <dd>{trabajo.autor}</dd>
-            <dt>{t("fecha-publicacion")}:</dt>
-            <dd>
-              <Tiempo
-                fechaHora={trabajo.publicacion}
-                local={i18n.language}
-              ></Tiempo>
-            </dd>
-            <dt>Valoración:</dt>
-            <dd>
-              {trabajo.valoracion != -1 ? (
-                <StarRating
-                  formComentario={null}
-                  setFormComentario={null}
-                  ratinginicial={trabajo.valoracion}
-                  desabilitado={true}
-                />
-              ) : (
-                <>{t("no-valoracion")}</>
-              )}
-            </dd>
-            <dt>{t("palabras-clave")}:</dt>
-            <dd>
-              {trabajo["palabras-clave"].length > 0 ? (
-                trabajo["palabras-clave"].map((palabra, idx) => (
-                  <span key={idx}>
-                    {idx != 0 ? " |" : ""} {palabra.nombre}
-                  </span>
-                ))
-              ) : (
-                <>{t("no-resultados")}</>
-              )}
-            </dd>
+            <div className="contenedor-pares-datos">
+              <dt>{t("autor")}:</dt>
+              <dd>{trabajo.autor}</dd>
+            </div>
+            <div className="contenedor-pares-datos">
+              <dt>{t("fecha-publicacion")}:</dt>
+              <dd>
+                <Tiempo fechaHora={trabajo.publicacion} local={i18n.language} />
+              </dd>
+            </div>
+            <div className="contenedor-pares-datos">
+              <dt>Valoración:</dt>
+              <dd>
+                {trabajo.valoracion != -1 ? (
+                  <StarRating
+                    formComentario={null}
+                    setFormComentario={null}
+                    ratinginicial={trabajo.valoracion}
+                    desabilitado={true}
+                  />
+                ) : (
+                  <>{t("no-valoracion")}</>
+                )}
+              </dd>
+            </div>
+            <div className="contenedor-pares-datos">
+              <dt>{t("palabras-clave")}:</dt>
+              <dd>
+                {trabajo["palabras-clave"].length > 0 ? (
+                  trabajo["palabras-clave"].map((palabra, idx) => (
+                    <span key={idx}>
+                      {idx != 0 ? " |" : ""} {palabra.nombre}
+                    </span>
+                  ))
+                ) : (
+                  <>{t("no-resultados")}</>
+                )}
+              </dd>
+            </div>
           </dl>
           <p>
             <b></b>
