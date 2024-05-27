@@ -11,6 +11,7 @@ import ContenedorComentario from "./ContenedorComentario";
 import { useTranslation } from 'react-i18next';
 import { useNavigate } from 'react-router-dom';
 import ContenedorTrabajoAsociado from "./ContenedorTrabajoAsociado";
+import ContenedorRecursoAsociado from "./ContenedorRecursoAsociado";
 
 export default function Detalles() {
   const navigate = useNavigate();
@@ -49,6 +50,7 @@ export default function Detalles() {
         id: data.id,
         nombre: data.nombre,
         autor: data.autor,
+        titulacion: data.titulacion,
         publicacion: data.publicacion,
         resumen: data.resumen,
         portada: data.portada,
@@ -105,7 +107,7 @@ export default function Detalles() {
         ids.push(palabra.id);
       });
       const palabras_juntas = ids.join("_");
-      axios.get(`${URL_BASE}trabajos?palabras-clave=${palabras_juntas}`).then((result) => {
+      axios.get(`${URL_BASE}trabajos?titulacion=${trabajo.titulacion}`).then((result) => { // Cambiamos hasta que la query este arreglada
         setTrabajosAsociados(result.data);
       }).catch((err) => {
         console.log(err);
@@ -148,7 +150,7 @@ export default function Detalles() {
             <p className="contenido-letra">
               <b>{t('palabras-clave')}:</b> {trabajo['palabras-clave'].length > 0 ? (
                 trabajo['palabras-clave'].map((palabra, idx) => (
-                  <span>{idx != 0 ? " |" : ""} {palabra.nombre}</span>
+                  <span key={idx}>{idx != 0 ? " |" : ""} {palabra.nombre}</span>
                 ))
               ) : (
                 <p>{t('no-resultados')}</p>
@@ -169,8 +171,8 @@ export default function Detalles() {
             <h3 className="contenido-letra">{t('recursos-multimedia')}:</h3>
             <div>
               {trabajo.recursos.length > 0 ? (
-                trabajo.recursos.map((recurso) => (
-                  <img src={`/assets/${recurso.ruta}`} alt={recurso.nombre}></img>
+                trabajo.recursos.map((recurso, idx) => (
+                  <ContenedorRecursoAsociado recurso={recurso} key={idx} />
                 ))
               ) : (
                 <p>{t('no-resultados')}</p>
@@ -182,9 +184,9 @@ export default function Detalles() {
             <h3 className="titulo-letra">{t('trabajos-asociados')}: </h3>
             <div>
               {trabajosAsociados.length > 0 ? (
-                trabajosAsociados.map((trabajo) => (
+                trabajosAsociados.map((trabajo, idx) => (
                   <ContenedorTrabajoAsociado
-                    trabajo={trabajo}
+                    trabajo={trabajo} key={idx}
                   />
                 ))
               ) : (
@@ -201,9 +203,10 @@ export default function Detalles() {
               </div>
               <div>
                 {trabajo.comentarios.length > 0 ? (
-                  trabajo.comentarios.map((comentario) => (
+                  trabajo.comentarios.map((comentario, idx) => (
                     <ContenedorComentario
                       comentario={comentario}
+                      key={idx}
                     />
                   ))
                 ) : (

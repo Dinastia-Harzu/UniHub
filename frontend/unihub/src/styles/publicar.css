@@ -124,9 +124,26 @@
     align-items: center;
 }
 
-.contenedor-recurso img {
+.contenedor-recurso img,
+.contenedor-recurso video {
     cursor: pointer;
     width: 200px;
+}
+
+.contenedor-recurso-audio {
+    display: flex;
+    align-items: center;
+    height: 9.375em;
+    cursor: pointer;
+}
+
+.contenedor-recurso-audio audio {
+    width: 100%;
+}
+
+.contenedor-recurso-texto,
+.contenedor-recurso-otro {
+    cursor: pointer;
 }
 
 .btn-anyadir-recurso {

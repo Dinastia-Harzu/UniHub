@@ -6,9 +6,11 @@ import { URL_BASE } from "../utils/constantes";
 export default function ContenedorComentario({ comentario }) {
 
   const [autorComentario, setAutorComentario] = useState({});
+  const [usuarioVerificado, setusuarioVerificado] = useState(false);
 
   useEffect(() => {
     obtenerAutorComentario();
+    comprobarUsuarioComentario();
   }, []);
 
   function obtenerAutorComentario() {
@@ -17,6 +19,32 @@ export default function ContenedorComentario({ comentario }) {
     }).catch((err) => {
       console.log(err);
     });
+  }
+
+  function borrarComentario(event) {
+    event.preventDefault();
+    axios.delete(`${URL_BASE}comentarios/${comentario.id}`).then((result) => {
+      console.log(result);
+      alert("Comentario borrado!");
+      window.location.reload();
+    }).catch((err) => {
+      console.log(err);
+    })
+  }
+
+  function comprobarUsuarioComentario() {
+    const usuario = JSON.parse(sessionStorage.getItem('usuario')); // Obtenemos usuario actual
+
+    if (usuario.id == comentario.autor) {
+      setusuarioVerificado(true);
+    }
+  }
+
+  function mostrarBotonBorrar() {
+    if (usuarioVerificado) {
+      return <button className="btn btn-letra btn-primary" onClick={(event) => borrarComentario(event)}>Borrar comentario</button>;
+    }
+    return;
   }
 
   return (
@@ -35,6 +63,7 @@ export default function ContenedorComentario({ comentario }) {
       <p className="texto-comentario">
         {comentario.comentario}
       </p>
+      {mostrarBotonBorrar()}
     </div>
   );
 }
