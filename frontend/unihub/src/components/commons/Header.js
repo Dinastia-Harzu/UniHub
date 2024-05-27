@@ -73,7 +73,8 @@ export default function Header() {
         <div className="navbar-buttons btn-letra">
           {sessionStorage.getItem("usuario") ? (
             <div className="contenido-letra">
-              {t("bienvenido")}{" "}
+              {t("bienvenido")}
+              {", "}
               {JSON.parse(sessionStorage.getItem("usuario")).nombre}!
               {sessionStorage.getItem("usuario") ? (
                 <Link
