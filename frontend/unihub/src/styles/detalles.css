@@ -189,6 +189,18 @@ dt {
   font-weight: bold;
 }
 
+dd {
+  margin-bottom: 0.5em;
+}
+
+dd::before {
+  content: "\00a0";
+}
+
+.contenedor-pares-datos {
+  display: flex;
+}
+
 /* MEDIA QUERIES */
 @media only screen and (max-width: 1350px) {
   .contenedor-portada img {
