@@ -1,18 +1,15 @@
 import { useState } from "react";
-import { useTranslation } from 'react-i18next';
+import { useTranslation } from "react-i18next";
 import "../styles/publicar.css";
 import ContenedorRecurso from "./ContenedorRecurso";
 
 export default function FormPublicar2({ setPagina, formData, setFormData }) {
   const { t } = useTranslation();
-  // Estado para almacenar los recursos
   const [recursos, setRecursos] = useState([]);
   const [contadorId, setContadorId] = useState(0); // Nuevo estado para el contador de los recursos y asi no usar length
 
-  // Función para agregar un nuevo ContenedorRecurso
   const agregarRecurso = (evt) => {
     evt.preventDefault();
-
     if (recursos.length <= 5) {
       setRecursos([...recursos, { id: contadorId }]);
       setContadorId(contadorId + 1); // Incrementar el contador de id
@@ -28,22 +25,25 @@ export default function FormPublicar2({ setPagina, formData, setFormData }) {
       <section className="contenedor-formulario-publicar">
         <div className="contenedor-apartados-publicar">
           <p className="apartado no-actual" onClick={() => setPagina(0)}>
-            {t('detalles')}
+            {t("detalles")}
           </p>
           <p className="apartado actual" onClick={() => setPagina(1)}>
-            {t('multimedia')}
+            {t("multimedia")}
           </p>
-          <p className="apartado no-actual contenido-letra" onClick={() => setPagina(2)}>
-            {t('portada')}
+          <p
+            className="apartado no-actual contenido-letra"
+            onClick={() => setPagina(2)}
+          >
+            {t("portada")}
           </p>
         </div>
         <div className="formulario-publicar">
           <form>
             <div className="contenedor-apartados-formulario">
-              <label htmlFor="resumen">{t('resumen')}:</label>
+              <label htmlFor="resumen">{t("resumen")}:</label>
               <textarea
                 name="resumen"
-                placeholder={t('introduce-res')}
+                placeholder={t("introduce-res")}
                 rows={8}
                 cols={50}
                 value={formData.resumen}
@@ -53,14 +53,15 @@ export default function FormPublicar2({ setPagina, formData, setFormData }) {
                 className="contenido-letra"
               ></textarea>
             </div>
-
-            <label className="titulo-recursos contenido-letra" htmlFor="recursos[]">
-              {t('recursos-multimedia-2')}:
+            <label
+              className="titulo-recursos contenido-letra"
+              htmlFor="recursos[]"
+            >
+              {t("recursos-multimedia-2")}:
             </label>
             <section className="contenedor-todos-los-recursos">
               {recursos.map((recurso) => (
                 <ContenedorRecurso
-
                   key={recurso.id}
                   id={recurso.id}
                   eliminarRecurso={eliminarRecurso}
@@ -69,12 +70,11 @@ export default function FormPublicar2({ setPagina, formData, setFormData }) {
                 />
               ))}
             </section>
-
             <button
               className="btn btn-anyadir-recurso btn-letra"
               onClick={(event) => agregarRecurso(event)}
             >
-              {t('aniadir-recurso')}
+              {t("aniadir-recurso")}
             </button>
           </form>
         </div>

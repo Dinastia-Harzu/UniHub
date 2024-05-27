@@ -1,5 +1,5 @@
 import { useForm } from "react-hook-form";
-import { useTranslation } from 'react-i18next';
+import { useTranslation } from "react-i18next";
 import {
   edadValidator,
   titulacionValidator,
@@ -7,18 +7,19 @@ import {
 } from "./validators";
 import React, { useState, useRef } from "react";
 import "../styles/formulario.css";
-import { FaEye, FaEyeSlash } from 'react-icons/fa';
-import { Link, useNavigate } from 'react-router-dom';
+import { FaEye, FaEyeSlash } from "react-icons/fa";
+import { Link, useNavigate } from "react-router-dom";
 import {
   SelectorTipoTrabajo,
   SelectorTitulaciones,
 } from "./commons/SelectoresTrabajo";
 
-const Perfilusuario = () => {
-
+export default function Perfilusuario() {
   const navigate = useNavigate();
-  if (sessionStorage.getItem('usuario') == null) { navigate('/login'); } 
- 
+  if (sessionStorage.getItem("usuario") == null) {
+    navigate("/login");
+  }
+
   const { t } = useTranslation();
   const {
     register,
@@ -51,13 +52,15 @@ const Perfilusuario = () => {
     }
   };
 
-  const user = JSON.parse(sessionStorage.getItem('usuario'));
-  const profilePhoto = user && user['foto-perfil'] ? user['foto-perfil'] : "/assets/no_photo.png";
+  const user = JSON.parse(sessionStorage.getItem("usuario"));
+  const profilePhoto =
+    user && user["foto-perfil"] ? user["foto-perfil"] : "/assets/no_photo.png";
 
-  const formattedFechaNacimiento = user && user.nacimiento ? new Date(user.nacimiento).toLocaleDateString('es-ES') : '';
+  const formattedFechaNacimiento =
+    user && user.nacimiento
+      ? new Date(user.nacimiento).toLocaleDateString("es-ES")
+      : "";
 
-  
-  
   function cambiarFoto(inp) {
     if (inp.target.files.length > 0) {
       const fichero = inp.target.files[0];
@@ -68,12 +71,11 @@ const Perfilusuario = () => {
     }
   }
 
-
   return (
     <main>
       <div className="contenedor-inicial">
         <div className="titulo">
-          <h2 className="titulo-letra">{t('mi-perfil')}</h2>
+          <h2 className="titulo-letra">{t("mi-perfil")}</h2>
         </div>
         <div className="form-container">
           <form method="get" className="pos-wrapper">
@@ -85,14 +87,16 @@ const Perfilusuario = () => {
                 <label htmlFor="portada"></label>
                 <img
                   ref={refImagen}
-                  src={`/assets/${profilePhoto}`} 
+                  src={`/assets/${profilePhoto}`}
                   alt="foto-perfil"
                   width={240}
                   height={320}
                 />
               </div>
               <div className="form-group" id="nombre">
-                <label htmlFor="nombre" className="contenido-letra">{t('nombre')}:</label>
+                <label htmlFor="nombre" className="contenido-letra">
+                  {t("nombre")}:
+                </label>
                 <input
                   className="solo-mostrar contenido-letra"
                   type="text"
@@ -107,7 +111,9 @@ const Perfilusuario = () => {
                 />
               </div>
               <div className="form-group" id="apellidos">
-                <label htmlFor="apellidos" className="contenido-letra">{t('apellidos')}:</label>
+                <label htmlFor="apellidos" className="contenido-letra">
+                  {t("apellidos")}:
+                </label>
                 <input
                   className="solo-mostrar contenido-letra"
                   type="text"
@@ -123,7 +129,9 @@ const Perfilusuario = () => {
               </div>
               <div id="parte-inferior">
                 <div className="form-group" id="correo">
-                  <label htmlFor="correo" className="contenido-letra">{t('correo')}:</label>
+                  <label htmlFor="correo" className="contenido-letra">
+                    {t("correo")}:
+                  </label>
                   <input
                     className="solo-mostrar contenido-letra"
                     type="email"
@@ -137,7 +145,9 @@ const Perfilusuario = () => {
                 </div>
                 <div className="form-group" id="contrasenia">
                   <div className="input-contrasenia">
-                    <label htmlFor="contrasena" className="contenido-letra">{t('contrasenia')}:</label>
+                    <label htmlFor="contrasena" className="contenido-letra">
+                      {t("contrasenia")}:
+                    </label>
                     <input
                       className="solo-mostrar contenido-letra"
                       defaultValue={user.clave}
@@ -164,7 +174,9 @@ const Perfilusuario = () => {
                   <br />
                 </div>
                 <div className="form-group" id="titulacion">
-                  <label htmlFor="titulacion" className="contenido-letra">{t('sel-tit')}:</label>
+                  <label htmlFor="titulacion" className="contenido-letra">
+                    {t("sel-tit")}:
+                  </label>
                   <input
                     className="solo-mostrar contenido-letra"
                     type="text"
@@ -177,7 +189,9 @@ const Perfilusuario = () => {
                   <br />
                 </div>
                 <div className="form-group" id="estilo">
-                  <label htmlFor="estilo" className="contenido-letra">{t('sel-estilo')}:</label>
+                  <label htmlFor="estilo" className="contenido-letra">
+                    {t("sel-estilo")}:
+                  </label>
                   <input
                     className="solo-mostrar contenido-letra"
                     type="text"
@@ -190,7 +204,9 @@ const Perfilusuario = () => {
                   <br />
                 </div>
                 <div className="form-group" id="direccion">
-                  <label htmlFor="direccion" className="contenido-letra">{t('direccion')}:</label>
+                  <label htmlFor="direccion" className="contenido-letra">
+                    {t("direccion")}:
+                  </label>
                   <input
                     className="solo-mostrar contenido-letra"
                     type="text"
@@ -203,7 +219,9 @@ const Perfilusuario = () => {
                   <br />
                 </div>
                 <div className="form-group" id="nacimiento">
-                  <label htmlFor="fecha_nacimiento" className="contenido-letra">{t('fecnac')}:</label>
+                  <label htmlFor="fecha_nacimiento" className="contenido-letra">
+                    {t("fecnac")}:
+                  </label>
                   <input
                     className="solo-mostrar contenido-letra"
                     type="text"
@@ -217,7 +235,13 @@ const Perfilusuario = () => {
                 </div>
               </div>
               <div className="boton-editar btn-letra">
-                <Link to="editar" className="btn btn-primary btn-letra" value="Editar">{t('editar')}</Link>
+                <Link
+                  to="editar"
+                  className="btn btn-primary btn-letra"
+                  value="Editar"
+                >
+                  {t("editar")}
+                </Link>
               </div>
             </div>
           </form>
@@ -225,6 +249,4 @@ const Perfilusuario = () => {
       </div>
     </main>
   );
-};
-
-export default Perfilusuario;
+}

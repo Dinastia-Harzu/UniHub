@@ -1,5 +1,5 @@
 import "../styles/publicar.css";
-import { useTranslation } from 'react-i18next';
+import { useTranslation } from "react-i18next";
 import {
   SelectorTipoTrabajo,
   SelectorTitulaciones,
@@ -12,24 +12,27 @@ export default function FormPublicar1({ setPagina, formData, setFormData }) {
       <section className="contenedor-formulario-publicar">
         <div className="contenedor-apartados-publicar">
           <p className="apartado actual" onClick={() => setPagina(0)}>
-            {t('detalles')}
+            {t("detalles")}
           </p>
           <p className="apartado no-actual" onClick={() => setPagina(1)}>
-            {t('multimedia')}
+            {t("multimedia")}
           </p>
-          <p className="apartado no-actual contenido-letra" onClick={() => setPagina(2)}>
-            {t('portada')}
+          <p
+            className="apartado no-actual contenido-letra"
+            onClick={() => setPagina(2)}
+          >
+            {t("portada")}
           </p>
         </div>
         <div className="formulario-publicar">
           <form>
             <div className="contenedor-apartados-formulario contenido-letra">
-              <label htmlFor="titulo">{t('titulo')}</label>
+              <label htmlFor="titulo">{t("titulo")}</label>
               <input
                 type="text"
                 name="titulo"
                 required
-                placeholder={t('introduce-tit')}
+                placeholder={t("introduce-tit")}
                 value={formData.nombre}
                 onChange={(event) =>
                   setFormData({ ...formData, nombre: event.target.value })
@@ -37,7 +40,6 @@ export default function FormPublicar1({ setPagina, formData, setFormData }) {
                 className="contenido-letra"
               ></input>
             </div>
-
             <SelectorTitulaciones
               formData={formData}
               setFormData={setFormData}
@@ -46,20 +48,22 @@ export default function FormPublicar1({ setPagina, formData, setFormData }) {
               formData={formData}
               setFormData={setFormData}
             />
-
             <div className="contenedor-apartados-formulario">
               <p>
-                <label htmlFor="palabras-clave">{t('palabras-clave')}</label>
-                <label className="texto-info-comas contenido-letra" htmlFor="palabras-clave">
+                <label htmlFor="palabras-clave">{t("palabras-clave")}</label>
+                <label
+                  className="texto-info-comas contenido-letra"
+                  htmlFor="palabras-clave"
+                >
                   {" "}
-                  ({t('separado-coma')})
+                  ({t("separado-coma")})
                 </label>
               </p>
               <input
                 type="text"
                 name="palabras-clave"
-                placeholder={t('introduce-pc')}
-                value={formData['palabras-clave']}
+                placeholder={t("introduce-pc")}
+                value={formData["palabras-clave"]}
                 onChange={(event) =>
                   setFormData({
                     ...formData,

@@ -1,74 +1,74 @@
 dialog {
-    border: none;
-    border-radius: 1em;
+  border: none;
+  border-radius: 1em;
 }
 
 dialog::backdrop {
-    background-color: rgba(0, 0, 0, 0.5)
+  background-color: rgba(0, 0, 0, 0.5)
 }
 
 .modal {
-    position: fixed;
-    z-index: 1002;
-    top: 5%;
-    left: 25%;
-    width: 45%;
-    display: none;
-    color: black;
+  position: fixed;
+  z-index: 1002;
+  top: 5%;
+  left: 25%;
+  width: 45%;
+  display: none;
+  color: black;
 }
 
 .modal.esta-abierto {
-    display: block;
-    text-align: left;
+  display: block;
+  text-align: left;
 }
 
 .boton-cerrar-modal {
-    position: absolute;
-    top: 1em;
-    cursor: pointer;
-    padding: 0.5em 0.75em 0.5em 0.75em;
-    background-color: black;
-    color: white;
-    border-radius: 0.5em;
+  position: absolute;
+  top: 1em;
+  cursor: pointer;
+  padding: 0.5em 0.75em 0.5em 0.75em;
+  background-color: black;
+  color: white;
+  border-radius: 0.5em;
 }
 
 .boton-cerrar-modal:hover,
 .boton-cerrar-modal:focus {
-    background-color: rgb(51, 51, 51);
+  background-color: rgb(51, 51, 51);
 }
 
 .boton-publicar-comentario {
-    background-color: var(--color-bg-2);
-    border: 0;
-    font-size: 1em;
-    cursor: pointer;
-    border-style: none;
+  background-color: var(--color-bg-2);
+  border: 0;
+  font-size: 1em;
+  cursor: pointer;
+  border-style: none;
 }
 
 .boton-publicar-comentario:hover,
 .boton-publicar-comentario:focus {
-    background-color: var(--color-bg);
+  background-color: var(--color-bg);
 }
 
 .contenedor-modal {
-    background-color: var(--color-bg-3);
-    border-radius: 0.45em;
-    padding: 2.8em 2em 2em;
-    position: relative;
+  background-color: var(--color-bg-3);
+  border-radius: 0.45em;
+  padding: 2.8em 2em 2em;
+  position: relative;
 }
 
 .contenedor-usuario-y-publicar {
-    display: grid;
-    grid-template-columns: 60% 40%;
-    margin: 2em 0 2em 0;
+  display: grid;
+  grid-template-columns: 60% 40%;
+  margin: 2em 0 2em 0;
 }
 
 .parrafo-valoracion {
-    margin-bottom: 0;
-    margin-top: 2em;
+  margin-bottom: 0;
+  margin-top: 2em;
 }
 
 .contenedor-modal textarea {
-    width: 97%;
-    padding: 0.5em;
+  width: 97%;
+  padding: 0.5em;
 }

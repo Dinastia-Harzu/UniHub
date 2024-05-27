@@ -55,9 +55,13 @@ const buildQuery = (params) => {
     values.push(params.titulacion);
   }
   if (params["palabras-clave"]) {
-    const palabras_clave = params["palabras-clave"].split('_');
-    conditions.push("(" + palabras_clave.map(() => "t.`palabras-clave` LIKE ?").join(" OR ") + ")");
-    values.push(...palabras_clave.map(palabra => `%${palabra}%`));
+    const palabras_clave = params["palabras-clave"].split("_");
+    conditions.push(
+      "(" +
+        palabras_clave.map(() => "t.`palabras-clave` LIKE ?").join(" OR ") +
+        ")"
+    );
+    values.push(...palabras_clave.map((palabra) => `%${palabra}%`));
   }
   if (conditions.length > 0) {
     query += " AND " + conditions.join(" AND ");

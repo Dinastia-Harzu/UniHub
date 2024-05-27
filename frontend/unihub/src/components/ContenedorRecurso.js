@@ -1,6 +1,13 @@
 import { useRef, useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faXmark, faFile, faFilePdf, faFileWord, faFileExcel, faFileLines } from "@fortawesome/free-solid-svg-icons";
+import {
+  faXmark,
+  faFile,
+  faFilePdf,
+  faFileWord,
+  faFileExcel,
+  faFileLines,
+} from "@fortawesome/free-solid-svg-icons";
 
 export default function ContenedorRecurso({
   id,
@@ -11,11 +18,17 @@ export default function ContenedorRecurso({
   const refRecurso = useRef();
   const refImagen = useRef();
   const [recursoActual, setRecursoActual] = useState("imagen_defecto");
-  const [tipoRecursoActual, settipoRecursoActual] = useState('defecto');
-  const tiposDeImagen = ['jpg', 'jpeg', 'png', 'gif', 'bmp', 'svg'];
-  const tiposDeVideo = ['mp4', 'avi', 'mov', 'wmv', 'flv', 'mkv'];
-  const tiposDeAudio = ['mp3', 'wav', 'ogg', 'flac', 'aac', 'mpeg'];
-  const tiposDeDocumento = ['pdf', 'vnd.openxmlformats-officedocument.wordprocessingml.document', 'msword', 'plain', 'vnd.openxmlformats-officedocument.spreadsheetml.sheet'];
+  const [tipoRecursoActual, settipoRecursoActual] = useState("defecto");
+  const tiposDeImagen = ["jpg", "jpeg", "png", "gif", "bmp", "svg"];
+  const tiposDeVideo = ["mp4", "avi", "mov", "wmv", "flv", "mkv"];
+  const tiposDeAudio = ["mp3", "wav", "ogg", "flac", "aac", "mpeg"];
+  const tiposDeDocumento = [
+    "pdf",
+    "vnd.openxmlformats-officedocument.wordprocessingml.document",
+    "msword",
+    "plain",
+    "vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+  ];
 
   function setRecurso() {
     const recurso_actual = refRecurso.current;
@@ -26,54 +39,49 @@ export default function ContenedorRecurso({
     if (event.key === "Enter") {
       setRecurso();
     }
-  }
+  };
   const handleKeyDownDelete = (event) => {
     if (event.key === "Enter") {
       eliminar();
     }
-  }
+  };
 
   function cambiarFoto(inp) {
     const fichero = inp.target.files[0];
-
-    if (fichero) { // Si el fichero existe (es decir) que el "files" del input tiene algo
+    if (fichero) {
       if (recursoActual !== "imagen_defecto") {
         const recursoExistenteIndex = formData.multimedia.findIndex(
           (ruta) => ruta.ruta === recursoActual.name
         );
-
         let nuevoMultimedia;
-
         if (recursoExistenteIndex !== -1) {
-          // Si existe, reemplazarlo
           nuevoMultimedia = [...formData.multimedia];
           nuevoMultimedia.splice(recursoExistenteIndex, 1);
           formData.multimedia = nuevoMultimedia;
         }
       }
-
-      let nombre_fichero = fichero.name.split('.');
+      let nombre_fichero = fichero.name.split(".");
       nombre_fichero.pop();
       nombre_fichero = nombre_fichero.join(".");
-
-      // Actualizamos formData
       const nuevoFormData = {
         ...formData,
-        multimedia: [...formData.multimedia, {
-          nombre: nombre_fichero,
-          ruta: fichero.name
-        }]
+        multimedia: [
+          ...formData.multimedia,
+          {
+            nombre: nombre_fichero,
+            ruta: fichero.name,
+          },
+        ],
       };
       setFormData(nuevoFormData);
       setRecursoActual(fichero);
-      settipoRecursoActual(fichero.type.replace(/(.*)\//g, ''));
+      settipoRecursoActual(fichero.type.replace(/(.*)\//g, ""));
     }
   }
 
   function eliminar() {
     eliminarRecurso(id);
     const ruta_recurso = refRecurso.current.value.split("\\")[2];
-
     const nuevosRecursos = formData.multimedia.filter(
       (ruta, _) => ruta.ruta !== ruta_recurso
     );
@@ -85,11 +93,9 @@ export default function ContenedorRecurso({
   }
 
   function mostrarTipoArchivo() {
-
     console.log(recursoActual);
     console.log(tipoRecursoActual);
-
-    if (tipoRecursoActual === 'defecto') { // Archivo por defecto
+    if (tipoRecursoActual === "defecto") {
       return (
         <img
           src="/assets/Foto_defecto_recurso.png"
@@ -98,10 +104,9 @@ export default function ContenedorRecurso({
           onKeyDown={handleKeyDown}
           tabIndex="0"
         />
-      )
+      );
     }
-
-    if (tiposDeImagen.includes(tipoRecursoActual)) { // Archivo de imagen
+    if (tiposDeImagen.includes(tipoRecursoActual)) {
       return (
         <img
           src={URL.createObjectURL(recursoActual)}
@@ -110,10 +115,9 @@ export default function ContenedorRecurso({
           onKeyDown={handleKeyDown}
           tabIndex="0"
         />
-      )
+      );
     }
-
-    if (tiposDeAudio.includes(tipoRecursoActual)) { // Archivo de audio
+    if (tiposDeAudio.includes(tipoRecursoActual)) {
       return (
         <div onClick={() => setRecurso()} className="contenedor-recurso-audio">
           <audio
@@ -130,10 +134,9 @@ export default function ContenedorRecurso({
             Tu navegador no soporta la reproducción de audio.
           </audio>
         </div>
-      )
+      );
     }
-
-    if (tiposDeVideo.includes(tipoRecursoActual)) { // Archivo de video
+    if (tiposDeVideo.includes(tipoRecursoActual)) {
       return (
         <video
           key={recursoActual.name}
@@ -149,16 +152,15 @@ export default function ContenedorRecurso({
           />
           Tu navegador no soporta la reproducción de videos.
         </video>
-      )
+      );
     }
-
     if (tiposDeDocumento.includes(tipoRecursoActual)) {
       return (
         <div onClick={() => setRecurso()} className="contenedor-recurso-texto">
           {determinarTipoDocumento()}
           <p>{recursoActual.name}</p>
         </div>
-      )
+      );
     }
 
     return (
@@ -166,27 +168,37 @@ export default function ContenedorRecurso({
         <FontAwesomeIcon icon={faFile} size="2x" />
         <p>{recursoActual.name}</p>
       </div>
-    )
+    );
   }
 
   function determinarTipoDocumento() {
-    if (tipoRecursoActual === 'pdf') {
-      return <FontAwesomeIcon icon={faFilePdf} size="2x" />
-    } else if (tipoRecursoActual === 'msword' || tipoRecursoActual === 'vnd.openxmlformats-officedocument.wordprocessingml.document') {
-      return <FontAwesomeIcon icon={faFileWord} size="2x" />
-    } else if (tipoRecursoActual === 'vnd.openxmlformats-officedocument.spreadsheetml.sheet') {
-      return <FontAwesomeIcon icon={faFileExcel} size="2x" />
+    if (tipoRecursoActual === "pdf") {
+      return <FontAwesomeIcon icon={faFilePdf} size="2x" />;
+    } else if (
+      tipoRecursoActual === "msword" ||
+      tipoRecursoActual ===
+        "vnd.openxmlformats-officedocument.wordprocessingml.document"
+    ) {
+      return <FontAwesomeIcon icon={faFileWord} size="2x" />;
+    } else if (
+      tipoRecursoActual ===
+      "vnd.openxmlformats-officedocument.spreadsheetml.sheet"
+    ) {
+      return <FontAwesomeIcon icon={faFileExcel} size="2x" />;
     } else {
-      return <FontAwesomeIcon icon={faFileLines} size="2x" />
+      return <FontAwesomeIcon icon={faFileLines} size="2x" />;
     }
   }
 
   return (
     <div className="contenedor-apartados-formulario contenedor-recurso">
-      <label>
-        {mostrarTipoArchivo()}
-      </label>
-      <p className="boton-eliminar-recurso" tabIndex="0" onKeyDown={handleKeyDownDelete} onClick={() => eliminar()}>
+      <label>{mostrarTipoArchivo()}</label>
+      <p
+        className="boton-eliminar-recurso"
+        tabIndex="0"
+        onKeyDown={handleKeyDownDelete}
+        onClick={() => eliminar()}
+      >
         <FontAwesomeIcon icon={faXmark} />
       </p>
       <input

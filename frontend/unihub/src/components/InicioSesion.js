@@ -2,15 +2,17 @@ import { useForm } from "react-hook-form";
 import React, { useState } from "react";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
 import "../styles/formulario.css";
-import { useTranslation } from 'react-i18next';
+import { useTranslation } from "react-i18next";
 import { URL_BASE } from "../utils/constantes";
-import axios from 'axios';
-import { useNavigate } from 'react-router-dom';
+import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
-const InicioSesion = () => {
+export default function InicioSesion() {
   const { t } = useTranslation();
   const navigate = useNavigate();
-  if(sessionStorage.getItem('usuario') != null) { navigate('../');}
+  if (sessionStorage.getItem("usuario") != null) {
+    navigate("../");
+  }
   const {
     register,
     formState: { errors },
@@ -24,37 +26,48 @@ const InicioSesion = () => {
       const response = await axios.post(`${URL_BASE}login`, {
         correo: data.correo,
         clave: data.contrasena,
-        nombre: data.nombre
+        nombre: data.nombre,
       });
 
       if (response.status === 200) {
-        setMessage(t('usuario-logueado'));
-        console.log('User data:', response.data);
-        sessionStorage.setItem('usuario', JSON.stringify(response.data));
-        navigate('../');
-
-        axios.get(`${URL_BASE}usuarios/${JSON.parse(sessionStorage.getItem('usuario')).id}`).then((result) => {
-          const userThemeFromBackend = result.data.ruta;
-
-          console.log(userThemeFromBackend);
-
-          if (document.getElementById("tema-de-usuario")) { document.head.removeChild(document.getElementById("tema-de-usuario")); }
-
-          const link = document.createElement("link");
-          link.setAttribute("id", "tema-de-usuario");
-          link.rel = "stylesheet";
-          link.href = `/assets/themes/${userThemeFromBackend}`;
-          document.head.appendChild(link);
-
-          if (userThemeFromBackend === "general-ac.css" || userThemeFromBackend === "general-ac-lg.css" || userThemeFromBackend === "general-osc-lg.css" || userThemeFromBackend === "general-osc.css") {
-            document.getElementsByClassName("logotipo").src = "/assets/W_Logotipo.PNG";
-          }
-        });
+        setMessage(t("usuario-logueado"));
+        console.log("User data:", response.data);
+        sessionStorage.setItem("usuario", JSON.stringify(response.data));
+        navigate("../");
+        axios
+          .get(
+            `${URL_BASE}usuarios/${
+              JSON.parse(sessionStorage.getItem("usuario")).id
+            }`
+          )
+          .then((result) => {
+            const userThemeFromBackend = result.data.ruta;
+            console.log(userThemeFromBackend);
+            if (document.getElementById("tema-de-usuario")) {
+              document.head.removeChild(
+                document.getElementById("tema-de-usuario")
+              );
+            }
+            const link = document.createElement("link");
+            link.setAttribute("id", "tema-de-usuario");
+            link.rel = "stylesheet";
+            link.href = `/assets/themes/${userThemeFromBackend}`;
+            document.head.appendChild(link);
+            if (
+              userThemeFromBackend === "general-ac.css" ||
+              userThemeFromBackend === "general-ac-lg.css" ||
+              userThemeFromBackend === "general-osc-lg.css" ||
+              userThemeFromBackend === "general-osc.css"
+            ) {
+              document.getElementsByClassName("logotipo").src =
+                "/assets/W_Logotipo.PNG";
+            }
+          });
       } else {
-        setMessage(t('usuario-no-logueado'));
+        setMessage(t("usuario-no-logueado"));
       }
     } catch (error) {
-      setMessage(t('usuario-no-logueado'));
+      setMessage(t("usuario-no-logueado"));
     }
   };
 
@@ -72,38 +85,37 @@ const InicioSesion = () => {
     <main>
       <div className="contenedor-inicial">
         <div className="titulo">
-          <h2 className="titulo-letra">{t('titulo-inicio-sesion')}</h2>
+          <h2 className="titulo-letra">{t("titulo-inicio-sesion")}</h2>
         </div>
-
         <div className="form-container">
           <form onSubmit={handleSubmit(onSubmit)} className="pos-wrapper">
             <div className="wrapper">
               <div id="parte-inferior">
                 <div className="form-group contenido-letra" id="correo">
-                  <label htmlFor="correo">{t('correo')}:</label>
+                  <label htmlFor="correo">{t("correo")}:</label>
                   <input
                     className="contenido-letra"
                     type="email"
                     id="correo"
                     name="correo"
-                    placeholder={t('placeholder-correo')}
+                    placeholder={t("placeholder-correo")}
                     {...register("correo", {
                       required: true,
                       pattern: /^[^\s@]+@[^\s@]+\.[^\s@]+$/i,
                     })}
                   />
                   {errors.correo?.type === "required" && (
-                    <p className="contenido-letra">{t('campo-requerido')}</p>
+                    <p className="contenido-letra">{t("campo-requerido")}</p>
                   )}
                   {errors.correo?.type === "pattern" && (
-                    <p className="contenido-letra">{t('correo-erróneo')}</p>
+                    <p className="contenido-letra">{t("correo-erróneo")}</p>
                   )}
                   <br />
                   <br />
                 </div>
                 <div className="form-group" id="contrasenia">
                   <div className="input-contrasenia contenido-letra">
-                    <label htmlFor="contrasena">{t('contrasenia')}:</label>
+                    <label htmlFor="contrasena">{t("contrasenia")}:</label>
                     <input
                       className="contenido-letra"
                       type={mostrarContrasena ? "text" : "password"}
@@ -130,24 +142,25 @@ const InicioSesion = () => {
                     </span>
                   </div>
                   {errors.contrasena?.type === "required" && (
-                    <p className="contenido-letra">{t('campo-requerido')}</p>
+                    <p className="contenido-letra">{t("campo-requerido")}</p>
                   )}
                   {errors.contrasena?.type === "pattern" && (
-                    <p className="contenido-letra">{t('contra-erróneo')}</p>
+                    <p className="contenido-letra">{t("contra-erróneo")}</p>
                   )}
                   <br />
                 </div>
               </div>
               <div className="recomendacion">
-                <span className="contenido-letra">{t('pregunta-inicio-sesion')}</span>
-                <a href="registro" className="contenido-letra">{t('regis')}</a>
+                <span className="contenido-letra">
+                  {t("pregunta-inicio-sesion")}
+                </span>
+                <a href="registro" className="contenido-letra">
+                  {t("regis")}
+                </a>
               </div>
               <div className="boton-entrar btn-letra">
-                <button
-                  type="submit"
-                  className="btn btn-primary btn-letra"
-                >
-                  {t('login')}
+                <button type="submit" className="btn btn-primary btn-letra">
+                  {t("login")}
                 </button>
               </div>
               {message && <p className="contenido-letra">{message}</p>}
@@ -157,6 +170,4 @@ const InicioSesion = () => {
       </div>
     </main>
   );
-};
-
-export default InicioSesion;
+}

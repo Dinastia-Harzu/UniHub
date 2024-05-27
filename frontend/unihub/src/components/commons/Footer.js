@@ -1,6 +1,6 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
-import { useTranslation } from 'react-i18next';
+import React from "react";
+import { Link } from "react-router-dom";
+import { useTranslation } from "react-i18next";
 
 export default function Footer() {
   const { t } = useTranslation();
@@ -9,23 +9,34 @@ export default function Footer() {
   const changeLanguage = (event) => {
     const lng = event.target.value;
     i18n.changeLanguage(lng);
+    console.log(i18n.language);
   };
 
   return (
-    <div className="navbar footer">
+    <footer className="navbar footer">
       <div className="container1">
-        <p className='btn-letra'>&copy;2024 UniHub</p>
+        <p className="btn-letra">&copy;2024 UniHub</p>
       </div>
       <div className="container2">
-        <Link to="/contacto" className='btn-letra'>{t('contacto')}</Link>
+        <Link to="/contacto" className="btn-letra">
+          {t("contacto")}
+        </Link>
       </div>
       <div className="language-selector btn-letra">
-        <select title='Selector de idioma' className="language-selector btn btn-letra" onChange={changeLanguage} defaultValue={i18n.language}>
-          <option value="en" className='btn-letra'>English</option>
-          <option value="es" className='btn-letra'>Español</option>
+        <select
+          title="Selector de idioma"
+          className="language-selector btn btn-letra"
+          onChange={changeLanguage}
+          defaultValue={i18n.language}
+        >
+          <option value="en" className="btn-letra">
+            English
+          </option>
+          <option value="es" className="btn-letra">
+            Español
+          </option>
         </select>
       </div>
-    </div>
+    </footer>
   );
 }
-

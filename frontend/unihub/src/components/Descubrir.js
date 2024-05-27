@@ -2,12 +2,15 @@ import React, { useState, useEffect } from "react";
 import { MdTune } from "react-icons/md";
 import { Link } from "react-router-dom";
 import "../styles/mis-trabajos.css";
-import { useTranslation } from 'react-i18next';
-import axios from 'axios';
+import { useTranslation } from "react-i18next";
+import axios from "axios";
 import { URL_BASE } from "../utils/constantes";
-import { SelectorTipoTrabajo, SelectorTitulaciones } from "./commons/SelectoresTrabajo";
+import {
+  SelectorTipoTrabajo,
+  SelectorTitulaciones,
+} from "./commons/SelectoresTrabajo";
 
-const Descubrir = () => {
+export default function Descubrir() {
   const { t } = useTranslation();
   const [filterOpen, setFilterOpen] = useState(false);
   const [formData, setFormData] = useState({
@@ -21,7 +24,8 @@ const Descubrir = () => {
   useEffect(() => {
     const searchParams = { ...formData };
     if (searchParams.titulacion === -1) delete searchParams.titulacion;
-    if (searchParams["tipo-trabajo"] === -1) delete searchParams["tipo-trabajo"];
+    if (searchParams["tipo-trabajo"] === -1)
+      delete searchParams["tipo-trabajo"];
     handleLoad(searchParams);
   }, []);
 
@@ -30,13 +34,14 @@ const Descubrir = () => {
   };
 
   const handleSearch = (event) => {
-    event.preventDefault(); // Evita que el formulario se envíe y la página se recargue
+    event.preventDefault();
     handleLoad(formData);
   };
 
   const handleLoad = (data) => {
     setLoading(true);
-    axios.get(`${URL_BASE}trabajos`, { params: data })
+    axios
+      .get(`${URL_BASE}trabajos`, { params: data })
       .then((response) => {
         setCardsData(response.data);
         setLoading(false);
@@ -60,30 +65,42 @@ const Descubrir = () => {
   };
 
   if (loading) {
-    return <main className="contenedor-notfound">
-      <div className="error-container">
-        <h1 className="error-title titulo-letra">Cargando...</h1>
-      </div>
-    </main>;
+    return (
+      <main className="contenedor-notfound">
+        <div className="error-container">
+          <h1 className="error-title titulo-letra">Cargando...</h1>
+        </div>
+      </main>
+    );
   }
 
   if (error) {
-    return <main className="contenedor-notfound">
-      <div className="error-container">
-        <h1 className="error-title titulo-letra">Error</h1>
-        <p className="error-message contenido-letra">{error.message}</p>
-        <div className="btn-letra"><Link to="/" className="btn home-link btn-letra">{t('btn-volver2')}</Link></div>
-      </div>
-    </main>;
+    return (
+      <main className="contenedor-notfound">
+        <div className="error-container">
+          <h1 className="error-title titulo-letra">Error</h1>
+          <p className="error-message contenido-letra">{error.message}</p>
+          <div className="btn-letra">
+            <Link to="/" className="btn home-link btn-letra">
+              {t("btn-volver2")}
+            </Link>
+          </div>
+        </div>
+      </main>
+    );
   }
 
   return (
     <main>
-      <h2 className='titulo'>{t('descubrir')}</h2>
-      <div className='actions-container'>
-        <div className='filter'>
-          <button className='filter-button' onClick={handleFilterClick} tabIndex="0">
-            <MdTune className='icon-filter' />
+      <h2 className="titulo">{t("descubrir")}</h2>
+      <div className="actions-container">
+        <div className="filter">
+          <button
+            className="filter-button"
+            onClick={handleFilterClick}
+            tabIndex="0"
+          >
+            <MdTune className="icon-filter" />
           </button>
           {filterOpen && (
             <form onSubmit={handleSearch}>
@@ -91,32 +108,46 @@ const Descubrir = () => {
                 formData={formData}
                 setFormData={setFormData}
               />
-
               <SelectorTitulaciones
                 formData={formData}
                 setFormData={setFormData}
               />
               <div className="filter-form">
-                <button type="button" className="btn btn-fondo btn-secondary contenido-letra" onClick={handleCancel}>{t('cancelar')}</button>
-                <button type="submit" className="btn btn-fondo btn-primary contenido-letra">{t('buscar')}</button>
+                <button
+                  type="button"
+                  className="btn btn-fondo btn-secondary contenido-letra"
+                  onClick={handleCancel}
+                >
+                  {t("cancelar")}
+                </button>
+                <button
+                  type="submit"
+                  className="btn btn-fondo btn-primary contenido-letra"
+                >
+                  {t("buscar")}
+                </button>
               </div>
             </form>
           )}
         </div>
       </div>
       <div className="cards-container">
-        {cardsData.map(card => (
-          <Link key={card.id} to={`/detalles/${card.id}`} className="card btn-letra">
+        {cardsData.map((card) => (
+          <Link
+            key={card.id}
+            to={`/detalles/${card.id}`}
+            className="card btn-letra"
+          >
             <img src={card.portada} alt={card.nombre} title={card.nombre} />
             <div className="card-content btn-letra">
               <h3>{card.nombre}</h3>
-              <div className='descripcion btn-letra'><p>{card.resumen}</p></div>
+              <div className="descripcion btn-letra">
+                <p>{card.resumen}</p>
+              </div>
             </div>
           </Link>
         ))}
       </div>
     </main>
   );
-};
-
-export default Descubrir;
+}

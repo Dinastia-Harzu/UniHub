@@ -1,5 +1,5 @@
 import { useForm } from "react-hook-form";
-import { useTranslation } from 'react-i18next';
+import { useTranslation } from "react-i18next";
 import {
   edadValidator,
   titulacionValidator,
@@ -8,15 +8,18 @@ import {
 import React, { useState, useRef } from "react";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
 import "../styles/formulario.css";
-import { useNavigate } from 'react-router-dom';
-import axios from 'axios';
+import { useNavigate } from "react-router-dom";
+import axios from "axios";
 import { URL_BASE } from "../utils/constantes";
-import { SelectorTitulaciones, SelectorTema } from "./commons/SelectoresTrabajo";
+import {
+  SelectorTitulaciones,
+  SelectorTema,
+} from "./commons/SelectoresTrabajo";
 
-const Registro = () => {
+export default function Registro() {
   const navigate = useNavigate();
-  if (sessionStorage.getItem('usuario') != null) {
-    navigate('../');
+  if (sessionStorage.getItem("usuario") != null) {
+    navigate("../");
   }
   const { t } = useTranslation();
   const {
@@ -29,7 +32,6 @@ const Registro = () => {
   const refPortada = useRef();
   const refImagen = useRef();
 
-
   const [formData, setFormData] = useState({
     nombre: "nuevo",
     apellidos: "nuevo",
@@ -39,9 +41,8 @@ const Registro = () => {
     direccion: "casa",
     nacimiento: "2003-02-02",
     clave: "Miclave2024&",
-    "foto-perfil": "no_photo.png"
+    "foto-perfil": "no_photo.png",
   });
-
 
   const toggleMostrarContrasena = () => {
     setMostrarContrasena(!mostrarContrasena);
@@ -78,23 +79,23 @@ const Registro = () => {
 
   const formatoFecha = (event) => {
     const date = new Date(event.target.value);
-    const fechaFormateada = date.toISOString().split('T')[0];
+    const fechaFormateada = date.toISOString().split("T")[0];
     setFormData({ ...formData, nacimiento: fechaFormateada });
     console.log(fechaFormateada);
-  }
+  };
 
   const enviarData = () => {
     console.log("enviardata");
     console.log(formData);
-    navigate('../login');
-    axios.post(`${URL_BASE}usuarios`, formData, {
-      headers: {
-        'Content-Type': 'application/json',
-      },
-    })
+    navigate("../login");
+    axios
+      .post(`${URL_BASE}usuarios`, formData, {
+        headers: {
+          "Content-Type": "application/json",
+        },
+      })
       .then((result) => {
         console.log(result);
-
       })
       .catch((err) => {
         console.log(err);
@@ -105,7 +106,7 @@ const Registro = () => {
     <main>
       <div className="contenedor-inicial">
         <div className="titulo">
-          <h2 className="titulo-letra">{t('registro')}</h2>
+          <h2 className="titulo-letra">{t("registro")}</h2>
         </div>
         <div className="form-container">
           <form className="pos-wrapper" method="get">
@@ -132,13 +133,15 @@ const Registro = () => {
                 />
               </div>
               <div className="form-group" id="nombre">
-                <label htmlFor="nombre" className="contenido-letra">{t('nombre')}:</label>
+                <label htmlFor="nombre" className="contenido-letra">
+                  {t("nombre")}:
+                </label>
                 <input
                   className="contenido-letra"
                   type="text"
                   id="nombre"
                   name="nombre"
-                  placeholder={t('placeholder-nombre')}
+                  placeholder={t("placeholder-nombre")}
                   {...register("nombre", {
                     required: true,
                     maxLength: 20,
@@ -148,20 +151,22 @@ const Registro = () => {
                   }
                 />
                 {errors.nombre?.type === "required" && (
-                  <p className="contenido-letra">{t('campo-requerido')}</p>
+                  <p className="contenido-letra">{t("campo-requerido")}</p>
                 )}
                 {errors.nombre?.type === "maxLength" && (
-                  <p className="contenido-letra">{t('nombre-largo')}</p>
+                  <p className="contenido-letra">{t("nombre-largo")}</p>
                 )}
               </div>
               <div className="form-group" id="apellidos">
-                <label htmlFor="apellidos" className="contenido-letra">{t('apellidos')}:</label>
+                <label htmlFor="apellidos" className="contenido-letra">
+                  {t("apellidos")}:
+                </label>
                 <input
                   className="contenido-letra"
                   type="text"
                   id="apellidos"
                   name="apellidos"
-                  placeholder={t('placeholder-apellidos')}
+                  placeholder={t("placeholder-apellidos")}
                   {...register("apellidos", {
                     required: true,
                     maxLength: 50,
@@ -171,21 +176,23 @@ const Registro = () => {
                   }
                 />
                 {errors.apellidos?.type === "required" && (
-                  <p className="contenido-letra">{t('campo-requerido')}</p>
+                  <p className="contenido-letra">{t("campo-requerido")}</p>
                 )}
                 {errors.apellidos?.type === "maxLength" && (
-                  <p className="contenido-letra">{t('nombre-largo')}</p>
+                  <p className="contenido-letra">{t("nombre-largo")}</p>
                 )}
               </div>
               <div id="parte-inferior">
                 <div className="form-group" id="correo">
-                  <label htmlFor="correo" className="contenido-letra">{t('correo')}:</label>
+                  <label htmlFor="correo" className="contenido-letra">
+                    {t("correo")}:
+                  </label>
                   <input
                     className="contenido-letra"
                     type="email"
                     id="correo"
                     name="correo"
-                    placeholder={t('placeholder-correo')}
+                    placeholder={t("placeholder-correo")}
                     {...register("correo", {
                       required: true,
                       pattern: /^[^\s@]+@[^\s@]+\.[^\s@]+$/i,
@@ -195,17 +202,19 @@ const Registro = () => {
                     }
                   />
                   {errors.correo?.type === "required" && (
-                    <p className="contenido-letra">{t('campo-requerido')}</p>
+                    <p className="contenido-letra">{t("campo-requerido")}</p>
                   )}
                   {errors.correo?.type === "pattern" && (
-                    <p className="contenido-letra">{t('correo-erróneo')}</p>
+                    <p className="contenido-letra">{t("correo-erróneo")}</p>
                   )}
                   <br />
                   <br />
                 </div>
                 <div className="form-group" id="contrasenia">
                   <div className="input-contrasenia">
-                    <label htmlFor="contrasena" className="contenido-letra">{t('contrasenia')}:</label>
+                    <label htmlFor="contrasena" className="contenido-letra">
+                      {t("contrasenia")}:
+                    </label>
                     <input
                       className="contenido-letra"
                       type={mostrarContrasena ? "text" : "password"}
@@ -234,12 +243,12 @@ const Registro = () => {
                       )}
                     </span>
                   </div>
-                  <p className="contenido-letra">{t('contra-reglas')}</p>
+                  <p className="contenido-letra">{t("contra-reglas")}</p>
                   {errors.contrasena?.type === "required" && (
-                    <p className="contenido-letra">{t('campo-requerido')}</p>
+                    <p className="contenido-letra">{t("campo-requerido")}</p>
                   )}
                   {errors.contrasena?.type === "pattern" && (
-                    <p className="contenido-letra">{t('contra-erróneo')}</p>
+                    <p className="contenido-letra">{t("contra-erróneo")}</p>
                   )}
                   <br />
                 </div>
@@ -249,45 +258,49 @@ const Registro = () => {
                     setFormData={setFormData}
                   />
                   {errors.titulacion?.type === "required" && (
-                    <p className="contenido-letra">{t('campo-requerido')}</p>
+                    <p className="contenido-letra">{t("campo-requerido")}</p>
                   )}
                   {errors.titulacion?.type === "validate" && (
-                    <p className="contenido-letra">{t('titulacion-obligatoria')}</p>
+                    <p className="contenido-letra">
+                      {t("titulacion-obligatoria")}
+                    </p>
                   )}
                   <br />
                   <br />
                 </div>
                 <div className="form-group" id="titulacion">
-                  <SelectorTema
-                    formData={formData}
-                    setFormData={setFormData}
-                  />
+                  <SelectorTema formData={formData} setFormData={setFormData} />
                   {errors.estilo?.type === "required" && (
-                    <p className="contenido-letra">{t('campo-requerido')}</p>
+                    <p className="contenido-letra">{t("campo-requerido")}</p>
                   )}
                   {errors.estilo?.type === "validate" && (
-                    <p className="contenido-letra">{t('estilo-obligatorio')}</p>
+                    <p className="contenido-letra">{t("estilo-obligatorio")}</p>
                   )}
                   <br />
                   <br />
                 </div>
                 <div className="form-group" id="direccion">
-                  <label htmlFor="direccion" className="contenido-letra">{t('direccion')}:</label>
+                  <label htmlFor="direccion" className="contenido-letra">
+                    {t("direccion")}:
+                  </label>
                   <input
                     className="contenido-letra"
                     type="text"
                     id="direccion"
                     name="direccion"
-                    placeholder={t('placeholder-direccion')}
+                    placeholder={t("placeholder-direccion")}
                     {...register("direccion", {
                       required: true,
                     })}
                     onChange={(event) =>
-                      setFormData({ ...formData, direccion: event.target.value })
+                      setFormData({
+                        ...formData,
+                        direccion: event.target.value,
+                      })
                     }
                   />
                   {errors.direccion?.type === "required" && (
-                    <p className="contenido-letra">{t('campo-requerido')}</p>
+                    <p className="contenido-letra">{t("campo-requerido")}</p>
                   )}
                   <br />
                   <br />
@@ -295,36 +308,47 @@ const Registro = () => {
                 <br />
                 <br />
                 <div className="form-group contenido-letra" id="nacimiento">
-                  <label htmlFor="fecha_nacimiento" className="contenido-letra">{t('fecnac')}:</label>
+                  <label htmlFor="fecha_nacimiento" className="contenido-letra">
+                    {t("fecnac")}:
+                  </label>
                   <input
                     className="contenido-letra"
                     type="date"
                     id="fecha_nacimiento"
                     name="fecha_nacimiento"
-                    placeholder={t('placeholder-fecha')}
+                    placeholder={t("placeholder-fecha")}
                     {...register("fecha_nacimiento", {
                       required: true,
                       validate: edadValidator,
                     })}
-                    onChange={(event) => formatoFecha(event)
-                    }
+                    onChange={(event) => formatoFecha(event)}
                   />
                   {errors.fecha_nacimiento?.type === "required" && (
-                    <p className="contenido-letra">{t('campo-requerido')}</p>
+                    <p className="contenido-letra">{t("campo-requerido")}</p>
                   )}
                   {errors.fecha_nacimiento?.type === "validate" && (
-                    <p className="contenido-letra">{t('mayor-edad')}</p>
+                    <p className="contenido-letra">{t("mayor-edad")}</p>
                   )}
                   <br />
                   <br />
                 </div>
               </div>
               <div className="recomendacion">
-                <span className="contenido-letra">{t('pregunta-registro')}</span>
-                <a href="login" className="contenido-letra">{t('in')}</a>
+                <span className="contenido-letra">
+                  {t("pregunta-registro")}
+                </span>
+                <a href="login" className="contenido-letra">
+                  {t("in")}
+                </a>
               </div>
               <div className="boton-entrar btn-letra">
-                <button onClick={handleSubmit(enviarData)} className="btn btn-primary btn-letra" value="Editar perfil">{t('registro')}</button>
+                <button
+                  onClick={handleSubmit(enviarData)}
+                  className="btn btn-primary btn-letra"
+                  value="Editar perfil"
+                >
+                  {t("registro")}
+                </button>
               </div>
             </div>
           </form>
@@ -332,6 +356,4 @@ const Registro = () => {
       </div>
     </main>
   );
-};
-
-export default Registro;
+}

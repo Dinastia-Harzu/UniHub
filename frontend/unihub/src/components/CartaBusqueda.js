@@ -28,20 +28,18 @@ const cardsData = [
 
 export default function CartaBusqueda({ cardsData }) {
   return (
-    <>
-      <div className="cards-container">
-        {cardsData.map((card) => (
-          <Link key={card.id} to="/trabajo" className="card">
-            <img src={card.image} alt={card.title} title={card.title} />
-            <div className="card-content contenido-letra">
-              <h3>{card.title}</h3>
-              <div className="descripcion">
-                <p>{card.description}</p>
-              </div>
+    <div className="cards-container">
+      {cardsData.map((card) => (
+        <Link key={card.id} to="/trabajo" className="card">
+          <img src={card.image} alt={card.title} title={card.title} />
+          <div className="card-content contenido-letra">
+            <h3>{card.title}</h3>
+            <div className="descripcion">
+              <p>{card.description}</p>
             </div>
-          </Link>
-        ))}
-      </div>
-    </>
+          </div>
+        </Link>
+      ))}
+    </div>
   );
 }

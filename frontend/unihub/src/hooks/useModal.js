@@ -10,11 +10,13 @@ export const useModal = (initialValue = false) => {
 
   const publicar = (event, formComentario) => {
     event.preventDefault();
-
-    axios.post(URL_BASE + "comentarios/", formComentario).then((result) => {
-      alert("Comentario enviado!");
-      window.location.reload();
-    }).catch((err) => console.log(err))
+    axios
+      .post(URL_BASE + "comentarios/", formComentario)
+      .then((result) => {
+        alert("Comentario enviado!");
+        window.location.reload();
+      })
+      .catch((err) => console.log(err));
   };
 
   return [estaAbierto, abrirModal, cerrarModal, publicar];

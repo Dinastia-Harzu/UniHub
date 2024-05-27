@@ -1,14 +1,13 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
 import { URL_BASE } from "../../utils/constantes.js";
-import { useTranslation } from 'react-i18next';
+import { useTranslation } from "react-i18next";
 
 export function SelectorTipoTrabajo({ formData, setFormData }) {
   const { t } = useTranslation();
   const [tiposTrabajo, settiposTrabajo] = useState([]);
 
   function recogerTiposTrabajo() {
-
     axios
       .get(URL_BASE + "tipos-trabajo")
       .then((result) => {
@@ -24,8 +23,9 @@ export function SelectorTipoTrabajo({ formData, setFormData }) {
 
   return (
     <div className="contenedor-apartados-formulario contenido-letra">
-      <label htmlFor="tipoTrabajo" className="contenido-letra"
-      >{t("tipo-trabajo")}</label>
+      <label htmlFor="tipoTrabajo" className="contenido-letra">
+        {t("tipo-trabajo")}
+      </label>
       <select
         id="tipoTrabajo"
         title="tipos-trabajo"
@@ -33,7 +33,10 @@ export function SelectorTipoTrabajo({ formData, setFormData }) {
         className="contenido-letra"
         defaultValue={formData.tipo}
         onChange={(event) => {
-          setFormData({ ...formData, "tipo-trabajo": parseInt(event.target.value) })
+          setFormData({
+            ...formData,
+            "tipo-trabajo": parseInt(event.target.value),
+          });
         }}
         value={formData.tipo}
       >
@@ -46,7 +49,7 @@ export function SelectorTipoTrabajo({ formData, setFormData }) {
         })}
         ;
       </select>
-    </div >
+    </div>
   );
 }
 
@@ -71,8 +74,9 @@ export function SelectorTitulaciones({ formData, setFormData }) {
 
   return (
     <div className="contenedor-apartados-formulario">
-      <label htmlFor="titulacion" className="contenido-letra"
-      >{t('titulacion')}</label>
+      <label htmlFor="titulacion" className="contenido-letra">
+        {t("titulacion")}
+      </label>
       <select
         id="titulacion"
         title="titulaciones"
@@ -116,8 +120,9 @@ export function SelectorTema({ formData, setFormData }) {
 
   return (
     <div className="contenedor-apartados-formulario">
-      <label htmlFor="tema" className="contenido-letra"
-      >{t('estilo')}</label>
+      <label htmlFor="tema" className="contenido-letra">
+        {t("estilo")}
+      </label>
       <select
         id="tema"
         title="temas"
