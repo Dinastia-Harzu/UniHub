@@ -134,5 +134,7 @@
   "ocultar-filtros": "Mostrar menos filtros",
   "usuario-no-logueado": "¡Correo o contraseña incorrectos!",
   "contra-reglas": "Debe tener un carácter especial (%,&..), una minúscula, una mayúscula y un número.",
-  "no-valoracion": "No hay valoración"
+  "no-valoracion": "No hay valoración",
+  "no-autorizado": "No autorizado",
+  "registra-o-inicia": "Regístrate o inicia sesión para continuar"
 }

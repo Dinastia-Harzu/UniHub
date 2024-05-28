@@ -28,6 +28,8 @@ import Detalles from "./components/Detalles.js";
 import { URL_BASE } from "./utils/constantes.js";
 
 import axios from "axios";
+import RutasProtegidas from "./RutasProtegidas.js";
+import NoAutorizado from "./components/NoAutorizado.js";
 
 export default function App() {
   const [userTheme, setUserTheme] = useState("");
@@ -91,8 +93,12 @@ export default function App() {
           <Route path="/">
             <Route index element={<Inicio />} />
             <Route path="buscar" element={<Busqueda />} />
-            <Route path="perfil" element={<Perfilusuario />} />
-            <Route path="perfil/editar" element={<EditarPerfil />} />
+            <Route element={<RutasProtegidas />}>
+              <Route path="perfil" element={<Perfilusuario />} />
+            </Route>
+            <Route element={<RutasProtegidas />}>
+              <Route path="perfil/editar" element={<EditarPerfil />} />
+            </Route>
             <Route path="login" element={<InicioSesion />} />
             <Route path="registro" element={<Registro />} />
             <Route path="detalles/:id" element={<Detalles />} />
@@ -103,6 +109,7 @@ export default function App() {
             <Route path="algo" element={<Inicio />}>
               <Route path="lol" element={<MisTrabajos />} />
             </Route>
+            <Route path="no-autorizado" element={<NoAutorizado />} />
             <Route path="*" element={<NotFound />} />
           </Route>
         </Routes>

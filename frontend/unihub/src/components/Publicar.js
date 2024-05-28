@@ -24,7 +24,7 @@ export default function Publicar() {
   const [formData, setFormData] = useState({
     nombre: "",
     tipo: 1,
-    autor: 14,
+    autor: sessionStorage.getItem("usuario") ? sessionStorage.getItem("usuario").id : -1,
     titulacion: 1,
     publicacion: new Date(
       new Date().getTime() - new Date().getTimezoneOffset() * 60 * 1000
