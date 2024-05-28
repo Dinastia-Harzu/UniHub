@@ -33,7 +33,6 @@ exports.loginPOST = function (body) {
         } else {
           if (filas.length == 0) {
             reject(responder(403, { motivo: "No existe este usuario" }));
-            console.log(body.correo);
           } else {
             resolve(
               responder(200, {

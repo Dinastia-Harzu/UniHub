@@ -35,17 +35,14 @@ import { UsuarioSesion } from "./components/commons/SessionStorage.js";
 export default function App() {
   const [userTheme, setUserTheme] = useState("");
   const idUsuarioLoggeado = UsuarioSesion("id");
-  console.log(idUsuarioLoggeado);
 
   useEffect(() => {
     if (idUsuarioLoggeado) {
-      console.log(idUsuarioLoggeado);
       axios
         .get(`${URL_BASE}usuarios/${idUsuarioLoggeado}`)
         .then((result) => {
           const userThemeFromBackend = result.data["ruta-tema"];
           setUserTheme(userThemeFromBackend);
-          console.log(userThemeFromBackend);
           if (document.getElementById("tema-de-usuario")) {
             document.head.removeChild(
               document.getElementById("tema-de-usuario")
