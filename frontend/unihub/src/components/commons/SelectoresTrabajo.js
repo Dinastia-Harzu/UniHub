@@ -14,7 +14,7 @@ export function SelectorTipoTrabajo({ formData, setFormData }) {
         settiposTrabajo(result.data);
       })
       .catch((err) => {
-        console.log(err);
+        console.error(err);
       });
   }
   useEffect(() => {
@@ -64,7 +64,7 @@ export function SelectorTitulaciones({ formData, setFormData }) {
         setTitulaciones(result.data);
       })
       .catch((err) => {
-        console.log(err);
+        console.error(err);
       });
   }
 
@@ -111,7 +111,7 @@ export function SelectorTema({ formData, setFormData }) {
         setTemas(result.data);
       })
       .catch((err) => {
-        console.log(err);
+        console.error(err);
       });
   }
 

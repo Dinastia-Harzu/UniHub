@@ -60,7 +60,7 @@ export default function Publicar() {
         console.log(result);
       })
       .catch((err) => {
-        console.log(err);
+        console.error(err);
       });
     alert("Trabajo publicado!");
     window.location.replace("");

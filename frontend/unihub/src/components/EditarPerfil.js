@@ -113,7 +113,7 @@ export default function EditarPerfil() {
         console.log(result);
       })
       .catch((err) => {
-        console.log(err);
+        console.error(err);
       });
   };
 

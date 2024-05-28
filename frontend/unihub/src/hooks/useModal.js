@@ -16,7 +16,7 @@ export const useModal = (initialValue = false) => {
         alert("Comentario enviado!");
         window.location.reload();
       })
-      .catch((err) => console.log(err));
+      .catch((err) => console.error(err));
   };
 
   return [estaAbierto, abrirModal, cerrarModal, publicar];

@@ -20,7 +20,7 @@ export default function ContenedorComentario({ comentario }) {
         setAutorComentario(result.data);
       })
       .catch((err) => {
-        console.log(err);
+        console.error(err);
       });
   }
 
@@ -34,7 +34,7 @@ export default function ContenedorComentario({ comentario }) {
         window.location.reload();
       })
       .catch((err) => {
-        console.log(err);
+        console.error(err);
       });
   }
 
