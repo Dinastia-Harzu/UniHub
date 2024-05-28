@@ -12,13 +12,8 @@ const select = helper.select;
 const _ = require("./TrabajosService");
 const palabrasClave = require("./PalabrasClaveService");
 
-/**
- * GET Trabajos
- *
- * returns OK-GET
- **/
-const buildQuery = (params) => {
-  let query = `
+function construirConsulta(params) {
+  let sql = `
     SELECT t.*, u.nombre AS nombre_autor, tt.nombre AS nombre_tipotrabajo, tl.nombre AS nombre_titulacion
     FROM trabajo t
     JOIN usuario u ON u.id = t.autor
@@ -27,53 +22,58 @@ const buildQuery = (params) => {
     WHERE 1 = 1
     `;
 
-  let conditions = [];
-  let values = [];
+  let condiciones = [];
+  let valores = [];
 
   if (params.nombre) {
-    conditions.push("t.nombre LIKE ?");
-    values.push(`%${params.nombre}%`);
+    condiciones.push("t.nombre LIKE ?");
+    valores.push(`%${params.nombre}%`);
   }
   if (params.autor) {
-    conditions.push("CONCAT(u.nombre, ' ', u.apellidos) LIKE ?");
-    values.push(`%${params.autor}%`);
+    condiciones.push("CONCAT(u.nombre, ' ', u.apellidos) LIKE ?");
+    valores.push(`%${params.autor}%`);
   }
   if (params.autorId) {
-    conditions.push("u.id = ?");
-    values.push(params.autorId);
+    condiciones.push("u.id = ?");
+    valores.push(params.autorId);
   }
   if (params.publicacion) {
-    conditions.push("DATE(t.publicacion) = STR_TO_DATE(?, '%Y-%m-%d')");
-    values.push(params.publicacion);
+    condiciones.push("DATE(t.publicacion) = STR_TO_DATE(?, '%Y-%m-%d')");
+    valores.push(params.publicacion);
   }
   if (params["tipo-trabajo"] && params["tipo-trabajo"] != "-1") {
-    conditions.push("tt.id = ?");
-    values.push(params["tipo-trabajo"]);
+    condiciones.push("tt.id = ?");
+    valores.push(params["tipo-trabajo"]);
   }
   if (params.titulacion && params.titulacion != "-1") {
-    conditions.push("tl.id = ?");
-    values.push(params.titulacion);
+    condiciones.push("tl.id = ?");
+    valores.push(params.titulacion);
   }
   if (params["palabras-clave"]) {
     const palabras_clave = params["palabras-clave"].split("_");
-    conditions.push(
+    condiciones.push(
       "(" +
         palabras_clave.map(() => "t.`palabras-clave` LIKE ?").join(" OR ") +
         ")"
     );
-    values.push(...palabras_clave.map((palabra) => `%${palabra}%`));
+    valores.push(...palabras_clave.map((palabra) => `%${palabra}%`));
   }
-  if (conditions.length > 0) {
-    query += " AND " + conditions.join(" AND ");
+  if (condiciones.length > 0) {
+    sql += "AND " + condiciones.join("\nAND ");
   }
 
-  return { query, values };
-};
+  return { sql, valores };
+}
 
+/**
+ * GET Trabajos
+ *
+ * returns OK-GET
+ **/
 exports.trabajosGET = function (params) {
   console.log(params);
   return new Promise((resolve, reject) => {
-    const { query, values } = buildQuery(params);
+    const { query, values } = construirConsulta(params);
     console.log(query);
     console.log(values);
 
