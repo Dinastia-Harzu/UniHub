@@ -190,27 +190,27 @@ export default function Detalles() {
         </article>
         <article className="recursos-asociados ">
           <h3 className="contenido-letra">{t("recursos-multimedia")}:</h3>
-          <div>
-            {trabajo.recursos.length > 0 ? (
-              trabajo.recursos.map((recurso, idx) => (
+          {trabajo.recursos.length > 0 ? (
+            <div>
+              {trabajo.recursos.map((recurso, idx) => (
                 <ContenedorRecursoAsociado recurso={recurso} key={idx} />
-              ))
-            ) : (
-              <p>{t("no-resultados")}</p>
-            )}
-          </div>
+              ))}
+            </div>
+          ) : (
+            <p>{t("no-resultados")}</p>
+          )}
         </article>
         <article className="trabajos-similares">
           <h3 className="titulo-letra">{t("trabajos-asociados")}: </h3>
-          <div>
-            {trabajosAsociados.length > 0 ? (
-              trabajosAsociados.map((trabajo, idx) => (
+          {trabajosAsociados.length > 0 ? (
+            <div>
+              {trabajosAsociados.map((trabajo, idx) => (
                 <ContenedorTrabajoAsociado trabajo={trabajo} key={idx} />
-              ))
-            ) : (
-              <p>{t("no-resultados")}</p>
-            )}
-          </div>
+              ))}
+            </div>
+          ) : (
+            <p>{t("no-resultados")}</p>
+          )}
         </article>
         <article className="seccion-comentarios">
           <h3 className="titulo-letra">{t("comentarios")}:</h3>
