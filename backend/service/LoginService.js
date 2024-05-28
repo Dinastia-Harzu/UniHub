@@ -15,30 +15,35 @@ const _ = require("./LoginService");
  * returns Created
  **/
 exports.loginPOST = function (body) {
-    return new Promise(function (resolve, reject) {
-        conexion.query(
-            `SELECT u.*,t.nombre tema_nombre,o.nombre titulacion_nombre FROM usuario u, tema t,titulacion o WHERE correo=${$(body.correo)} AND clave=${$(body.clave)} AND titulacion = o.id AND tema = t.id`,
-            (err, filas) => {
-                if (err) {
-                    console.error(err);
-                    const codigo = helper.getHttpCodeFromErrNo(err.code);
-                    reject(
-                        responder(
-                            codigo,
-                            codigo == 400 ? respuestas[400].POST : respuestas[codigo]
-                        )
-                    );
-                } else {
-                    if (filas.length == 0) {
-                        reject(responder(403, { motivo: "No existe este usuario" }));
-                        console.log(body.correo);
-                    } else {
-                       
-                        
-                        resolve(responder(200, filas[0])); 
-                    }
-                }
-            }
-        );
-    });
+  return new Promise(function (resolve, reject) {
+    conexion.query(
+      `SELECT u.*,t.nombre tema_nombre,o.nombre titulacion_nombre FROM usuario u, tema t,titulacion o WHERE correo=${$(
+        body.correo
+      )} AND clave=${$(body.clave)} AND titulacion = o.id AND tema = t.id`,
+      (err, filas) => {
+        if (err) {
+          console.error(err);
+          const codigo = helper.getHttpCodeFromErrNo(err.code);
+          reject(
+            responder(
+              codigo,
+              codigo == 400 ? respuestas[400].POST : respuestas[codigo]
+            )
+          );
+        } else {
+          if (filas.length == 0) {
+            reject(responder(403, { motivo: "No existe este usuario" }));
+            console.log(body.correo);
+          } else {
+            resolve(
+              responder(200, {
+                usuario: filas[0],
+                token: helper.creaToken(filas[0]),
+              })
+            );
+          }
+        }
+      }
+    );
+  });
 };
