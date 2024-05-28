@@ -10,6 +10,8 @@ import {
   SelectorTipoTrabajo,
   SelectorTitulaciones,
 } from "./commons/SelectoresTrabajo";
+import Cargando from "./commons/Cargando";
+import MensajeError from "./commons/MensajeError";
 
 export default function MisTrabajos() {
   const navigate = useNavigate();
@@ -21,7 +23,7 @@ export default function MisTrabajos() {
   const [formData, setFormData] = useState({
     "tipo-trabajo": -1,
     titulacion: -1,
-    autorId: JSON.parse(sessionStorage.getItem("usuario")).id,
+    autorId: JSON.parse(sessionStorage.getItem("usuario"))?.id ?? -1,
   });
   const [cardsData, setCardsData] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -56,11 +58,6 @@ export default function MisTrabajos() {
         setError(err);
         setLoading(false);
       });
-    setFormData({
-      "tipo-trabajo": 1,
-      titulacion: 2,
-      autorId: JSON.parse(sessionStorage.getItem("usuario")).id,
-    });
   };
 
   const handleCancel = () => {
@@ -71,106 +68,88 @@ export default function MisTrabajos() {
     setFilterOpen(false);
   };
 
-  if (loading) {
-    return (
-      <main className="contenedor-notfound">
-        <div className="error-container">
-          <h1 className="error-title titulo-letra">Cargando...</h1>
-        </div>
-      </main>
-    );
-  }
-
-  if (error) {
-    return (
-      <main className="contenedor-notfound">
-        <div className="error-container">
-          <h1 className="error-title titulo-letra">Error</h1>
-          <p className="error-message contenido-letra">{error.message}</p>
-          <div className="btn-letra">
-            <Link to="/" className="btn home-link btn-letra">
-              {t("btn-volver2")}
-            </Link>
-          </div>
-        </div>
-      </main>
-    );
-  }
-
   return (
     <main>
-      <h2 className="titulo">{t("mis-trabajos")}</h2>
-      <div className="actions-container">
-        <div className="filter">
-          <button
-            className="filter-button"
-            onClick={handleFilterClick}
-            tabIndex="0"
-          >
-            <MdTune className="icon-filter" />
-          </button>
-          {filterOpen && (
-            <form onSubmit={handleSearch}>
-              <SelectorTipoTrabajo
-                formData={formData}
-                setFormData={setFormData}
-              />
-              <SelectorTitulaciones
-                formData={formData}
-                setFormData={setFormData}
-              />
-              <div className="filter-form">
-                <button
-                  type="button"
-                  className="btn btn-secondary btn-fondo contenido-letra"
-                  onClick={handleCancel}
-                >
-                  {t("cancelar")}
-                </button>
-                <button
-                  type="submit"
-                  className="btn btn-primary btn-fondo contenido-letra"
-                >
-                  {t("buscar")}
-                </button>
-              </div>
-            </form>
-          )}
-        </div>
-        {sessionStorage.getItem("usuario") ? (
-          <div className="btn-letra">
-            <Link
-              to="/publicar"
-              className="btn btn-fondo publish-button btn-primary btn-letra"
-            >
-              {t("publicar")}
-            </Link>
-          </div>
-        ) : (
-          console.log("No hay usuario registrado")
-        )}
-      </div>
-      <div className="cards-container">
-        {cardsData.map((card) => (
-          <Link
-            key={card.id}
-            to={`/detalles/${card.id}`}
-            className="card btn-letra"
-          >
-            <img
-              src={`/assets/${card.portada}`}
-              alt={card.nombre}
-              title={card.nombre}
-            />
-            <div className="card-content btn-letra">
-              <h3>{card.nombre}</h3>
-              <div className="descripcion btn-letra">
-                <p>{card.resumen}</p>
-              </div>
+      {loading ? (
+        <Cargando />
+      ) : error ? (
+        <MensajeError mensaje={error.message} />
+      ) : (
+        <>
+          <h2 className="titulo">{t("mis-trabajos")}</h2>
+          <div className="actions-container">
+            <div className="filter">
+              <button
+                className="filter-button"
+                onClick={handleFilterClick}
+                tabIndex="0"
+              >
+                <MdTune className="icon-filter" />
+              </button>
+              {filterOpen && (
+                <form onSubmit={handleSearch}>
+                  <SelectorTipoTrabajo
+                    formData={formData}
+                    setFormData={setFormData}
+                  />
+                  <SelectorTitulaciones
+                    formData={formData}
+                    setFormData={setFormData}
+                  />
+                  <div className="filter-form">
+                    <button
+                      type="button"
+                      className="btn btn-fondo btn-secondary contenido-letra"
+                      onClick={handleCancel}
+                    >
+                      {t("cancelar")}
+                    </button>
+                    <button
+                      type="submit"
+                      className="btn btn-fondo btn-primary contenido-letra"
+                    >
+                      {t("buscar")}
+                    </button>
+                  </div>
+                </form>
+              )}
             </div>
-          </Link>
-        ))}
-      </div>
+            {sessionStorage.getItem("usuario") ? (
+              <div className="btn-letra">
+                <Link
+                  to="/publicar"
+                  className="btn btn-fondo publish-button btn-primary btn-letra"
+                >
+                  {t("publicar")}
+                </Link>
+              </div>
+            ) : (
+              console.log("No hay usuario registrado")
+            )}
+          </div>
+          <div className="cards-container">
+            {cardsData.map((card) => (
+              <Link
+                key={card.id}
+                to={`/detalles/${card.id}`}
+                className="card btn-letra"
+              >
+                <img
+                  src={`/assets/${card.portada}`}
+                  alt={card.nombre}
+                  title={card.nombre}
+                />
+                <div className="card-content btn-letra">
+                  <h3>{card.nombre}</h3>
+                  <div className="descripcion btn-letra">
+                    <p>{card.resumen}</p>
+                  </div>
+                </div>
+              </Link>
+            ))}
+          </div>
+        </>
+      )}
     </main>
   );
 }
