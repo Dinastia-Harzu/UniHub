@@ -65,16 +65,25 @@ exports.usuariosIdDELETE = function (id) {
  **/
 exports.usuariosIdGET = function (id) {
   return new Promise(function (resolve, reject) {
-    conexion.query(`SELECT u.*,t.css ruta, tit.nombre titulacion from usuario u JOIN tema t on(u.tema = t.id) JOIN titulacion tit on (u.titulacion = tit.id) where u.id=${id}`, (err, res) => {
-      if (err) {
-        console.error(err);
-        reject(responder(500, respuestas[500]));
-      } else if (res.length == 0) {
-        reject(responder(204));
-      } else {
-        resolve(responder(200, res[0]));
+    conexion.query(
+      `
+        SELECT u.*, t.css \`ruta-tema\`, tit.nombre \`nombre-titulacion\`
+        FROM usuario u
+        JOIN tema t ON(u.tema = t.id)
+        JOIN titulacion tit ON(u.titulacion = tit.id)
+        WHERE u.id = ${id}
+      `,
+      (err, res) => {
+        if (err) {
+          console.error(err);
+          reject(responder(500, respuestas[500]));
+        } else if (res.length == 0) {
+          reject(responder(204));
+        } else {
+          resolve(responder(200, res[0]));
+        }
       }
-    });
+    );
   });
 };
 
