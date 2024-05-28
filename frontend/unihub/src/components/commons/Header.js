@@ -35,9 +35,7 @@ export default function Header() {
   return (
     <header>
       <div className="container1">
-        <Link to="/" className="logotipo">
-          <div className="logotipo"></div>
-        </Link>
+        <Link to="/" className="logotipo" />
       </div>
       <nav ref={navRef}>
         <div className="container2 btn-letra">
