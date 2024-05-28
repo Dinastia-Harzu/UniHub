@@ -20,17 +20,19 @@ export default function Detalles() {
   const params = useParams();
   const id_trabajo = params.id;
   const [trabajo, setTrabajo] = useState({
-    id: "",
+    id: -1,
     nombre: "",
-    autor: "",
+    tipo: -1,
+    autor: -1,
+    titulacion: -1,
     publicacion: Date(),
     resumen: "",
     portada: "",
-    recursos: [],
-    "palabras-clave": [],
-    comentarios: [],
     documento: "",
+    recursos: [],
+    comentarios: [],
     valoracion: -1,
+    "palabras-clave": [],
   });
 
   const [trabajosAsociados, setTrabajosAsociados] = useState([]);
@@ -41,15 +43,21 @@ export default function Detalles() {
   const obtenerDatosTrabajo = async () => {
     try {
       const result = await axios.get(`${URL_BASE}trabajos/${id_trabajo}`);
-      let data = result.data;
-      data.publicacion = data.publicacion.split("T").at(0);
+      const data = result.data;
+      console.log(data);
 
+      data.publicacion = data.publicacion.split("T").at(0);
       setTrabajo((prevTrabajo) => ({
         ...prevTrabajo,
         id: data.id,
         nombre: data.nombre,
+        tipo: data.tipo,
+        "nombre-tipo-trabajo": data["nombre-tipo-trabajo"],
         autor: data.autor,
+        "nombre-autor": data["nombre-autor"],
+        "apellidos-autor": data["apellidos-autor"],
         titulacion: data.titulacion,
+        "nombre-titulacion": data["nombre-titulacion"],
         publicacion: data.publicacion,
         resumen: data.resumen,
         portada: data.portada,
@@ -57,12 +65,6 @@ export default function Detalles() {
         recursos: [],
         "palabras-clave": [],
         valoracion: -1,
-      }));
-
-      const usuario = await axios.get(`${URL_BASE}usuarios/${data.autor}`);
-      setTrabajo((prevTrabajo) => ({
-        ...prevTrabajo,
-        autor: usuario.data.nombre,
       }));
 
       const recursos = await axios.get(
@@ -86,12 +88,11 @@ export default function Detalles() {
         valoraciones.push(comentario.valoracion);
       });
       if (valoraciones.length > 0) {
-        const valoracionMedia = Math.round(
-          valoraciones.reduce((a, b) => a + b) / valoraciones.length
-        );
         setTrabajo((prevTrabajo) => ({
           ...prevTrabajo,
-          valoracion: valoracionMedia,
+          valoracion: Math.round(
+            valoraciones.reduce((a, b) => a + b) / valoraciones.length
+          ),
         }));
       }
 
@@ -109,33 +110,32 @@ export default function Detalles() {
       });
       const palabras_juntas = ids.join("_");
       try {
-        const resultado = axios.get(
+        const resultado = await axios.get(
           `${URL_BASE}trabajos?titulacion=${trabajo.titulacion}`
         );
         // Cambiamos hasta que la query este arreglada
         console.log(result.data);
         setTrabajosAsociados(result.data);
       } catch (err) {
-        console.log(err);
+        console.error(err);
       }
     } catch (err) {
-      console.log(err);
+      console.error(err);
     }
   };
 
   const { i18n } = useTranslation();
 
   let palabras_clave = "";
-  console.log(trabajo["palabras-clave"]);
   if (trabajo["palabras-clave"].length > 0) {
     trabajo["palabras-clave"].map((palabra, idx) => {
       palabras_clave += `${idx != 0 ? " | " : ""}${palabra.nombre}`;
-      console.log(palabras_clave);
     });
   } else {
     palabras_clave += t("no-resultados");
   }
-  console.log(palabras_clave);
+
+  console.log(trabajo);
 
   return (
     <main className="contenedor-detalles">
@@ -161,17 +161,29 @@ export default function Detalles() {
           <h2>{trabajo.nombre}</h2>
           <dl>
             <div className="contenedor-pares-datos">
-              <dt>{t("autor")}:</dt>
-              <dd>{trabajo.autor}</dd>
+              <dt>{t("autor")}</dt>
+              <dd>{`${trabajo["apellidos-autor"]}, ${trabajo["nombre-autor"]}`}</dd>
             </div>
             <div className="contenedor-pares-datos">
-              <dt>{t("fecha-publicacion")}:</dt>
+              <dt>{t("grado-master")}</dt>
+              <dd>{t(trabajo["nombre-titulacion"])}</dd>
+            </div>
+            <div className="contenedor-pares-datos">
+              <dt>{t("tipo-trabajo")}</dt>
+              <dd>{t(trabajo["nombre-tipo-trabajo"])}</dd>
+            </div>
+            <div className="contenedor-pares-datos">
+              <dt>{t("fecha-publicacion")}</dt>
               <dd>
                 <Tiempo fechaHora={trabajo.publicacion} local={i18n.language} />
               </dd>
             </div>
             <div className="contenedor-pares-datos">
-              <dt>Valoración:</dt>
+              <dt>{t("palabras-clave")}</dt>
+              <dd>{palabras_clave}</dd>
+            </div>
+            <div className="contenedor-pares-datos">
+              <dt>{t("valoracion")}</dt>
               <dd>
                 {trabajo.valoracion != -1 ? (
                   <StarRating
@@ -185,10 +197,6 @@ export default function Detalles() {
                 )}
               </dd>
             </div>
-            <div className="contenedor-pares-datos">
-              <dt>{t("palabras-clave")}:</dt>
-              <dd>{palabras_clave}</dd>
-            </div>
           </dl>
         </article>
         <article className="resumen">
@@ -198,7 +206,7 @@ export default function Detalles() {
           <p>{trabajo.resumen}</p>
         </article>
         <article className="recursos-asociados ">
-          <h3 className="contenido-letra">{t("recursos-multimedia")}:</h3>
+          <h3 className="contenido-letra">{t("recursos-multimedia")}</h3>
           {trabajo.recursos.length > 0 ? (
             <div>
               {trabajo.recursos.map((recurso, idx) => (
@@ -210,7 +218,7 @@ export default function Detalles() {
           )}
         </article>
         <article className="trabajos-similares">
-          <h3 className="titulo-letra">{t("trabajos-asociados")}: </h3>
+          <h3 className="titulo-letra">{t("trabajos-asociados")}</h3>
           {trabajosAsociados.length > 0 ? (
             <div>
               {trabajosAsociados.map((trabajo, idx) => (
@@ -222,7 +230,7 @@ export default function Detalles() {
           )}
         </article>
         <article className="seccion-comentarios">
-          <h3 className="titulo-letra">{t("comentarios")}:</h3>
+          <h3 className="titulo-letra">{t("comentarios")}</h3>
           <div>
             <div className="contenedor-comentar">
               <ModalDetalle id_trabajo={id_trabajo} />
