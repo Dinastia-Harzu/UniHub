@@ -136,5 +136,7 @@
   "contra-reglas": "Debe tener un carácter especial (%,&..), una minúscula, una mayúscula y un número.",
   "no-valoracion": "No hay valoración",
   "no-autorizado": "No autorizado",
-  "registra-o-inicia": "Regístrate o inicia sesión para continuar"
+  "registra-o-inicia": "Regístrate o inicia sesión para continuar",
+  "grado-master": "Grado/Máster",
+  "valoracion": "Valoración"
 }
