@@ -123,16 +123,31 @@ exports.trabajosIdDELETE = function (id) {
  **/
 exports.trabajosIdGET = function (id) {
   return new Promise(function (resolve, reject) {
-    conexion.query(`SELECT * FROM trabajo WHERE id = ${id} `, (err, res) => {
-      if (err) {
-        console.error(err);
-        reject(responder(500, respuestas[500]));
-      } else if (res.length == 0) {
-        reject(responder(204));
-      } else {
-        resolve(responder(200, res[0]));
+    conexion.query(
+      `
+        SELECT
+          t.*,
+          u.nombre AS \`nombre-autor\`,
+          u.apellidos AS \`apellidos-autor\`,
+          tl.nombre AS \`nombre-titulacion\`,
+          tt.nombre AS \`nombre-tipo-trabajo\`
+        FROM trabajo t
+        JOIN usuario u ON(u.id = t.autor)
+        JOIN titulacion tl ON(tl.id = t.titulacion)
+        JOIN \`tipo-trabajo\` tt ON(tt.id = t.tipo)
+        WHERE t.id = ${id}
+      `,
+      (err, res) => {
+        if (err) {
+          console.error(err);
+          reject(responder(500, respuestas[500]));
+        } else if (res.length == 0) {
+          reject(responder(204));
+        } else {
+          resolve(responder(200, res[0]));
+        }
       }
-    });
+    );
   });
 };
 
@@ -178,93 +193,7 @@ exports.trabajosIdPUT = function (body, id) {
  **/
 exports.trabajosPOST = function (body) {
   return new Promise(function (resolve, reject) {
-    // // Insertar en la tabla TRABAJO
-    // const trabajoQuery = 'INSERT INTO TRABAJO (column1, column2, ...) VALUES (?, ?, ...)';
-    // connection.query(trabajoQuery, [trabajoData.column1, trabajoData.column2, ...], (err, result) => {
-    //   if (err) {
-    //     return connection.rollback(() => {
-    //       callback(err);
-    //     });
-    //   }
-
-    //   const idTrabajo = result.insertId;
-
-    //   // Insertar en la tabla MULTIMEDIA
-    //   const multimediaQueries = multimediaFiles.map(ruta => {
-    //     return new Promise((resolve, reject) => {
-    //       const multimediaQuery = 'INSERT INTO MULTIMEDIA (ruta, trabajo) VALUES (?, ?)';
-    //       connection.query(multimediaQuery, [ruta, idTrabajo], (err, result) => {
-    //         if (err) return reject(err);
-    //         resolve(result);
-    //       });
-    //     });
-    //   });
-
-    //   // Insertar en la tabla PALABRA-CLAVE y obtener sus IDs
-    //   const palabraClaveQueries = keywords.map(palabra => {
-    //     return new Promise((resolve, reject) => {
-    //       const palabraClaveQuery = 'INSERT INTO PALABRA_CLAVE (palabra) VALUES (?)';
-    //       connection.query(palabraClaveQuery, [palabra], (err, result) => {
-    //         if (err) return reject(err);
-    //         resolve(result.insertId);
-    //       });
-    //     });
-    //   });
-
-    //   Promise.all(multimediaQueries)
-    //     .then(() => {
-    //       return Promise.all(palabraClaveQueries);
-    //     })
-    //     .then(palabraClaveIds => {
-    //       // Insertar en la tabla PALABRA_CLAVE_TRABAJO
-    //       const palabraClaveTrabajoQueries = palabraClaveIds.map(idPalabraClave => {
-    //         return new Promise((resolve, reject) => {
-    //           const palabraClaveTrabajoQuery = 'INSERT INTO PALABRA_CLAVE_TRABAJO (id_palabra_clave, id_trabajo) VALUES (?, ?)';
-    //           connection.query(palabraClaveTrabajoQuery, [idPalabraClave, idTrabajo], (err, result) => {
-    //             if (err) return reject(err);
-    //             resolve(result);
-    //           });
-    //         });
-    //       });
-
-    //       return Promise.all(palabraClaveTrabajoQueries);
-    //     })
-    //     .then(() => {
-    //       connection.commit(err => {
-    //         if (err) {
-    //           return connection.rollback(() => {
-    //             callback(err);
-    //           });
-    //         }
-    //         callback(null, { idTrabajo });
-    //       });
-    //     })
-    //     .catch(err => {
-    //       connection.rollback(() => {
-    //         callback(err);
-    //       });
-    //     });
-
     conexion.query(
-      //   `
-      //   START TRANSACTION;
-      //   INSERT INTO trabajo VALUES (
-      //     ${$()},
-      //     ${$(body.nombre)},
-      //     ${$(body.tipo)},
-      //     ${$(body.autor)},
-      //     ${$(body.titulacion)},
-      //     ${$(body.publicacion)},
-      //     ${$(body.resumen)},
-      //     ${$(body.portada)},
-      //     ${$(body.documento)}
-      // );
-      // SET @id_trabajo = LAST_INSERT_ID();
-      // INSERT INTO \`palabra-clave\` VALUES(${$()}, ${$(palabra)});
-      // SET @id_palabra_clave = LAST_INSERT_ID();
-      // INSERT INTO \`palabra-clave-trabajo\` VALUES(@id_trabajo, @id_palabra_clave);
-      // COMMIT;
-      // `
       `
         INSERT INTO trabajo VALUES (
           ${$()},
@@ -375,90 +304,6 @@ exports.trabajosPOST = function (body) {
                 reject(err);
               });
             });
-          // let promesas = [];
-          // _.trabajosGET().then(
-          //   res => {
-          //     const trabajo = res.payload.at(-1);
-          //     for (const palabra of body["palabras-clave"]) {
-          //       promesas.push(palabrasClave.palabras_clavePOST({ nombre: palabra })
-          //         .then(r => new Promise((resolve0, reject0) => {
-          //           conexion.query(`
-          //           INSERT INTO \`palabra-clave-trabajo\` VALUES(
-          //             ${trabajo.id},
-          //             ${r.payload["palabra-clave"].id}
-          //           )
-          //         `, err => {
-          //             if (err) {
-          //               console.error(err);
-          //               reject(err);
-          //             } else {
-          //               resolve(responder(201, Object.assign({}, respuestas[201])));
-          //             }
-          //           });
-          //         }), e => { console.error(e); reject(e) }));
-          //     }
-          //     return Promise.all(promesas);
-          //   }, error => reject(error)
-          // ).then(res => {
-          //   resolve(
-          //     responder(
-          //       201,
-          //       Object.assign({}, respuestas[201], {
-          //         trabajo: res.payload.at(-1),
-          //       })
-          //     )
-          //   )
-          // }, err => { console.error(err); reject(err) });
-
-          // _.trabajosGET().then(
-          //   (res) => {
-          //     const trabajo = res.payload.at(-1);
-          //     for (const palabra of body["palabras-clave"]) {
-          //       const promesas = [];
-          //       promesas.push(
-          //         new Promise((resolve, reject) => {
-          //           conexion.query(
-          //             `
-
-          //       `,
-          //             (err) => {
-          //               if (err) {
-          //                 console.error(err);
-          //                 reject(err);
-          //               } else {
-          //                 resolve(
-          //                   responder(201, Object.assign({}, respuestas[201]))
-          //                 );
-          //               }
-          //             }
-          //           );
-          //         })
-          //       );
-          //       Promise.all(promesas).then(
-          //         () => {
-          //           resolve(
-          //             responder(
-          //               201,
-          //               Object.assign({}, respuestas[201], {
-          //                 trabajo: Object.assign(trabajo, {
-          //                   "palabras-clave": body["palabras-clave"],
-          //                 }),
-          //               })
-          //             )
-          //           );
-          //         },
-          //         (e) => {
-          //           console.error(e);
-          //           reject(e);
-          //         }
-          //       );
-          //     }
-          //   },
-          //   (error) => {
-          //     console.error(error);
-          //     reject(error);
-          //   }
-          // );
         }
       }
     );
