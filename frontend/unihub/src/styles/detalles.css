@@ -189,6 +189,10 @@ dt {
   font-weight: bold;
 }
 
+dt::after {
+  content: ":";
+}
+
 dd {
   display: flex;
 }
