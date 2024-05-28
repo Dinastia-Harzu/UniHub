@@ -38,9 +38,9 @@ export default function ContenedorComentario({ comentario }) {
   }
 
   function comprobarUsuarioComentario() {
-    const usuario = JSON.parse(sessionStorage.getItem("usuario")); // Obtenemos usuario actual
+    const usuario = JSON.parse(sessionStorage.getItem("usuario"));
 
-    if (usuario.id == comentario.autor) {
+    if (usuario?.id == comentario.autor) {
       setusuarioVerificado(true);
     }
   }
