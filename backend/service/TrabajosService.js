@@ -59,7 +59,7 @@ function construirConsulta(params) {
     valores.push(...palabras_clave.map((palabra) => `%${palabra}%`));
   }
   if (condiciones.length > 0) {
-    sql += "AND " + condiciones.join("\nAND ");
+    sql += "AND " + condiciones.join(" AND ");
   }
 
   return { sql, valores };
@@ -73,11 +73,8 @@ function construirConsulta(params) {
 exports.trabajosGET = function (params) {
   console.log(params);
   return new Promise((resolve, reject) => {
-    const { query, values } = construirConsulta(params);
-    console.log(query);
-    console.log(values);
-
-    conexion.query(query, values, (err, filas) => {
+    const { sql, valores } = construirConsulta(params);
+    conexion.query(sql, valores, (err, filas) => {
       if (err) {
         console.error(err);
         reject(responder(500, respuestas[500]));
