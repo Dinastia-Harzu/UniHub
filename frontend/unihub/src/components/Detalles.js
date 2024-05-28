@@ -105,6 +105,7 @@ export default function Detalles() {
         .get(`${URL_BASE}trabajos?titulacion=${trabajo.titulacion}`)
         .then((result) => {
           // Cambiamos hasta que la query este arreglada
+          console.log(result.data);
           setTrabajosAsociados(result.data);
         })
         .catch((err) => {
@@ -171,7 +172,7 @@ export default function Detalles() {
                 {trabajo["palabras-clave"].length > 0 ? (
                   trabajo["palabras-clave"].map((palabra, idx) => (
                     <span key={idx}>
-                      {idx != 0 ? " |" : ""} {palabra.nombre}
+                      {idx != 0 ? " | " : ""} {palabra.nombre}
                     </span>
                   ))
                 ) : (
@@ -180,18 +181,6 @@ export default function Detalles() {
               </dd>
             </div>
           </dl>
-          <p>
-            <b></b>
-          </p>
-          <p className="contenido-letra">
-            <b></b>
-          </p>
-          <p>
-            <b className="contenido-letra"></b>
-          </p>
-          <p className="contenido-letra">
-            <b></b>{" "}
-          </p>
         </article>
         <article className="resumen">
           <p className="contenido-letra">

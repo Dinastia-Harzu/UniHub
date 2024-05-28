@@ -40,7 +40,7 @@ export default function ContenedorComentario({ comentario }) {
   function comprobarUsuarioComentario() {
     const usuario = JSON.parse(sessionStorage.getItem("usuario")); // Obtenemos usuario actual
 
-    if (usuario.id == comentario.autor) {
+    if (usuario && usuario.id == comentario.autor) {
       setusuarioVerificado(true);
     }
   }

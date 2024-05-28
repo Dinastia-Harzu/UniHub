@@ -190,7 +190,7 @@ dt {
 }
 
 dd {
-  margin-bottom: 0.5em;
+  display: flex;
 }
 
 dd::before {
@@ -199,6 +199,8 @@ dd::before {
 
 .contenedor-pares-datos {
   display: flex;
+  align-items: center;
+  padding: 0.5em 0;
 }
 
 /* MEDIA QUERIES */
