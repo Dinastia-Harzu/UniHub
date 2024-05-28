@@ -12,10 +12,11 @@ import {
 } from "./commons/SelectoresTrabajo";
 import Cargando from "./commons/Cargando";
 import MensajeError from "./commons/MensajeError";
+import { UsuarioSesion } from "./commons/SessionStorage";
 
 export default function MisTrabajos() {
   const navigate = useNavigate();
-  if (sessionStorage.getItem("usuario") == null) {
+  if (!UsuarioSesion()) {
     navigate("/login");
   }
   const { t } = useTranslation();
@@ -23,7 +24,7 @@ export default function MisTrabajos() {
   const [formData, setFormData] = useState({
     "tipo-trabajo": -1,
     titulacion: -1,
-    autorId: JSON.parse(sessionStorage.getItem("usuario"))?.id ?? -1,
+    autorId: UsuarioSesion("id") ?? -1,
   });
   const [cardsData, setCardsData] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -114,18 +115,14 @@ export default function MisTrabajos() {
                 </form>
               )}
             </div>
-            {sessionStorage.getItem("usuario") ? (
-              <div className="btn-letra">
-                <Link
-                  to="/publicar"
-                  className="btn btn-fondo publish-button btn-primary btn-letra"
-                >
-                  {t("publicar")}
-                </Link>
-              </div>
-            ) : (
-              console.log("No hay usuario registrado")
-            )}
+            <div className="btn-letra">
+              <Link
+                to="/publicar"
+                className="btn btn-fondo publish-button btn-primary btn-letra"
+              >
+                {t("publicar")}
+              </Link>
+            </div>
           </div>
           <div className="cards-container">
             {cardsData.map((card) => (

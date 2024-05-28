@@ -6,11 +6,12 @@ import { useTranslation } from "react-i18next";
 import { URL_BASE } from "../utils/constantes";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import { GuardarUsuario, UsuarioSesion } from "./commons/SessionStorage";
 
 export default function InicioSesion() {
   const { t } = useTranslation();
   const navigate = useNavigate();
-  if (sessionStorage.getItem("usuario") != null) {
+  if (UsuarioSesion()) {
     navigate("../");
   }
   const {
@@ -25,8 +26,7 @@ export default function InicioSesion() {
     try {
       const response = await axios.post(`${URL_BASE}login`, {
         correo: data.correo,
-        clave: data.contrasena,
-        nombre: data.nombre,
+        clave: data.clave,
       });
 
       if (response.status === 200) {
@@ -35,24 +35,22 @@ export default function InicioSesion() {
         delete usuario.usuario;
         setMessage(t("usuario-logueado"));
         console.log(usuario);
-        sessionStorage.setItem("usuario", JSON.stringify(usuario));
+        GuardarUsuario(usuario);
         navigate("/");
 
         const resultado = await axios.get(
-          `${URL_BASE}usuarios/${
-            JSON.parse(sessionStorage.getItem("usuario")).datos.id
-          }`
+          `${URL_BASE}usuarios/${UsuarioSesion("id")}`
         );
         console.log(resultado.data);
-        const userThemeFromBackend = resultado.data.ruta;
+        const userThemeFromBackend = resultado.data["ruta-tema"];
         console.log(userThemeFromBackend);
         if (document.getElementById("tema-de-usuario")) {
           document.head.removeChild(document.getElementById("tema-de-usuario"));
         }
         const link = document.createElement("link");
         link.setAttribute("id", "tema-de-usuario");
-        link.rel = "stylesheet";
-        link.href = `/assets/themes/${userThemeFromBackend}`;
+        link.setAttribute("rel", "stylesheet");
+        link.setAttribute("href", `/assets/themes/${userThemeFromBackend}`);
         document.head.appendChild(link);
         if (
           userThemeFromBackend === "general-ac.css" ||
@@ -110,18 +108,16 @@ export default function InicioSesion() {
                   {errors.correo?.type === "pattern" && (
                     <p className="contenido-letra">{t("correo-erróneo")}</p>
                   )}
-                  <br />
-                  <br />
                 </div>
                 <div className="form-group" id="contrasenia">
                   <div className="input-contrasenia contenido-letra">
-                    <label htmlFor="contrasena">{t("contrasenia")}:</label>
+                    <label htmlFor="clave">{t("contrasenia")}:</label>
                     <input
                       className="contenido-letra"
                       type={mostrarContrasena ? "text" : "password"}
-                      id="contrasena"
-                      name="contrasena"
-                      {...register("contrasena", {
+                      id="clave"
+                      name="clave"
+                      {...register("clave", {
                         required: true,
                       })}
                     />
@@ -141,13 +137,12 @@ export default function InicioSesion() {
                       )}
                     </span>
                   </div>
-                  {errors.contrasena?.type === "required" && (
+                  {errors.clave?.type === "required" && (
                     <p className="contenido-letra">{t("campo-requerido")}</p>
                   )}
-                  {errors.contrasena?.type === "pattern" && (
+                  {errors.clave?.type === "pattern" && (
                     <p className="contenido-letra">{t("contra-erróneo")}</p>
                   )}
-                  <br />
                 </div>
               </div>
               <div className="recomendacion">

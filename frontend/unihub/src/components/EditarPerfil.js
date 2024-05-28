@@ -11,10 +11,11 @@ import {
 } from "./commons/SelectoresTrabajo";
 import "../styles/formulario.css";
 import { edadValidator } from "./validators";
+import { GuardarUsuario, UsuarioSesion } from "./commons/SessionStorage";
 
 export default function EditarPerfil() {
   const navigate = useNavigate();
-  if (sessionStorage.getItem("usuario") == null) {
+  if (!UsuarioSesion()) {
     navigate("/login");
   }
 
@@ -30,7 +31,7 @@ export default function EditarPerfil() {
   const refPortada = useRef();
   const refImagen = useRef();
 
-  const user = JSON.parse(sessionStorage.getItem("usuario"));
+  const user = UsuarioSesion();
   const profilePhoto =
     user && user["foto-perfil"] ? user["foto-perfil"] : "/assets/no_photo.png";
   const formattedFechaNacimiento =
@@ -78,15 +79,11 @@ export default function EditarPerfil() {
           console.log(response);
           if (response.status === 200) {
             setMessage(t("usuario-logueado"));
-            sessionStorage.setItem("usuario", JSON.stringify(response.data));
+            GuardarUsuario(response.data);
             axios
-              .get(
-                `${URL_BASE}usuarios/${
-                  JSON.parse(sessionStorage.getItem("usuario")).id
-                }`
-              )
+              .get(`${URL_BASE}usuarios/${UsuarioSesion("id")}`)
               .then((result) => {
-                const userThemeFromBackend = result.data.ruta;
+                const userThemeFromBackend = result.data["ruta-tema"];
                 console.log(userThemeFromBackend);
                 if (document.getElementById("tema-de-usuario")) {
                   document.head.removeChild(

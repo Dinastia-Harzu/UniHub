@@ -43,6 +43,7 @@ export default function Detalles() {
       const result = await axios.get(`${URL_BASE}trabajos/${id_trabajo}`);
       let data = result.data;
       data.publicacion = data.publicacion.split("T").at(0);
+
       setTrabajo((prevTrabajo) => ({
         ...prevTrabajo,
         id: data.id,
@@ -57,11 +58,13 @@ export default function Detalles() {
         "palabras-clave": [],
         valoracion: -1,
       }));
+
       const usuario = await axios.get(`${URL_BASE}usuarios/${data.autor}`);
       setTrabajo((prevTrabajo) => ({
         ...prevTrabajo,
         autor: usuario.data.nombre,
       }));
+
       const recursos = await axios.get(
         `${URL_BASE}multimedia/trabajo/${data.id}`
       );
@@ -69,6 +72,7 @@ export default function Detalles() {
         ...prevTrabajo,
         recursos: recursos.data,
       }));
+
       const comentarios = await axios.get(
         `${URL_BASE}comentarios/trabajo/${data.id}`
       );
@@ -76,6 +80,7 @@ export default function Detalles() {
         ...prevTrabajo,
         comentarios: comentarios.data,
       }));
+
       const valoraciones = [];
       comentarios.data.forEach((comentario) => {
         valoraciones.push(comentario.valoracion);
@@ -89,6 +94,7 @@ export default function Detalles() {
           valoracion: valoracionMedia,
         }));
       }
+
       const palabras_clave = await axios.get(
         `${URL_BASE}palabras-clave/trabajo/${data.id}`
       );
@@ -96,27 +102,39 @@ export default function Detalles() {
         ...prevTrabajo,
         "palabras-clave": palabras_clave.data,
       }));
+
       const ids = [];
       palabras_clave.data.forEach((palabra) => {
         ids.push(palabra.id);
       });
       const palabras_juntas = ids.join("_");
-      axios
-        .get(`${URL_BASE}trabajos?titulacion=${trabajo.titulacion}`)
-        .then((result) => {
-          // Cambiamos hasta que la query este arreglada
-          console.log(result.data);
-          setTrabajosAsociados(result.data);
-        })
-        .catch((err) => {
-          console.log(err);
-        });
+      try {
+        const resultado = axios.get(
+          `${URL_BASE}trabajos?titulacion=${trabajo.titulacion}`
+        );
+        // Cambiamos hasta que la query este arreglada
+        console.log(result.data);
+        setTrabajosAsociados(result.data);
+      } catch (err) {
+        console.log(err);
+      }
     } catch (err) {
       console.log(err);
     }
   };
 
   const { i18n } = useTranslation();
+
+  const palabras_clave = "";
+  console.log(trabajo["palabras-clave"]);
+  if (trabajo["palabras-clave"].length > 0) {
+    trabajo["palabras-clave"].map((palabra, idx) =>
+      palabras_clave.concat(`${idx != 0 ? " | " : ""}${palabra.nombre}`)
+    );
+  } else {
+    palabras_clave.concat(t("no-resultados"));
+  }
+  console.log(palabras_clave);
 
   return (
     <main className="contenedor-detalles">
@@ -162,23 +180,13 @@ export default function Detalles() {
                     desabilitado={true}
                   />
                 ) : (
-                  <>{t("no-valoracion")}</>
+                  t("no-valoracion")
                 )}
               </dd>
             </div>
             <div className="contenedor-pares-datos">
               <dt>{t("palabras-clave")}:</dt>
-              <dd>
-                {trabajo["palabras-clave"].length > 0 ? (
-                  trabajo["palabras-clave"].map((palabra, idx) => (
-                    <span key={idx}>
-                      {idx != 0 ? " | " : ""} {palabra.nombre}
-                    </span>
-                  ))
-                ) : (
-                  <>{t("no-resultados")}</>
-                )}
-              </dd>
+              <dd>{palabras_clave}</dd>
             </div>
           </dl>
         </article>

@@ -30,17 +30,20 @@ import { URL_BASE } from "./utils/constantes.js";
 import axios from "axios";
 import RutasProtegidas from "./RutasProtegidas.js";
 import NoAutorizado from "./components/NoAutorizado.js";
+import { UsuarioSesion } from "./components/commons/SessionStorage.js";
 
 export default function App() {
   const [userTheme, setUserTheme] = useState("");
-  const idUsuarioLoggeado = window.sessionStorage.getItem("usuario");
+  const idUsuarioLoggeado = UsuarioSesion("id");
+  console.log(idUsuarioLoggeado);
 
   useEffect(() => {
     if (idUsuarioLoggeado) {
+      console.log(idUsuarioLoggeado);
       axios
-        .get(`${URL_BASE}usuarios/${JSON.parse(idUsuarioLoggeado).id}`)
+        .get(`${URL_BASE}usuarios/${idUsuarioLoggeado}`)
         .then((result) => {
-          const userThemeFromBackend = result.data.ruta;
+          const userThemeFromBackend = result.data["ruta-tema"];
           setUserTheme(userThemeFromBackend);
           console.log(userThemeFromBackend);
           if (document.getElementById("tema-de-usuario")) {
@@ -50,8 +53,8 @@ export default function App() {
           }
           const link = document.createElement("link");
           link.setAttribute("id", "tema-de-usuario");
-          link.rel = "stylesheet";
-          link.href = `/assets/themes/${userThemeFromBackend}`;
+          link.setAttribute("rel", "stylesheet");
+          link.setAttribute("href", `/assets/themes/${userThemeFromBackend}`);
           document.head.appendChild(link);
           if (
             userThemeFromBackend === "general-ac.css" ||

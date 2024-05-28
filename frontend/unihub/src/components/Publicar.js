@@ -12,10 +12,11 @@ import axios from "axios";
 import { URL_BASE } from "../utils/constantes.js";
 import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
+import { UsuarioSesion } from "./commons/SessionStorage.js";
 
 export default function Publicar() {
   const navigate = useNavigate();
-  if (sessionStorage.getItem("usuario") == null) {
+  if (!UsuarioSesion()) {
     navigate("/login");
   }
 
@@ -24,7 +25,7 @@ export default function Publicar() {
   const [formData, setFormData] = useState({
     nombre: "",
     tipo: 1,
-    autor: sessionStorage.getItem("usuario")?.usuario?.id ?? -1,
+    autor: UsuarioSesion("id") ?? -1,
     titulacion: 1,
     publicacion: new Date(
       new Date().getTime() - new Date().getTimezoneOffset() * 60 * 1000

@@ -1,12 +1,13 @@
 import React, { useEffect, useState } from "react";
 import "../styles/inicio.css";
 import { useTranslation } from "react-i18next";
+import { UsuarioSesion } from "./commons/SessionStorage";
 
 export default function Inicio() {
   const { t } = useTranslation();
   const [correo, setCorreo] = useState("");
   useEffect(() => {
-    const usuario = JSON.parse(sessionStorage.getItem("usuario"));
+    const usuario = UsuarioSesion();
   }, []);
 
   return (

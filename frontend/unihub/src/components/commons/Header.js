@@ -3,6 +3,7 @@ import { FaBars, FaTimes } from "react-icons/fa";
 import { useTranslation } from "react-i18next";
 import "../../styles/header.css";
 import { Link, useNavigate } from "react-router-dom";
+import { UsuarioSesion } from "./SessionStorage";
 
 export default function Header() {
   const { t } = useTranslation();
@@ -10,7 +11,7 @@ export default function Header() {
   const navigate = useNavigate();
 
   useEffect(() => {
-    const usuario = JSON.parse(sessionStorage.getItem("usuario"));
+    const usuario = UsuarioSesion();
     console.log("usuario");
     console.log(usuario);
   }, []);
@@ -49,7 +50,7 @@ export default function Header() {
           >
             {t("descubrir")}
           </Link>
-          {sessionStorage.getItem("usuario") ? (
+          {UsuarioSesion() ? (
             <Link
               to="/trabajos"
               className="navbar-item btn-letra"
@@ -69,12 +70,10 @@ export default function Header() {
           </Link>
         </div>
         <div className="navbar-buttons btn-letra">
-          {sessionStorage.getItem("usuario") ? (
+          {UsuarioSesion() ? (
             <div className="contenido-letra">
-              {t("bienvenido")}
-              {", "}
-              {JSON.parse(sessionStorage.getItem("usuario")).nombre}!
-              {sessionStorage.getItem("usuario") ? (
+              {`${t("bienvenido")}, ${UsuarioSesion("nombre")}!`}
+              {UsuarioSesion() ? (
                 <Link
                   to="/perfil"
                   className="navbar-item btn-letra"

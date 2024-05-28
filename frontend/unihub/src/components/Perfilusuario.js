@@ -13,10 +13,11 @@ import {
   SelectorTipoTrabajo,
   SelectorTitulaciones,
 } from "./commons/SelectoresTrabajo";
+import { UsuarioSesion } from "./commons/SessionStorage";
 
 export default function Perfilusuario() {
   const navigate = useNavigate();
-  if (sessionStorage.getItem("usuario") == null) {
+  if (!UsuarioSesion()) {
     navigate("/login");
   }
 
@@ -52,7 +53,7 @@ export default function Perfilusuario() {
     }
   };
 
-  const user = JSON.parse(sessionStorage.getItem("usuario"));
+  const user = UsuarioSesion();
   const profilePhoto =
     user && user["foto-perfil"] ? user["foto-perfil"] : "/assets/no_photo.png";
 

@@ -6,6 +6,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEye } from "@fortawesome/free-solid-svg-icons";
 import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
+import { UsuarioSesion } from "./SessionStorage";
 
 export function ModalDetalle({ id_trabajo }) {
   const navigate = useNavigate();
@@ -21,12 +22,12 @@ export function ModalDetalle({ id_trabajo }) {
 
   return (
     <div>
-      {sessionStorage.getItem("usuario") ? (
+      {UsuarioSesion() ? (
         <p>{t("opinion-sobre-trabajo")}:</p>
       ) : (
         console.log("no puede comentar")
       )}
-      {sessionStorage.getItem("usuario") ? (
+      {UsuarioSesion() ? (
         <button
           onClick={(event) => {
             abrirModal1();

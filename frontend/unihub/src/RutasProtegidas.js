@@ -1,6 +1,6 @@
 import { Outlet, Navigate } from "react-router-dom";
+import { UsuarioSesion } from "./components/commons/SessionStorage";
 
 export default function RutasProtegidas() {
-  const usuario = sessionStorage.getItem("usuario");
-  return usuario ? <Outlet /> : <Navigate to="/no-autorizado" />
+  return UsuarioSesion() ? <Outlet /> : <Navigate to="/no-autorizado" />;
 }

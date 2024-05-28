@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import StarRating from "./commons/StarRating";
 import axios from "axios";
 import { URL_BASE } from "../utils/constantes";
+import { UsuarioSesion } from "./commons/SessionStorage";
 
 export default function ContenedorComentario({ comentario }) {
   const [autorComentario, setAutorComentario] = useState({});
@@ -38,7 +39,7 @@ export default function ContenedorComentario({ comentario }) {
   }
 
   function comprobarUsuarioComentario() {
-    const usuario = JSON.parse(sessionStorage.getItem("usuario"));
+    const usuario = UsuarioSesion();
 
     if (usuario?.id == comentario.autor) {
       setusuarioVerificado(true);

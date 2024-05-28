@@ -15,10 +15,11 @@ import {
   SelectorTitulaciones,
   SelectorTema,
 } from "./commons/SelectoresTrabajo";
+import { UsuarioSesion } from "./commons/SessionStorage";
 
 export default function Registro() {
   const navigate = useNavigate();
-  if (sessionStorage.getItem("usuario") != null) {
+  if (UsuarioSesion()) {
     navigate("../");
   }
   const { t } = useTranslation();
