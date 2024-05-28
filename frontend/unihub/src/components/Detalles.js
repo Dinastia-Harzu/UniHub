@@ -125,14 +125,15 @@ export default function Detalles() {
 
   const { i18n } = useTranslation();
 
-  const palabras_clave = "";
+  let palabras_clave = "";
   console.log(trabajo["palabras-clave"]);
   if (trabajo["palabras-clave"].length > 0) {
-    trabajo["palabras-clave"].map((palabra, idx) =>
-      palabras_clave.concat(`${idx != 0 ? " | " : ""}${palabra.nombre}`)
-    );
+    trabajo["palabras-clave"].map((palabra, idx) => {
+      palabras_clave += `${idx != 0 ? " | " : ""}${palabra.nombre}`;
+      console.log(palabras_clave);
+    });
   } else {
-    palabras_clave.concat(t("no-resultados"));
+    palabras_clave += t("no-resultados");
   }
   console.log(palabras_clave);
 
