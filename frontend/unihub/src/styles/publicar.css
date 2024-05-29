@@ -157,15 +157,17 @@
   width: fit-content;
   padding: 0.5em 0.8em;
   font-size: 1em;
-  border-radius: em;
+  border-radius: 0.5em;
   cursor: pointer;
   border-style: none;
+  transition: background-color 0.3s
 }
 
 .boton-eliminar-recurso:hover,
 .boton-eliminar-recurso:focus {
-  background-color: var(--color-secondary);
-
+  background-color: transparent;
+  color: var(--color-tertiary);
+  box-shadow: inset 0 0 0 .2em var(--color-tertiary);
 }
 
 .recurso-no-img {
