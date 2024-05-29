@@ -36,16 +36,14 @@ export default function Detalles() {
     "trabajos-asociados": [],
   });
 
-  const [trabajosAsociados, setTrabajosAsociados] = useState([]);
   useEffect(() => {
     obtenerDatosTrabajo();
-  }, []);
+  }, [params.id]);
 
   const obtenerDatosTrabajo = async () => {
     try {
       const result = await axios.get(`${URL_BASE}trabajos/${id_trabajo}`);
       const data = result.data;
-      console.log(data);
 
       data.publicacion = data.publicacion.split("T").at(0);
       setTrabajo((prevTrabajo) => ({
@@ -135,7 +133,7 @@ export default function Detalles() {
     palabras_clave += t("no-resultados");
   }
 
-  console.log(trabajo);
+  // console.log(trabajo);
 
   return (
     <main className="contenedor-detalles">
