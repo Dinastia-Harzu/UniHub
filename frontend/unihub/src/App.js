@@ -87,34 +87,29 @@ export default function App() {
 
   return (
     <BrowserRouter>
-      <>
-        <Header />
+      <Root>
         <Routes>
           <Route path="/">
             <Route index element={<Inicio />} />
-            <Route path="buscar" element={<Busqueda />} />
             <Route element={<RutasProtegidas />}>
               <Route path="perfil" element={<Perfilusuario />} />
-            </Route>
-            <Route element={<RutasProtegidas />}>
               <Route path="perfil/editar" element={<EditarPerfil />} />
+              <Route path="trabajos" element={<MisTrabajos />} />
+              <Route path="publicar" element={<Publicar />} />
             </Route>
-            <Route path="login" element={<InicioSesion />} />
-            <Route path="registro" element={<Registro />} />
-            <Route path="detalles/:id" element={<Detalles />} />
-            <Route path="publicar" element={<Publicar />} />
-            <Route path="contacto" element={<Contacto />} />
-            <Route path="trabajos" element={<MisTrabajos />} />
+            <Route element={<RutasProtegidas logueado={true} />}>
+              <Route path="login" element={<InicioSesion />} />
+              <Route path="registro" element={<Registro />} />
+            </Route>
             <Route path="descubrir" element={<Descubrir />} />
-            <Route path="algo" element={<Inicio />}>
-              <Route path="lol" element={<MisTrabajos />} />
-            </Route>
+            <Route path="buscar" element={<Busqueda />} />
+            <Route path="detalles/:id" element={<Detalles />} />
+            <Route path="contacto" element={<Contacto />} />
             <Route path="no-autorizado" element={<NoAutorizado />} />
             <Route path="*" element={<NotFound />} />
           </Route>
         </Routes>
-        <Footer />
-      </>
+      </Root>
     </BrowserRouter>
     // <RouterProvider
     //   router={createBrowserRouter(
