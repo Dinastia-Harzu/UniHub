@@ -5,7 +5,7 @@ import StarRating from "./StarRating";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEye } from "@fortawesome/free-solid-svg-icons";
 import { useTranslation } from "react-i18next";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { UsuarioSesion } from "./SessionStorage";
 
 export function ModalDetalle({ id_trabajo }) {
@@ -25,7 +25,7 @@ export function ModalDetalle({ id_trabajo }) {
       {UsuarioSesion() ? (
         <p>{t("opinion-sobre-trabajo")}:</p>
       ) : (
-        console.log("no puede comentar")
+        <p>Inicia sesión o regístrate para comentar</p>
       )}
       {UsuarioSesion() ? (
         <button
@@ -38,7 +38,9 @@ export function ModalDetalle({ id_trabajo }) {
           {t("comentar")}
         </button>
       ) : (
-        console.log("no puede comentar")
+        <Link to={"/login"} className="btn btn-fondo">
+          Inicia sesión
+        </Link>
       )}
       <Modal estaAbierto={modalEstaAbierto1} cerrarModal={cerrarModal1}>
         <form>
