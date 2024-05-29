@@ -1843,9 +1843,21 @@ components:
         resumen:
           type: string
         portada:
-          type: string
+          type: object
+          properties:
+            ruta:
+              type: string
+            fichero:
+              type: string
+              format: binary
         documento:
-          type: string
+          type: object
+          properties:
+            ruta:
+              type: string
+            fichero:
+              type: string
+              format: binary
         multimedia:
           type: array
           items:
@@ -1855,6 +1867,9 @@ components:
                 type: string
               ruta:
                 type: string
+              fichero:
+                type: string
+                format: binary
         palabras-clave:
           type: array
           items:
@@ -1996,7 +2011,7 @@ components:
       example:
         "500": Ha ocurrido un error interno en el servidor.
   requestBodies:
-    Login: 
+    Login:
       content:
         application/json:
           schema:
