@@ -74,7 +74,7 @@ export default function FormPublicar2({ setPagina, formData, setFormData }) {
               className="btn btn-anyadir-recurso btn-letra"
               onClick={(event) => agregarRecurso(event)}
             >
-              {t("aniadir-recurso")}
+              {t("agregar-recurso")}
             </button>
           </form>
         </div>

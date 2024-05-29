@@ -70,6 +70,7 @@ export default function ContenedorRecurso({
           {
             nombre: nombre_fichero,
             ruta: fichero.name,
+            fichero: fichero,
           },
         ],
       };
@@ -193,14 +194,14 @@ export default function ContenedorRecurso({
   return (
     <div className="contenedor-apartados-formulario contenedor-recurso">
       <label>{mostrarTipoArchivo()}</label>
-      <p
+      <button
         className="boton-eliminar-recurso"
         tabIndex="0"
         onKeyDown={handleKeyDownDelete}
-        onClick={() => eliminar()}
+        onClick={eliminar}
       >
         <FontAwesomeIcon icon={faXmark} />
-      </p>
+      </button>
       <input
         ref={refRecurso}
         type="file"

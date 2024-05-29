@@ -35,6 +35,7 @@ export default function Publicar() {
     resumen: "",
     portada: "",
     documento: "",
+    "rutas-multimedia": [],
     multimedia: [],
     "palabras-clave": [],
   });
@@ -58,12 +59,10 @@ export default function Publicar() {
       .post(`${URL_BASE}trabajos`, formData)
       .then((result) => {
         console.log(result);
+        alert("Trabajo publicado!");
+        navigate("/trabajos");
       })
-      .catch((err) => {
-        console.error(err);
-      });
-    alert("Trabajo publicado!");
-    window.location.replace("");
+      .catch((err) => console.error(err));
   }
 
   return (
@@ -134,7 +133,7 @@ export default function Publicar() {
             <button
               className="btn btn-fondo btn-letra"
               hidden={!(pagina === 2)}
-              onClick={() => enviarData()}
+              onClick={enviarData}
             >
               {t("publicar")}
             </button>

@@ -203,8 +203,8 @@ exports.trabajosPOST = function (body) {
           ${$(body.titulacion)},
           ${$(body.publicacion)},
           ${$(body.resumen)},
-          ${$(body.portada)},
-          ${$(body.documento)}
+          ${$(body.portada.ruta)},
+          ${$(body.documento.ruta)}
         );`,
       (err, res) => {
         if (err) {
@@ -218,6 +218,7 @@ exports.trabajosPOST = function (body) {
           );
         } else {
           const id_trabajo = res.insertId;
+          console.log(body);
           const inserciones_multimedia = body.multimedia.map((multimedia) => {
             return new Promise((resolve, reject) => {
               conexion.query(
@@ -309,3 +310,17 @@ exports.trabajosPOST = function (body) {
     );
   });
 };
+
+function subirFicherosTrabajo(req, res) {
+  console.log(req);
+  console.log(res);
+  helper.guardarFicheroNube.fields([
+    { name: "portada", maxCount: 1 },
+    { name: "documento", maxCount: 1 },
+    { name: "multimedia" },
+  ])(req, res, (err) => {
+    if (err) {
+      console.error(err);
+    }
+  });
+}
