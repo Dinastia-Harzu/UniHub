@@ -95,6 +95,10 @@ export default function App() {
               <Route path="perfil" element={<Perfilusuario />} />
               <Route path="perfil/editar" element={<EditarPerfil />} />
               <Route path="trabajos" element={<MisTrabajos />} />
+              <Route
+                path="trabajos/editar/:id"
+                element={<Publicar editartrabajo={true} />}
+              />
               <Route path="publicar" element={<Publicar />} />
             </Route>
             <Route element={<RutasProtegidas logueado={true} />}>

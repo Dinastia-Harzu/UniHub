@@ -7,18 +7,16 @@ import FormPublicar1 from "./FormPublicar1.js";
 import FormPublicar2 from "./FormPublicar2.js";
 import FormPublicar3 from "./FormPublicar3.js";
 import "../styles/publicar.css";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import axios from "axios";
 import { URL_BASE } from "../utils/constantes.js";
 import { useTranslation } from "react-i18next";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { UsuarioSesion } from "./commons/SessionStorage.js";
 
-export default function Publicar() {
+export default function Publicar({ editartrabajo = false }) {
   const navigate = useNavigate();
-  if (!UsuarioSesion()) {
-    navigate("/login");
-  }
+  const params = useParams();
 
   const { t } = useTranslation();
   const [pagina, setPagina] = useState(0);
@@ -39,6 +37,49 @@ export default function Publicar() {
     multimedia: [],
     "palabras-clave": [],
   });
+
+  useEffect(() => {
+    if (editartrabajo) {
+      axios
+        .get(`${URL_BASE}trabajos/${params.id}`)
+        .then((result) => {
+          // Cambiamos los valores del FormData (solo las variables que coincidan)
+          const formDataFiltrado = Object.keys(formData).reduce((acc, key) => {
+            if (result.data.hasOwnProperty(key)) {
+              acc[key] = result.data[key];
+            }
+            acc["publicacion"] = new Date(
+              new Date().getTime() - new Date().getTimezoneOffset() * 60 * 1000
+            )
+              .toISOString()
+              .split("T")[0];
+            return acc;
+          }, {});
+          console.log(formDataFiltrado);
+          setFormData((prevFormData) => ({
+            ...prevFormData,
+            ...formDataFiltrado,
+          }));
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+
+      // Actualizamos palabras clave
+      axios
+        .get(`${URL_BASE}palabras-clave/trabajo/${params.id}`)
+        .then((result) => {
+          // Actualizamos formData
+          setFormData((prevFormData) => ({
+            ...prevFormData,
+            "palabras-clave": result.data.map((item) => item.nombre),
+          }));
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    }
+  }, []);
 
   function adelantarPagina(event) {
     setPagina(pagina + 1);
