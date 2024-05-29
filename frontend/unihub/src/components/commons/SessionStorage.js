@@ -27,5 +27,7 @@ export function InsertarEnSS(clave, valor) {
 }
 
 export function GuardarUsuario(datos) {
+  datos.datos = datos.usuario;
+  delete datos.usuario;
   InsertarEnSS("usuario", datos);
 }

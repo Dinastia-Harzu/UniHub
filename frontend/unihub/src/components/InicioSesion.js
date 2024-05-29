@@ -31,8 +31,6 @@ export default function InicioSesion() {
 
       if (response.status === 200) {
         const usuario = response.data;
-        usuario.datos = usuario.usuario;
-        delete usuario.usuario;
         setMessage(t("usuario-logueado"));
         console.log(usuario);
         GuardarUsuario(usuario);
