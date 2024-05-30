@@ -47,6 +47,7 @@ const connection = mysql.createConnection({
     return useDefaultTypeCasting();
   },
   multipleStatements: true,
+  charset: "utf8mb4",
 });
 
 function getHttpCodeFromErrNo(errno) {
