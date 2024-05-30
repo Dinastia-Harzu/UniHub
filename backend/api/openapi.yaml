@@ -16,7 +16,7 @@ paths:
   /login:
     post:
       tags:
-        - login
+        - Login
       description: POST login
       operationId: loginPOST
       requestBody:
@@ -2024,7 +2024,7 @@ components:
       required: true
     Trabajo:
       content:
-        application/json:
+        multipart/form-data:
           schema:
             $ref: "#/components/schemas/ReqTrabajo"
       required: true
