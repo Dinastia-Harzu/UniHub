@@ -310,17 +310,3 @@ exports.trabajosPOST = function (body) {
     );
   });
 };
-
-function subirFicherosTrabajo(req, res) {
-  console.log(req);
-  console.log(res);
-  helper.guardarFicheroNube.fields([
-    { name: "portada", maxCount: 1 },
-    { name: "documento", maxCount: 1 },
-    { name: "multimedia" },
-  ])(req, res, (err) => {
-    if (err) {
-      console.error(err);
-    }
-  });
-}
