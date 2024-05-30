@@ -42,16 +42,15 @@ export default function ContenedorRecurso({
   async function setValorImagenes() {
     const recurso = formData.multimedia.at(id);
     // Creamos un archivo
-    fetch(`assets/${recurso.ruta}`).then((res) => {
-      console.log(res.url.split("/").pop());
+    if (recurso) {
       setRecursoActual({
-        url: res.url.split("/").pop(),
+        url: recurso.ruta,
         name: recurso.nombre,
         type: recurso.ruta.split(".").pop().toLowerCase(),
       });
-    });
-    settipoRecursoActual(recurso.ruta.split(".").pop().toLowerCase());
-    setRecursoDeAntes(true);
+      settipoRecursoActual(recurso.ruta.split(".").pop().toLowerCase());
+      setRecursoDeAntes(true);
+    }
   }
 
   function setRecurso() {
@@ -101,15 +100,22 @@ export default function ContenedorRecurso({
       setFormData(nuevoFormData);
       setRecursoActual(fichero);
       settipoRecursoActual(fichero.type.replace(/(.*)\//g, ""));
+      setRecursoDeAntes(false);
     }
   }
 
   function eliminar() {
     eliminarRecurso(id);
     const ruta_recurso = refRecurso.current.value.split("\\")[2];
-    const nuevosRecursos = formData.multimedia.filter(
+    let nuevosRecursos = formData.multimedia.filter(
       (ruta, _) => ruta.ruta !== ruta_recurso
     );
+    if (recursoDeAntes) {
+      nuevosRecursos = formData.multimedia.filter(
+        (ruta, _) => ruta.ruta !== recursoActual.url,
+        console.log(recursoActual.url)
+      );
+    }
     const nuevoFormData = {
       ...formData,
       multimedia: nuevosRecursos,
@@ -118,8 +124,6 @@ export default function ContenedorRecurso({
   }
 
   function mostrarTipoArchivo() {
-    // console.log(recursoActual);
-    // console.log(tipoRecursoActual);
     if (tipoRecursoActual === "defecto") {
       return (
         <img
@@ -162,7 +166,7 @@ export default function ContenedorRecurso({
                   : URL.createObjectURL(recursoActual)
               }
               alt={recursoActual.name}
-              type={recursoActual.type}
+              type="audio/mpeg"
             />
             Tu navegador no soporta la reproducción de audio.
           </audio>
@@ -185,7 +189,7 @@ export default function ContenedorRecurso({
                 : URL.createObjectURL(recursoActual)
             }
             alt={recursoActual.name}
-            type={recursoActual.type}
+            type="video/mp4"
           />
           Tu navegador no soporta la reproducción de videos.
         </video>
