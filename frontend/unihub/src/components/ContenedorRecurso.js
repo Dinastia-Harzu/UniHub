@@ -9,6 +9,7 @@ import {
   faFileLines,
 } from "@fortawesome/free-solid-svg-icons";
 import { useParams } from "react-router-dom";
+import { URL_BASE } from "../utils/constantes";
 
 export default function ContenedorRecurso({
   id,
@@ -41,15 +42,19 @@ export default function ContenedorRecurso({
 
   async function setValorImagenes() {
     const recurso = formData.multimedia.at(id);
+    console.log(recurso);
     // Creamos un archivo
-    fetch(`assets/${recurso.ruta}`).then((res) => {
-      console.log(res.url.split("/").pop());
-      setRecursoActual({
-        url: res.url.split("/").pop(),
-        name: recurso.nombre,
-        type: recurso.ruta.split(".").pop().toLowerCase(),
-      });
+    const res = await fetch(`${URL_BASE}${recurso.ruta}`);
+    console.log(res);
+    const blob = await res.blob();
+    const fichero = new File([blob], recurso.ruta, { type: blob.type });
+    console.log(fichero);
+    setRecursoActual({
+      url: URL_BASE + recurso.ruta,
+      name: recurso.nombre,
+      type: blob.type,
     });
+    console.log(recursoActual);
     settipoRecursoActual(recurso.ruta.split(".").pop().toLowerCase());
     setRecursoDeAntes(true);
   }
@@ -118,8 +123,6 @@ export default function ContenedorRecurso({
   }
 
   function mostrarTipoArchivo() {
-    // console.log(recursoActual);
-    // console.log(tipoRecursoActual);
     if (tipoRecursoActual === "defecto") {
       return (
         <img
@@ -136,7 +139,7 @@ export default function ContenedorRecurso({
         <img
           src={
             recursoDeAntes
-              ? `/assets/${recursoActual.url}`
+              ? recursoActual.url
               : URL.createObjectURL(recursoActual)
           }
           alt={recursoActual.name}
@@ -147,6 +150,7 @@ export default function ContenedorRecurso({
       );
     }
     if (tiposDeAudio.includes(tipoRecursoActual)) {
+      console.log(recursoActual.type);
       return (
         <div onClick={() => setRecurso()} className="contenedor-recurso-audio">
           <audio
@@ -158,7 +162,7 @@ export default function ContenedorRecurso({
             <source
               src={
                 recursoDeAntes
-                  ? `/assets/${recursoActual.url}`
+                  ? recursoActual.url
                   : URL.createObjectURL(recursoActual)
               }
               alt={recursoActual.name}
@@ -181,7 +185,7 @@ export default function ContenedorRecurso({
           <source
             src={
               recursoDeAntes
-                ? `/assets/${recursoActual.url}`
+                ? recursoActual.url
                 : URL.createObjectURL(recursoActual)
             }
             alt={recursoActual.name}
