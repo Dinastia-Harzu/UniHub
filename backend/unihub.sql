@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 29-05-2024 a las 15:26:10
+-- Tiempo de generación: 30-05-2024 a las 19:54:08
 -- Versión del servidor: 10.4.32-MariaDB
 -- Versión de PHP: 8.2.12
 
@@ -40,10 +40,7 @@ CREATE TABLE `comentario` (
 --
 
 INSERT INTO `comentario` (`id`, `autor`, `trabajo`, `comentario`, `valoracion`) VALUES
-(35, 14, 3, 'fdgdfg', 3),
-(36, 14, 1, 'adsdasd', 4),
-(37, 14, 5, '', 0),
-(38, 14, 6, 'dadsdad', 5);
+(36, 14, 1, 'Buen trabajo, la verdad.', 4);
 
 -- --------------------------------------------------------
 
@@ -63,25 +60,11 @@ CREATE TABLE `multimedia` (
 --
 
 INSERT INTO `multimedia` (`id`, `nombre`, `ruta`, `trabajo`) VALUES
-(1, 'muestra1', 'muestra1.png', 2),
-(2, 'clase15', 'clase15.js', 3),
-(3, 'unihub', 'unihub.sql', 3),
-(4, 'clase15', 'clase15.html', 3),
-(5, 'SFML-Game-Developme-By-Example', 'SFML-Game-Developme-By-Example.pdf', 6),
-(6, 'tileset', 'tileset.png', 6),
-(7, 'Google_C_Style_Guide', 'Google_C_Style_Guide.pdf', 7),
-(8, 'tileset', 'tileset.png', 7),
-(9, 'clase15', 'clase15.html', 8),
-(10, 'tileset', 'tileset.png', 17),
-(11, 'clase15', 'clase15.html', 17),
-(12, 'clase15', 'clase15.html', 17),
-(13, 'string', 'string', 19),
-(14, 'string', 'string', 20),
-(15, 'clase15', 'clase15.html', 21),
-(16, 'tileset', 'tileset.png', 21),
-(17, 'SFML-Game-Developme-By-Example', 'SFML-Game-Developme-By-Example.pdf', 21),
-(18, 'Google_C_Style_Guide', 'Google_C_Style_Guide.pdf', 22),
-(19, 'tileset', 'tileset.png', 22);
+(77, 'imagen_2024-05-30_142253388', 'nube/trabajos/multimedia/imagen_2024-05-30_142253388.png', 58),
+(78, 'skull-gif', 'nube/trabajos/multimedia/skull-gif.gif', 58),
+(79, 'skull-gif-lowres', 'nube/trabajos/multimedia/skull-gif-lowres.gif', 58),
+(80, 'pedro-bernabe-ciclo', 'nube/trabajos/multimedia/pedro-bernabe-ciclo.png', 58),
+(81, 'tiles_tiny_sample_2', 'nube/trabajos/multimedia/tiles_tiny_sample_2.png', 58);
 
 -- --------------------------------------------------------
 
@@ -99,34 +82,9 @@ CREATE TABLE `palabra-clave` (
 --
 
 INSERT INTO `palabra-clave` (`id`, `nombre`) VALUES
-(1, 'animacion'),
-(2, 'videojuego'),
-(3, 'ia'),
-(4, 'motor'),
-(5, 'juego'),
-(6, 'trabajo'),
-(7, 'mola'),
-(8, 'ai'),
-(9, 'si'),
-(10, 'no'),
-(11, 'puede'),
-(12, 'si'),
-(13, 'no'),
-(14, 'puede'),
-(15, 'sdfsdf'),
-(16, 'si'),
-(17, 'no'),
-(18, 'puede'),
-(19, 'mola'),
-(20, 'ai'),
-(21, 'string'),
-(22, 'string'),
-(23, 'si'),
-(24, 'no'),
-(25, 'puede'),
-(26, 'si'),
-(27, 'no'),
-(28, 'puede');
+(120, 'videojuego'),
+(121, 'motor'),
+(122, 'shaders');
 
 -- --------------------------------------------------------
 
@@ -144,33 +102,9 @@ CREATE TABLE `palabra-clave-trabajo` (
 --
 
 INSERT INTO `palabra-clave-trabajo` (`id-trabajo`, `id-palabra-clave`) VALUES
-(2, 2),
-(2, 3),
-(2, 4),
-(2, 5),
-(2, 6),
-(3, 7),
-(3, 8),
-(4, 9),
-(4, 10),
-(4, 11),
-(5, 12),
-(5, 13),
-(5, 14),
-(6, 15),
-(7, 16),
-(7, 17),
-(7, 18),
-(8, 19),
-(8, 20),
-(19, 21),
-(20, 22),
-(21, 23),
-(21, 24),
-(21, 25),
-(22, 26),
-(22, 27),
-(22, 28);
+(58, 120),
+(58, 121),
+(58, 122);
 
 -- --------------------------------------------------------
 
@@ -284,27 +218,8 @@ CREATE TABLE `trabajo` (
 --
 
 INSERT INTO `trabajo` (`id`, `nombre`, `tipo`, `autor`, `titulacion`, `publicacion`, `resumen`, `portada`, `documento`) VALUES
-(1, 'Realización de un cortometraje de animación en 3D', 1, 14, 1, '2024-05-02', 'Este trabajo consiste en la realización de un cortometraje que narra el día de un niño a través de la caracterización de un avión de papel. Este día comienza en el colegio y, al terminar las clases, se va al parque a disfrutar de su entorno...', 'portada.png', 'documento.pdf'),
-(2, 'Melatonia', 2, 14, 1, '2024-05-23', 'Trabajo chulo', 'miportada.jpg', 'melatonia.pdf'),
-(3, 'Trabajo mierdecilla', 1, 14, 3, '2024-05-26', 'luhluihuh', 'tileset.png', 'SFML-Game-Developme-By-Example.pdf'),
-(4, 'Hola', 1, 14, 12, '2024-05-28', 'Escribe un resumen sobre el trabajo...', 'tileset.png', 'SFML-Game-Developme-By-Example.pdf'),
-(5, 'Mi trabajo', 1, 24, 2, '2024-05-28', 'jkhnkhjkh', 'imagen_2024-05-28_122901639.png', 'SFML-Game-Developme-By-Example.pdf'),
-(6, 'sfsdfdsf', 1, 24, 1, '2024-05-29', 'sfdsfsdf', 'tileset.png', 'Google_C_Style_Guide.pdf'),
-(7, 'Hola', 1, 24, 26, '2024-05-29', 'llll', 'tileset.png', 'SFML-Game-Developme-By-Example.pdf'),
-(8, 'Mi trabajo', 1, 24, 26, '2024-05-29', 'assdadasdasdad', 'tileset.png', 'SFML-Game-Developme-By-Example.pdf'),
-(9, '', 1, 24, 1, '2024-05-29', '', '', ''),
-(10, '', 1, 24, 1, '2024-05-29', '', '', ''),
-(11, '', 1, 24, 1, '2024-05-29', '', '', ''),
-(13, 'string', 1, 24, 1, '2024-05-29', 'string', '{\"ruta\":\"string\",\"fichero\":\"string\"}', '{\"ruta\":\"string\",\"fichero\":\"string\"}'),
-(14, 'string', 1, 24, 1, '2024-05-29', 'string', '{\"ruta\":\"string\",\"fichero\":\"string\"}', '{\"ruta\":\"string\",\"fichero\":\"string\"}'),
-(15, 'string', 1, 24, 1, '2024-05-29', 'string', '{\"ruta\":\"string\",\"fichero\":\"string\"}', '{\"ruta\":\"string\",\"fichero\":\"string\"}'),
-(16, 'string', 1, 24, 1, '2024-05-29', 'string', '{\"ruta\":\"string\",\"fichero\":\"string\"}', '{\"ruta\":\"string\",\"fichero\":\"string\"}'),
-(17, '', 1, 24, 1, '2024-05-29', '', '', ''),
-(18, 'string', 1, 24, 1, '2024-05-29', 'string', '{\"ruta\":\"string\",\"fichero\":\"string\"}', '{\"ruta\":\"string\",\"fichero\":\"string\"}'),
-(19, 'string', 1, 24, 2, '2024-05-29', 'string', 'string', 'string'),
-(20, 'string', 1, 24, 2, '2024-05-29', 'string', 'string', 'string'),
-(21, 'Trabajo mierdecilla', 1, 24, 1, '2024-05-29', 'asdasdasd', 'tileset.png', 'Google_C_Style_Guide.pdf'),
-(22, 'Hola', 1, 24, 1, '2024-05-29', 'ghrd gdg', 'tileset.png', 'SFML-Game-Developme-By-Example.pdf');
+(1, 'Realización de un cortometraje de animación en 3D', 1, 14, 1, '2024-05-02', 'Este trabajo consiste en la realización de un cortometraje que narra el día de un niño a través de la caracterización de un avión de papel. Este día comienza en el colegio y, al terminar las clases, se va al parque a disfrutar de su entorno...', 'nube/trabajos/portadas/portada.png', 'nube/trabajos/documentos/documento.pdf'),
+(58, 'Melatonia', 1, 24, 1, '2024-05-30', 'Este juego está bastante guay, con generación procedural de salas y todo', 'nube/trabajos/portadas/TFG_Similar2.png', 'nube/trabajos/documentos/Google_C_Style_Guide.pdf');
 
 -- --------------------------------------------------------
 
@@ -411,19 +326,19 @@ ALTER TABLE `usuario`
 -- AUTO_INCREMENT de la tabla `comentario`
 --
 ALTER TABLE `comentario`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=39;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=40;
 
 --
 -- AUTO_INCREMENT de la tabla `multimedia`
 --
 ALTER TABLE `multimedia`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=82;
 
 --
 -- AUTO_INCREMENT de la tabla `palabra-clave`
 --
 ALTER TABLE `palabra-clave`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=29;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=123;
 
 --
 -- AUTO_INCREMENT de la tabla `tema`
@@ -447,7 +362,7 @@ ALTER TABLE `titulacion`
 -- AUTO_INCREMENT de la tabla `trabajo`
 --
 ALTER TABLE `trabajo`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=59;
 
 --
 -- AUTO_INCREMENT de la tabla `usuario`
