@@ -78,13 +78,6 @@ export default function Registro() {
     }
   };
 
-  const formatoFecha = (event) => {
-    const date = new Date(event.target.value);
-    const fechaFormateada = date.toISOString().split("T")[0];
-    setFormData({ ...formData, nacimiento: fechaFormateada });
-    console.log(fechaFormateada);
-  };
-
   const enviarData = () => {
     console.log("enviardata");
     console.log(formData);
@@ -322,7 +315,12 @@ export default function Registro() {
                       required: true,
                       validate: edadValidator,
                     })}
-                    onChange={(event) => formatoFecha(event)}
+                    onChange={(event) =>
+                      setFormData({
+                        ...formData,
+                        nacimiento: event.target.value,
+                      })
+                    }
                   />
                   {errors.fecha_nacimiento?.type === "required" && (
                     <p className="contenido-letra">{t("campo-requerido")}</p>

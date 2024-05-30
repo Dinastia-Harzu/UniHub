@@ -34,3 +34,11 @@ function fechaFormateada(fecha_hora, local, formato) {
   }
   return new Intl.DateTimeFormat(local, config).format(new Date(fecha_hora));
 }
+
+export function fechaActual() {
+  return new Date(
+    new Date().getTime() - new Date().getTimezoneOffset() * 60 * 1000
+  )
+    .toISOString()
+    .split("T")[0];
+}

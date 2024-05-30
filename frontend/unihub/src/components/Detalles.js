@@ -46,7 +46,6 @@ export default function Detalles() {
       const result = await axios.get(`${URL_BASE}trabajos/${id_trabajo}`);
       const data = result.data;
 
-      data.publicacion = data.publicacion.split("T").at(0);
       setTrabajo((prevTrabajo) => ({
         ...prevTrabajo,
         id: data.id,

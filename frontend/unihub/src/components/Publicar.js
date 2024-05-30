@@ -13,6 +13,7 @@ import { URL_BASE } from "../utils/constantes.js";
 import { useTranslation } from "react-i18next";
 import { useNavigate, useParams } from "react-router-dom";
 import { UsuarioSesion } from "./commons/SessionStorage.js";
+import { fechaActual } from "./commons/Tiempo.js";
 
 export default function Publicar() {
   const navigate = useNavigate();
@@ -25,11 +26,7 @@ export default function Publicar() {
     tipo: 1,
     autor: UsuarioSesion("id") ?? -1,
     titulacion: 1,
-    publicacion: new Date(
-      new Date().getTime() - new Date().getTimezoneOffset() * 60 * 1000
-    )
-      .toISOString()
-      .split("T")[0],
+    publicacion: fechaActual(),
     resumen: "",
     portada: "",
     documento: "",
@@ -50,11 +47,7 @@ export default function Publicar() {
             if (trabajoResponse.data.hasOwnProperty(key)) {
               acc[key] = trabajoResponse.data[key];
             }
-            acc["publicacion"] = new Date(
-              new Date().getTime() - new Date().getTimezoneOffset() * 60 * 1000
-            )
-              .toISOString()
-              .split("T")[0];
+            acc["publicacion"] = fechaActual();
             return acc;
           }, {});
 

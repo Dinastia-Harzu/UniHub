@@ -12,6 +12,7 @@ import {
 import "../styles/formulario.css";
 import { edadValidator } from "./validators";
 import { GuardarUsuario, UsuarioSesion } from "./commons/SessionStorage";
+import { fechaActual } from "./commons/Tiempo";
 
 export default function EditarPerfil() {
   const navigate = useNavigate();
@@ -32,12 +33,8 @@ export default function EditarPerfil() {
   const refImagen = useRef();
 
   const user = UsuarioSesion();
-  const profilePhoto =
-    user && user["foto-perfil"] ? user["foto-perfil"] : "/assets/no_photo.png";
-  const formattedFechaNacimiento =
-    user && user.nacimiento
-      ? new Date(user.nacimiento).toISOString().split("T")[0]
-      : "";
+  const profilePhoto = user["foto-perfil"];
+  const formattedFechaNacimiento = user.nacimiento;
 
   const [formData, setFormData] = useState({
     nombre: user?.nombre || "",
@@ -46,20 +43,16 @@ export default function EditarPerfil() {
     correo: user?.correo || "",
     tema: user?.tema || 1,
     direccion: user?.direccion || "",
-    nacimiento: formattedFechaNacimiento || "",
+    nacimiento: user?.nacimiento || fechaActual(),
     clave: user?.clave || "",
-    "foto-perfil": user["foto-perfil"] || "no_photo.png",
+    "foto-perfil": user["foto-perfil"] || null,
   });
+
   const [message, setMessage] = useState("");
+
   useEffect(() => {
     setValue("fecha_nacimiento", formattedFechaNacimiento);
   }, [setValue, formattedFechaNacimiento]);
-
-  const formatoFecha = (event) => {
-    const date = new Date(event.target.value);
-    const fechaFormateada = date.toISOString().split("T")[0];
-    setFormData({ ...formData, nacimiento: fechaFormateada });
-  };
 
   const enviarData = () => {
     console.log(formData);
@@ -74,7 +67,6 @@ export default function EditarPerfil() {
           const response = await axios.post(`${URL_BASE}login`, {
             correo: formData.correo,
             clave: formData.clave,
-            nombre: formData.nombre,
           });
           console.log(response);
           if (response.status === 200) {
@@ -122,6 +114,7 @@ export default function EditarPerfil() {
       const fichero = inp.target.files[0];
       const img = refImagen.current;
       const nuevaURL = URL.createObjectURL(fichero);
+      console.log(nuevaURL);
       img.src = nuevaURL;
       setImagenSeleccionada(nuevaURL); // Actualizar el estado de la imagen seleccionada
     } else {
@@ -155,7 +148,11 @@ export default function EditarPerfil() {
                 <label htmlFor="portada"></label>
                 <img
                   ref={refImagen}
-                  src={`${URL_BASE}${profilePhoto}`}
+                  src={
+                    profilePhoto
+                      ? `${URL_BASE}${profilePhoto}`
+                      : "/assets/no_photo.png"
+                  }
                   alt="Portada"
                   onClick={() => refPortada.current.click()}
                   width={240}
@@ -348,7 +345,12 @@ export default function EditarPerfil() {
                       required: true,
                       validate: edadValidator,
                     })}
-                    onChange={(event) => formatoFecha(event)}
+                    onChange={(event) =>
+                      setFormData({
+                        ...formData,
+                        nacimiento: event.target.value,
+                      })
+                    }
                   />
                   {errors.fecha_nacimiento?.type === "required" && (
                     <p className="contenido-letra">{t("campo-requerido")}</p>

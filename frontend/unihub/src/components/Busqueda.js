@@ -34,12 +34,6 @@ export default function Busqueda() {
     handleLoad(searchParams);
   }, []);
 
-  const formatoFecha = (event) => {
-    const date = new Date(event.target.value);
-    const fechaFormateada = date.toISOString().split("T")[0];
-    setFormData({ ...formData, publicacion: fechaFormateada });
-  };
-
   const getSearchParams = () => {
     const searchParams = { ...formData };
     if (selectorVisible) {
@@ -165,7 +159,9 @@ export default function Busqueda() {
                 name="publicacion"
                 placeholder="Fecha"
                 value={formData.publicacion}
-                onChange={(event) => formatoFecha(event)}
+                onChange={(event) =>
+                  setFormData({ ...formData, publicacion: event.target.value })
+                }
               />
             </div>
             <button

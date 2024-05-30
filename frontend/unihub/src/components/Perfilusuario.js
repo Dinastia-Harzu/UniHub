@@ -14,13 +14,9 @@ import {
   SelectorTitulaciones,
 } from "./commons/SelectoresTrabajo";
 import { UsuarioSesion } from "./commons/SessionStorage";
+import { URL_BASE } from "../utils/constantes";
 
 export default function Perfilusuario() {
-  const navigate = useNavigate();
-  if (!UsuarioSesion()) {
-    navigate("/login");
-  }
-
   const { t } = useTranslation();
   const {
     register,
@@ -54,8 +50,7 @@ export default function Perfilusuario() {
   };
 
   const user = UsuarioSesion();
-  const profilePhoto =
-    user && user["foto-perfil"] ? user["foto-perfil"] : "/assets/no_photo.png";
+  const profilePhoto = user["foto-perfil"];
 
   const formattedFechaNacimiento =
     user && user.nacimiento
@@ -88,7 +83,11 @@ export default function Perfilusuario() {
                 <label htmlFor="portada"></label>
                 <img
                   ref={refImagen}
-                  src={`${URL_BASE}${profilePhoto}`}
+                  src={
+                    profilePhoto
+                      ? `${URL_BASE}${profilePhoto}`
+                      : "/assets/no_photo.png"
+                  }
                   alt="foto-perfil"
                   width={240}
                   height={320}
