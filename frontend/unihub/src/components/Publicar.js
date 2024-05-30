@@ -136,7 +136,7 @@ export default function Publicar() {
 
   return (
     <main className="pagina-publicar">
-      <h1>{t("publicar-trabajo")}</h1>
+      <h1>{params.id ? t("editar-trabajo") : t("publicar-trabajo")}</h1>
       <div>
         <div
           className={
