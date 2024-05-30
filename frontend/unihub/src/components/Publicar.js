@@ -14,7 +14,7 @@ import { useTranslation } from "react-i18next";
 import { useNavigate, useParams } from "react-router-dom";
 import { UsuarioSesion } from "./commons/SessionStorage.js";
 
-export default function Publicar({ editartrabajo = false }) {
+export default function Publicar() {
   const navigate = useNavigate();
   const params = useParams();
 
@@ -39,14 +39,16 @@ export default function Publicar({ editartrabajo = false }) {
   });
 
   useEffect(() => {
-    if (editartrabajo) {
-      axios
-        .get(`${URL_BASE}trabajos/${params.id}`)
-        .then((result) => {
-          // Cambiamos los valores del FormData (solo las variables que coincidan)
+    if (params.id) {
+      const fetchData = async () => {
+        try {
+          // Obtener trabajo
+          const trabajoResponse = await axios.get(
+            `${URL_BASE}trabajos/${params.id}`
+          );
           const formDataFiltrado = Object.keys(formData).reduce((acc, key) => {
-            if (result.data.hasOwnProperty(key)) {
-              acc[key] = result.data[key];
+            if (trabajoResponse.data.hasOwnProperty(key)) {
+              acc[key] = trabajoResponse.data[key];
             }
             acc["publicacion"] = new Date(
               new Date().getTime() - new Date().getTimezoneOffset() * 60 * 1000
@@ -55,29 +57,45 @@ export default function Publicar({ editartrabajo = false }) {
               .split("T")[0];
             return acc;
           }, {});
-          console.log(formDataFiltrado);
+
           setFormData((prevFormData) => ({
             ...prevFormData,
             ...formDataFiltrado,
           }));
-        })
-        .catch((err) => {
-          console.log(err);
-        });
 
-      // Actualizamos palabras clave
-      axios
-        .get(`${URL_BASE}palabras-clave/trabajo/${params.id}`)
-        .then((result) => {
-          // Actualizamos formData
+          // Obtener palabras clave
+          const palabrasClaveResponse = await axios.get(
+            `${URL_BASE}palabras-clave/trabajo/${params.id}`
+          );
+
           setFormData((prevFormData) => ({
             ...prevFormData,
-            "palabras-clave": result.data.map((item) => item.nombre),
+            "palabras-clave": palabrasClaveResponse.data.map(
+              (item) => item.nombre
+            ),
           }));
-        })
-        .catch((err) => {
-          console.log(err);
-        });
+
+          // Obtener multimedia
+          const MultimediaResponse = await axios.get(
+            `${URL_BASE}multimedia/trabajo/${params.id}`
+          );
+          const multimedia = MultimediaResponse.data.map((item) => ({
+            nombre: item.nombre,
+            ruta: item.ruta,
+          }));
+          setFormData((prevFormData) => ({
+            ...prevFormData,
+            multimedia: multimedia,
+            "rutas-multimedia": MultimediaResponse.data.map(
+              (item) => item.ruta
+            ),
+          }));
+        } catch (error) {
+          console.error(error);
+        }
+      };
+
+      fetchData();
     }
   }, []);
 
@@ -136,22 +154,31 @@ export default function Publicar({ editartrabajo = false }) {
             pagina === 1 ? "form-mostrado contenido-letra" : "form-oculto"
           }
         >
-          <FormPublicar2
-            setPagina={setPagina}
-            formData={formData}
-            setFormData={setFormData}
-          />
+          {params.id === undefined ||
+          formData["rutas-multimedia"].length !== 0 ? (
+            <FormPublicar2
+              setPagina={setPagina}
+              formData={formData}
+              setFormData={setFormData}
+            />
+          ) : (
+            <p>Todavía no se ha cargado</p>
+          )}
         </div>
         <div
           className={
             pagina === 2 ? "form-mostrado contenido-letra" : "form-oculto"
           }
         >
-          <FormPublicar3
-            setPagina={setPagina}
-            formData={formData}
-            setFormData={setFormData}
-          />
+          {params.id === undefined || formData.documento !== "" ? (
+            <FormPublicar3
+              setPagina={setPagina}
+              formData={formData}
+              setFormData={setFormData}
+            />
+          ) : (
+            <p>Todavía no se ha cargado</p>
+          )}
         </div>
       </div>
       <section className="seccion-botones-publicar">
@@ -189,6 +216,7 @@ export default function Publicar({ editartrabajo = false }) {
               {t("publicar")}
             </button>
           </div>
+          <p onClick={() => console.log(formData)}>ver trabajo</p>
         </div>
       </section>
     </main>
