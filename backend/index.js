@@ -1,16 +1,15 @@
 "use strict";
 
-const express = require("express");
 var path = require("path");
 var http = require("http");
 const fs = require("fs");
+const { app } = require("./utils/helper");
 
 var oas3Tools = require("oas3-tools");
 const multer = require("multer");
 var serverPort = 8192;
 
-var app = express();
-app.use("/nube", express.static(path.join(__dirname, "nube")));
+app.use("/nube", require("express").static(path.join(__dirname, "nube")));
 
 function guardarFicheroNube(subdir) {
   return multer({
@@ -54,6 +53,7 @@ var expressAppConfig = oas3Tools.expressAppConfig(
   path.join(__dirname, "api/openapi.yaml"),
   options
 );
+
 app.use(expressAppConfig.getApp());
 
 // Initialize the Swagger middleware
