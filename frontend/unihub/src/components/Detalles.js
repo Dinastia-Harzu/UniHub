@@ -151,6 +151,10 @@ export default function Detalles() {
           <ModalPDF archivo={trabajo.documento} nombre={trabajo.nombre} />
         </div>
         <img src={`${URL_BASE}${trabajo.portada}`} alt={t("portada")}></img>
+        <div className="contenedor-editar-borrar">
+          <button className="btn btn-primary editar">{t("editar")}</button>
+          <button className="btn btn-secondary borrar">{t("borrar")}</button>
+        </div>
       </section>
       <section className="contenedor-datos">
         <article className="datos">
