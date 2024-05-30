@@ -1,12 +1,27 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import "../styles/publicar.css";
 import ContenedorRecurso from "./ContenedorRecurso";
+import { useParams } from "react-router-dom";
 
 export default function FormPublicar2({ setPagina, formData, setFormData }) {
   const { t } = useTranslation();
   const [recursos, setRecursos] = useState([]);
   const [contadorId, setContadorId] = useState(0); // Nuevo estado para el contador de los recursos y asi no usar length
+  const params = useParams();
+
+  useEffect(() => {
+    if (params.id) {
+      const nuevosRecursos = [];
+      formData["multimedia"].forEach((_, idx) => {
+        nuevosRecursos.push({
+          id: idx,
+        });
+      });
+      setRecursos(nuevosRecursos);
+      setContadorId(formData["multimedia"].length);
+    }
+  }, []);
 
   const agregarRecurso = (evt) => {
     evt.preventDefault();
@@ -18,6 +33,8 @@ export default function FormPublicar2({ setPagina, formData, setFormData }) {
 
   const eliminarRecurso = (id) => {
     setRecursos(recursos.filter((recurso) => recurso.id !== id));
+    console.log(recursos);
+    console.log(contadorId);
   };
 
   return (

@@ -1,14 +1,66 @@
 import "../styles/publicar.css";
 import { useTranslation } from "react-i18next";
-import { useRef } from "react";
+import { useEffect, useRef } from "react";
+import { useParams } from "react-router-dom";
 
-export default function FormPublicar3({ setPagina, formData, setFormData }) {
+export default function FormPublicar3({
+  setPagina,
+  formData,
+  setFormData,
+  editartrabajo = false,
+}) {
   const { t } = useTranslation();
-  const refPortada = useRef();
+  const refInputDocumento = useRef();
+  const refInputPortada = useRef();
   const refImagen = useRef();
+  const params = useParams();
+
+  useEffect(() => {
+    if (params.id) {
+      setValorInput(formData.documento, refInputDocumento, true);
+      setValorInput(formData.portada, refInputPortada, false);
+      refImagen.current.src = `/assets/${formData.portada}`;
+    }
+  }, []);
+
+  async function setValorInput(nombre, refInput, modificarFormData = true) {
+    // Creamos el archivo con File
+    try {
+      const respuesta = await fetch(`assets/${nombre}`);
+      const blob = await respuesta.blob();
+      const nombreFichero = nombre;
+      const tipoFichero = modificarFormData
+        ? "application/pdf"
+        : `image/${nombre.split(".").pop().toLowerCase()}`;
+      const fichero = new File([blob], nombreFichero, {
+        type: tipoFichero,
+      });
+
+      if (modificarFormData) {
+        setFormData((prevFormData) => ({
+          ...prevFormData,
+          documento: { ruta: nombre, fichero: fichero },
+        }));
+      } else {
+        setFormData((prevFormData) => ({
+          ...prevFormData,
+          portada: { ruta: nombre, fichero: fichero },
+        }));
+      }
+
+      // console.log(fichero);
+
+      // Lo metemos en el value del input file
+      let datafile = new DataTransfer();
+      datafile.items.add(fichero);
+      refInput.current.files = datafile.files;
+    } catch (error) {
+      console.error("Error al obtener el archivo:", error);
+    }
+  }
 
   function setPortada() {
-    const recurso_actual = refPortada.current;
+    const recurso_actual = refInputPortada.current;
     recurso_actual.click();
   }
 
@@ -55,13 +107,18 @@ export default function FormPublicar3({ setPagina, formData, setFormData }) {
               <input
                 type="file"
                 name="archivo"
+                ref={refInputDocumento}
                 accept="application/pdf"
                 onChange={(event) =>
                   setFormData({
                     ...formData,
                     documento: {
-                      ruta: event.target.files[0].name,
-                      fichero: event.target.files[0],
+                      ruta: event.target.files[0]
+                        ? event.target.files[0].name
+                        : formData.documento.ruta,
+                      fichero: event.target.files[0]
+                        ? event.target.files[0]
+                        : formData.documento.fichero,
                     },
                   })
                 }
@@ -79,7 +136,7 @@ export default function FormPublicar3({ setPagina, formData, setFormData }) {
                 height={320}
               />
               <input
-                ref={refPortada}
+                ref={refInputPortada}
                 type="file"
                 name="portada"
                 accept="image/*"

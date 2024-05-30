@@ -1,4 +1,4 @@
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faXmark,
@@ -8,6 +8,7 @@ import {
   faFileExcel,
   faFileLines,
 } from "@fortawesome/free-solid-svg-icons";
+import { useParams } from "react-router-dom";
 
 export default function ContenedorRecurso({
   id,
@@ -15,6 +16,7 @@ export default function ContenedorRecurso({
   formData,
   setFormData,
 }) {
+  const params = useParams();
   const refRecurso = useRef();
   const refImagen = useRef();
   const [recursoActual, setRecursoActual] = useState("imagen_defecto");
@@ -29,6 +31,24 @@ export default function ContenedorRecurso({
     "plain",
     "vnd.openxmlformats-officedocument.spreadsheetml.sheet",
   ];
+
+  useEffect(() => {
+    if (params.id) {
+      setValorImagenes();
+    }
+  }, []);
+
+  async function setValorImagenes() {
+    const recurso = formData.multimedia.at(id);
+    // Creamos un archivo
+    const respuesta = await fetch(`assets/${recurso.ruta}`);
+    const blob = await respuesta.blob();
+    const nombreFichero = recurso.nombre;
+    const fichero = new File([blob], nombreFichero, {
+      type: blob.type,
+    });
+    console.log(fichero);
+  }
 
   function setRecurso() {
     const recurso_actual = refRecurso.current;
@@ -94,8 +114,8 @@ export default function ContenedorRecurso({
   }
 
   function mostrarTipoArchivo() {
-    console.log(recursoActual);
-    console.log(tipoRecursoActual);
+    // console.log(recursoActual);
+    // console.log(tipoRecursoActual);
     if (tipoRecursoActual === "defecto") {
       return (
         <img
