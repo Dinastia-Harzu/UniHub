@@ -56,7 +56,9 @@ export default function Publicar() {
       formData["palabras-clave"] = formData["palabras-clave"].split(",");
     }
     axios
-      .post(`${URL_BASE}trabajos`, formData)
+      .post(`${URL_BASE}trabajos`, formData, {
+        headers: { "Content-Type": "multipart/form-data" },
+      })
       .then((result) => {
         console.log(result);
         alert("Trabajo publicado!");
