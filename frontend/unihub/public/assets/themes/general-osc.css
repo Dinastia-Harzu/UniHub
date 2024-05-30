@@ -131,15 +131,8 @@ header .nav-btn {
 
 .footer {
   z-index: 500;
-  position: fixed;
-  bottom: 0;
-  width: 100%;
-}
-
-.footer {
-  z-index: 500;
   color: white;
-  position: fixed;
+  position: sticky;
   bottom: 0;
   width: 100%;
 }
