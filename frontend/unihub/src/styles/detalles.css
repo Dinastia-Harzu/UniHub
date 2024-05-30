@@ -180,6 +180,7 @@ body {
 
 .foto-usuario {
   width: 50px;
+  border-radius: 50%;
 }
 
 .fecha-comentario {
@@ -314,9 +315,14 @@ dd::before {
     flex-direction: row;
     align-items: baseline;
     justify-content: space-between;
+    position: relative;
   }
 
   .contenedor-portada img {
     display: none;
+  }
+
+  .contenedor-editar-borrar {
+    flex-direction: row;
   }
 }
