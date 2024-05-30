@@ -15,9 +15,6 @@ const fs = require("fs");
 const config = require("../config");
 
 app.use(cors());
-app.options("*", cors());
-
-app.use(express.static("../nube"));
 
 app.use(bp.json());
 
@@ -213,4 +210,5 @@ module.exports = {
   TIEMPO_EXPIRACION_TOKEN,
   creaToken,
   decodificaToken,
+  app,
 };

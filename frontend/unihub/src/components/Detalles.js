@@ -133,14 +133,12 @@ export default function Detalles() {
     palabras_clave += t("no-resultados");
   }
 
-  // console.log(trabajo);
-
   return (
     <main className="contenedor-detalles">
       <section className="contenedor-portada">
         <div className="contenedor-ver-y-descargar">
           <a
-            href={`/documentos/${trabajo.documento}`}
+            href={`${URL_BASE}${trabajo.documento}`}
             download={trabajo.documento}
             target="blank"
           >
