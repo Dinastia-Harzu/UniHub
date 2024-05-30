@@ -66,6 +66,7 @@ body {
 
 .contenedor-portada a {
   color: black;
+  text-align: center;
 }
 
 .contenedor-portada img {
@@ -80,9 +81,13 @@ body {
   flex-direction: row;
 }
 
-.contenedor-editar-borrar>.editar,
+.contenedor-editar-borrar>.editar {
+  flex: 50%;
+}
+
 .contenedor-editar-borrar>.borrar {
   flex: 50%;
+  text-decoration: underline;
 }
 
 .ver-y-descargar-oculto {

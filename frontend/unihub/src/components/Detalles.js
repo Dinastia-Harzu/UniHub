@@ -13,6 +13,7 @@ import { useNavigate } from "react-router-dom";
 import ContenedorTrabajoAsociado from "./ContenedorTrabajoAsociado";
 import ContenedorRecursoAsociado from "./ContenedorRecursoAsociado";
 import Tiempo from "./commons/Tiempo";
+import { UsuarioSesion } from "./commons/SessionStorage";
 
 export default function Detalles() {
   const navigate = useNavigate();
@@ -151,10 +152,31 @@ export default function Detalles() {
           <ModalPDF archivo={trabajo.documento} nombre={trabajo.nombre} />
         </div>
         <img src={`${URL_BASE}${trabajo.portada}`} alt={t("portada")}></img>
-        <div className="contenedor-editar-borrar">
-          <button className="btn btn-primary editar">{t("editar")}</button>
-          <button className="btn btn-secondary borrar">{t("borrar")}</button>
-        </div>
+        {trabajo.autor == UsuarioSesion("id") ? (
+          <div className="contenedor-editar-borrar">
+            <Link
+              to={`/trabajos/editar/${trabajo.id}`}
+              className="btn btn-primary editar"
+            >
+              {t("editar")}
+            </Link>
+            <button
+              className="btn btn-secondary borrar"
+              onClick={() =>
+                axios
+                  .delete(`${URL_BASE}trabajos/${trabajo.id}`)
+                  .then((res) => {
+                    alert(res.data[200]);
+                    navigate("/trabajos");
+                  })
+              }
+            >
+              {t("borrar")}
+            </button>
+          </div>
+        ) : (
+          <></>
+        )}
       </section>
       <section className="contenedor-datos">
         <article className="datos">
