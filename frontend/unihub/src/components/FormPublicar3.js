@@ -13,6 +13,9 @@ export default function FormPublicar3({ setPagina, formData, setFormData }) {
   }
 
   function cambiarFoto(inp) {
+    if (inp.target.files.length == 0) {
+      return;
+    }
     const fichero = inp.target.files[0];
     const img = refImagen.current;
     img.src = URL.createObjectURL(fichero);
