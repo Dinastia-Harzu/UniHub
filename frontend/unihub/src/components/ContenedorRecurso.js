@@ -19,6 +19,7 @@ export default function ContenedorRecurso({
   const params = useParams();
   const refRecurso = useRef();
   const refImagen = useRef();
+  const [recursoDeAntes, setRecursoDeAntes] = useState(false);
   const [recursoActual, setRecursoActual] = useState("imagen_defecto");
   const [tipoRecursoActual, settipoRecursoActual] = useState("defecto");
   const tiposDeImagen = ["jpg", "jpeg", "png", "gif", "bmp", "svg"];
@@ -41,13 +42,16 @@ export default function ContenedorRecurso({
   async function setValorImagenes() {
     const recurso = formData.multimedia.at(id);
     // Creamos un archivo
-    const respuesta = await fetch(`assets/${recurso.ruta}`);
-    const blob = await respuesta.blob();
-    const nombreFichero = recurso.nombre;
-    const fichero = new File([blob], nombreFichero, {
-      type: blob.type,
+    fetch(`assets/${recurso.ruta}`).then((res) => {
+      console.log(res.url.split("/").pop());
+      setRecursoActual({
+        url: res.url.split("/").pop(),
+        name: recurso.nombre,
+        type: recurso.ruta.split(".").pop().toLowerCase(),
+      });
     });
-    console.log(fichero);
+    settipoRecursoActual(recurso.ruta.split(".").pop().toLowerCase());
+    setRecursoDeAntes(true);
   }
 
   function setRecurso() {
@@ -130,7 +134,11 @@ export default function ContenedorRecurso({
     if (tiposDeImagen.includes(tipoRecursoActual)) {
       return (
         <img
-          src={URL.createObjectURL(recursoActual)}
+          src={
+            recursoDeAntes
+              ? `/assets/${recursoActual.url}`
+              : URL.createObjectURL(recursoActual)
+          }
           alt={recursoActual.name}
           onClick={() => setRecurso()}
           onKeyDown={handleKeyDown}
@@ -148,7 +156,11 @@ export default function ContenedorRecurso({
             tabIndex="0"
           >
             <source
-              src={URL.createObjectURL(recursoActual)}
+              src={
+                recursoDeAntes
+                  ? `/assets/${recursoActual.url}`
+                  : URL.createObjectURL(recursoActual)
+              }
               alt={recursoActual.name}
               type={recursoActual.type}
             />
@@ -167,7 +179,11 @@ export default function ContenedorRecurso({
           tabIndex="0"
         >
           <source
-            src={URL.createObjectURL(recursoActual)}
+            src={
+              recursoDeAntes
+                ? `/assets/${recursoActual.url}`
+                : URL.createObjectURL(recursoActual)
+            }
             alt={recursoActual.name}
             type={recursoActual.type}
           />
