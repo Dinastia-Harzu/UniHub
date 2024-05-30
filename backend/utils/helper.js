@@ -214,7 +214,7 @@ const guardarFicheroNube = multer({
 });
 
 ["trabajos", "pfp"].forEach(
-  (subdir) => !fs.existsSync(`nube/${subdir}`) && fs.mkdirSync(`nube/${subdir}`)
+  (subdir) => !fs.existsSync(`nube/${subdir}`) && fs.mkdirSync(`nube/${subdir}`, { recursive: true })
 );
 
 module.exports = {

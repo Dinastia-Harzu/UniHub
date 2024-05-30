@@ -33,18 +33,17 @@ export default function Detalles() {
     comentarios: [],
     valoracion: -1,
     "palabras-clave": [],
+    "trabajos-asociados": [],
   });
 
-  const [trabajosAsociados, setTrabajosAsociados] = useState([]);
   useEffect(() => {
     obtenerDatosTrabajo();
-  }, []);
+  }, [params.id]);
 
   const obtenerDatosTrabajo = async () => {
     try {
       const result = await axios.get(`${URL_BASE}trabajos/${id_trabajo}`);
       const data = result.data;
-      console.log(data);
 
       data.publicacion = data.publicacion.split("T").at(0);
       setTrabajo((prevTrabajo) => ({
@@ -65,6 +64,7 @@ export default function Detalles() {
         recursos: [],
         "palabras-clave": [],
         valoracion: -1,
+        "trabajos-asociados": [],
       }));
 
       const recursos = await axios.get(
@@ -109,16 +109,14 @@ export default function Detalles() {
         ids.push(palabra.id);
       });
       const palabras_juntas = ids.join("_");
-      try {
-        const resultado = await axios.get(
-          `${URL_BASE}trabajos?titulacion=${trabajo.titulacion}`
-        );
-        // Cambiamos hasta que la query este arreglada
-        console.log(result.data);
-        setTrabajosAsociados(result.data);
-      } catch (err) {
-        console.error(err);
-      }
+
+      const trabajosAsoc = await axios.get(
+        `${URL_BASE}trabajos?titulacion=${trabajo.titulacion}`
+      );
+      setTrabajo((prevTrabajo) => ({
+        ...prevTrabajo,
+        "trabajos-asociados": trabajosAsoc.data,
+      }));
     } catch (err) {
       console.error(err);
     }
@@ -135,7 +133,7 @@ export default function Detalles() {
     palabras_clave += t("no-resultados");
   }
 
-  console.log(trabajo);
+  // console.log(trabajo);
 
   return (
     <main className="contenedor-detalles">
@@ -219,9 +217,9 @@ export default function Detalles() {
         </article>
         <article className="trabajos-similares">
           <h3 className="titulo-letra">{t("trabajos-asociados")}</h3>
-          {trabajosAsociados.length > 0 ? (
+          {trabajo["trabajos-asociados"].length > 0 ? (
             <div>
-              {trabajosAsociados.map((trabajo, idx) => (
+              {trabajo["trabajos-asociados"].map((trabajo, idx) => (
                 <ContenedorTrabajoAsociado trabajo={trabajo} key={idx} />
               ))}
             </div>
