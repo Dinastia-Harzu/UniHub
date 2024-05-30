@@ -106,15 +106,22 @@ export default function ContenedorRecurso({
       setFormData(nuevoFormData);
       setRecursoActual(fichero);
       settipoRecursoActual(fichero.type.replace(/(.*)\//g, ""));
+      setRecursoDeAntes(false);
     }
   }
 
   function eliminar() {
     eliminarRecurso(id);
     const ruta_recurso = refRecurso.current.value.split("\\")[2];
-    const nuevosRecursos = formData.multimedia.filter(
+    let nuevosRecursos = formData.multimedia.filter(
       (ruta, _) => ruta.ruta !== ruta_recurso
     );
+    if (recursoDeAntes) {
+      nuevosRecursos = formData.multimedia.filter(
+        (ruta, _) => ruta.ruta !== recursoActual.url,
+        console.log(recursoActual.url)
+      );
+    }
     const nuevoFormData = {
       ...formData,
       multimedia: nuevosRecursos,
@@ -166,7 +173,7 @@ export default function ContenedorRecurso({
                   : URL.createObjectURL(recursoActual)
               }
               alt={recursoActual.name}
-              type={recursoActual.type}
+              type="audio/mpeg"
             />
             Tu navegador no soporta la reproducción de audio.
           </audio>
@@ -189,7 +196,7 @@ export default function ContenedorRecurso({
                 : URL.createObjectURL(recursoActual)
             }
             alt={recursoActual.name}
-            type={recursoActual.type}
+            type="video/mp4"
           />
           Tu navegador no soporta la reproducción de videos.
         </video>
