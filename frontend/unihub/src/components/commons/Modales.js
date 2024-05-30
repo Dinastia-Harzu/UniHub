@@ -7,6 +7,7 @@ import { faEye } from "@fortawesome/free-solid-svg-icons";
 import { useTranslation } from "react-i18next";
 import { Link, useNavigate } from "react-router-dom";
 import { UsuarioSesion } from "./SessionStorage";
+import { URL_BASE } from "../../utils/constantes";
 
 export function ModalDetalle({ id_trabajo }) {
   const navigate = useNavigate();
@@ -104,7 +105,7 @@ export function ModalPDF({ archivo, nombre }) {
         <div className="contenedor-pdf">
           <b className="titulo-pdf">{nombre}</b>
           <object
-            data={`/documentos/${archivo}`}
+            data={`${URL_BASE}${archivo}`}
             type="application/pdf"
             width="100%"
             height="98%"
