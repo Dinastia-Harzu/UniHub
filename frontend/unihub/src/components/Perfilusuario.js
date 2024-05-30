@@ -88,7 +88,7 @@ export default function Perfilusuario() {
                 <label htmlFor="portada"></label>
                 <img
                   ref={refImagen}
-                  src={`/assets/${profilePhoto}`}
+                  src={`${URL_BASE}${profilePhoto}`}
                   alt="foto-perfil"
                   width={240}
                   height={320}

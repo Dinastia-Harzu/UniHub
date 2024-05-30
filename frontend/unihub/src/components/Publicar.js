@@ -102,8 +102,16 @@ export default function Publicar({ editartrabajo = false }) {
       })
       .then((result) => {
         console.log(result);
-        alert("Trabajo publicado!");
-        navigate("/trabajos");
+        axios
+          .post(`${URL_BASE}fichero/trabajos`, formData, {
+            headers: { "Content-Type": "multipart/form-data" },
+          })
+          .then((res) => {
+            console.log(result);
+            alert("Trabajo publicado!");
+            navigate("/trabajos");
+          })
+          .catch((err) => console.error(err));
       })
       .catch((err) => console.error(err));
   }

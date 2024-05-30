@@ -192,6 +192,8 @@ exports.trabajosIdPUT = function (body, id) {
  * returns Created
  **/
 exports.trabajosPOST = function (body) {
+  body.portada.ruta = `nube/trabajos/portadas/${body.portada.ruta}`;
+  body.documento.ruta = `nube/trabajos/documentos/${body.documento.ruta}`;
   return new Promise(function (resolve, reject) {
     conexion.query(
       `
@@ -220,6 +222,7 @@ exports.trabajosPOST = function (body) {
           const id_trabajo = res.insertId;
           console.log(body);
           const inserciones_multimedia = body.multimedia.map((multimedia) => {
+            multimedia.ruta = `nube/trabajos/multimedia/${multimedia.ruta}`;
             return new Promise((resolve, reject) => {
               conexion.query(
                 `

@@ -152,7 +152,7 @@ export default function Detalles() {
           </a>
           <ModalPDF archivo={trabajo.documento} nombre={trabajo.nombre} />
         </div>
-        <img src={`/assets/${trabajo.portada}`} alt={t("portada")}></img>
+        <img src={`${URL_BASE}${trabajo.portada}`} alt={t("portada")}></img>
       </section>
       <section className="contenedor-datos">
         <article className="datos">

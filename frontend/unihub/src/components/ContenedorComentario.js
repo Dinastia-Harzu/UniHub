@@ -64,7 +64,7 @@ export default function ContenedorComentario({ comentario }) {
     <div className="contenedor-comentario">
       <p className="contenedor-usuario">
         <img
-          src={`/assets/${autorComentario["foto-perfil"]}`}
+          src={`${URL_BASE}${autorComentario["foto-perfil"]}`}
           alt="foto-usuario"
           className="foto-usuario"
         />

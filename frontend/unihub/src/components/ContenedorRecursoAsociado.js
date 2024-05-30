@@ -6,6 +6,7 @@ import {
   faFileLines,
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { URL_BASE } from "../utils/constantes";
 
 function obtenerTipoDeArchivo(ruta) {
   const extension = ruta.split(".").pop().toLowerCase();
@@ -42,12 +43,12 @@ export default function ContenedorRecursoAsociado({ recurso }) {
   const tipoDeArchivo = obtenerTipoDeArchivo(recurso.ruta);
   switch (tipoDeArchivo) {
     case "imagen":
-      return <img src={`/assets/${recurso.ruta}`} alt={recurso.nombre} />;
+      return <img src={`${URL_BASE}${recurso.ruta}`} alt={recurso.nombre} />;
     case "video":
       return (
         <video controls>
           <source
-            src={`/assets/${recurso.ruta}`}
+            src={`${URL_BASE}${recurso.ruta}`}
             type={`video/${recurso.ruta.split(".").pop()}`}
           />
           Tu navegador no soporta la reproducción de videos.
@@ -57,7 +58,7 @@ export default function ContenedorRecursoAsociado({ recurso }) {
       return (
         <audio controls>
           <source
-            src={`/assets/${recurso.ruta}`}
+            src={`${URL_BASE}${recurso.ruta}`}
             type={`audio/${recurso.ruta.split(".").pop()}`}
           />
           Tu navegador no soporta la reproducción de audio.
@@ -66,7 +67,7 @@ export default function ContenedorRecursoAsociado({ recurso }) {
     case "pdf":
       return (
         <article className="recurso-otro-tipo">
-          <a href={`/assets/${recurso.ruta}`} download={recurso.ruta}>
+          <a href={`${URL_BASE}${recurso.ruta}`} download={recurso.ruta}>
             <FontAwesomeIcon icon={faFilePdf} size="3x" />
           </a>
           <b className="contenido-letra">{recurso.ruta}</b>
@@ -75,7 +76,7 @@ export default function ContenedorRecursoAsociado({ recurso }) {
     case "word":
       return (
         <article className="recurso-otro-tipo">
-          <a href={`/assets/${recurso.ruta}`} download={recurso.ruta}>
+          <a href={`${URL_BASE}${recurso.ruta}`} download={recurso.ruta}>
             <FontAwesomeIcon icon={faFileWord} size="3x" />
           </a>
           <b className="contenido-letra">{recurso.ruta}</b>
@@ -84,7 +85,7 @@ export default function ContenedorRecursoAsociado({ recurso }) {
     case "excel":
       return (
         <article className="recurso-otro-tipo">
-          <a href={`/assets/${recurso.ruta}`} download={recurso.ruta}>
+          <a href={`${URL_BASE}${recurso.ruta}`} download={recurso.ruta}>
             <FontAwesomeIcon icon={faFileExcel} size="3x" />
           </a>
           <b className="contenido-letra">{recurso.ruta}</b>
@@ -93,7 +94,7 @@ export default function ContenedorRecursoAsociado({ recurso }) {
     case "txt":
       return (
         <article className="recurso-otro-tipo">
-          <a href={`/assets/${recurso.ruta}`} download={recurso.ruta}>
+          <a href={`${URL_BASE}${recurso.ruta}`} download={recurso.ruta}>
             <FontAwesomeIcon icon={faFileLines} size="3x" />
           </a>
           <b className="contenido-letra">{recurso.ruta}</b>
@@ -102,7 +103,7 @@ export default function ContenedorRecursoAsociado({ recurso }) {
     default:
       return (
         <article className="recurso-otro-tipo">
-          <a href={`/assets/${recurso.ruta}`} download={recurso.ruta}>
+          <a href={`${URL_BASE}${recurso.ruta}`} download={recurso.ruta}>
             <FontAwesomeIcon icon={faFile} size="3x" />
           </a>
           <b className="contenido-letra">{recurso.ruta}</b>

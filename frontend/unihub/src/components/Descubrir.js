@@ -116,7 +116,7 @@ export default function Descubrir() {
                 className="card btn-letra"
               >
                 <img
-                  src={`/assets/${card.portada}`}
+                  src={`${URL_BASE}${card.portada}`}
                   alt={card.nombre}
                   title={card.nombre}
                 />

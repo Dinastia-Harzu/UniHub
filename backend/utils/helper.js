@@ -201,22 +201,6 @@ function decodificaToken(token) {
   });
 }
 
-const guardarFicheroNube = multer({
-  storage: multer.diskStorage({
-    destination: (req, fichero, cb) => {
-      console.log(req);
-      console.log(fichero);
-      cb(null, "nube/");
-    },
-    filename: (req, fichero, cb) =>
-      cb(null, Date.now() + path.extname(fichero.originalname)),
-  }),
-});
-
-["trabajos", "pfp"].forEach(
-  (subdir) => !fs.existsSync(`nube/${subdir}`) && fs.mkdirSync(`nube/${subdir}`, { recursive: true })
-);
-
 module.exports = {
   connection,
   getHttpCodeFromErrNo,
@@ -229,5 +213,4 @@ module.exports = {
   TIEMPO_EXPIRACION_TOKEN,
   creaToken,
   decodificaToken,
-  guardarFicheroNube,
 };

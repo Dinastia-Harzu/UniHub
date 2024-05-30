@@ -155,7 +155,7 @@ export default function EditarPerfil() {
                 <label htmlFor="portada"></label>
                 <img
                   ref={refImagen}
-                  src={`/assets/${profilePhoto}`}
+                  src={`${URL_BASE}${profilePhoto}`}
                   alt="Portada"
                   onClick={() => refPortada.current.click()}
                   width={240}
