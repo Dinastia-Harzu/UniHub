@@ -8,7 +8,7 @@ import { useTranslation } from "react-i18next";
 import { Link, useNavigate } from "react-router-dom";
 import { UsuarioSesion } from "./SessionStorage";
 import { URL_BASE } from "../../utils/constantes";
-import ModalBase from "./ModalBase";
+import ModalBase from "./modales/ModalBase";
 
 export function ModalDetalle({ id_trabajo }) {
   const navigate = useNavigate();
