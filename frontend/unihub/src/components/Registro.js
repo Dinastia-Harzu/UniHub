@@ -15,13 +15,9 @@ import {
   SelectorTitulaciones,
   SelectorTema,
 } from "./commons/SelectoresTrabajo";
-import { UsuarioSesion } from "./commons/SessionStorage";
 
 export default function Registro() {
   const navigate = useNavigate();
-  if (UsuarioSesion()) {
-    navigate("../");
-  }
   const { t } = useTranslation();
   const {
     register,
@@ -81,7 +77,6 @@ export default function Registro() {
   const enviarData = () => {
     console.log("enviardata");
     console.log(formData);
-    navigate("../login");
     axios
       .post(`${URL_BASE}usuarios`, formData, {
         headers: {
@@ -89,6 +84,7 @@ export default function Registro() {
         },
       })
       .then((result) => {
+        navigate("/login");
         console.log(result);
       })
       .catch((err) => {
