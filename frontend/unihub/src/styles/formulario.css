@@ -64,7 +64,6 @@
   padding: 1em;
   border-radius: 0.5em;
   border: 2px solid white;
-
 }
 
 /* .img-cabecera{
@@ -102,7 +101,7 @@ select {
   /* Bordes redondeados */
 }
 
-.boton-editar {
+.boton-editar-perfil {
   display: flex;
   justify-content: right;
   grid-column: 3;
@@ -237,7 +236,7 @@ button {
     grid-row: 5;
   }
 
-  .boton-editar {
+  .boton-editar-perfil {
     display: flex;
     justify-content: right;
     grid-column: 3;
