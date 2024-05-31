@@ -95,6 +95,7 @@ exports.usuariosIdGET = function (id) {
  * returns OK-GETidPUT
  **/
 exports.usuariosIdPUT = function (body, id) {
+  body["foto-perfil"] = `nube/pfp/${body["foto-perfil"].ruta}`;
   return new Promise(function (resolve, reject) {
     _.usuariosIdGET(id).then(
       (res) => {
@@ -128,6 +129,7 @@ exports.usuariosIdPUT = function (body, id) {
  * returns Created
  **/
 exports.usuariosPOST = function (body) {
+  body["foto-perfil"].ruta = `nube/pfp/${body["foto-perfil"].ruta}`;
   return new Promise(function (resolve, reject) {
     conexion.query(
       `INSERT INTO usuario VALUES (
@@ -140,7 +142,7 @@ exports.usuariosPOST = function (body) {
         ${$(body.direccion)},
         ${$(body.nacimiento)},
         ${$(body.tema)},
-        ${$(body["foto-perfil"])}
+        ${$(body["foto-perfil"].ruta)}
     )`,
       (err) => {
         if (err) {

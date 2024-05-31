@@ -1825,7 +1825,13 @@ components:
         tema:
           type: integer
         foto-perfil:
-          type: string
+          type: object
+          properties:
+            ruta:
+              type: string
+            fichero:
+              type: string
+              format: binary
     ReqTrabajo:
       properties:
         nombre:

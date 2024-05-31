@@ -45,7 +45,10 @@ export default function EditarPerfil() {
     direccion: user?.direccion || "",
     nacimiento: user?.nacimiento || fechaActual(),
     clave: user?.clave || "",
-    "foto-perfil": user["foto-perfil"] || null,
+    "foto-perfil": {
+      ruta: user["foto-perfil"].split("/").pop() || null,
+      fichero: null,
+    },
   });
 
   const [message, setMessage] = useState("");
@@ -63,6 +66,25 @@ export default function EditarPerfil() {
         },
       })
       .then(async (result) => {
+        if (user["foto-perfil"] && formData["foto-perfil"].fichero == null) {
+          const blob = await (
+            await fetch(`${URL_BASE}${user["foto-perfil"]}`)
+          ).blob();
+          formData["foto-perfil"].fichero = new File(
+            [blob],
+            formData["foto-perfil"].ruta,
+            {
+              type: blob.type,
+            }
+          );
+          console.log(formData["foto-perfil"]);
+        }
+        console.log(user["foto-perfil"]);
+        console.log("Segundo");
+        const res = await axios.post(`${URL_BASE}fichero/pfp`, formData, {
+          headers: { "Content-Type": "multipart/form-data" },
+        });
+        console.log(res);
         try {
           const response = await axios.post(`${URL_BASE}login`, {
             correo: formData.correo,
@@ -110,16 +132,16 @@ export default function EditarPerfil() {
   };
 
   const cambiarFoto = (inp) => {
-    if (inp.target.files.length > 0) {
-      const fichero = inp.target.files[0];
-      const img = refImagen.current;
-      const nuevaURL = URL.createObjectURL(fichero);
-      console.log(nuevaURL);
-      img.src = nuevaURL;
-      setImagenSeleccionada(nuevaURL); // Actualizar el estado de la imagen seleccionada
-    } else {
-      setImagenSeleccionada(null);
+    if (inp.target.files.length == 0) {
+      return;
     }
+    const fichero = inp.target.files[0];
+    const img = refImagen.current;
+    img.src = URL.createObjectURL(fichero);
+    setFormData({
+      ...formData,
+      "foto-perfil": { ruta: fichero.name, fichero: fichero },
+    });
   };
 
   const toggleMostrarContrasena = () => {

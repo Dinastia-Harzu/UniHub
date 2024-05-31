@@ -159,6 +159,8 @@ exports.trabajosIdGET = function (id) {
  * returns OK-GETidPUT
  **/
 exports.trabajosIdPUT = function (body, id) {
+  body.portada = `nube/trabajos/portadas/${body.portada.ruta}`;
+  body.documento = `nube/trabajos/documentos/${body.documento.ruta}`;
   return new Promise(function (resolve, reject) {
     _.trabajosIdGET(id).then(
       (res) => {
