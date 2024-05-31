@@ -150,5 +150,12 @@
   "conformacion-eliminar-comentario": "¿Estás seguro de que quieres eliminar el comentario?",
   "cerrar": "Cerrar",
   "si": "Sí",
-  "no":"No"
+  "no":"No",
+  "cualquiera": "cualquiera",
+  "comentario-borrado": "¡Comentario borrado!",
+  "comentario-enviado": "¡Comentario enviado!",
+  "cargando": "Cargando...",
+  "no-soporte-audio": "Tu navegador no soporta la reproducción de audio",
+  "no-soporte-video": "Tu navegador no soporta la reproducción de video"
+  
 }

@@ -40,7 +40,7 @@ export function SelectorTipoTrabajo({ formData, setFormData }) {
         value={formData["tipo-trabajo"]}
       >
         {formData.documento !== undefined ? null : (
-          <option value={-1}>Cualquiera</option>
+          <option value={-1}>{t("cualquiera")}</option>
         )}
         {tiposTrabajo.map((tipo, idx) => {
           return (
@@ -90,7 +90,7 @@ export function SelectorTitulaciones({ formData, setFormData }) {
         value={formData.titulacion}
       >
         {formData.documento !== undefined ? null : (
-          <option value={-1}>Cualquiera</option>
+          <option value={-1}>{t("cualquiera")}</option>
         )}
         {titulaciones.map((titulacion, idx) => {
           return (

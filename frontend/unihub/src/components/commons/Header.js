@@ -12,7 +12,6 @@ export default function Header() {
 
   useEffect(() => {
     const usuario = UsuarioSesion();
-    console.log("usuario");
     console.log(usuario);
   }, []);
 

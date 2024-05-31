@@ -10,6 +10,7 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 import { useParams } from "react-router-dom";
 import { URL_BASE } from "../utils/constantes";
+import { t } from "i18next";
 
 export default function ContenedorRecurso({
   id,
@@ -177,7 +178,7 @@ export default function ContenedorRecurso({
               alt={recursoActual.name}
               type="audio/mpeg"
             />
-            Tu navegador no soporta la reproducción de audio.
+            {t("no-soporte-audio")}
           </audio>
         </div>
       );

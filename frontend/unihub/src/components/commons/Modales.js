@@ -26,7 +26,7 @@ export function ModalDetalle({ id_trabajo }) {
     axios
       .post(URL_BASE + "comentarios/", formComentario)
       .then((result) => {
-        alert("Comentario enviado!");
+        alert(t("comentario-enviado"));
         window.location.reload();
       })
       .catch((err) => console.error(err));

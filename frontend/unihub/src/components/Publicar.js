@@ -193,30 +193,22 @@ export default function Publicar() {
             pagina === 1 ? "form-mostrado contenido-letra" : "form-oculto"
           }
         >
-          {params.id && formData.multimedia.length == 0 ? (
-            <p>Todavía no se ha cargado</p>
-          ) : (
-            <FormPublicar2
-              setPagina={setPagina}
-              formData={formData}
-              setFormData={setFormData}
-            />
-          )}
+          <FormPublicar2
+            setPagina={setPagina}
+            formData={formData}
+            setFormData={setFormData}
+          />
         </div>
         <div
           className={
             pagina === 2 ? "form-mostrado contenido-letra" : "form-oculto"
           }
         >
-          {params.id === undefined || formData.documento !== "" ? (
-            <FormPublicar3
-              setPagina={setPagina}
-              formData={formData}
-              setFormData={setFormData}
-            />
-          ) : (
-            <p>Todavía no se ha cargado</p>
-          )}
+          <FormPublicar3
+            setPagina={setPagina}
+            formData={formData}
+            setFormData={setFormData}
+          />
         </div>
       </div>
       <section className="seccion-botones-publicar">
