@@ -19,10 +19,7 @@ export default function ModalBase({
         aria-labelledby="unstyled-modal-title"
         aria-describedby="unstyled-modal-description"
         open={abierto}
-        onClose={(event, razon) => {
-          console.log(razon);
-          cerrar();
-        }}
+        onClose={cerrar}
         slots={{
           backdrop: Backdrop,
         }}

@@ -68,9 +68,6 @@ export default function ContenedorComentario({ comentario }) {
               <button className="btn btn-secondary no">{t("no")}</button>
             </div>
           </ModalBase>
-          <div className="boton-editar" onClick={borrarComentario}>
-            <FontAwesomeIcon icon={faEdit} size="xl" />
-          </div>
         </div>
       );
     }
