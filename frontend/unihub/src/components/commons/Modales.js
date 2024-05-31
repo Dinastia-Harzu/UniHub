@@ -15,7 +15,7 @@ export function ModalDetalle({ id_trabajo }) {
   const [modalEstaAbierto1, abrirModal1, cerrarModal1, publicarModal1] =
     useModal(false);
   const [formComentario, setFormComentario] = useState({
-    autor: 14,
+    autor: UsuarioSesion("id"),
     trabajo: parseInt(id_trabajo),
     comentario: "",
     valoracion: 0,
@@ -26,7 +26,7 @@ export function ModalDetalle({ id_trabajo }) {
       {UsuarioSesion() ? (
         <p>{t("opinion-sobre-trabajo")}:</p>
       ) : (
-        <p>Inicia sesión o regístrate para comentar</p>
+        <p>{t("inicia-sesion-para-comentar")}</p>
       )}
       {UsuarioSesion() ? (
         <button
@@ -40,7 +40,7 @@ export function ModalDetalle({ id_trabajo }) {
         </button>
       ) : (
         <Link to={"/login"} className="btn btn-fondo">
-          Inicia sesión
+          {t("login")}
         </Link>
       )}
       <Modal estaAbierto={modalEstaAbierto1} cerrarModal={cerrarModal1}>
