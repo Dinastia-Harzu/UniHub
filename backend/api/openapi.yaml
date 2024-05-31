@@ -2022,7 +2022,7 @@ components:
             $ref: "#/components/schemas/ReqLogin"
     Usuario:
       content:
-        application/json:
+        multipart/form-data:
           schema:
             $ref: "#/components/schemas/ReqUsuario"
       required: true
