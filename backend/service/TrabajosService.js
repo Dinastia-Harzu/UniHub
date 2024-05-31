@@ -161,6 +161,8 @@ exports.trabajosIdGET = function (id) {
 exports.trabajosIdPUT = function (body, id) {
   body.portada = `nube/trabajos/portadas/${body.portada.ruta}`;
   body.documento = `nube/trabajos/documentos/${body.documento.ruta}`;
+  delete body["portada[fichero]"];
+  delete body["documento[fichero]"];
   return new Promise(function (resolve, reject) {
     _.trabajosIdGET(id).then(
       (res) => {

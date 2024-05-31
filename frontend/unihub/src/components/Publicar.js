@@ -34,7 +34,6 @@ export default function Publicar() {
     resumen: "",
     portada: "",
     documento: "",
-    "rutas-multimedia": [],
     multimedia: [],
     "palabras-clave": [],
   });
@@ -84,9 +83,6 @@ export default function Publicar() {
           setFormData((prevFormData) => ({
             ...prevFormData,
             multimedia: multimedia,
-            "rutas-multimedia": MultimediaResponse.data.map(
-              (item) => item.ruta
-            ),
           }));
         } catch (error) {
           setError(error);
@@ -137,10 +133,13 @@ export default function Publicar() {
       if (formData["palabras-clave"].length != 0) {
         formData["palabras-clave"] = formData["palabras-clave"].split(",");
       }
-      axios
-        .post(`${URL_BASE}trabajos`, formData, {
+      axios[params.id ? "put" : "post"](
+        `${URL_BASE}trabajos/${params.id ?? ""}`,
+        formData,
+        {
           headers: { "Content-Type": "multipart/form-data" },
-        })
+        }
+      )
         .then((result) => {
           console.log(result);
           axios
@@ -149,7 +148,7 @@ export default function Publicar() {
             })
             .then((res) => {
               console.log(result);
-              alert("Trabajo publicado!");
+              alert(`Trabajo ${params.id ? "editado" : "publicado"}!`);
               navigate("/trabajos");
             })
             .catch((err) => console.error(err));
@@ -186,15 +185,14 @@ export default function Publicar() {
             pagina === 1 ? "form-mostrado contenido-letra" : "form-oculto"
           }
         >
-          {params.id === undefined ||
-          formData["rutas-multimedia"].length !== 0 ? (
+          {params.id && formData.multimedia.length == 0 ? (
+            <p>Todavía no se ha cargado</p>
+          ) : (
             <FormPublicar2
               setPagina={setPagina}
               formData={formData}
               setFormData={setFormData}
             />
-          ) : (
-            <p>Todavía no se ha cargado</p>
           )}
         </div>
         <div
