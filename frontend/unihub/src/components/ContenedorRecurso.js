@@ -41,7 +41,7 @@ export default function ContenedorRecurso({
   }, []);
 
   async function setValorImagenes() {
-    const recurso = formData.multimedia.at(id);
+    const recurso = formData.multimedia[id];
     console.log(recurso);
     // Creamos un archivo
     const res = await fetch(`${URL_BASE}${recurso.ruta}`);
