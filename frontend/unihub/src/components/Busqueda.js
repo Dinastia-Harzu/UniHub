@@ -86,7 +86,7 @@ export default function Busqueda() {
     return (
       <main className="contenedor-notfound">
         <div className="error-container">
-          <h1 className="error-title titulo-letra">Cargando...</h1>
+          <h1 className="error-title titulo-letra">{t("cargando")}</h1>
         </div>
       </main>
     );

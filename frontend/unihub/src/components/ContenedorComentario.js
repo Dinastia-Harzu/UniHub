@@ -33,7 +33,7 @@ export default function ContenedorComentario({ comentario }) {
       .delete(`${URL_BASE}comentarios/${comentario.id}`)
       .then((result) => {
         console.log(result);
-        alert("Comentario borrado!");
+        alert(t("comentario-borrado"));
         window.location.reload();
       })
       .catch((err) => {
