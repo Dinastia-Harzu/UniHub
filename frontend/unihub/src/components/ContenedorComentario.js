@@ -62,7 +62,7 @@ export default function ContenedorComentario({ comentario }) {
 
   return (
     <div className="contenedor-comentario">
-      <p className="contenedor-usuario">
+      <div className="contenedor-usuario">
         <img
           src={
             autorComentario["foto-perfil"]
@@ -81,7 +81,7 @@ export default function ContenedorComentario({ comentario }) {
           ratinginicial={comentario.valoracion}
           desabilitado={true}
         />
-      </p>
+      </div>
       <p className="texto-comentario">{comentario.comentario}</p>
       {mostrarBotonBorrar()}
     </div>

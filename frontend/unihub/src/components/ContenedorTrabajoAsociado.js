@@ -6,7 +6,7 @@ export default function ContenedorTrabajoAsociado({ trabajo }) {
     <div className="trabajo-relacionado">
       <Link to={`/detalles/${trabajo.id}`} className="link-fondo">
         <img src={`${URL_BASE}${trabajo.portada}`} alt={trabajo.nombre}></img>
-        {trabajo.nombre}
+        <p>{trabajo.nombre}</p>
       </Link>
     </div>
   );
