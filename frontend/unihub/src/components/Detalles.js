@@ -14,12 +14,16 @@ import ContenedorTrabajoAsociado from "./ContenedorTrabajoAsociado";
 import ContenedorRecursoAsociado from "./ContenedorRecursoAsociado";
 import Tiempo from "./commons/Tiempo";
 import { UsuarioSesion } from "./commons/SessionStorage";
+import Cargando from "./commons/Cargando";
+import MensajeError from "./commons/MensajeError";
 
 export default function Detalles() {
   const navigate = useNavigate();
   const { t } = useTranslation();
   const params = useParams();
   const id_trabajo = params.id;
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
   const [trabajo, setTrabajo] = useState({
     id: -1,
     nombre: "",
@@ -42,6 +46,7 @@ export default function Detalles() {
   }, [params.id]);
 
   const obtenerDatosTrabajo = async () => {
+    setLoading(true);
     try {
       const result = await axios.get(`${URL_BASE}trabajos/${id_trabajo}`);
       const data = result.data;
@@ -118,7 +123,9 @@ export default function Detalles() {
         "trabajos-asociados": trabajosAsoc.data,
       }));
     } catch (err) {
-      console.error(err);
+      setError(err);
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -133,7 +140,15 @@ export default function Detalles() {
     palabras_clave += t("no-resultados");
   }
 
-  return (
+  return loading ? (
+    <main>
+      <Cargando />
+    </main>
+  ) : error ? (
+    <main>
+      <MensajeError />
+    </main>
+  ) : (
     <main className="contenedor-detalles">
       <section className="contenedor-portada">
         <div className="contenedor-ver-y-descargar">

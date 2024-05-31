@@ -14,12 +14,16 @@ import { useTranslation } from "react-i18next";
 import { useNavigate, useParams } from "react-router-dom";
 import { UsuarioSesion } from "./commons/SessionStorage.js";
 import { fechaActual } from "./commons/Tiempo.js";
+import Cargando from "./commons/Cargando.js";
+import MensajeError from "./commons/MensajeError.js";
 
 export default function Publicar() {
   const navigate = useNavigate();
   const params = useParams();
 
   const { t } = useTranslation();
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState(null);
   const [pagina, setPagina] = useState(0);
   const [formData, setFormData] = useState({
     nombre: "",
@@ -37,6 +41,7 @@ export default function Publicar() {
 
   useEffect(() => {
     if (params.id) {
+      setLoading(true);
       const fetchData = async () => {
         try {
           // Obtener trabajo
@@ -84,7 +89,9 @@ export default function Publicar() {
             ),
           }));
         } catch (error) {
-          console.error(error);
+          setError(error);
+        } finally {
+          setLoading(false);
         }
       };
 
@@ -104,19 +111,19 @@ export default function Publicar() {
 
   function comprobarData() {
     if (formData.nombre == "") {
-      alert('Rellena el campo "Título"');
+      alert(t("rellenar-titulo"));
       return false;
     }
     if (formData.resumen == "") {
-      alert('Rellena el campo "Resumen"');
+      alert(t("rellenar-resumen"));
       return false;
     }
     if (formData.documento == "") {
-      alert('Introduce el documento en el campo "Archivo de trabajo"');
+      alert(t("introducir-documento"));
       return false;
     }
     if (formData.portada == "") {
-      alert('Introduce la imagen de la portada en el campo "Portada"');
+      alert(t("introducir-portada"));
       return false;
     }
     return true;
@@ -151,7 +158,15 @@ export default function Publicar() {
     }
   }
 
-  return (
+  return loading ? (
+    <main>
+      <Cargando />
+    </main>
+  ) : error ? (
+    <main>
+      <MensajeError />
+    </main>
+  ) : (
     <main className="pagina-publicar">
       <h1>{params.id ? t("editar-trabajo") : t("publicar-trabajo")}</h1>
       <div>
