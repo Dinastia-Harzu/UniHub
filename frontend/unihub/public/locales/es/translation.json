@@ -142,5 +142,13 @@
   "registra-o-inicia": "Regístrate o inicia sesión para continuar",
   "ya-estas-logueado": "Ya has iniciado sesión",
   "grado-master": "Grado/Máster",
-  "valoracion": "Valoración"
+  "valoracion": "Valoración",
+  "rellenar-titulo": "Rellena el campo \"Título\"",
+  "rellenar-resumen": "Rellena el campo \"Resumen\"",
+  "introducir-documento": "Introduce el documento en el campo \"Archivo de trabajo\"",
+  "introducir-portada": "Introduce la imagen de la portada en el campo \"Portada\"",
+  "conformacion-eliminar-comentario": "¿Estás seguro de que quieres eliminar el comentario?",
+  "cerrar": "Cerrar",
+  "si": "Sí",
+  "no":"No"
 }
