@@ -3,6 +3,9 @@ import StarRating from "./commons/StarRating";
 import axios from "axios";
 import { URL_BASE } from "../utils/constantes";
 import { UsuarioSesion } from "./commons/SessionStorage";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faEdit, faTrash } from "@fortawesome/free-solid-svg-icons";
+import ModalBase from "./commons/ModalBase";
 
 export default function ContenedorComentario({ comentario }) {
   const [autorComentario, setAutorComentario] = useState({});
@@ -24,8 +27,7 @@ export default function ContenedorComentario({ comentario }) {
       });
   }
 
-  function borrarComentario(event) {
-    event.preventDefault();
+  function borrarComentario() {
     axios
       .delete(`${URL_BASE}comentarios/${comentario.id}`)
       .then((result) => {
@@ -40,21 +42,35 @@ export default function ContenedorComentario({ comentario }) {
 
   function comprobarUsuarioComentario() {
     const usuario = UsuarioSesion();
-
     if (usuario?.id == comentario.autor) {
       setusuarioVerificado(true);
     }
   }
 
-  function mostrarBotonBorrar() {
+  function mostrarBotonesAdicionales() {
     if (usuarioVerificado) {
       return (
-        <button
-          className="btn btn-letra btn-primary"
-          onClick={(event) => borrarComentario(event)}
-        >
-          Borrar comentario
-        </button>
+        <div className="contenedor-botones-adicionales">
+          <ModalBase
+            boton={({ onClick }) => (
+              <div className="boton-borrar">
+                <FontAwesomeIcon icon={faTrash} size="xl" onClick={onClick} />
+              </div>
+            )}
+            incluirBotonCerrar
+          >
+            <h4>¿Estás seguro de que quieres eliminar el comentario?</h4>
+            <div className="contenedor-si-no">
+              <button className="btn btn-primary si" onClick={borrarComentario}>
+                Sí
+              </button>
+              <button className="btn btn-secondary no">No</button>
+            </div>
+          </ModalBase>
+          <div className="boton-editar" onClick={borrarComentario}>
+            <FontAwesomeIcon icon={faEdit} size="xl" />
+          </div>
+        </div>
       );
     }
     return;
@@ -83,7 +99,7 @@ export default function ContenedorComentario({ comentario }) {
         />
       </div>
       <p className="texto-comentario">{comentario.comentario}</p>
-      {mostrarBotonBorrar()}
+      {mostrarBotonesAdicionales()}
     </div>
   );
 }

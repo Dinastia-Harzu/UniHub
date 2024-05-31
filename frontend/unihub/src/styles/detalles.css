@@ -12,12 +12,32 @@ body {
 .boton-ver {
   margin-right: 0.3em;
   color: var(--color-text);
+  transition: color 0.3s;
 }
 
 .boton-descargar:hover,
 .boton-ver:hover,
 .boton-descargar:focus,
 .boton-ver:focus {
+  cursor: pointer;
+  color: var(--color-tertiary);
+}
+
+.contenedor-botones-adicionales {
+  display: flex;
+}
+
+.boton-editar,
+.boton-borrar {
+  padding: 0.5em;
+  color: var(--color-text);
+  transition: color 0.3s;
+}
+
+.boton-editar:hover,
+.boton-borrar:hover,
+.boton-editar:focus,
+.boton-borrar:focus {
   cursor: pointer;
   color: var(--color-tertiary);
 }
@@ -76,16 +96,19 @@ body {
   z-index: -1;
 }
 
-.contenedor-editar-borrar {
+.contenedor-editar-borrar,
+.contenedor-si-no {
   display: flex;
   flex-direction: row;
 }
 
-.contenedor-editar-borrar>.editar {
+.contenedor-editar-borrar>.editar,
+.contenedor-si-no>.si {
   flex: 50%;
 }
 
-.contenedor-editar-borrar>.borrar {
+.contenedor-editar-borrar>.borrar,
+.contenedor-si-no>.no {
   flex: 50%;
   text-decoration: underline;
 }

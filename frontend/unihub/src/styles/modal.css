@@ -72,3 +72,27 @@ dialog::backdrop {
   width: 97%;
   padding: 0.5em;
 }
+
+.modal-backdrop {
+  z-index: -1;
+  position: fixed;
+  inset: 0;
+  background-color: rgb(0 0 0 / 0.5);
+}
+
+.modal-base {
+  z-index: 1300;
+  position: fixed;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.modal-contenido {
+  background-color: var(--color-bg);
+  color: white;
+  position: relative;
+  padding: 1em;
+  border-radius: 0.5em;
+}
