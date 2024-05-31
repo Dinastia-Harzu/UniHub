@@ -37,52 +37,19 @@ export default function App() {
   const idUsuarioLoggeado = UsuarioSesion("id");
 
   useEffect(() => {
-    if (idUsuarioLoggeado) {
-      axios
-        .get(`${URL_BASE}usuarios/${idUsuarioLoggeado}`)
-        .then((result) => {
-          const userThemeFromBackend = result.data["ruta-tema"];
-          setUserTheme(userThemeFromBackend);
-          if (document.getElementById("tema-de-usuario")) {
-            document.head.removeChild(
-              document.getElementById("tema-de-usuario")
-            );
-          }
-          const link = document.createElement("link");
-          link.setAttribute("id", "tema-de-usuario");
-          link.setAttribute("rel", "stylesheet");
-          link.setAttribute("href", `/assets/themes/${userThemeFromBackend}`);
-          document.head.appendChild(link);
-          if (
-            userThemeFromBackend === "general-ac.css" ||
-            userThemeFromBackend === "general-ac-lg.css" ||
-            userThemeFromBackend === "general-osc-lg.css" ||
-            userThemeFromBackend === "general-osc.css"
-          ) {
-            document.getElementsByClassName("logotipo").src =
-              "/assets/W_Logotipo.PNG";
-          }
-
-          return () => {
-            document.head.removeChild(link);
-          };
-        })
-        .catch((error) => {
-          console.error("Error al obtener el tema del usuario:", error);
-        });
-    } else {
-      if (document.getElementById("tema-de-usuario")) {
-        document.head.removeChild(document.getElementById("tema-de-usuario"));
-      }
-      const link = document.createElement("link");
-      link.setAttribute("id", "tema-de-usuario");
-      link.rel = "stylesheet";
-      link.href = `/assets/themes/general-normal.css`;
-      document.head.appendChild(link);
-      return () => {
-        document.head.removeChild(link);
-      };
+    if (document.getElementById("tema-de-usuario")) {
+      document.head.removeChild(document.getElementById("tema-de-usuario"));
     }
+    const link = document.createElement("link");
+    link.setAttribute("id", "tema-de-usuario");
+    link.rel = "stylesheet";
+    link.href = `/assets/themes/${
+      UsuarioSesion("tema-ruta") ?? "general-normal.css"
+    }`;
+    document.head.appendChild(link);
+    return () => {
+      document.head.removeChild(link);
+    };
   }, [idUsuarioLoggeado]);
 
   return (
