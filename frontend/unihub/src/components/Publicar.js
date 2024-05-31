@@ -47,13 +47,21 @@ export default function Publicar() {
           const trabajoResponse = await axios.get(
             `${URL_BASE}trabajos/${params.id}`
           );
+          console.log(formData);
+          console.log(trabajoResponse.data);
           const formDataFiltrado = Object.keys(formData).reduce((acc, key) => {
             if (trabajoResponse.data.hasOwnProperty(key)) {
               acc[key] = trabajoResponse.data[key];
             }
-            acc["publicacion"] = fechaActual();
+            // console.log(acc);
             return acc;
           }, {});
+          formDataFiltrado.publicacion = fechaActual();
+          formDataFiltrado.portada = formDataFiltrado.portada.split("/").pop();
+          formDataFiltrado.documento = formDataFiltrado.documento
+            .split("/")
+            .pop();
+          console.log(formDataFiltrado);
 
           setFormData((prevFormData) => ({
             ...prevFormData,
@@ -246,7 +254,6 @@ export default function Publicar() {
               {t("publicar")}
             </button>
           </div>
-          <p onClick={() => console.log(formData)}>ver trabajo</p>
         </div>
       </section>
     </main>

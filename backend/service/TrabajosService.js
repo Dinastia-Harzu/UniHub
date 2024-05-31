@@ -5,12 +5,8 @@ const responder = writer.respondWithCode;
 const helper = require("../utils/helper");
 const conexion = helper.connection;
 const respuestas = helper.respuestas;
-const camposPut = helper.determinarCamposPut;
 const $ = helper.json2sql;
-const filtro = helper.filtro;
-const select = helper.select;
 const _ = require("./TrabajosService");
-const palabrasClave = require("./PalabrasClaveService");
 
 function construirConsulta(params) {
   let sql = `
@@ -159,24 +155,36 @@ exports.trabajosIdGET = function (id) {
  * returns OK-GETidPUT
  **/
 exports.trabajosIdPUT = function (body, id) {
-  body.portada = `nube/trabajos/portadas/${body.portada.ruta}`;
-  body.documento = `nube/trabajos/documentos/${body.documento.ruta}`;
-  delete body["portada[fichero]"];
-  delete body["documento[fichero]"];
+  body.portada.ruta = `nube/trabajos/portadas/${body.portada.ruta}`;
+  body.documento.ruta = `nube/trabajos/documentos/${body.documento.ruta}`;
   return new Promise(function (resolve, reject) {
     _.trabajosIdGET(id).then(
       (res) => {
-        conexion.query(camposPut("trabajo", body, id), (err) => {
-          if (err) {
-            console.error(err);
-            reject(responder(500, respuestas[500]));
-          } else {
-            _.trabajosIdGET(id).then(
-              (res) => resolve(res),
-              (err) => reject(err)
-            );
+        conexion.query(
+          `
+            UPDATE trabajo SET
+              nombre = ${$(body.nombre)},
+              tipo = ${$(body.tipo)},
+              autor = ${$(body.autor)},
+              titulacion = ${$(body.titulacion)},
+              publicacion = ${$(body.publicacion)},
+              resumen = ${$(body.resumen)},
+              portada = ${$(body.portada.ruta)},
+              documento = ${$(body.documento.ruta)}
+            WHERE id = ${id}
+          `,
+          (err) => {
+            if (err) {
+              console.error(err);
+              reject(responder(500, respuestas[500]));
+            } else {
+              _.trabajosIdGET(id).then(
+                (res) => resolve(res),
+                (err) => reject(err)
+              );
+            }
           }
-        });
+        );
       },
       (err) => {
         if (err.code == 204) {
@@ -231,13 +239,13 @@ exports.trabajosPOST = function (body) {
                 return new Promise((resolve, reject) => {
                   conexion.query(
                     `
-                INSERT INTO multimedia VALUES(
-                  ${$()},
-                  ${$(multimedia.nombre)},
-                  ${$(multimedia.ruta)},
-                  ${$(id_trabajo)}
-                )
-              `,
+                      INSERT INTO multimedia VALUES(
+                        ${$()},
+                        ${$(multimedia.nombre)},
+                        ${$(multimedia.ruta)},
+                        ${$(id_trabajo)}
+                      )
+                    `,
                     (err, result) => {
                       if (err) {
                         reject(err);

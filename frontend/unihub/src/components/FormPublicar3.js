@@ -18,16 +18,25 @@ export default function FormPublicar3({
 
   useEffect(() => {
     if (params.id) {
-      setValorInput(formData.documento, refInputDocumento, true);
-      setValorInput(formData.portada, refInputPortada, false);
-      refImagen.current.src = `${URL_BASE}${formData.portada}`;
+      console.log(formData.documento);
+      console.log(formData.portada);
+      setValorInput(formData.documento, "documentos", refInputDocumento, true);
+      setValorInput(formData.portada, "portadas", refInputPortada, false);
+      refImagen.current.src = `${URL_BASE}nube/trabajos/portadas/${formData.portada}`;
     }
   }, []);
 
-  async function setValorInput(nombre, refInput, modificarFormData = true) {
+  async function setValorInput(
+    nombre,
+    carpeta,
+    refInput,
+    modificarFormData = true
+  ) {
     // Creamos el archivo con File
     try {
-      const respuesta = await fetch(`assets/${nombre}`);
+      const respuesta = await fetch(
+        `${URL_BASE}nube/trabajos/${carpeta}/${nombre}`
+      );
       const blob = await respuesta.blob();
       const nombreFichero = nombre;
       const tipoFichero = modificarFormData

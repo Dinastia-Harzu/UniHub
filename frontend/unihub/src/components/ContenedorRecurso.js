@@ -43,20 +43,22 @@ export default function ContenedorRecurso({
   async function setValorImagenes() {
     const recurso = formData.multimedia[id];
     console.log(recurso);
-    // Creamos un archivo
-    const res = await fetch(`${URL_BASE}${recurso.ruta}`);
-    console.log(res);
-    const blob = await res.blob();
-    const fichero = new File([blob], recurso.ruta, { type: blob.type });
-    console.log(fichero);
-    setRecursoActual({
-      url: URL_BASE + recurso.ruta,
-      name: recurso.nombre,
-      type: blob.type,
-    });
-    console.log(recursoActual);
-    settipoRecursoActual(recurso.ruta.split(".").pop().toLowerCase());
-    setRecursoDeAntes(true);
+    if (recurso) {
+      // Creamos un archivo
+      const res = await fetch(`${URL_BASE}${recurso.ruta}`);
+      console.log(res);
+      const blob = await res.blob();
+      const fichero = new File([blob], recurso.ruta, { type: blob.type });
+      console.log(fichero);
+      setRecursoActual({
+        url: URL_BASE + recurso.ruta,
+        name: recurso.nombre,
+        type: blob.type,
+      });
+      console.log(recursoActual);
+      settipoRecursoActual(recurso.ruta.split(".").pop().toLowerCase());
+      setRecursoDeAntes(true);
+    }
   }
 
   function setRecurso() {
@@ -118,7 +120,7 @@ export default function ContenedorRecurso({
     );
     if (recursoDeAntes) {
       nuevosRecursos = formData.multimedia.filter(
-        (ruta, _) => ruta.ruta !== recursoActual.url,
+        (ruta, _) => ruta.ruta !== recursoActual.url.split("/").pop(),
         console.log(recursoActual.url)
       );
     }
