@@ -5,7 +5,7 @@ import { URL_BASE } from "../utils/constantes";
 import { UsuarioSesion } from "./commons/SessionStorage";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEdit, faTrash } from "@fortawesome/free-solid-svg-icons";
-import ModalBase from "./commons/ModalBase";
+import ModalBase from "./commons/modales/ModalBase";
 
 export default function ContenedorComentario({ comentario }) {
   const [autorComentario, setAutorComentario] = useState({});
