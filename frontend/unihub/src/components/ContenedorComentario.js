@@ -7,10 +7,13 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEdit, faTrash } from "@fortawesome/free-solid-svg-icons";
 import ModalBase from "./commons/modales/ModalBase";
 import { t } from "i18next";
+import { useNavigate } from "react-router-dom";
 
-export default function ContenedorComentario({ comentario }) {
+export default function ContenedorComentario({ comentario, idTrabajo }) {
   const [autorComentario, setAutorComentario] = useState({});
   const [usuarioVerificado, setusuarioVerificado] = useState(false);
+
+  const navigate = useNavigate();
 
   useEffect(() => {
     obtenerAutorComentario();
@@ -33,7 +36,6 @@ export default function ContenedorComentario({ comentario }) {
       .delete(`${URL_BASE}comentarios/${comentario.id}`)
       .then((result) => {
         console.log(result);
-        alert(t("comentario-borrado"));
         window.location.reload();
       })
       .catch((err) => {

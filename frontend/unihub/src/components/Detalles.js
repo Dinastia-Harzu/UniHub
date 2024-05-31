@@ -43,7 +43,7 @@ export default function Detalles() {
 
   useEffect(() => {
     obtenerDatosTrabajo();
-  }, [params.id]);
+  }, [params.id, trabajo.comentarios.length]);
 
   const obtenerDatosTrabajo = async () => {
     setLoading(true);
@@ -274,7 +274,11 @@ export default function Detalles() {
             <div>
               {trabajo.comentarios.length > 0 ? (
                 trabajo.comentarios.map((comentario, idx) => (
-                  <ContenedorComentario comentario={comentario} key={idx} />
+                  <ContenedorComentario
+                    comentario={comentario}
+                    idTrabajo={params.id}
+                    key={idx}
+                  />
                 ))
               ) : (
                 <p>{t("no-comentarios")}</p>
