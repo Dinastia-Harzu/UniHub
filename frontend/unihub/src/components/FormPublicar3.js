@@ -2,6 +2,7 @@ import "../styles/publicar.css";
 import { useTranslation } from "react-i18next";
 import { useEffect, useRef } from "react";
 import { useParams } from "react-router-dom";
+import { URL_BASE } from "../utils/constantes";
 
 export default function FormPublicar3({
   setPagina,
@@ -19,7 +20,7 @@ export default function FormPublicar3({
     if (params.id) {
       setValorInput(formData.documento, refInputDocumento, true);
       setValorInput(formData.portada, refInputPortada, false);
-      refImagen.current.src = `/assets/${formData.portada}`;
+      refImagen.current.src = `${URL_BASE}${formData.portada}`;
     }
   }, []);
 
@@ -129,7 +130,7 @@ export default function FormPublicar3({
                 ref={refImagen}
                 src="/assets/Foto_defecto_portada.png"
                 alt="Portada"
-                onClick={() => setPortada()}
+                onClick={setPortada}
                 width={240}
                 height={320}
               />
