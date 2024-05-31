@@ -17,9 +17,15 @@ const _ = require("./LoginService");
 exports.loginPOST = function (body) {
   return new Promise(function (resolve, reject) {
     conexion.query(
-      `SELECT u.*,t.nombre tema_nombre,o.nombre titulacion_nombre FROM usuario u, tema t,titulacion o WHERE correo=${$(
-        body.correo
-      )} AND clave=${$(body.clave)} AND titulacion = o.id AND tema = t.id`,
+      `
+        SELECT u.*, t.nombre AS \`tema-nombre\`, t.css AS \`tema-ruta\`, tl.nombre AS \`titulacion-nombre\`
+        FROM usuario u
+        JOIN tema t ON(t.id = u.tema)
+        JOIN titulacion tl ON(tl.id = u.titulacion)
+        WHERE 1
+        AND correo = ${$(body.correo)}
+        AND clave = ${$(body.clave)}
+      `,
       (err, filas) => {
         if (err) {
           console.error(err);
