@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { useModal } from "../../hooks/useModal";
-import Modal from "./Modal";
+import MiModal from "./MiModal";
 import StarRating from "./StarRating";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEye } from "@fortawesome/free-solid-svg-icons";
@@ -43,7 +43,7 @@ export function ModalDetalle({ id_trabajo }) {
           {t("login")}
         </Link>
       )}
-      <Modal estaAbierto={modalEstaAbierto1} cerrarModal={cerrarModal1}>
+      <MiModal estaAbierto={modalEstaAbierto1} cerrarModal={cerrarModal1}>
         <form>
           <p className="parrafo-valoracion titulo-letra">
             <label htmlFor="valoracion">{t("intro-val")}:</label>
@@ -77,7 +77,7 @@ export function ModalDetalle({ id_trabajo }) {
             <b>{t("publicar-comentario")}</b>
           </button>
         </form>
-      </Modal>
+      </MiModal>
     </div>
   );
 }
@@ -101,7 +101,7 @@ export function ModalPDF({ archivo, nombre }) {
         onClick={abrirModal2}
         onKeyDown={handleKeyDown}
       />
-      <Modal estaAbierto={modalEstaAbierto2} cerrarModal={cerrarModal2}>
+      <MiModal estaAbierto={modalEstaAbierto2} cerrarModal={cerrarModal2}>
         <div className="contenedor-pdf">
           <b className="titulo-pdf">{nombre}</b>
           <object
@@ -111,7 +111,7 @@ export function ModalPDF({ archivo, nombre }) {
             height="98%"
           ></object>
         </div>
-      </Modal>
+      </MiModal>
     </div>
   );
 }
