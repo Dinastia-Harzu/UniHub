@@ -91,7 +91,7 @@ dialog::backdrop {
 
 .modal-contenido {
   background-color: var(--color-bg);
-  color: white;
+  color: var(--color-text);
   padding: 0em 2em 1.5em 2em;
   border-radius: 0.5em;
   width: 60%;
