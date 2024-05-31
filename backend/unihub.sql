@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 30-05-2024 a las 19:54:08
+-- Tiempo de generación: 31-05-2024 a las 22:53:01
 -- Versión del servidor: 10.4.32-MariaDB
 -- Versión de PHP: 8.2.12
 
@@ -55,17 +55,6 @@ CREATE TABLE `multimedia` (
   `trabajo` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
---
--- Volcado de datos para la tabla `multimedia`
---
-
-INSERT INTO `multimedia` (`id`, `nombre`, `ruta`, `trabajo`) VALUES
-(77, 'imagen_2024-05-30_142253388', 'nube/trabajos/multimedia/imagen_2024-05-30_142253388.png', 58),
-(78, 'skull-gif', 'nube/trabajos/multimedia/skull-gif.gif', 58),
-(79, 'skull-gif-lowres', 'nube/trabajos/multimedia/skull-gif-lowres.gif', 58),
-(80, 'pedro-bernabe-ciclo', 'nube/trabajos/multimedia/pedro-bernabe-ciclo.png', 58),
-(81, 'tiles_tiny_sample_2', 'nube/trabajos/multimedia/tiles_tiny_sample_2.png', 58);
-
 -- --------------------------------------------------------
 
 --
@@ -82,9 +71,11 @@ CREATE TABLE `palabra-clave` (
 --
 
 INSERT INTO `palabra-clave` (`id`, `nombre`) VALUES
-(120, 'videojuego'),
+(123, 'audio'),
 (121, 'motor'),
-(122, 'shaders');
+(124, 'música'),
+(122, 'shaders'),
+(120, 'videojuego');
 
 -- --------------------------------------------------------
 
@@ -96,15 +87,6 @@ CREATE TABLE `palabra-clave-trabajo` (
   `id-trabajo` int(11) NOT NULL,
   `id-palabra-clave` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-
---
--- Volcado de datos para la tabla `palabra-clave-trabajo`
---
-
-INSERT INTO `palabra-clave-trabajo` (`id-trabajo`, `id-palabra-clave`) VALUES
-(58, 120),
-(58, 121),
-(58, 122);
 
 -- --------------------------------------------------------
 
@@ -207,7 +189,7 @@ CREATE TABLE `trabajo` (
   `tipo` int(11) NOT NULL,
   `autor` int(11) NOT NULL,
   `titulacion` int(11) NOT NULL,
-  `publicacion` date NOT NULL,
+  `publicacion` varchar(10) NOT NULL,
   `resumen` text NOT NULL,
   `portada` varchar(255) NOT NULL,
   `documento` varchar(255) NOT NULL
@@ -218,8 +200,7 @@ CREATE TABLE `trabajo` (
 --
 
 INSERT INTO `trabajo` (`id`, `nombre`, `tipo`, `autor`, `titulacion`, `publicacion`, `resumen`, `portada`, `documento`) VALUES
-(1, 'Realización de un cortometraje de animación en 3D', 1, 14, 1, '2024-05-02', 'Este trabajo consiste en la realización de un cortometraje que narra el día de un niño a través de la caracterización de un avión de papel. Este día comienza en el colegio y, al terminar las clases, se va al parque a disfrutar de su entorno...', 'nube/trabajos/portadas/portada.png', 'nube/trabajos/documentos/documento.pdf'),
-(58, 'Melatonia', 1, 24, 1, '2024-05-30', 'Este juego está bastante guay, con generación procedural de salas y todo', 'nube/trabajos/portadas/TFG_Similar2.png', 'nube/trabajos/documentos/Google_C_Style_Guide.pdf');
+(1, 'Realización de un cortometraje de animación en 3D', 1, 14, 1, '2024-05-02', 'Este trabajo consiste en la realización de un cortometraje que narra el día de un niño a través de la caracterización de un avión de papel. Este día comienza en el colegio y, al terminar las clases, se va al parque a disfrutar de su entorno...', 'nube/trabajos/portadas/portada.png', 'nube/trabajos/documentos/documento.pdf');
 
 -- --------------------------------------------------------
 
@@ -235,7 +216,7 @@ CREATE TABLE `usuario` (
   `clave` varchar(255) NOT NULL,
   `titulacion` int(11) NOT NULL,
   `direccion` varchar(255) NOT NULL,
-  `nacimiento` date NOT NULL,
+  `nacimiento` varchar(10) NOT NULL,
   `tema` int(11) NOT NULL DEFAULT 0,
   `foto-perfil` varchar(255) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
@@ -245,9 +226,11 @@ CREATE TABLE `usuario` (
 --
 
 INSERT INTO `usuario` (`id`, `nombre`, `apellidos`, `correo`, `clave`, `titulacion`, `direccion`, `nacimiento`, `tema`, `foto-perfil`) VALUES
-(14, 'Arturo', 'García Richardson', 'agrg11@alu.ua.es', '12345%ABab', 1, 'C/ del Presidente Adolfo Suárez, 22', '2002-10-24', 1, 'no_photo.png'),
-(22, 'Paula', 'Lario Llinares', 'paula@alu.ua.es', 'clave', 1, 'C/ del Presidente Adolfo Suárez, 22', '2002-10-24', 3, NULL),
-(24, 'Ainhoa', 'Palop Almansa', 'ainhoa@alu.ua.es', 'qwertyuiop1234567890%A', 22, 'Mi casa de Calpe', '2003-02-08', 2, 'no_photo.png');
+(14, 'Arturo', 'García Richardson', 'agrg11@alu.ua.es', '12345%ABab', 1, 'C/ del Presidente Adolfo Suárez, 22', '2002-10-24', 1, NULL),
+(22, 'Paula', 'Lario Llinares', 'paula@alu.ua.es', '@8f45VDZ3q-5', 1, 'C/ del Presidente Adolfo Suárez, 22', '2002-10-24', 3, NULL),
+(24, 'Ainhoa', 'Palop Almansa', 'ainhoa@alu.ua.es', 'qwertyuiop1234567890%A', 22, 'Mi casa de Calpe', '2003-02-06', 2, 'nube/pfp/Foto_Usuario.jpg'),
+(25, 'Marta', 'Gómez Verdú', 'mgv76@alu.ua.es', 'Fz9ntL7m8bs', 1, 'Ibi', '2003-08-15', 4, 'nube/pfp/The_true_Tivi.jpg'),
+(29, 'Sergio', 'Luján Mora', 'slm@alu.ua.es', 'c7t):#W3k!X2', 1, 'Mi casa', '2002-01-01', 2, 'nube/pfp/Foto_Usuario.jpg');
 
 --
 -- Índices para tablas volcadas
@@ -272,7 +255,8 @@ ALTER TABLE `multimedia`
 -- Indices de la tabla `palabra-clave`
 --
 ALTER TABLE `palabra-clave`
-  ADD PRIMARY KEY (`id`);
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `nombre` (`nombre`);
 
 --
 -- Indices de la tabla `palabra-clave-trabajo`
@@ -326,19 +310,19 @@ ALTER TABLE `usuario`
 -- AUTO_INCREMENT de la tabla `comentario`
 --
 ALTER TABLE `comentario`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=40;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=65;
 
 --
 -- AUTO_INCREMENT de la tabla `multimedia`
 --
 ALTER TABLE `multimedia`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=82;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=110;
 
 --
 -- AUTO_INCREMENT de la tabla `palabra-clave`
 --
 ALTER TABLE `palabra-clave`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=123;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=152;
 
 --
 -- AUTO_INCREMENT de la tabla `tema`
@@ -362,13 +346,13 @@ ALTER TABLE `titulacion`
 -- AUTO_INCREMENT de la tabla `trabajo`
 --
 ALTER TABLE `trabajo`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=59;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=81;
 
 --
 -- AUTO_INCREMENT de la tabla `usuario`
 --
 ALTER TABLE `usuario`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=25;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=30;
 
 --
 -- Restricciones para tablas volcadas
