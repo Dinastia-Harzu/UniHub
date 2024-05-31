@@ -102,29 +102,53 @@ export default function Publicar() {
     event.target.blur();
   }
 
+  function comprobarData() {
+    if (formData.nombre == "") {
+      alert('Rellena el campo "Título"');
+      return false;
+    }
+    if (formData.resumen == "") {
+      alert('Rellena el campo "Resumen"');
+      return false;
+    }
+    if (formData.documento == "") {
+      alert('Introduce el documento en el campo "Archivo de trabajo"');
+      return false;
+    }
+    if (formData.portada == "") {
+      alert('Introduce la imagen de la portada en el campo "Portada"');
+      return false;
+    }
+    return true;
+  }
+
   function enviarData() {
     console.log(formData);
-    if (formData["palabras-clave"].length != 0) {
-      formData["palabras-clave"] = formData["palabras-clave"].split(",");
+
+    // Comprobar los parametros
+    if (comprobarData()) {
+      if (formData["palabras-clave"].length != 0) {
+        formData["palabras-clave"] = formData["palabras-clave"].split(",");
+      }
+      axios
+        .post(`${URL_BASE}trabajos`, formData, {
+          headers: { "Content-Type": "multipart/form-data" },
+        })
+        .then((result) => {
+          console.log(result);
+          axios
+            .post(`${URL_BASE}fichero/trabajos`, formData, {
+              headers: { "Content-Type": "multipart/form-data" },
+            })
+            .then((res) => {
+              console.log(result);
+              alert("Trabajo publicado!");
+              navigate("/trabajos");
+            })
+            .catch((err) => console.error(err));
+        })
+        .catch((err) => console.error(err));
     }
-    axios
-      .post(`${URL_BASE}trabajos`, formData, {
-        headers: { "Content-Type": "multipart/form-data" },
-      })
-      .then((result) => {
-        console.log(result);
-        axios
-          .post(`${URL_BASE}fichero/trabajos`, formData, {
-            headers: { "Content-Type": "multipart/form-data" },
-          })
-          .then((res) => {
-            console.log(result);
-            alert("Trabajo publicado!");
-            navigate("/trabajos");
-          })
-          .catch((err) => console.error(err));
-      })
-      .catch((err) => console.error(err));
   }
 
   return (
