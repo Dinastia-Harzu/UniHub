@@ -103,10 +103,7 @@ body {
 }
 
 .contenedor-editar-borrar>.editar,
-.contenedor-si-no>.si {
-  flex: 50%;
-}
-
+.contenedor-si-no>.si,
 .contenedor-editar-borrar>.borrar,
 .contenedor-si-no>.no {
   flex: 50%;

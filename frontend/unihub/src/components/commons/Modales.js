@@ -9,6 +9,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { UsuarioSesion } from "./SessionStorage";
 import { URL_BASE } from "../../utils/constantes";
 import ModalBase from "./modales/ModalBase";
+import axios from "axios";
 
 export function ModalDetalle({ id_trabajo }) {
   const navigate = useNavigate();
@@ -19,6 +20,17 @@ export function ModalDetalle({ id_trabajo }) {
     comentario: "",
     valoracion: 0,
   });
+
+  const publicar = (event, formComentario) => {
+    event.preventDefault();
+    axios
+      .post(URL_BASE + "comentarios/", formComentario)
+      .then((result) => {
+        alert("Comentario enviado!");
+        window.location.reload();
+      })
+      .catch((err) => console.error(err));
+  };
 
   return (
     <div>
@@ -64,7 +76,7 @@ export function ModalDetalle({ id_trabajo }) {
             ></textarea>
             <button
               className="btn btn-letra"
-              onClick={(event) => publicarModal1(event, formComentario)}
+              onClick={(event) => publicar(event, formComentario)}
             >
               <b>{t("publicar-comentario")}</b>
             </button>

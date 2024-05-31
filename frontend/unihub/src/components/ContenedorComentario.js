@@ -6,6 +6,7 @@ import { UsuarioSesion } from "./commons/SessionStorage";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEdit, faTrash } from "@fortawesome/free-solid-svg-icons";
 import ModalBase from "./commons/modales/ModalBase";
+import { t } from "i18next";
 
 export default function ContenedorComentario({ comentario }) {
   const [autorComentario, setAutorComentario] = useState({});
@@ -59,12 +60,12 @@ export default function ContenedorComentario({ comentario }) {
             )}
             incluirBotonCerrar
           >
-            <h4>¿Estás seguro de que quieres eliminar el comentario?</h4>
+            <h4>{t("conformacion-eliminar-comentario")}</h4>
             <div className="contenedor-si-no">
               <button className="btn btn-primary si" onClick={borrarComentario}>
-                Sí
+                {t("si")}
               </button>
-              <button className="btn btn-secondary no">No</button>
+              <button className="btn btn-secondary no">{t("no")}</button>
             </div>
           </ModalBase>
           <div className="boton-editar" onClick={borrarComentario}>

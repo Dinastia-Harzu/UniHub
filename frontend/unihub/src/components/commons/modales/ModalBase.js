@@ -1,4 +1,5 @@
 import { Modal } from "@mui/base/Modal";
+import { t } from "i18next";
 import { useState } from "react";
 
 export default function ModalBase({
@@ -30,7 +31,7 @@ export default function ModalBase({
           {children}
           {incluirBotonCerrar ? (
             <button className="btn" onClick={cerrar}>
-              Cerrar
+              {t("cerrar")}
             </button>
           ) : (
             <></>

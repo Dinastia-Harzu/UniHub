@@ -142,5 +142,13 @@
   "registra-o-inicia": "Sign in or log in to continue",
   "ya-estas-logueado": "You have already logged in",
   "grado-master": "Degree/Master",
-  "valoracion": "Rating"
+  "valoracion": "Rating",
+  "rellenar-titulo": "Fill the field \"Title\"",
+  "rellenar-resumen": "Fill the field \"Summary\"",
+  "introducir-documento": "Introduce the document in the field \"Project file\"",
+  "introducir-portada": "Introduce the image of the cover in the field \"Cover\"",
+  "conformacion-eliminar-comentario": "Are you sure you want to delete this comment?",
+  "cerrar": "Close",
+  "si": "Yes",
+  "no":"No"
 }
