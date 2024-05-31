@@ -223,11 +223,12 @@ exports.trabajosPOST = function (body) {
         } else {
           const id_trabajo = res.insertId;
           console.log(body);
-          const inserciones_multimedia = body.multimedia.map((multimedia) => {
-            multimedia.ruta = `nube/trabajos/multimedia/${multimedia.ruta}`;
-            return new Promise((resolve, reject) => {
-              conexion.query(
-                `
+          const inserciones_multimedia = body.multimedia
+            ? body.multimedia.map((multimedia) => {
+                multimedia.ruta = `nube/trabajos/multimedia/${multimedia.ruta}`;
+                return new Promise((resolve, reject) => {
+                  conexion.query(
+                    `
                 INSERT INTO multimedia VALUES(
                   ${$()},
                   ${$(multimedia.nombre)},
@@ -235,34 +236,35 @@ exports.trabajosPOST = function (body) {
                   ${$(id_trabajo)}
                 )
               `,
-                (err, result) => {
-                  if (err) {
-                    reject(err);
-                  } else {
-                    resolve(result);
-                  }
-                }
-              );
-            });
-          });
-          const inserciones_palabras_clave = body["palabras-clave"].map(
-            (nombre) => {
-              return new Promise((resolve, reject) => {
-                conexion.query(
-                  `
+                    (err, result) => {
+                      if (err) {
+                        reject(err);
+                      } else {
+                        resolve(result);
+                      }
+                    }
+                  );
+                });
+              })
+            : [];
+          const inserciones_palabras_clave = body["palabras-clave"]
+            ? body["palabras-clave"].map((nombre) => {
+                return new Promise((resolve, reject) => {
+                  conexion.query(
+                    `
                 INSERT INTO \`palabra-clave\` VALUES(${$()}, ${$(nombre)})
               `,
-                  (err, result) => {
-                    if (err) {
-                      reject(err);
-                    } else {
-                      resolve(result);
+                    (err, result) => {
+                      if (err) {
+                        reject(err);
+                      } else {
+                        resolve(result);
+                      }
                     }
-                  }
-                );
-              });
-            }
-          );
+                  );
+                });
+              })
+            : [];
           Promise.all(inserciones_multimedia)
             .then(() => {
               return Promise.all(inserciones_palabras_clave);
