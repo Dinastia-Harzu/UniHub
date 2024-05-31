@@ -182,7 +182,7 @@ export default function Perfilusuario() {
                     type="text"
                     id="titulacion"
                     name="titulacion"
-                    defaultValue={t(user.titulacion_nombre)}
+                    defaultValue={t(user["titulacion-nombre"])}
                     readOnly
                   />
                   <br />
@@ -197,7 +197,7 @@ export default function Perfilusuario() {
                     type="text"
                     id="estilo"
                     name="estilo"
-                    defaultValue={t(user.tema_nombre)}
+                    defaultValue={t(user["tema-nombre"])}
                     readOnly
                   />
                   <br />
@@ -234,7 +234,7 @@ export default function Perfilusuario() {
                   <br />
                 </div>
               </div>
-              <div className="boton-editar btn-letra">
+              <div className="boton-editar-perfil btn-letra">
                 <Link
                   to="editar"
                   className="btn btn-primary btn-letra"

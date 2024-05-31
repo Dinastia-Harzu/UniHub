@@ -46,7 +46,7 @@ export default function EditarPerfil() {
     nacimiento: user?.nacimiento || fechaActual(),
     clave: user?.clave || "",
     "foto-perfil": {
-      ruta: user["foto-perfil"].split("/").pop() || null,
+      ruta: user["foto-perfil"]?.split("/").pop() || null,
       fichero: null,
     },
   });
@@ -382,7 +382,7 @@ export default function EditarPerfil() {
                   )}
                 </div>
               </div>
-              <div className="boton-editar btn-letra">
+              <div className="boton-editar-perfil btn-letra">
                 <button
                   onClick={handleSubmit(enviarData)}
                   className="btn btn-primary btn-letra"

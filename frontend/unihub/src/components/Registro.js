@@ -38,7 +38,10 @@ export default function Registro() {
     direccion: "casa",
     nacimiento: "2003-02-02",
     clave: "Miclave2024&",
-    "foto-perfil": "no_photo.png",
+    "foto-perfil": {
+      ruta: null,
+      fichero: null,
+    },
   });
 
   const toggleMostrarContrasena = () => {
@@ -62,16 +65,16 @@ export default function Registro() {
     }
   };
   const cambiarFoto = (inp) => {
-    if (inp.target.files.length > 0) {
-      const fichero = inp.target.files[0];
-      const img = refImagen.current;
-      img.src = URL.createObjectURL(fichero);
-      setImagenSeleccionada(fichero);
-      setFormData({ ...formData, "foto-perfil": fichero.name });
-    } else {
-      setImagenSeleccionada(null);
-      setFormData({ ...formData, "foto-perfil": null });
+    if (inp.target.files.length == 0) {
+      return;
     }
+    const fichero = inp.target.files[0];
+    const img = refImagen.current;
+    img.src = URL.createObjectURL(fichero);
+    setFormData({
+      ...formData,
+      "foto-perfil": { ruta: fichero.name, fichero: fichero },
+    });
   };
 
   const enviarData = () => {
@@ -80,7 +83,7 @@ export default function Registro() {
     axios
       .post(`${URL_BASE}usuarios`, formData, {
         headers: {
-          "Content-Type": "application/json",
+          "Content-Type": "multipart/form-data",
         },
       })
       .then((result) => {
