@@ -33,7 +33,7 @@ export default function FormPublicar3({
         ? "application/pdf"
         : `image/${nombre.split(".").pop().toLowerCase()}`;
       const fichero = new File([blob], nombreFichero, {
-        type: tipoFichero,
+        type: blob.type,
       });
 
       if (modificarFormData) {
@@ -47,8 +47,6 @@ export default function FormPublicar3({
           portada: { ruta: nombre, fichero: fichero },
         }));
       }
-
-      // console.log(fichero);
 
       // Lo metemos en el value del input file
       let datafile = new DataTransfer();
